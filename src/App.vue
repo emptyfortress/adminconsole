@@ -33,8 +33,9 @@ q-layout(view="hHh LpR fFf")
 		p lakjsdlaj
 
 	q-page-container
-		router-view
-		q-btn(label="test" color="primary")
+		router-view(v-slot="{ Component, route }")
+			transition(name="fade")
+				component(:is="Component")
 </template>
 
 <style scoped lang="scss">
