@@ -16,7 +16,19 @@ export const router = createRouter({
 			path: '/',
 			name: 'home',
 			component: Home,
-			meta: { title: 'Docsvision docs', bread: ['Web-client'] },
+			meta: { title: 'Admin console', bread: ['Web-client'] },
+		},
+		{
+			path: '/setup',
+			name: 'setup',
+			component: () => import('@/pages/Setup.vue'),
+			meta: { title: 'Настройки', bread: ['Web-client'] },
+		},
+		{
+			path: '/logs',
+			name: 'logs',
+			component: () => import('@/pages/Logs.vue'),
+			meta: { title: 'Логи', bread: ['Web-client'] },
 		},
 	],
 })

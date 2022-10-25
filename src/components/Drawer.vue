@@ -1,7 +1,7 @@
 <template lang="pug">
 q-drawer(show-if-above behavior="desktop" v-model="leftDrawer" side="left" bordered :width="256" :mini="mini").rel
 	q-list.q-mt-md
-		q-item(v-for="item in menu" :key="item.url" clickable)
+		q-item(v-for="item in menu" :key="item.url" clickable :to="item.url")
 			q-item-section(avatar)
 				q-icon(:name="item.icon" color="secondary")
 			q-item-section {{item.text}}
@@ -37,5 +37,9 @@ const menu = [
 	bottom: 0.5rem;
 	left: 0.5rem;
 	overflow-x: hidden;
+}
+.q-router-link--active {
+	background: #cad4e9;
+	color: var(--text-color);
 }
 </style>
