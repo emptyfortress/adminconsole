@@ -87,3 +87,15 @@ body.body--dark {
 .rel {
 	position: relative;
 }
+
+.zag {
+	font-size: 2rem;
+	color: #999;
+	text-align: center;
+}
+
+.q-chip--selected {
+	.q-icon {
+		color: #fff !important;
+	}
+}

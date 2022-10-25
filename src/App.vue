@@ -6,9 +6,9 @@ import RDrawer from '@/components/RDrawer.vue'
 
 const rightDrawer = ref(false)
 const ru = ref(true)
-const toggleRightDrawer = () => {
-	rightDrawer.value = !rightDrawer.value
-}
+// const toggleRightDrawer = () => {
+// 	rightDrawer.value = !rightDrawer.value
+// }
 
 const $q = useQuasar()
 const dark = () => {
@@ -17,8 +17,8 @@ const dark = () => {
 </script>
 
 <template lang="pug">
-q-layout(view="hHh LpR fFf")
-	q-header.head
+q-layout(view="hHh LpR lFr")
+	q-header(reveal).head
 		q-toolbar
 			img(src="@/assets/img/adm-logo.svg")
 			q-toolbar-title.text-uppercase Administration
@@ -45,6 +45,11 @@ q-layout(view="hHh LpR fFf")
 		router-view(v-slot="{ Component, route }")
 			transition(name="fade")
 				component(:is="Component")
+
+	q-footer(bordered).footer
+		div .dv admin panel
+		div memory 80%
+		div v.0.43.1
 </template>
 
 <style scoped lang="scss">
@@ -69,5 +74,16 @@ q-layout(view="hHh LpR fFf")
 	border-radius: 8px;
 	background: teal;
 	display: inline-block;
+}
+.footer {
+	height: 32px;
+	line-height: 32px;
+	background: var(--bg-drawer);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	color: var(--text-color);
+	padding: 0 1rem;
+	font-size: 0.8rem;
 }
 </style>

@@ -13,7 +13,7 @@ q-drawer(show-if-above behavior="desktop" v-model="leftDrawer" side="left" borde
 import { ref, computed } from 'vue'
 
 const leftDrawer = ref(true)
-const mini = ref(false)
+const mini = ref(true)
 
 const toggleMini = () => {
 	mini.value = !mini.value
