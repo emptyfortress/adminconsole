@@ -1,4 +1,44 @@
 @import './animation.scss';
 
 :root {
+	// backgrounds
+	--bg-light: hsl(0, 0%, 93%);
+	--bg-gradient: linear-gradient(
+		to bottom,
+		rgb(var(--bg-light)) 20%,
+		hsl(27, 100%, 96%) 50%,
+		rgb(var(--bg-light)) 80%
+	);
+	--bg-drawer: #e3e5e8;
+	--bg-card: #fff;
+	--my-border-color: #0000001f;
+	--bg-hover: #f2f2f2;
+	--btn-group: #666;
+	--main-bg: var(--bg-light);
+
+	// fonts
+	--my-body-font-size: 14px;
+	--text-color: rgba(0, 0, 0, 0.7);
+	--text-color-bright: #000;
+	--q-link: #1b73bb;
+
+	--th-border-color: #fff;
+
+	// icons
+	--icon-color: #607d8b;
+}
+
+// Light theme ****************************************
+
+body.body--light {
+	background: var(--bg-light);
+	background-attachment: fixed;
+	--q-selection: var(--q-primary-selection);
+	.q-drawer {
+		background: var(--bg-drawer);
+	}
+}
+
+.rel {
+	position: relative;
 }

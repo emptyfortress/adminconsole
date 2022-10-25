@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref } from 'vue'
+import Drawer from '@/components/Drawer.vue'
+import RDrawer from '@/components/RDrawer.vue'
 
-const leftDrawer = ref(true)
-const rightDrawer = ref(true)
-const toggleLeftDrawer = () => {
-	leftDrawer.value = !leftDrawer.value
-}
+const rightDrawer = ref(false)
 const toggleRightDrawer = () => {
 	rightDrawer.value = !rightDrawer.value
 }
@@ -13,24 +11,14 @@ const toggleRightDrawer = () => {
 
 <template lang="pug">
 q-layout(view="hHh LpR fFf")
-	q-header(elevated).head
+	q-header.head
 		q-toolbar
-			q-btn(dense flat round icon="menu" @click="toggleLeftDrawer")
-			q-toolbar-title
-				q-avatar
-					img(src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg")
-			q-btn(dense flat round icon="menu" @click="toggleRightDrawer")
+			img(src="@/assets/img/adm-logo.svg")
+			q-toolbar-title.text-uppercase Administration
+			q-btn(dense flat round icon="mdi-menu" @click="toggleRightDrawer")
 
-	//- q-drawer(v-model="leftDrawer" side="left" bordered)
-	q-drawer(show-if-above behavior="desktop" v-model="leftDrawer" side="left" bordered)
-		div fuck
-
-	q-drawer(show-if-above behavior="desktop" v-model="rightDrawer" side="right" bordered)
-		p lakjsdlaj
-		p lakjsdlaj
-		p lakjsdlaj
-		p lakjsdlaj
-		p lakjsdlaj
+	component(:is="Drawer")
+	component(:is="RDrawer" :show="rightDrawer")
 
 	q-page-container
 		router-view(v-slot="{ Component, route }")
@@ -40,14 +28,13 @@ q-layout(view="hHh LpR fFf")
 
 <style scoped lang="scss">
 .head {
-	/* backdrop-filter: blur(10px); */
-	/* -webkit-backdrop-filter: blur(10px); */
-	/* background-color: #0000001a; */
-	background-color: #d2d2d2;
-	color: var(--font-color);
+	background-color: #efefef;
 	height: 64px;
+	color: var(--text-color);
+	padding-left: 1rem;
 	line-height: 64px;
-	/* border-bottom: 1px solid #fff; */
+	border-bottom: 1px solid #fff;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 	@media screen and (max-width: 1024px) {
 		height: 48px;
 		line-height: 48px;
