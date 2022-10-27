@@ -1,15 +1,11 @@
 <template lang="pug">
 q-page
 	.grid
-		q-card
-		q-card
-		q-card
-		q-card
+		q-card(v-for="n in 4").flex.flex-center
+			div Это заглушка
 </template>
 
-<script setup lang="ts">
-import SvgIcon from '@/components/SvgIcon.vue'
-</script>
+<script setup lang="ts"></script>
 
 <style scoped lang="scss">
 .grid {
@@ -24,5 +20,9 @@ import SvgIcon from '@/components/SvgIcon.vue'
 }
 .q-card {
 	height: 100%;
+	div {
+		font-size: 2rem;
+		color: #ccc;
+	}
 }
 </style>

@@ -89,7 +89,6 @@ export const router = createRouter({
 			path: '/logs',
 			name: 'logs',
 			component: () => import('@/pages/Logs.vue'),
-			meta: { title: 'Логи', bread: ['Web-client'] },
 		},
 	],
 })

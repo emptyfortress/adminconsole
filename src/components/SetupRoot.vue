@@ -3,13 +3,13 @@ div
 	.zag Настройки
 	br
 	.mygrid
-		.bl(@click="goto('/setup/dvserver')")
+		.bl(@click="goto('dvserver')")
 			.tit Docsvision server
 			q-img(src="@/assets/img/serverdv.svg" width="26px")
-		.bl(@click="goto('/setup/email')")
+		.bl(@click="goto('email')")
 			.tit Email server
 			q-img(src="@/assets/img/mailserver.svg" width="43px")
-		.bl(@click="goto('/setup/worker')")
+		.bl(@click="goto('worker')")
 			.tit Worker service
 			q-img(src="@/assets/img/worker.svg" width="35px")
 		.bl.disable
@@ -24,7 +24,7 @@ div
 import { router } from '@/router/router'
 
 const goto = (e: string) => {
-	router.push(e)
+	router.push({ name: e })
 }
 </script>
 
