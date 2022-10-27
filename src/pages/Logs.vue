@@ -6,13 +6,12 @@ q-page(padding)
 	br
 	br
 	.zag Последние действия
-	LogTable(:headers="headers" :items="actions")
+	component(:is="LogTable")
 
 </template>
 
 <script setup lang="ts">
 import LogTable from '@/components/LogTable.vue'
-import { headers, actions } from '@/stores/actions'
 </script>
 
 <style scoped lang="scss">

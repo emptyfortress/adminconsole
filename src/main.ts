@@ -24,7 +24,7 @@ app.use(Quasar, {
 			timeout: 3000,
 			icon: 'mdi-alert',
 			color: 'primary',
-			classes: 'notific',
+			classes: 'notifications',
 		},
 	},
 })

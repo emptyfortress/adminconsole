@@ -18,7 +18,7 @@
 	--main-bg: var(--bg-light);
 
 	// fonts
-	--my-body-font-size: 14px;
+	--my-body-font-size: 16px;
 	--text-color: rgba(0, 0, 0, 0.7);
 	--text-color-bright: #000;
 	--q-link: #1b73bb;
@@ -90,7 +90,7 @@ body.body--dark {
 
 .zag {
 	font-size: 2rem;
-	color: #999;
+	color: $secondary;
 	text-align: center;
 }
 
@@ -98,4 +98,23 @@ body.body--dark {
 	.q-icon {
 		color: #fff !important;
 	}
+}
+
+.sticky {
+	position: sticky;
+	top: 0;
+	z-index: 4;
+}
+
+.q-icon {
+	color: $secondary;
+}
+
+.notifications {
+	transition: all 0.3s ease;
+}
+
+.pink {
+	background: pink;
+	color: darkred;
 }
