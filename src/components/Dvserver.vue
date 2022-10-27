@@ -1,9 +1,42 @@
 <template lang="pug">
-h2 Hello!
+div
+	.zag Docsvision
+	q-card.card
+		.row.items-baseline.q-gutter-x-md
+			q-select(v-model="type" label="Тип соединения" disable)
+			q-chip(color="warning") Всего соединений: {{connections.length}}
+			q-space
+			q-btn(color="primary" unelevated @click="add") Добавить экземпляр
+
+		component(:is="GreyBlock1" v-for="item in connections" :key="item" :name="item.name" @delete="del" @duble="addConnection")
+
+	component(:is="AddConnection" :show="dialog" @close="dialog = false" @add="addConnection")
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref, reactive } from 'vue'
+import GreyBlock1 from '@/components/GreyBlock1.vue'
+import AddConnection from '@/components/AddConnection.vue'
+
+const type = ref('Docsvision')
+const connections = reactive([{ name: 'SOL2016' }])
+
+const dialog = ref(false)
+const add = () => {
+	dialog.value = !dialog.value
+}
+const del = (e: string) => {
+	let index = connections.indexOf((item: any) => item.name === e)
+	connections.splice(index, 1)
+}
+const addConnection = (e: string) => {
+	connections.push({ name: e })
+	dialog.value = false
+}
+</script>
 
 <style scoped lang="scss">
-//@import '@/assets/css/colors.scss';
+.q-select {
+	width: 200px;
+}
 </style>

@@ -21,7 +21,7 @@ q-layout(view="hHh LpR lFr")
 	q-header(reveal).head
 		q-toolbar
 			img(src="@/assets/img/adm-logo.svg")
-			q-toolbar-title.text-uppercase Administration
+			q-toolbar-title.text-uppercase Docsvision 5 консоль управления
 			q-btn(flat round icon="mdi-brightness-4" @click="dark").q-mr-md
 			q-btn(dense flat round  @click="ru = !ru").q-mr-md
 				img(v-if="ru" src="@/assets/img/russia.svg" width="26")

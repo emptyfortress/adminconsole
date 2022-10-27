@@ -94,7 +94,7 @@ export const router = createRouter({
 	],
 })
 
-const DEFAULT_TITLE = 'DV Web-Client'
+const DEFAULT_TITLE = 'Консоль управления DV'
 router.beforeEach((to) => {
 	document.title = to.meta.title || DEFAULT_TITLE
 })
