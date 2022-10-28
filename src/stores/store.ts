@@ -7,7 +7,7 @@ interface Connection {
 export const useStore = defineStore({
 	id: 'store',
 	state: () => ({
-		connections: [{ name: 'SOL2016' }, { name: 'fuck' }],
+		connections: [{ name: 'SOL2016' }],
 	}),
 	getters: {},
 	actions: {

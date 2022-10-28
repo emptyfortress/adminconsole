@@ -39,7 +39,7 @@ import Uzel from '@/components/Uzel.vue'
 
 const store = useStore()
 const type = ref('Docsvision')
-const connect = ref('two')
+const connect = ref('one')
 
 const dialog = ref(false)
 const add = () => {
