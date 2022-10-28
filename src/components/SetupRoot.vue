@@ -3,7 +3,7 @@ div
 	.zag Настройки
 	br
 	.mygrid
-		.bl(@click="goto('dvserver')")
+		router-link(to="/setup/dvserver").bl
 			.tit Docsvision server
 			q-img(src="@/assets/img/serverdv.svg" width="26px")
 		.bl(@click="goto('email')")
@@ -47,6 +47,7 @@ const goto = (e: string) => {
 		position: relative;
 		cursor: pointer;
 		transition: 0.2s ease all;
+		text-decoration: none;
 		.q-img {
 			position: absolute;
 			bottom: 1rem;

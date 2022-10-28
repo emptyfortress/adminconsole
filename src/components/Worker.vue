@@ -15,39 +15,38 @@ div
 			q-card.card
 				.row.items-baseline.q-gutter-x-md
 					q-select(v-model="type" label="Тип соединения" disable)
-					q-chip(color="warning") Всего соединений: {{connections.length}}
+					q-chip(color="warning") Всего соединений: {{store.connections.length}}
 					q-space
 					q-btn(color="primary" unelevated @click="add") Добавить экземпляр
 
-				component(:is="GreyBlock1" v-for="item in connections" :key="item" :name="item.name" @delete="del" @duble="addConnection")
+				component(:is="GreyBlock1" v-for="item in store.connections" :key="item" :name="item.name" @delete="store.deleteConnection(item)" @duble="addConnection")
 
 
-		q-tab-panel(name="two")
-			q-card.card
-				.text-h6 Что здесь? В задаче отсутствует описание.
+		q-tab-panel(name="two").mypanel
+			q-card( v-for="item in store.connections" :key="item.name").flcard
+				component(:is="Uzel" :name="item.name")
 
 	component(:is="AddConnection" :show="dialog" @close="dialog = false" @add="addConnection")
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref } from 'vue'
+import { useStore } from '@/stores/store'
+
 import GreyBlock1 from '@/components/GreyBlock1.vue'
 import AddConnection from '@/components/AddConnection.vue'
+import Uzel from '@/components/Uzel.vue'
 
+const store = useStore()
 const type = ref('Docsvision')
-const connect = ref('one')
-const connections = reactive([{ name: 'SOL2016' }])
+const connect = ref('two')
 
 const dialog = ref(false)
 const add = () => {
 	dialog.value = !dialog.value
 }
-const del = (e: string) => {
-	let index = connections.indexOf((item: any) => item.name === e)
-	connections.splice(index, 1)
-}
 const addConnection = (e: string) => {
-	connections.push({ name: e })
+	store.addConnection(e)
 	dialog.value = false
 }
 </script>
@@ -61,5 +60,20 @@ const addConnection = (e: string) => {
 }
 .inf {
 	text-align: left;
+}
+.mypanel {
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+	gap: 0.5rem;
+	flex-wrap: wrap;
+	padding: 1rem 0;
+}
+.flcard {
+	width: clamp(640px, 47%, 900px);
+	// width: 680px;
+	// min-width: 600px;
+	margin: 0.5rem auto;
+	padding: 1rem;
 }
 </style>
