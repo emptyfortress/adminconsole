@@ -10,7 +10,7 @@ div
 							q-item-section Подтверждаю
 		.current {{ name }}
 		br
-		.form
+		.form(v-if="props.dv")
 			.label Имя соединения:
 			q-input(v-model="form.name" dense outlined bg-color="white")
 			.label Адрес сервера:
@@ -21,6 +21,14 @@ div
 			q-input(v-model="form.login" dense outlined bg-color="white")
 			.label Пароль:
 			q-input(v-model="form.password" dense outlined bg-color="white" type="password")
+
+		.form(v-if="!props.dv")
+			.label Имя соединения:
+			q-input(v-model="form.name" dense outlined bg-color="white")
+			.label Конфигурация сервера:
+			q-select(v-model="form.config" dense outlined bg-color="white" :options="config")
+			.label База данных:
+			q-select(v-model="form.database" dense outlined bg-color="white" :options="config")
 
 		.form.q-mt-lg
 			div
@@ -38,8 +46,13 @@ const props = defineProps({
 		type: String,
 		default: 'name',
 	},
+	dv: {
+		type: Boolean,
+		default: false,
+	},
 })
 const emit = defineEmits(['delete', 'duble'])
+const config = ['Option 1', 'Option 2', 'Option 3', 'Option 4']
 
 const editMode1 = ref(false)
 const name = ref(props.name)
@@ -50,6 +63,7 @@ const form = reactive({
 	login: '',
 	password: '',
 	def1: false,
+	config: '',
 })
 
 watch(form, (value) => {
