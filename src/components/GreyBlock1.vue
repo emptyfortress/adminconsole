@@ -3,7 +3,9 @@ div
 	.grey(:class="{ edit : editMode1}")
 		.close
 			q-btn(round flat icon="mdi-content-duplicate" @click="duble")
+				q-tooltip Дублировать
 			q-btn(round flat icon="mdi-trash-can-outline")
+				q-tooltip Удалить
 				q-menu
 					q-list
 						q-item(clickable v-close-popup @click="del(name)").pink
