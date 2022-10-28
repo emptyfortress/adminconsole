@@ -10,7 +10,8 @@ div
 					q-list
 						q-item(clickable v-close-popup @click="del(name)").pink
 							q-item-section Подтверждаю
-		.current {{ props.name }}
+
+		.current {{ name }}
 		br
 		.form
 			.label Имя процесса:
@@ -53,7 +54,7 @@ const props = defineProps({
 const emit = defineEmits(['del'])
 
 const editMode1 = ref(false)
-// const name = ref(props.name)
+const name = ref(props.name)
 const options = ['Option 1', 'Не задано']
 const form = reactive({
 	name: props.name,
