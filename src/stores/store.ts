@@ -1,3 +1,4 @@
+import { uid } from 'quasar'
 import { defineStore } from 'pinia'
 
 interface Connection {
@@ -8,6 +9,10 @@ export const useStore = defineStore({
 	id: 'store',
 	state: () => ({
 		connections: [{ name: 'SOL2016' }],
+		config: [
+			{ id: '0', name: 'SOL2016' },
+			{ id: '1', name: 'SOL2017' },
+		],
 		params: [
 			{ id: 0, key: 'DV_Docsvision_Platform_5.5_Server Databases Docsvision DB', value: '' },
 			{ id: 1, key: 'DV_Docsvision__Platform_5.5_Server_DefaultBaseName', value: '' },
@@ -32,6 +37,14 @@ export const useStore = defineStore({
 		},
 		addConnection(e: string) {
 			this.connections.push({ name: e })
+		},
+		addConfig(e: string) {
+			let temp = { id: uid(), name: e }
+			this.config.push(temp)
+		},
+		removeConfig(e: any) {
+			let index = this.config.indexOf(e)
+			this.config.splice(index, 1)
 		},
 	},
 })

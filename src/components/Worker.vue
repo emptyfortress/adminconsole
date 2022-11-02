@@ -1,8 +1,9 @@
 <template lang="pug">
 div
 	.zag Worker service
-	q-card( v-for="item in store.connections" :key="item.name").flcard
-		component(:is="Uzel" :name="item.name")
+	.grid
+		q-card( v-for="item in store.config" :key="item.name").flcard
+			component(:is="Uzel" :name="item.name")
 
 	component(:is="AddConnection" :show="dialog" @close="dialog = false" @add="addConnection")
 </template>
@@ -32,5 +33,11 @@ const addConnection = (e: string) => {
 	width: clamp(640px, 47%, 900px);
 	margin: 0.5rem auto;
 	padding: 1rem;
+}
+.grid {
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	flex-wrap: wrap;
 }
 </style>

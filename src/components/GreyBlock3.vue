@@ -18,7 +18,7 @@ div
 			.label Название конфигурации:
 			q-input(v-model="form.name" dense outlined bg-color="white")
 		br
-		q-markup-table(flat dense).table
+		q-markup-table(flat dense :key="compKey").table
 			thead
 				tr
 					th.xsm
@@ -35,8 +35,8 @@ div
 					td(v-if="editMode").small
 						.hov
 							q-btn(unelevated round dense color="secondary" icon="mdi-plus" size="10px" @click="add(index)")
-							q-btn(unelevated round dense color="secondary" icon="mdi-content-duplicate" size="10px")
-							q-btn(unelevated round dense color="secondary" icon="mdi-trash-can-outline" size="10px")
+							q-btn(unelevated round dense color="secondary" icon="mdi-content-duplicate" size="10px" @click="duplicate(index)")
+							q-btn(unelevated round dense color="secondary" icon="mdi-trash-can-outline" size="10px" @click="remove(index)")
 
 
 		.q-mt-lg
@@ -47,7 +47,7 @@ div
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, watch, nextTick } from 'vue'
+import { ref, reactive, watch } from 'vue'
 import { uid } from 'quasar'
 
 const props = defineProps({
@@ -90,14 +90,34 @@ const duble = () => {
 
 const con = ref(false)
 
+const compKey = ref(0)
 const otmena = () => {
-	let keys = document.querySelectorAll('.edit1')
-	keys.forEach((item, index) => (item.innerHTML = params[index].key))
+	params.value = [...backup]
 	con.value = false
 	editMode.value = false
+	compKey.value += 1
+}
+const duplicate = () => {
+	console.log(1)
 }
 
-const params = reactive([
+const backup = [
+	{ id: uid(), key: 'DV_Docsvision_Platform_5.5_Server Databases Docsvision DB', value: '' },
+	{ id: uid(), key: 'DV_Docsvision__Platform_5.5_Server_DefaultBaseName', value: '' },
+	{ id: uid(), key: 'DV_Groups_Docs Vision Administrators 0', value: '' },
+	{ id: uid(), key: 'DV_Groups_Docs Vision Administrators 1', value: '' },
+	{ id: uid(), key: 'DV_Groups_DocsVision Security Administrators_0', value: '' },
+	{ id: uid(), key: 'DV_Security_Jwt_Securitykey', value: '' },
+	{ id: uid(), key: 'DV_Security_Jwt_Issuer', value: '' },
+	{ id: uid(), key: 'DV_Domains_o', value: '' },
+	{ id: uid(), key: 'DV_Ldap_Credential_UserName', value: '' },
+	{ id: uid(), key: 'DV_Ldap_Credential_Password', value: '' },
+	{ id: uid(), key: 'DV_APIKEY', value: '' },
+	{ id: uid(), key: 'DV_Logging_LogLevel_Default', value: '' },
+	{ id: uid(), key: 'KRBS_KTNAME', value: '' },
+]
+
+let params = ref([
 	{ id: uid(), key: 'DV_Docsvision_Platform_5.5_Server Databases Docsvision DB', value: '' },
 	{ id: uid(), key: 'DV_Docsvision__Platform_5.5_Server_DefaultBaseName', value: '' },
 	{ id: uid(), key: 'DV_Groups_Docs Vision Administrators 0', value: '' },
@@ -116,17 +136,15 @@ const params = reactive([
 const add = (e: any) => {
 	let newid = uid()
 	let temp = { id: newid, key: 'Новый параметр', value: '' }
-	params.splice(e + 1, 0, temp)
+	params.value.splice(e + 1, 0, temp)
 	setTimeout(() => {
 		let key = document.getElementById(newid)
 		key?.focus()
-		// if (window.getSelection) {
-		// 	var range = document.createRange()
-		// 	range.selectNode(key!)
-		// 	window.getSelection()!.removeAllRanges()
-		// 	window.getSelection()!.addRange(range)
-		// }
 	}, 10)
+}
+
+const remove = (e: number) => {
+	params.value.splice(e, 1)
 }
 
 const save = (e: any) => {

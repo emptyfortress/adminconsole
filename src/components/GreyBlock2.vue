@@ -19,9 +19,8 @@ div
 			div
 			.label Тип конфигурации:
 			q-select(v-model="form.configtype" dense outlined :options="options" bg-color="white").rem
-			div
 
-		.grid
+		.grids
 			.border
 				.form
 					.label Соединение Docsvision:
@@ -98,7 +97,7 @@ const del = (e: string) => {
 .form {
 	grid-template-columns: 160px 1fr 95px;
 }
-.grid {
+.grids {
 	margin-top: 0.5rem;
 	display: grid;
 	grid-template-columns: auto 194px;
