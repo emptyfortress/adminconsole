@@ -2,11 +2,16 @@
 q-dialog(v-model="props.show")
 	q-card(style="min-width: 400px; padding: 1rem;")
 		.row.items-center.q-pb-none
-			.text-h6 Добавить экземпляр
+			.text-h6(v-if="props.dv") Добавить конфигурацию
+			.text-h6(v-else) Добавить экземпляр
 			q-space
 			q-btn(icon="close" flat round dense @click="close")
 		q-card-section
-			q-input(autofocus v-model="newname" label="Имя соединения")
+			q-input(autofocus v-model="newname" v-if="props.dv" label="Название конфигурации")
+			q-input(autofocus v-model="newname" v-else label="Имя соединения")
+			template(v-if="!dv")
+				q-select(v-model="config" :options="options" label="Конфигурация")
+				q-select(v-model="config" :options="options" label="База данных")
 		q-card-actions(align="right")
 			q-btn(flat label="Отмена"  @click="close")
 			q-btn(unelevated color="primary" label="Добавить" v-close-popup @click="addConnection(newname)")
@@ -18,10 +23,16 @@ import { ref } from 'vue'
 
 const props = defineProps({
 	show: Boolean,
+	dv: {
+		type: Boolean,
+		default: false,
+	},
 })
 const emit = defineEmits(['add', 'close'])
 
 const newname = ref('name')
+const config = ref('')
+const options = ['Option 1']
 
 const addConnection = (e: string) => {
 	emit('add', e)

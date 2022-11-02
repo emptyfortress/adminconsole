@@ -61,11 +61,11 @@ const name = ref(props.name)
 const form = reactive({
 	name: props.name,
 	address: '',
-	database: '',
+	database: 'Database 1',
 	login: '',
 	password: '',
 	def1: false,
-	config: '',
+	config: 'Конфигурация А',
 })
 
 watch(form, (value) => {

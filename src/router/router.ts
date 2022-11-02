@@ -53,7 +53,20 @@ export const router = createRouter({
 						bread: [
 							{ label: 'Dashboard', to: '/' },
 							{ label: 'Настройки', to: '/setup' },
-							{ label: 'DV server', to: '/setup/dvserver' },
+							{ label: 'Сервер DV', to: '/setup/dvserver' },
+						],
+					},
+				},
+				{
+					path: 'connection',
+					name: 'connecton',
+					component: () => import('@/components/Connection.vue'),
+					meta: {
+						title: 'Настройки',
+						bread: [
+							{ label: 'Dashboard', to: '/' },
+							{ label: 'Настройки', to: '/setup' },
+							{ label: 'Соединения', to: '/setup/connection' },
 						],
 					},
 				},

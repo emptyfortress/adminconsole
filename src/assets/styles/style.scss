@@ -109,6 +109,9 @@ body.body--dark {
 .q-icon {
 	color: $secondary;
 }
+.hov .q-icon {
+	color: white;
+}
 
 .notifications {
 	transition: all 0.3s ease;

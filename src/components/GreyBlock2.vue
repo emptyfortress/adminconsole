@@ -31,7 +31,7 @@ div
 			.border
 				.row.items-center.q-gutter-x-sm
 					.label Таймаут:
-					q-input(v-model="form.timeout" dense outlined bg-color="white").small
+					q-input(v-model="form.timeout" dense outlined bg-color="white" type="number").small
 				.column.q-mt-sm
 					q-checkbox(v-model="form.turn" dense label="Отключено")
 					q-checkbox(v-model="form.x86" dense label="Использовать x86")

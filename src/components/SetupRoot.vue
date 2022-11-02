@@ -4,40 +4,44 @@ div
 	br
 	.mygrid
 		router-link(to="/setup/dvserver").bl
-			.tit Docsvision server
+			.tit Сервер Docsvision
 			q-img(src="@/assets/img/serverdv.svg" width="26px")
-		.bl(@click="goto('email')")
-			.tit Email server
+		router-link(to="/setup/connection").bl
+			.tit Соединения
+			q-img(src="@/assets/img/connection.svg" width="42px")
+		router-link(to="/setup/email").bl
+			.tit Почтовый сервер
 			q-img(src="@/assets/img/mailserver.svg" width="43px")
-		.bl(@click="goto('worker')")
-			.tit Worker service
+		router-link(to="/setup/worker").bl
+			.tit Служба фоновых операций
 			q-img(src="@/assets/img/worker.svg" width="35px")
 		.bl.disable
 			.tit Web-client
 			q-img(src="@/assets/img/webclient.svg" width="38px")
 		.bl.disable
-			.tit Workflow service
+			.tit Сервис управления бизнес-процессам
 			q-img(src="@/assets/img/workflow.svg" width="32px")
 </template>
 
 <script setup lang="ts">
 import { router } from '@/router/router'
 
-const goto = (e: string) => {
-	router.push({ name: e })
-}
+// const goto = (e: string) => {
+// 	router.push({ name: e })
+// }
 </script>
 
 <style scoped lang="scss">
 .mygrid {
 	display: grid;
-	grid-template-columns: repeat(3, 200px);
+	grid-template-columns: repeat(3, 220px);
 	gap: 1rem;
 	margin: 0 auto;
-	max-width: 632px;
+	// background: pink;
+	max-width: 692px;
 	.bl {
-		width: 200px;
-		height: 200px;
+		width: 220px;
+		height: 180px;
 		background: var(--bg-drawer);
 		font-size: 1.2rem;
 		color: $secondary;
