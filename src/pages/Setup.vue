@@ -1,21 +1,18 @@
 <template lang="pug">
 q-page(padding)
-	//- q-breadcrumbs
-	//- 	q-breadcrumbs-el(v-for="item in router.currentRoute.value.meta.bread" key="item.label" :label="item.label" :to="item.to")
-	//- 	q-btn(round dense flat @click="notify").q-ml-xl
-	//- 		q-icon(name="mdi-link-variant" color="primary" size="16px")
-	.nav(v-if="router.currentRoute.value.meta.nav")
-		q-btn(round color="secondary" size="sm" @click="router.push('/setup')")
-			q-icon(name="mdi-arrow-left" color="white")
-		router-link(v-for="item in items" :to="item.to").bl
-			div {{item.label}}
-		.bl1
-			div Web-client
-		.bl1
-			div Workflow service
+	transition(name="slide-top")
+		.nav(v-if="router.currentRoute.value.meta.nav")
+			q-btn(round color="secondary" size="sm" @click="router.push('/setup')")
+				q-icon(name="mdi-arrow-left" color="white")
+			router-link(v-for="item in items" :to="item.to").bl
+				div {{item.label}}
+			.bl1
+				div Web-client
+			.bl1
+				div Workflow service
 
 	router-view(v-slot="{ Component, route }")
-		transition(name="slide-left")
+		transition(name="slide-left" mode="out-in")
 			component(:is="Component")
 
 </template>
