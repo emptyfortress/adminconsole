@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-	.zag Worker service
+	.zag Настройки службы фоновых операций
 	.grid
 		q-card( v-for="item in store.config" :key="item.name").flcard
 			component(:is="Uzel" :name="item.name")

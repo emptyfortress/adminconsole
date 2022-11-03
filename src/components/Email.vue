@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-	.zag Email server
+	.zag Настройки почтового сервера
 	q-card.card
 		.row.items-baseline.q-gutter-x-md
 			q-select(v-model="type" label="Тип соединения" disable)

@@ -19,7 +19,7 @@ div
 			.tit Служба фоновых операций
 			q-img(src="@/assets/img/worker.svg" width="35px")
 		.bl.disable
-			.tit Web-client
+			.tit Web-клиент
 			q-img(src="@/assets/img/webclient.svg" width="38px")
 		.bl.disable
 			.tit Сервис управления бизнес-процессам

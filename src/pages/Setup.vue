@@ -6,10 +6,13 @@ q-page(padding)
 				q-icon(name="mdi-arrow-left" color="white")
 			router-link(v-for="item in items" :to="item.to").bl
 				div {{item.label}}
+				q-tooltip(v-if="item.tooltip") {{item.tooltip}}
 			.bl1
-				div Web-client
+				div Web-клиент
 			.bl1
-				div Workflow service
+				div СУБП
+				q-tooltip Сервис управления бизнес-процессами
+
 
 	router-view(v-slot="{ Component, route }")
 		transition(name="slide-left" mode="out-in")
@@ -20,10 +23,10 @@ q-page(padding)
 <script setup lang="ts">
 import { router } from '@/router/router'
 const items = [
-	{ id: 0, label: 'DV server', to: '/setup/dvserver' },
-	{ id: 1, label: 'Connection', to: '/setup/connection' },
-	{ id: 2, label: 'Email server', to: '/setup/email' },
-	{ id: 3, label: 'Worker service', to: '/setup/worker' },
+	{ id: 0, label: 'Сервер DV', to: '/setup/dvserver' },
+	{ id: 1, label: 'Соединения', to: '/setup/connection' },
+	{ id: 2, label: 'Почтовый сервер', to: '/setup/email' },
+	{ id: 3, label: 'СФО', to: '/setup/worker', tooltip: 'Служба фоновых операций' },
 ]
 </script>
 
