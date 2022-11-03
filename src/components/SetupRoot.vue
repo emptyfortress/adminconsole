@@ -1,6 +1,9 @@
 <template lang="pug">
 div
 	.zag Настройки
+	.inf
+		span Адрес хранилища настроек:
+		a(href="#").q-ml-md http://sol2016.digdes.com:5200/api
 	br
 	.mygrid
 		router-link(to="/setup/dvserver").bl
@@ -24,7 +27,7 @@ div
 </template>
 
 <script setup lang="ts">
-import { router } from '@/router/router'
+// import { router } from '@/router/router'
 
 // const goto = (e: string) => {
 // 	router.push({ name: e })
@@ -68,6 +71,9 @@ import { router } from '@/router/router'
 			border: 1px dotted $secondary;
 		}
 	}
+}
+.inf {
+	text-align: center;
 }
 @media screen and (max-width: 750px) {
 	.mygrid {
