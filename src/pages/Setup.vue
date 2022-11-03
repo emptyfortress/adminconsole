@@ -4,6 +4,15 @@ q-page(padding)
 	//- 	q-breadcrumbs-el(v-for="item in router.currentRoute.value.meta.bread" key="item.label" :label="item.label" :to="item.to")
 	//- 	q-btn(round dense flat @click="notify").q-ml-xl
 	//- 		q-icon(name="mdi-link-variant" color="primary" size="16px")
+	.nav(v-if="router.currentRoute.value.meta.nav")
+		q-btn(round color="secondary" size="sm" @click="router.push('/setup')")
+			q-icon(name="mdi-arrow-left" color="white")
+		router-link(v-for="item in items" :to="item.to").bl
+			div {{item.label}}
+		.bl1
+			div Web-client
+		.bl1
+			div Workflow service
 
 	router-view(v-slot="{ Component, route }")
 		transition(name="slide-left")
@@ -13,16 +22,57 @@ q-page(padding)
 
 <script setup lang="ts">
 import { router } from '@/router/router'
-import { useQuasar } from 'quasar'
-
-const $q = useQuasar()
-const notify = () => {
-	$q.notify({
-		message: 'Путь скопирован в буфер обмена',
-		icon: '',
-		position: 'top',
-	})
-}
+const items = [
+	{ id: 0, label: 'DV server', to: '/setup/dvserver' },
+	{ id: 1, label: 'Connection', to: '/setup/connection' },
+	{ id: 2, label: 'Email server', to: '/setup/email' },
+	{ id: 3, label: 'Worker service', to: '/setup/worker' },
+]
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.nav {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 0.5rem;
+	margin-bottom: 2rem;
+}
+.bl1 {
+	// background: var(--bg-drawer);
+	font-size: 0.8rem;
+	color: $secondary;
+	// border-radius: 0.5rem;
+	// padding: 4px 10px;
+	// border: 1px dotted $secondary;
+	text-decoration: none;
+	opacity: 0.7;
+	margin-left: 0.5rem;
+}
+.bl {
+	background: var(--bg-drawer);
+	font-size: 0.8rem;
+	color: $secondary;
+	border-radius: 0.5rem;
+	padding: 4px 10px;
+	border: 1px dotted $secondary;
+	cursor: pointer;
+	// transition: 0.2s ease all;
+	text-decoration: none;
+	&:hover {
+		box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4), -1px -1px 3px rgba(0, 0, 0, 0.2);
+		border: 1px solid #fff;
+		color: #000;
+		background: #cad0da;
+	}
+}
+.router-link-active {
+	color: #fff;
+	background: $secondary;
+	&:hover {
+		background: $secondary;
+		color: white;
+		border: 1px solid $secondary;
+	}
+}
+</style>

@@ -63,6 +63,7 @@ div
 		&:hover {
 			box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.3);
 			border: 1px solid #fff;
+			color: #000;
 		}
 		&.disable {
 			opacity: 0.5;

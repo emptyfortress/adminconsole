@@ -50,6 +50,7 @@ export const router = createRouter({
 					component: () => import('@/components/Dvserver.vue'),
 					meta: {
 						title: 'Настройки',
+						nav: true,
 						bread: [
 							{ label: 'Dashboard', to: '/' },
 							{ label: 'Настройки', to: '/setup' },
@@ -63,6 +64,7 @@ export const router = createRouter({
 					component: () => import('@/components/Connection.vue'),
 					meta: {
 						title: 'Настройки',
+						nav: true,
 						bread: [
 							{ label: 'Dashboard', to: '/' },
 							{ label: 'Настройки', to: '/setup' },
@@ -76,6 +78,7 @@ export const router = createRouter({
 					component: () => import('@/components/Email.vue'),
 					meta: {
 						title: 'Настройки',
+						nav: true,
 						bread: [
 							{ label: 'Dashboard', to: '/' },
 							{ label: 'Настройки', to: '/setup' },
@@ -89,6 +92,7 @@ export const router = createRouter({
 					component: () => import('@/components/Worker.vue'),
 					meta: {
 						title: 'Настройки',
+						nav: true,
 						bread: [
 							{ label: 'Dashboard', to: '/' },
 							{ label: 'Настройки', to: '/setup' },
