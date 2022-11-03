@@ -147,6 +147,7 @@ const duplicate = (a: any, e: number) => {
 	params.value.splice(e + 1, 0, temp)
 	setTimeout(() => {
 		let key = document.getElementById(newid)
+		window.getSelection()?.selectAllChildren(key!)
 		key?.focus()
 	}, 10)
 }
