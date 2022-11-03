@@ -1,8 +1,7 @@
 // page transitions
 .fade-enter-active,
 .fade-leave-active {
-	transition: opacity 0.3s ease;
-	position: absolute;
+	transition: opacity 0.5s ease;
 }
 .fade-leave-to,
 .fade-enter-from {
@@ -16,18 +15,17 @@
 }
 .slide-right-enter-from,
 .slide-right-leave-to {
-	transform: translateX(50px);
+	transform: translateX(30px);
 	opacity: 0;
 }
 
 .slide-left-enter-active,
 .slide-left-leave-active {
-	transition: all 0.2s ease;
-	// position: absolute;
+	transition: all 0.3s ease;
 }
 .slide-left-enter-from,
 .slide-left-leave-to {
-	// position: absolute;
+	position: absolute;
 	transform: translateX(-30px);
 	opacity: 0;
 }
@@ -58,8 +56,7 @@
 	transition: all 0.3s ease-in-out;
 	position: absolute;
 }
-.sliding-enter-from,
-.sliding-leave-to {
+.sliding-enter-from, .sliding-leave-to {
 	opacity: 0;
 	transform: translateY(60px);
 	position: absolute;
