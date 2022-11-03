@@ -72,8 +72,4 @@ const items = [
 		border: 1px solid $secondary;
 	}
 }
-.pink {
-	background: pink;
-	width: 100%;
-}
 </style>
