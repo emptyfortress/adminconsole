@@ -26,13 +26,7 @@ div
 			q-img(src="@/assets/img/workflow.svg" width="32px")
 </template>
 
-<script setup lang="ts">
-// import { router } from '@/router/router'
-
-// const goto = (e: string) => {
-// 	router.push({ name: e })
-// }
-</script>
+<script setup lang="ts"></script>
 
 <style scoped lang="scss">
 .mygrid {

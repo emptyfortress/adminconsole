@@ -1,7 +1,7 @@
 <template lang="pug">
 q-page(padding)
 	transition(name="slide-top")
-		.nav(v-if="router.currentRoute.value.meta.nav")
+		.nav(v-if="route.meta.nav")
 			q-btn(round color="secondary" size="sm" @click="router.push('/setup')")
 				q-icon(name="mdi-arrow-left" color="white")
 			router-link(v-for="item in items" :to="item.to").bl
@@ -21,7 +21,11 @@ q-page(padding)
 </template>
 
 <script setup lang="ts">
-import { router } from '@/router/router'
+import { useRoute, useRouter } from 'vue-router'
+
+const route = useRoute()
+const router = useRouter()
+
 const items = [
 	{ id: 0, label: 'Сервер DV', to: '/setup/dvserver' },
 	{ id: 1, label: 'Соединения', to: '/setup/connection' },
