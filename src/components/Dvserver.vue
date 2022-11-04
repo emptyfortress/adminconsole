@@ -9,7 +9,7 @@ div
 
 		component(:is="GreyBlock3" v-for="item in store.config" :key="item.id" :name="item.name" @delete="store.removeConfig(item)" @duble="addConfig(item.name)")
 
-	component(:is="AddConnection" :show="dialog" @close="dialog = false" @add="addConfig" dv)
+	component(:is="AddConnection" v-model="dialog" @add="addConfig" dv)
 </template>
 
 <script setup lang="ts">

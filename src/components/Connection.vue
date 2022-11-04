@@ -10,7 +10,7 @@ div
 
 		component(:is="GreyBlock1" v-for="item in store.connections" :key="item" :name="item.name" @delete="store.deleteConnection(item)" @duble="addConnection")
 
-	component(:is="AddConnection" :show="dialog" @close="dialog = false" @add="addConnection")
+	component(:is="AddConnection" v-model="dialog" @add="addConnection")
 </template>
 
 <script setup lang="ts">

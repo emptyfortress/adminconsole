@@ -12,7 +12,7 @@ div
 
 	component(:is="GreyBlock2" v-for="item in processes" :key="item.name" :name="item.name" @del="delProcess")
 
-	component(:is="AddProcess" :show="dialog" @close="dialog = false" @add="addProcess")
+	component(:is="AddProcess" v-model="dialog" @add="addProcess")
 </template>
 
 <script setup lang="ts">

@@ -9,7 +9,7 @@ div
 			q-btn(color="primary" unelevated @click="add") Добавить экземпляр
 		component(:is="GreyBlock" v-for="item in connections" :key="item" :name="item.name" @delete="del" @duble="addConnection")
 
-	component(:is="AddConnection" :show="dialog" @close="dialog = false" @add="addConnection")
+	component(:is="AddConnection" v-model="dialog" @add="addConnection")
 </template>
 
 <script setup lang="ts">

@@ -1,5 +1,5 @@
 <template lang="pug">
-q-dialog(v-model="props.show")
+q-dialog(:model-value="props.modelValue")
 	q-card(style="min-width: 400px; padding: 1rem;")
 		.row.items-center.q-pb-none
 			.text-h6(v-if="props.dv") Добавить конфигурацию
@@ -22,13 +22,16 @@ q-dialog(v-model="props.show")
 import { ref } from 'vue'
 
 const props = defineProps({
-	show: Boolean,
+	modelValue: {
+		type: Boolean,
+		default: false,
+	},
 	dv: {
 		type: Boolean,
 		default: false,
 	},
 })
-const emit = defineEmits(['add', 'close'])
+const emit = defineEmits(['add', 'update:modelValue'])
 
 const newname = ref('name')
 const config = ref('')
@@ -38,7 +41,7 @@ const addConnection = (e: string) => {
 	emit('add', e)
 }
 const close = () => {
-	emit('close')
+	emit('update:modelValue', false)
 }
 </script>
 
