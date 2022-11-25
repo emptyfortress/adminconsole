@@ -1,14 +1,26 @@
-<svg width="45" height="72" viewBox="0 0 45 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M0 3C0 1.34315 1.34315 0 3 0H42C43.6569 0 45 1.34315 45 3V72H0V3Z" fill="#445A64"/>
-<rect x="4.5" y="11.25" width="35.7188" height="11.5312" fill="#546E7A"/>
-<rect x="11.25" y="11.25" width="22.5" height="2.25" fill="#0195DA"/>
-<rect x="4.5" y="24.4688" width="35.7188" height="11.5312" fill="#546E7A"/>
-<rect x="11.25" y="24.4688" width="22.5" height="2.25" fill="#0195DA"/>
-<rect x="4.5" y="37.6875" width="35.7188" height="11.5312" fill="#546E7A"/>
-<rect x="11.25" y="37.6875" width="22.5" height="2.25" fill="#0195DA"/>
-<circle cx="36.8438" cy="5.625" r="2.25" fill="#BBD02D"/>
+<svg width="36" height="74" viewBox="0 0 36 74" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_1214_253)">
+<path d="M0 39.5C0 38.6716 0.686499 38 1.53333 38H21.4667C22.3135 38 23 38.6716 23 39.5V74H0V39.5Z" fill="#445A64"/>
+<path d="M21 44H2V50H21V44Z" fill="#546E7A"/>
+<path d="M21 51H2V57H21V51Z" fill="#546E7A"/>
+<path d="M21 58H2V64H21V58Z" fill="#546E7A"/>
+<path d="M18 44H5V45H18V44Z" fill="#0195DA"/>
+<path d="M18 51H5V52H18V51Z" fill="#0195DA"/>
+<path d="M18 58H5V59H18V58Z" fill="#0195DA"/>
+<path d="M19.125 42.2653C19.7463 42.2653 20.25 41.7582 20.25 41.1327C20.25 40.5071 19.7463 40 19.125 40C18.5037 40 18 40.5071 18 41.1327C18 41.7582 18.5037 42.2653 19.125 42.2653Z" fill="#BBD02D"/>
 <g style="mix-blend-mode:overlay" opacity="0.35">
-<path d="M0 3C0 1.34315 1.34315 0 3 0H22.5V72H0V3Z" fill="white"/>
+<path d="M0 39.5102C0 38.6761 0.671575 38 1.5 38H11.25V74.2449H0V39.5102Z" fill="white"/>
 </g>
-<path d="M4.5 68.625H19.9688L4.5 53.1562V68.625Z" fill="#BBD02D"/>
+<path d="M2.25 72.5459H9.9844L2.25 64.7589V72.5459Z" fill="#BBD02D"/>
+<path d="M0.5 1.5C0.5 0.95802 0.952224 0.5 1.53333 0.5H21.4667C22.0478 0.5 22.5 0.958015 22.5 1.5V35.5H0.5V1.5Z" stroke="#698297"/>
+<path d="M18 6H5V7H18V6Z" fill="#698297"/>
+<path d="M18 13H5V14H18V13Z" fill="#698297"/>
+<path d="M18 20H5V21H18V20Z" fill="#698297"/>
+<path d="M19.125 4.26531C19.7463 4.26531 20.25 3.7582 20.25 3.13265C20.25 2.50711 19.7463 2 19.125 2C18.5037 2 18 2.50711 18 3.13265C18 3.7582 18.5037 4.26531 19.125 4.26531Z" fill="#698297"/>
+</g>
+<defs>
+<clipPath id="clip0_1214_253">
+<rect width="36" height="74" fill="white"/>
+</clipPath>
+</defs>
 </svg>
