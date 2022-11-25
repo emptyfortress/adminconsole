@@ -12,6 +12,9 @@ div
 		router-link(to="/setup/dvserver").bl
 			.icon.serverdv
 			.tit Сервер Docsvision
+		router-link(to="/setup/dvserver1").bl
+			.icon.serverdv
+			.tit Сервер Docsvision 1
 		router-link(to="/setup/connection").bl
 			.icon.connection
 			.tit Соединения
@@ -44,21 +47,15 @@ const search = ref()
 }
 .mygrid {
 	display: grid;
-	grid-template-columns: repeat(3, 220px);
-	// gap: 1rem;
+	grid-template-columns: repeat(3, 230px);
 	margin: 0 auto;
-	// background: pink;
 	max-width: 692px;
 	.bl {
-		width: 220px;
-		// height: 180px;
-		// background: var(--bg-drawer);
+		width: 230px;
 		font-size: 1.2rem;
 		color: $secondary;
-		// border-radius: 0.5rem;
 		padding: 1rem;
 		border: 1px solid transparent;
-		position: relative;
 		cursor: pointer;
 		transition: 0.2s ease all;
 		text-decoration: none;
@@ -115,17 +112,11 @@ const search = ref()
 	.mygrid {
 		display: block;
 		.bl {
-			position: relative;
+			display: flex;
+			align-items: center;
+			gap: 1rem;
 			width: 100%;
-			height: 100px;
 			margin-bottom: 0.5rem;
-			.q-img {
-				position: absolute;
-				left: initial;
-				bottom: initial;
-				right: 1rem;
-				top: 1rem;
-			}
 		}
 	}
 }
