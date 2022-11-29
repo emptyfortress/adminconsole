@@ -6,15 +6,16 @@ q-dialog(:model-value="props.modelValue")
 			.text-h6(v-else) Добавить экземпляр
 			q-space
 			q-btn(icon="close" flat round dense @click="close")
-		q-card-section
-			q-input(autofocus v-model="newname" v-if="props.dv" label="Название конфигурации")
-			q-input(autofocus v-model="newname" v-else label="Имя соединения")
-			template(v-if="!dv")
-				q-select(v-model="config" :options="options" label="Конфигурация")
-				q-select(v-model="config" :options="options" label="База данных")
-		q-card-actions(align="right")
-			q-btn(flat label="Отмена"  @click="close")
-			q-btn(unelevated color="primary" label="Добавить" v-close-popup @click="addConnection(newname)")
+		q-form(@submit="addConnection(newname)")
+			q-card-section
+				q-input(autofocus v-model="newname" v-if="props.dv" label="Название конфигурации" @submit="addConnection(newname)")
+				q-input(autofocus v-model="newname" v-else label="Имя соединения")
+				template(v-if="!dv")
+					q-select(v-model="config" :options="options" label="Конфигурация")
+					q-select(v-model="config" :options="options" label="База данных")
+			q-card-actions(align="right")
+				q-btn(flat label="Отмена"  @click="close")
+				q-btn(unelevated color="primary" type="submit" label="Добавить" v-close-popup)
 
 </template>
 

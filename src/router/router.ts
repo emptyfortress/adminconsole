@@ -59,6 +59,20 @@ export const router = createRouter({
 					},
 				},
 				{
+					path: 'dvserver1',
+					name: 'dvserver1',
+					component: () => import('@/components/Dvserver1.vue'),
+					meta: {
+						title: 'Настройки',
+						nav: true,
+						bread: [
+							{ label: 'Dashboard', to: '/' },
+							{ label: 'Настройки', to: '/setup' },
+							{ label: 'Сервер DV', to: '/setup/dvserver' },
+						],
+					},
+				},
+				{
 					path: 'connection',
 					name: 'connecton',
 					component: () => import('@/components/Connection.vue'),

@@ -28,6 +28,7 @@ const router = useRouter()
 
 const items = [
 	{ id: 0, label: 'Сервер DV', to: '/setup/dvserver' },
+	{ id: 0, label: 'Сервер DV 1', to: '/setup/dvserver1' },
 	{ id: 1, label: 'Соединения', to: '/setup/connection' },
 	{ id: 2, label: 'Почтовый сервер', to: '/setup/email' },
 	{ id: 3, label: 'СФО', to: '/setup/worker', tooltip: 'Служба фоновых операций' },
@@ -43,12 +44,8 @@ const items = [
 	margin-bottom: 2rem;
 }
 .bl1 {
-	// background: var(--bg-drawer);
 	font-size: 0.8rem;
 	color: $secondary;
-	// border-radius: 0.5rem;
-	// padding: 4px 10px;
-	// border: 1px dotted $secondary;
 	text-decoration: none;
 	opacity: 0.7;
 	margin-left: 0.5rem;
@@ -57,17 +54,13 @@ const items = [
 	background: var(--bg-drawer);
 	font-size: 0.8rem;
 	color: $secondary;
-	border-radius: 0.5rem;
 	padding: 4px 10px;
 	border: 1px dotted $secondary;
 	cursor: pointer;
-	// transition: 0.2s ease all;
 	text-decoration: none;
 	&:hover {
-		box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4), -1px -1px 3px rgba(0, 0, 0, 0.2);
-		border: 1px solid #fff;
+		border: 1px solid $primary;
 		color: #000;
-		background: #cad0da;
 	}
 }
 .router-link-active {
