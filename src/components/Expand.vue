@@ -2,7 +2,7 @@
 br
 q-list
 	q-expansion-item(
-		v-for="panel in panels"
+		v-for="panel in store.panels"
 		icon="mdi-tune-variant"
 		group="group"
 		switch-toggle-side
@@ -10,30 +10,49 @@ q-list
 		template(v-slot:header)
 			.head
 				.title {{panel.title}}
-				.icon
-					q-btn(flat round @click.stop )
+				.icon(v-if="panel.change")
+					q-btn(dense flat round @click.stop="reset(panel.id)" )
 						component(:is="SvgIcon" name="restore" color="secondary" size="20px")
-					q-icon(name="mdi-alert" size="20px" color="negative")
+						q-tooltip Восстановить значения по умолчанию
+					q-btn(flat color="primary" size="sm" label="Сохранить" @click.stop="reset(panel.id)")
+					//- q-icon(name="mdi-alert" size="20px" color="negative")
 		.pcard
-			component(:is="panel.comp")
+			component(:is="calcComponent(panel.id)" :key="key" @change="change")
 
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
+import Licence from '@/components/setupcomponent/Licence.vue'
+import Server from '@/components/setupcomponent/Server.vue'
 import SvgIcon from '@/components/global/SvgIcon.vue'
-import License from '@/components/setupcomponent/Licence.vue'
+import { useStore } from '@/stores/store'
 
-const panels = [
-	{ id: 0, title: 'Лицензия', comp: License },
-	{ id: 1, title: 'Сервер DV' },
-	{ id: 2, title: 'Подключенные базы данных' },
-	{ id: 3, title: 'Настройка клиентской части' },
-	{ id: 4, title: 'Управление доступом' },
-	{ id: 5, title: 'Общие настройки серверной консоли' },
-	{ id: 6, title: 'Управление бизнес-процессами' },
-	{ id: 7, title: 'Настройки сервиса WorkFlow' },
-	{ id: 8, title: 'Почтовые настройки сервиса Workflow' },
-]
+const emit = defineEmits(['change'])
+
+const store = useStore()
+const calcComponent = (e: number) => {
+	switch (e) {
+		case 0:
+			return Licence
+		case 1:
+			return Server
+		default:
+			return Licence
+	}
+}
+const key = ref(0)
+
+const reset = (e: number) => {
+	if (e === 1) {
+		store.server.$reset()
+		store.panels[e].change = false
+	}
+	key.value += 1
+}
+const change = () => {
+	emit('change')
+}
 </script>
 
 <style scoped lang="scss">
@@ -58,5 +77,6 @@ const panels = [
 }
 .pcard {
 	padding: 1rem;
+	font-size: 0.85rem;
 }
 </style>

@@ -1,5 +1,6 @@
 import { uid } from 'quasar'
 import { defineStore } from 'pinia'
+import { useServer } from '@/stores/server'
 
 interface Connection {
 	name: string
@@ -28,6 +29,18 @@ export const useStore = defineStore({
 			{ id: 11, key: 'DV_Logging_LogLevel_Default', value: '' },
 			{ id: 12, key: 'KRBS_KTNAME', value: '' },
 		],
+		panels: [
+			{ id: 0, title: 'Лицензия', change: false },
+			{ id: 1, title: 'Сервер DV', change: false },
+			{ id: 2, title: 'Подключенные базы данных', change: false },
+			{ id: 3, title: 'Настройка клиентской части', change: false },
+			{ id: 4, title: 'Управление доступом', change: false },
+			{ id: 5, title: 'Общие настройки серверной консоли', change: false },
+			{ id: 6, title: 'Управление бизнес-процессами', change: false },
+			{ id: 7, title: 'Настройки сервиса WorkFlow', change: false },
+			{ id: 8, title: 'Почтовые настройки сервиса Workflow', change: false },
+		],
+		server: useServer(),
 	}),
 	getters: {},
 	actions: {
@@ -45,6 +58,9 @@ export const useStore = defineStore({
 		removeConfig(e: any) {
 			let index = this.config.indexOf(e)
 			this.config.splice(index, 1)
+		},
+		changeDefaults(e: number) {
+			this.panels[e].change = true
 		},
 	},
 })
