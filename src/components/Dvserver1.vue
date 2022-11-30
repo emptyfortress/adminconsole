@@ -15,7 +15,7 @@ div
 		q-tab-panels(v-model="tabs" animated)
 			template(v-for="item in store.config" :key="item.id")
 				q-tab-panel(:name="item.name")
-					GreyBlock4(:name="item.name")
+					component(:is="GreyBlock4" :name="item.name" @delete="store.removeConfig(item)" @duble="addConfig(item.name)")
 
 
 </template>

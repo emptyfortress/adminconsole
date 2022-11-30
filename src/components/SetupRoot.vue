@@ -27,9 +27,6 @@ div
 		.bl.disable
 			.icon.webclient
 			.tit Web-клиент
-		.bl.disable
-			.icon.workflow
-			.tit Сервис управления бизнес-процессам
 </template>
 
 <script setup lang="ts">

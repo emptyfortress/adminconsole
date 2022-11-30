@@ -9,10 +9,6 @@ q-page(padding)
 				q-tooltip(v-if="item.tooltip") {{item.tooltip}}
 			.bl1
 				div Web-клиент
-			.bl1
-				div СУБП
-				q-tooltip Сервис управления бизнес-процессами
-
 
 	router-view(v-slot="{ Component, route }")
 		transition(name="slide-left" mode="out-in")
@@ -28,10 +24,10 @@ const router = useRouter()
 
 const items = [
 	{ id: 0, label: 'Сервер DV', to: '/setup/dvserver' },
-	{ id: 0, label: 'Сервер DV 1', to: '/setup/dvserver1' },
-	{ id: 1, label: 'Соединения', to: '/setup/connection' },
-	{ id: 2, label: 'Почтовый сервер', to: '/setup/email' },
-	{ id: 3, label: 'СФО', to: '/setup/worker', tooltip: 'Служба фоновых операций' },
+	{ id: 1, label: 'Сервер DV 1', to: '/setup/dvserver1' },
+	{ id: 2, label: 'Соединения', to: '/setup/connection' },
+	{ id: 3, label: 'Почтовый сервер', to: '/setup/email' },
+	{ id: 4, label: 'СФО', to: '/setup/worker', tooltip: 'Служба фоновых операций' },
 ]
 </script>
 
