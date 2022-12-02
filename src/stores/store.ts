@@ -14,6 +14,7 @@ export const useStore = defineStore({
 			{ id: '0', name: 'SOL2016' },
 			{ id: '1', name: 'SOL2017' },
 		],
+		tabs: 'SOL2016',
 		params: [
 			{ id: 0, key: 'DV_Docsvision_Platform_5.5_Server Databases Docsvision DB', value: '' },
 			{ id: 1, key: 'DV_Docsvision__Platform_5.5_Server_DefaultBaseName', value: '' },
@@ -61,6 +62,9 @@ export const useStore = defineStore({
 		},
 		changeDefaults(e: number) {
 			this.panels[e].change = true
+		},
+		setTabs(e: string) {
+			this.tabs = e
 		},
 	},
 })

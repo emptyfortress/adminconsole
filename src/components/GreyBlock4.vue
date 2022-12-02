@@ -4,7 +4,7 @@
 	q-form
 		.form
 			.label Название конфигурации:
-			q-input(v-model="form.name" dense outlined bg-color="white")
+			q-input(v-model="form.name" dense outlined bg-color="white" lazy-rules :rules="req")
 			q-checkbox(v-model="form.def" dense label="Использовать по умолчанию").def
 			.but
 				q-btn(round flat icon="mdi-content-duplicate" @click="duble")
@@ -24,6 +24,8 @@
 
 <script setup lang="ts">
 import { ref, reactive, watch } from 'vue'
+import { useQuasar } from 'quasar'
+
 import { useStore } from '@/stores/store'
 import Expand from '@/components/Expand.vue'
 
@@ -49,6 +51,7 @@ const form = reactive({
 	name: props.name,
 	def: false,
 })
+const req = [(val: string) => (val && val.length > 0) || 'Это обязательное поле']
 
 watch(form, (value) => {
 	if (value) {
@@ -62,10 +65,26 @@ const setEditMode = () => {
 const otmena = () => {
 	editMode.value = false
 }
+
+const $q = useQuasar()
 const save = () => {
+	if (form.name.length === 0) {
+		$q.notify({
+			message: 'Заполните обязательные поля',
+			color: 'negative',
+			timeout: 10000,
+			fill: 'white',
+		})
+	} else if (form.name !== props.name) {
+	}
 	store.server.$reset()
 	store.panels[1].change = false
 	editMode.value = false
+	if (form.name.length > 0 && form.name !== props.name) {
+		let currentConfigIndex = store.config.findIndex((item) => item.name === props.name)
+		store.config[currentConfigIndex].name = form.name
+		store.setTabs(form.name)
+	}
 }
 </script>
 

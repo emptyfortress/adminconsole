@@ -115,6 +115,10 @@ body.body--dark {
 
 .notifications {
 	transition: all 0.3s ease;
+	.q-icon {
+		color: white;
+		// fill: white;
+	}
 }
 
 .pink {

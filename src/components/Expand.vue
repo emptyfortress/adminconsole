@@ -1,34 +1,44 @@
 <template lang="pug">
-br
-q-list
+q-list.q-mt-md
 	q-expansion-item(
-		v-for="panel in store.panels"
+		v-for="(panel, index) in store.panels"
 		icon="mdi-tune-variant"
 		group="group"
 		switch-toggle-side
+		:key="panel.id"
+		:class="{ er : neg[index]}"
 		:label="panel.title")
 		template(v-slot:header)
-			.head
+			.head(:class="{ er : neg[index]}")
 				.title {{panel.title}}
-				.icon(v-if="panel.change")
-					q-btn(dense flat round @click.stop="reset(panel.id)" )
-						component(:is="SvgIcon" name="restore" color="secondary" size="20px")
+				.icon
+					q-btn(dense flat round @click.stop="reset(panel.id)" v-if="panel.change")
+						q-icon(name="mdi-reload" style="transform: scaleX(-1);")
 						q-tooltip Восстановить значения по умолчанию
-					q-btn(flat color="primary" size="sm" label="Сохранить" @click.stop="reset(panel.id)")
-					//- q-icon(name="mdi-alert" size="20px" color="negative")
+					q-btn(flat color="primary" size="sm" label="Сохранить" @click.stop="reset(panel.id)" v-if="panel.change")
+					q-icon(name="mdi-alert-circle" size="20px" color="negative" v-if="neg[index]")
 		.pcard
-			component(:is="calcComponent(panel.id)" :key="key" @change="change")
+			component(:is="calcComponent(panel.id)" :key="key" @change="change" @haserror="setNeg(index)" @noerror="setPos(index)")
 
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 import Licence from '@/components/setupcomponent/Licence.vue'
 import Server from '@/components/setupcomponent/Server.vue'
-import SvgIcon from '@/components/global/SvgIcon.vue'
+import Database from '@/components/setupcomponent/Database.vue'
 import { useStore } from '@/stores/store'
 
 const emit = defineEmits(['change'])
+
+const neg = reactive([false, false, false, false, false, false, false, false, false])
+
+const setNeg = (e: number) => {
+	neg[e] = true
+}
+const setPos = (e: number) => {
+	neg[e] = false
+}
 
 const store = useStore()
 const calcComponent = (e: number) => {
@@ -37,8 +47,8 @@ const calcComponent = (e: number) => {
 			return Licence
 		case 1:
 			return Server
-		default:
-			return Licence
+		case 2:
+			return Database
 	}
 }
 const key = ref(0)
@@ -49,6 +59,7 @@ const reset = (e: number) => {
 		store.panels[e].change = false
 	}
 	key.value += 1
+	neg[e] = false
 }
 const change = () => {
 	emit('change')
@@ -63,9 +74,11 @@ const change = () => {
 	border-bottom: 1px dotted $secondary;
 }
 .q-expansion-item--expanded {
-	border: 1px solid $secondary;
+	box-shadow: 0 2px 7px rgba(0, 0, 0, 0.5);
+	border: 1px solid $primary;
 	margin-top: 1rem;
 	margin-bottom: 1rem;
+	// border-radius: 4px;
 }
 .head {
 	width: 100%;
@@ -78,5 +91,12 @@ const change = () => {
 .pcard {
 	padding: 1rem;
 	font-size: 0.85rem;
+}
+:deep(.er.q-expansion-item--collapsed) {
+	background: $pink-1;
+	border: 1px solid $negative;
+	.title {
+		color: $negative;
+	}
 }
 </style>
