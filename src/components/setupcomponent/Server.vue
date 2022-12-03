@@ -1,5 +1,5 @@
 <template lang="pug">
-q-form(ref="form" @validation-error="setError" @validation-success="setSuccess" no-error-focus)
+q-form(ref="form" @validation-error="$emit('haserror')" @validation-success="$emit('noerror')" no-error-focus)
 	.blo
 		.label Файл журнала:
 		q-input(dense outlined v-model="store.server.server.journal" bg-color="white" :rules="req" @blur="form.validate()")
@@ -32,20 +32,13 @@ q-form(ref="form" @validation-error="setError" @validation-success="setSuccess" 
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { useStore } from '@/stores/store'
+import { req } from '@/utils/utils'
 
 const store = useStore()
 
 const form = ref()
-const req = [(val: string) => (val && val.length > 0) || 'Это обязательное поле']
 
 const emit = defineEmits(['change', 'haserror', 'noerror'])
-
-const setError = () => {
-	emit('haserror')
-}
-const setSuccess = () => {
-	emit('noerror')
-}
 
 watch(store.server.server, (value) => {
 	if (value) {
@@ -55,34 +48,4 @@ watch(store.server.server, (value) => {
 })
 </script>
 
-<style scoped lang="scss">
-.blo {
-	display: grid;
-	align-items: start;
-	grid-template-columns: auto 1fr;
-	column-gap: 1rem;
-}
-fieldset .blo {
-	row-gap: 0.5rem;
-}
-.label {
-	line-height: 38px;
-}
-.q-input {
-	max-width: 450px;
-}
-legend {
-	padding: 0 5px;
-}
-fieldset {
-	margin-top: 1rem;
-	border: 3px double #aaa;
-	padding: 1rem;
-}
-.dig {
-	width: 100px;
-}
-:deep(.q-field__bottom) {
-	padding: 2px 3px;
-}
-</style>
+<style scoped lang="scss"></style>

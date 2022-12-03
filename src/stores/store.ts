@@ -1,6 +1,7 @@
 import { uid } from 'quasar'
 import { defineStore } from 'pinia'
 import { useServer } from '@/stores/server'
+import { useAccess } from '@/stores/access'
 
 interface Connection {
 	name: string
@@ -31,17 +32,18 @@ export const useStore = defineStore({
 			{ id: 12, key: 'KRBS_KTNAME', value: '' },
 		],
 		panels: [
-			{ id: 0, title: 'Лицензия', change: false },
-			{ id: 1, title: 'Сервер DV', change: false },
-			{ id: 2, title: 'Подключенные базы данных', change: false },
-			{ id: 3, title: 'Настройка клиентской части', change: false },
-			{ id: 4, title: 'Управление доступом', change: false },
-			{ id: 5, title: 'Общие настройки серверной консоли', change: false },
-			{ id: 6, title: 'Управление бизнес-процессами', change: false },
-			{ id: 7, title: 'Настройки сервиса WorkFlow', change: false },
-			{ id: 8, title: 'Почтовые настройки сервиса Workflow', change: false },
+			{ id: 0, neg: false, change: false, title: 'Лицензия' },
+			{ id: 1, neg: false, change: false, title: 'Сервер DV' },
+			{ id: 2, neg: false, change: false, title: 'Подключенные базы данных' },
+			{ id: 3, neg: false, change: false, title: 'Настройка клиентской части' },
+			{ id: 4, neg: false, change: false, expanded: true, title: 'Управление доступом' },
+			{ id: 5, neg: false, change: false, title: 'Общие настройки серверной консоли' },
+			{ id: 6, neg: false, change: false, title: 'Управление бизнес-процессами' },
+			{ id: 7, neg: false, change: false, title: 'Настройки сервиса WorkFlow' },
+			{ id: 8, neg: false, change: false, title: 'Почтовые настройки сервиса Workflow' },
 		],
 		server: useServer(),
+		access: useAccess(),
 	}),
 	getters: {},
 	actions: {

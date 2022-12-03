@@ -5,7 +5,8 @@
 		.form
 			.label Название конфигурации:
 			q-input(v-model="form.name" dense outlined bg-color="white" lazy-rules :rules="req")
-			q-checkbox(v-model="form.def" dense label="Использовать по умолчанию").def
+			.def
+				q-checkbox(v-model="form.def" dense label="Использовать по умолчанию")
 			.but
 				q-btn(round flat icon="mdi-content-duplicate" @click="duble")
 					q-tooltip Дублировать
@@ -72,8 +73,6 @@ const save = () => {
 		$q.notify({
 			message: 'Заполните обязательные поля',
 			color: 'negative',
-			timeout: 10000,
-			fill: 'white',
 		})
 	} else if (form.name !== props.name) {
 	}
@@ -93,6 +92,9 @@ const save = () => {
 	grid-template-columns: 170px 1fr 1fr 120px;
 	.but {
 		text-align: right;
+	}
+	.def {
+		margin-top: 8px;
 	}
 	@media screen and (max-width: 1180px) {
 		grid-template-columns: 170px 1fr 120px;

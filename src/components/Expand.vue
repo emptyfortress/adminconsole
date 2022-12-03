@@ -2,21 +2,21 @@
 q-list.q-mt-md
 	q-expansion-item(
 		v-for="(panel, index) in store.panels"
-		icon="mdi-tune-variant"
 		group="group"
+		v-model="panel.expanded"
 		switch-toggle-side
 		:key="panel.id"
-		:class="{ er : neg[index]}"
+		:class="{ er : panel.neg }"
 		:label="panel.title")
 		template(v-slot:header)
-			.head(:class="{ er : neg[index]}")
+			.head(:class="{ er : panel.neg}")
 				.title {{panel.title}}
 				.icon
 					q-btn(dense flat round @click.stop="reset(panel.id)" v-if="panel.change")
 						q-icon(name="mdi-reload" style="transform: scaleX(-1);")
 						q-tooltip Восстановить значения по умолчанию
 					q-btn(flat color="primary" size="sm" label="Сохранить" @click.stop="reset(panel.id)" v-if="panel.change")
-					q-icon(name="mdi-alert-circle" size="20px" color="negative" v-if="neg[index]")
+					q-icon(name="mdi-alert-circle" size="20px" color="negative" v-if="panel.neg")
 		.pcard
 			component(:is="calcComponent(panel.id)" :key="key" @change="change" @haserror="setNeg(index)" @noerror="setPos(index)")
 
@@ -27,17 +27,16 @@ import { ref, reactive } from 'vue'
 import Licence from '@/components/setupcomponent/Licence.vue'
 import Server from '@/components/setupcomponent/Server.vue'
 import Database from '@/components/setupcomponent/Database.vue'
+import Access from '@/components/setupcomponent/Access.vue'
 import { useStore } from '@/stores/store'
 
 const emit = defineEmits(['change'])
 
-const neg = reactive([false, false, false, false, false, false, false, false, false])
-
 const setNeg = (e: number) => {
-	neg[e] = true
+	store.panels[e].neg = true
 }
 const setPos = (e: number) => {
-	neg[e] = false
+	store.panels[e].neg = false
 }
 
 const store = useStore()
@@ -49,6 +48,8 @@ const calcComponent = (e: number) => {
 			return Server
 		case 2:
 			return Database
+		case 4:
+			return Access
 	}
 }
 const key = ref(0)
@@ -59,7 +60,13 @@ const reset = (e: number) => {
 		store.panels[e].change = false
 	}
 	key.value += 1
-	neg[e] = false
+	store.panels[e].neg = false
+	if (e === 4) {
+		store.access.$reset()
+		store.panels[e].change = false
+	}
+	key.value += 1
+	store.panels[e].neg = false
 }
 const change = () => {
 	emit('change')
