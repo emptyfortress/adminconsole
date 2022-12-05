@@ -2,7 +2,7 @@
 .rel
 	.btn
 		q-btn(flat round icon="mdi-printer-outline").q-mr-md
-		q-btn(unelevated color="primary" label="Изменить ключ" size="sm")
+		q-btn(unelevated color="secondary" label="Изменить ключ" size="sm")
 	.text-bold Параметры используемой лицензии:
 	q-scroll-area(style="height: 400px;").q-mt-md
 		.gr

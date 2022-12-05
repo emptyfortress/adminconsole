@@ -34,9 +34,9 @@ export const useStore = defineStore({
 		panels: [
 			{ id: 0, neg: false, change: false, title: 'Лицензия' },
 			{ id: 1, neg: false, change: false, title: 'Сервер DV' },
-			{ id: 2, neg: false, change: false, title: 'Подключенные базы данных' },
+			{ id: 2, neg: false, change: false, expanded: true, title: 'Подключенные базы данных' },
 			{ id: 3, neg: false, change: false, title: 'Настройка клиентской части' },
-			{ id: 4, neg: false, change: false, expanded: true, title: 'Управление доступом' },
+			{ id: 4, neg: false, change: false, title: 'Управление доступом' },
 			{ id: 5, neg: false, change: false, title: 'Общие настройки серверной консоли' },
 			{ id: 6, neg: false, change: false, title: 'Управление бизнес-процессами' },
 			{ id: 7, neg: false, change: false, title: 'Настройки сервиса WorkFlow' },
