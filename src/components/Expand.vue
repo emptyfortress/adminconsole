@@ -28,6 +28,7 @@ import Licence from '@/components/setupcomponent/Licence.vue'
 import Server from '@/components/setupcomponent/Server.vue'
 import Database from '@/components/setupcomponent/Database.vue'
 import Access from '@/components/setupcomponent/Access.vue'
+import Client from '@/components/setupcomponent/Client.vue'
 import { useStore } from '@/stores/store'
 
 const emit = defineEmits(['change'])
@@ -48,6 +49,8 @@ const calcComponent = (e: number) => {
 			return Server
 		case 2:
 			return Database
+		case 3:
+			return Client
 		case 4:
 			return Access
 	}

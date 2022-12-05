@@ -32,4 +32,7 @@ const def1 = ref(false)
 	background: #dedede;
 	background: #fff;
 }
+.q-tab-panels {
+	box-shadow: 0 2px 5px #bdbdbd;
+}
 </style>

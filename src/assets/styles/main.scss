@@ -173,9 +173,10 @@ body.body--dark {
 	align-items: baseline;
 	grid-template-columns: auto 1fr;
 	column-gap: 1rem;
-}
-.q-input {
-	max-width: 450px;
+	.q-input,
+	.q-select {
+		max-width: 450px;
+	}
 }
 legend {
 	padding: 0 5px;
