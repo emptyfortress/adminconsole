@@ -8,6 +8,11 @@
 			Db(v-model="def")
 		q-tab-panel(name="base2")
 			Db(v-model="def1")
+	div
+	.row.q-gutter-lg.q-mt-sm
+		div Вкладки в разделе БД:
+		router-link(to="/ext") Внешние хранилища
+		router-link(to="/archive") Архивирование
 </template>
 
 <script setup lang="ts">

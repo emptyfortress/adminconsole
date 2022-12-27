@@ -42,9 +42,10 @@ q-layout(view="hHh LpR lFr")
 	component(:is="RDrawer" :show="rightDrawer")
 
 	q-page-container
-		router-view(v-slot="{ Component, route }")
-			transition(name="fade")
-				component(:is="Component")
+		q-page
+			router-view(v-slot="{ Component, route }")
+				transition(name="fade")
+					component(:is="Component")
 
 	q-footer(bordered).footer
 		div .dv admin panel
