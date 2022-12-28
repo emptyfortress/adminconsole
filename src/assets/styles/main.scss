@@ -9,6 +9,7 @@
 		hsl(27, 100%, 96%) 50%,
 		rgb(var(--bg-light)) 80%
 	);
+	--bg-grey: #efefef;
 	--bg-header: #efefef;
 	--bg-drawer: #e3e5e8;
 	--bg-card: #fff;
@@ -134,7 +135,7 @@ body.body--dark {
 }
 
 .grey {
-	background: #efefef;
+	background: var(--bg-grey);
 	margin-top: 2rem;
 	position: relative;
 	border-radius: 0.3rem;

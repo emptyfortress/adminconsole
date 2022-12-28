@@ -21,7 +21,7 @@
 					q-btn(round flat icon="mdi-checkbox-marked-circle" size="sm" v-if="props.row.def")
 					q-btn(round flat icon="mdi-checkbox-blank-circle-outline" size="sm" v-else @click="assign(props.row.psevdo)")
 				q-td(key="def" :props="props").text-right
-					q-btn(round flat icon="mdi-pencil" size="sm" )
+					q-btn(round flat icon="mdi-pencil" size="sm" @click="editBD(props.row)")
 					q-btn(round flat icon="mdi-trash-can-outline" size="sm" @click="remove(props.row.psevdo)")
 	.master
 		div Чтобы создать новую базу данных, сделать доступной для пользователей существующую базу данных, а также обновить БД, если ее версия отличается от версии сервера Docsvision, воспользуйтесь Мастером баз данных.
@@ -29,12 +29,14 @@
 
 component(:is="ChangeDialog" v-model="change" @changeDef="assignDef")
 component(:is="MasterBD" v-model="master")
+component(:is="EditBD" v-model="edit" @close="edit = false" :bd="bdRow")
 </template>
 
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
-import MasterBD from '@/components/setupcomponent/MasterBD.vue'
 import ChangeDialog from '@/components/setupcomponent/ChangeDialog.vue'
+import MasterBD from '@/components/setupcomponent/MasterBD.vue'
+import EditBD from '@/components/setupcomponent/EditBD.vue'
 
 // import { useStore } from '@/stores/store'
 
@@ -42,11 +44,17 @@ import ChangeDialog from '@/components/setupcomponent/ChangeDialog.vue'
 const emit = defineEmits(['change', 'haserror', 'noerror'])
 
 const change = ref(false)
+const bdRow = ref()
 const master = ref(false)
+const edit = ref(false)
 const changename = ref('')
 
 const remove = (row: string) => {
 	console.log(row)
+}
+const editBD = (row: any) => {
+	bdRow.value = row
+	edit.value = true
 }
 
 const assign = (e: string) => {
