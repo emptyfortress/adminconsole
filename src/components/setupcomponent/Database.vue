@@ -27,23 +27,14 @@
 		div Чтобы создать новую базу данных, сделать доступной для пользователей существующую базу данных, а также обновить БД, если ее версия отличается от версии сервера Docsvision, воспользуйтесь Мастером баз данных.
 		q-btn(unelevated color="primary" @click="master = true") Мастер&nbsp;баз&nbsp;данных
 
-q-dialog(v-model="change")
-	q-card.q-pa-sm
-		q-card-section(class="row items-center q-pb-none")
-			div(class="text-h6") База данных по умолчанию
-			q-space
-			q-btn(icon="close" flat round dense v-close-popup)
-		q-card-section Вы действительно хотите назначить <span class="name">{{changename}}</span> в качестве базы по умолчанию? Это может занять некоторoе время, но измения вступят в силу сразу.
-		q-card-section.def При обращении к серверу Docsvision без ввода дополнительных параметров, происходит подключение к базе данных по умолчанию. Эта же база обрабатывается сервисами.
-		q-card-actions(align="right")
-			q-btn(flat label="Отмена" color="primary" v-close-popup)
-			q-btn(flat label="Назначить" color="primary" :loading="loading" @click="assignDefault")
+component(:is="ChangeDialog" v-model="change" @changeDef="assignDef")
 component(:is="MasterBD" v-model="master")
 </template>
 
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
 import MasterBD from '@/components/setupcomponent/MasterBD.vue'
+import ChangeDialog from '@/components/setupcomponent/ChangeDialog.vue'
 
 // import { useStore } from '@/stores/store'
 
@@ -53,7 +44,6 @@ const emit = defineEmits(['change', 'haserror', 'noerror'])
 const change = ref(false)
 const master = ref(false)
 const changename = ref('')
-const loading = ref(false)
 
 const remove = (row: string) => {
 	console.log(row)
@@ -64,17 +54,12 @@ const assign = (e: string) => {
 	change.value = true
 }
 
-const assignDefault = () => {
-	loading.value = true
+const assignDef = () => {
 	let index = rows.findIndex((item) => item.psevdo === changename.value)
-	setTimeout(() => {
-		rows.map((item) => (item.def = false))
-		rows[index].def = true
-		loading.value = false
-		change.value = false
-		// emit('change')
-		// store.panels[2].change = true
-	}, 1000)
+	rows.map((item) => (item.def = false))
+	rows[index].def = true
+	change.value = false
+	// store.panels[2].change = true
 }
 
 const columns = [
