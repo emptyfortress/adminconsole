@@ -1,6 +1,6 @@
 <template lang="pug">
 .database
-	q-table(
+	q-table(bordered
 		flat
 		:rows="rows"
 		:columns="columns"
@@ -22,7 +22,10 @@
 					q-btn(round flat icon="mdi-checkbox-blank-circle-outline" size="sm" v-else @click="assign(props.row.psevdo)")
 				q-td(key="def" :props="props").text-right
 					q-btn(round flat icon="mdi-pencil" size="sm" )
-					q-btn(round flat icon="mdi-trash-can-outline" size="sm" )
+					q-btn(round flat icon="mdi-trash-can-outline" size="sm" @click="remove(props.row.psevdo)")
+	.master
+		div Чтобы создать новую базу данных, сделать доступной для пользователей существующую базу данных, а также обновить БД, если ее версия отличается от версии сервера Docsvision, воспользуйтесь Мастером баз данных.
+		q-btn(unelevated color="primary" @click="master = true") Мастер&nbsp;баз&nbsp;данных
 
 q-dialog(v-model="change")
 	q-card.q-pa-sm
@@ -30,22 +33,48 @@ q-dialog(v-model="change")
 			div(class="text-h6") База данных по умолчанию
 			q-space
 			q-btn(icon="close" flat round dense v-close-popup)
-		q-card-section Вы действительно хотите назначить <span class="name">{{changename}}</span> в качестве базы по умолчанию? <br />Это может занять некоторые время.
+		q-card-section Вы действительно хотите назначить <span class="name">{{changename}}</span> в качестве базы по умолчанию? Это может занять некоторoе время, но измения вступят в силу сразу.
 		q-card-section.def При обращении к серверу Docsvision без ввода дополнительных параметров, происходит подключение к базе данных по умолчанию. Эта же база обрабатывается сервисами.
 		q-card-actions(align="right")
 			q-btn(flat label="Отмена" color="primary" v-close-popup)
-			q-btn(flat label="Назначить" color="primary" v-close-popup)
+			q-btn(flat label="Назначить" color="primary" :loading="loading" @click="assignDefault")
+component(:is="MasterBD" v-model="master")
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
+import MasterBD from '@/components/setupcomponent/MasterBD.vue'
+
+// import { useStore } from '@/stores/store'
+
+// const store = useStore()
+const emit = defineEmits(['change', 'haserror', 'noerror'])
 
 const change = ref(false)
+const master = ref(false)
 const changename = ref('')
+const loading = ref(false)
 
-const assign = (e) => {
+const remove = (row: string) => {
+	console.log(row)
+}
+
+const assign = (e: string) => {
 	changename.value = e
 	change.value = true
+}
+
+const assignDefault = () => {
+	loading.value = true
+	let index = rows.findIndex((item) => item.psevdo === changename.value)
+	setTimeout(() => {
+		rows.map((item) => (item.def = false))
+		rows[index].def = true
+		loading.value = false
+		change.value = false
+		// emit('change')
+		// store.panels[2].change = true
+	}, 1000)
 }
 
 const columns = [
@@ -58,13 +87,13 @@ const columns = [
 		sortable: true,
 	},
 	{ name: 'server', align: 'left', label: 'Сервер', field: 'server', sortable: true },
-	{ name: 'index', align: 'left', label: 'Индексируется', field: 'index' },
-	{ name: 'version', align: 'left', label: 'Версия', field: 'version' },
-	{ name: 'date', align: 'left', label: 'Дата создания', field: 'date' },
-	{ name: 'def', align: 'left', label: 'По умолчанию', field: 'def' },
+	{ name: 'index', align: 'left', label: 'Индексируется', field: 'index', sortable: true },
+	{ name: 'version', align: 'left', label: 'Версия', field: 'version', sortable: true },
+	{ name: 'date', align: 'left', label: 'Дата создания', field: 'date', sortable: true },
+	{ name: 'def', align: 'left', label: 'По умолчанию', field: 'def', sortable: true },
 	{ name: 'action', align: 'right', label: 'Действия' },
 ]
-const rows = [
+const rows = reactive([
 	{
 		psevdo: 'AGSupport',
 		server: 'Docsvision 1',
@@ -89,14 +118,10 @@ const rows = [
 		date: '09.07.2021',
 		def: false,
 	},
-]
+])
 </script>
 
 <style scoped lang="scss">
-.database {
-	// display: grid;
-	// grid-template-columns: auto 1fr;
-}
 :deep(.q-table th) {
 	font-size: 0.7rem;
 	font-weight: normal;
@@ -116,5 +141,12 @@ const rows = [
 	font-weight: 600;
 	padding: 3px 8px;
 	background: #efefef;
+}
+.master {
+	margin-top: 1rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 2rem;
 }
 </style>
