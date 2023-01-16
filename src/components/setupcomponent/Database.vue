@@ -27,7 +27,7 @@
 		div Чтобы создать новую базу данных, сделать доступной для пользователей существующую базу данных, а также обновить БД, если ее версия отличается от версии сервера Docsvision, воспользуйтесь Мастером баз данных.
 		q-btn(unelevated color="primary" @click="master = true") Мастер&nbsp;баз&nbsp;данных
 
-component(:is="ChangeDialog" v-model="change" @changeDef="assignDef")
+component(:is="ChangeDialog" v-model="change" :changename="changename" @changeDef="assignDef")
 component(:is="MasterBD" v-model="master")
 component(:is="EditBD" v-model="edit" @close="edit = false" :bd="bdRow")
 </template>
@@ -129,11 +129,6 @@ const rows = reactive([
 	padding-top: 0;
 	font-size: 0.8rem;
 	color: hsla(0, 0%, 40%, 1);
-}
-.name {
-	font-weight: 600;
-	padding: 3px 8px;
-	background: #efefef;
 }
 .master {
 	margin-top: 1rem;

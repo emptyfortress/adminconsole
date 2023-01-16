@@ -23,13 +23,15 @@ q-dialog(:modelValue="edit" persistent position="bottom" full-width)
 		div
 			q-separator
 			q-card-actions(align="center")
-				template( v-if="tabs !== 'outer'")
-					q-btn(flat @click="$emit('close')") Отмена
-					q-btn(flat @click="$emit('close')") Применить
-				template(v-else)
-					.change
-						q-icon(name="mdi-information-outline")
-						span Все изменения на этой вкладке применяются сразу.
+				q-btn(flat @click="$emit('close')") Отмена
+				q-btn(flat @click="$emit('close')") Применить
+				//- template( v-if="tabs !== 'outer'")
+				//- 	q-btn(flat @click="$emit('close')") Отмена
+				//- 	q-btn(flat @click="$emit('close')") Применить
+				//- template(v-else)
+				//- 	.change
+				//- 		q-icon(name="mdi-information-outline")
+				//- 		span Все изменения на этой вкладке применяются сразу.
 
 </template>
 
@@ -42,7 +44,17 @@ const props = defineProps({
 		type: Boolean,
 		default: false,
 	},
-	bd: Object,
+	bd: {
+		type: Object,
+		default: {
+			name: 'psevdo',
+			required: true,
+			label: 'Псевдоним',
+			align: 'left',
+			field: 'psevdo',
+			sortable: true,
+		},
+	},
 })
 const tabs = ref('outer')
 </script>

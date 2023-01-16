@@ -36,4 +36,10 @@ const changeDef = () => {
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.name {
+	font-weight: 600;
+	padding: 3px 8px;
+	background: #efefef;
+}
+</style>

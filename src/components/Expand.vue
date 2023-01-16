@@ -1,5 +1,5 @@
 <template lang="pug">
-q-list.q-mt-md
+q-list(separator).q-mt-md
 	q-expansion-item(
 		v-for="(panel, index) in store.panels"
 		group="group"
@@ -82,6 +82,7 @@ const change = () => {
 }
 .q-expansion-item--expanded :deep(.q-item) {
 	border-bottom: 1px dotted $secondary;
+	border-top: 1px solid $primary;
 }
 .q-expansion-item--expanded {
 	box-shadow: 0 2px 7px rgba(0, 0, 0, 0.5);
