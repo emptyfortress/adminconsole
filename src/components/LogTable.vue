@@ -69,30 +69,36 @@ const selected = ref([])
 .q-chip--selected {
 	background: $primary;
 	color: #fff;
+
 	.q-icon {
 		color: #fff !important;
 	}
 }
+
 .q-input {
 	width: 240px;
 }
+
 .tab {
 	margin-top: 1rem;
 }
 
-.tab::v-deep .q-table tbody td {
+.tab :deep(.q-table tbody td) {
 	font-size: 0.9rem;
 }
-.tab::v-deep thead {
+
+.tab :deep(thead) {
 	background: #ddd;
 	position: sticky;
 	top: 0;
+
 	th {
 		font-size: 0.75rem;
 		border-right: 1px solid #fff;
 		text-transform: capitalize;
 		padding: 0 16px;
 	}
+
 	tr {
 		height: 36px;
 	}

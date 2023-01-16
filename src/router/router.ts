@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from '@/pages/Home.vue'
 // import External from '@/components//setupcomponent/External.vue'
-import EditBD from '@/components/setupcomponent/EditBD.vue'
+// import EditBD from '@/components/setupcomponent/EditBD.vue'
 
 declare module 'vue-router' {
 	interface Bread {
@@ -135,15 +135,15 @@ export const router = createRouter({
 						nav: false,
 					},
 				},
-				{
-					path: '/edit',
-					name: 'edit',
-					component: EditBD,
-					meta: {
-						title: 'Вкладка',
-						nav: false,
-					},
-				},
+				// {
+				// 	path: '/edit',
+				// 	name: 'edit',
+				// 	component: EditBD,
+				// 	meta: {
+				// 		title: 'Вкладка',
+				// 		nav: false,
+				// 	},
+				// },
 			],
 		},
 		{

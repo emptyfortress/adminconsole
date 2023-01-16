@@ -1,26 +1,36 @@
-<template lang="pug">
-.grey(:class="{ edit : editMode}")
-	.current {{ props.name }}
-	q-form
-		.form
-			.label Название конфигурации:
-			q-input(v-model="form.name" dense outlined bg-color="white" lazy-rules :rules="req")
-			.def
-				q-checkbox(v-model="form.def" dense label="Использовать по умолчанию")
-			.but
-				q-btn(round flat icon="mdi-content-duplicate" @click="duble")
-					q-tooltip Дублировать
-				q-btn(round flat icon="mdi-trash-can-outline")
-					q-tooltip Удалить
-					q-menu
-						q-list
-							q-item(clickable v-close-popup @click="del").pink
-								q-item-section Подтверждаю
-		component(:is="Expand" @change="setEditMode")
-
-	q-card-actions(align="right" v-if="editMode")
-		q-btn(flat label="Отмена" @click="otmena")
-		q-btn(unelevated color="primary" label="Сохранить все" @click="save")
+<template>
+	<div class="grey" :class="{ edit: editMode }">
+		<div class="current">{{ props.name }}</div>
+		<q-form>
+			<div class="form">
+				<div class="label">Название конфигурации:</div>
+				<q-input v-model="form.name" dense outlined bg-color="white" lazy-rules :rules="req" />
+				<div class="def">
+					<q-checkbox v-model="form.def" dense label="Использовать по умолчанию"></q-checkbox>
+				</div>
+				<div class="but">
+					<q-btn round flat icon="mdi-content-duplicate" @click="duble">
+						<q-tooltip>Дублировать</q-tooltip>
+					</q-btn>
+					<q-btn round flat icon="mdi-trash-can-outline">
+						<q-tooltip>Удалить</q-tooltip>
+						<q-menu>
+							<q-list>
+								<q-item class="pink" clickable v-close-popup @click="del">
+									<q-item-section>Подтверждаю</q-item-section>
+								</q-item>
+							</q-list>
+						</q-menu>
+					</q-btn>
+				</div>
+			</div>
+			<Expand @change="setEditMode" />
+		</q-form>
+		<q-card-actions align="right" v-if="editMode">
+			<q-btn flat label="Отмена" @click="otmena"></q-btn>
+			<q-btn unelevated color="primary" label="Сохранить все" @click="save"></q-btn>
+		</q-card-actions>
+	</div>
 </template>
 
 <script setup lang="ts">
@@ -90,17 +100,22 @@ const save = () => {
 <style scoped lang="scss">
 .form {
 	grid-template-columns: 170px 1fr 1fr 120px;
+
 	.but {
 		text-align: right;
 	}
+
 	.def {
 		margin-top: 8px;
 	}
+
 	@media screen and (max-width: 1180px) {
 		grid-template-columns: 170px 1fr 120px;
+
 		.def {
 			grid-column: 2/3;
 		}
+
 		.but {
 			grid-row: 1/2;
 			grid-column: 3/4;
