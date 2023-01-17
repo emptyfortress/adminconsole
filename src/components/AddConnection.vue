@@ -14,7 +14,7 @@ q-dialog(:model-value="props.modelValue")
 					q-select(v-model="config" :options="options" label="Конфигурация")
 					q-select(v-model="config" :options="options" label="База данных")
 			q-card-actions(align="right")
-				q-btn(flat label="Отмена"  @click="close")
+				q-btn(flat color="primary" label="Отмена"  @click="close")
 				q-btn(unelevated color="primary" type="submit" label="Добавить" v-close-popup)
 
 </template>
