@@ -1,12 +1,12 @@
 <template>
 	<div class="outer">
+
 		<div>
 			<div class="row items-center justify-between">
 				<div class="zg">Хранилища ({{ list1.length }})</div>
 				<q-btn flat round icon="mdi-plus-circle"></q-btn>
 			</div>
 			<div class="grey">
-
 				<draggable class="list-group" :list="list1" item-key="id" :group="{ name: 'group', pull: 'clone', put: false }"
 					ghost-class="ghost" :move="checkMove" @start="dragging = true" @end="dragging = false">
 					<template #item="{ element, index }">
@@ -22,10 +22,11 @@
 				</draggable>
 			</div>
 		</div>
+
 		<div>
 			<div class="row items-center justify-between">
-				<div class="zg">Группы хранилищ ({{ list2.length }})</div>
-				<q-btn flat round icon="mdi-plus-circle"></q-btn>
+				<div class="zg">Группы хранилищ ({{ list2.length + 1 }})</div>
+				<q-btn flat round icon="mdi-plus-circle" @click="showAdd = true" />
 			</div>
 			<q-expansion-item class="exp" v-model="gr">
 				<template v-slot:header="header">
@@ -55,6 +56,7 @@
 				</q-card>
 			</q-expansion-item>
 		</div>
+
 		<div>
 			<div class="row items-center justify-between">
 				<div class="zg">Правила помещения в хранилище (0)</div>
@@ -64,12 +66,23 @@
 				<p>Создайте первое правило.</p>
 			</div>
 		</div>
+
 	</div>
+
+	<AddDialog v-model="showAdd">
+		<template v-slot:header>Новая группа</template>
+		<template v-slot:main>Новая группа</template>
+		<template v-slot:actions>
+			<q-btn flat color="primary" label="Отмена" @click="showAdd = false" />
+			<q-btn unelevated color="primary" label="Отмена" />
+		</template>
+	</AddDialog>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref } from 'vue'
 import draggable from 'vuedraggable'
+import AddDialog from '@/components/setupcomponent/AddDialog.vue'
 
 const gr = ref(true)
 const shape = ref(false)
@@ -77,11 +90,9 @@ const shape = ref(false)
 const list1 = ref([
 	{ name: 'Storage 1', id: 1 },
 	{ name: 'Storage 2', id: 2 },
-	{ name: 'Storage 3', id: 3 },
-	{ name: 'Storage 4', id: 4 },
-	{ name: 'Storage 5', id: 5 },
-	{ name: 'Storage 6', id: 6 },
 ])
+
+const showAdd = ref()
 const list2 = ref([])
 
 const remove = (n: number) => {

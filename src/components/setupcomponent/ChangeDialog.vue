@@ -13,7 +13,7 @@ q-dialog(:modelValue="props.change")
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref, } from 'vue'
 
 const loading = ref(false)
 
