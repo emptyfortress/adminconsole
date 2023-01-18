@@ -2,25 +2,7 @@
 	<div class="outer">
 
 		<div>
-			<div class="row items-center justify-between">
-				<div class="zg">Хранилища ({{ list1.length }})</div>
-				<q-btn flat round icon="mdi-plus-circle"></q-btn>
-			</div>
-			<div class="grey">
-				<draggable class="list-group" :list="list1" item-key="id" :group="{ name: 'group', pull: 'clone', put: false }"
-					ghost-class="ghost" :move="checkMove" @start="dragging = true" @end="dragging = false">
-					<template #item="{ element, index }">
-						<div class="row justify-between items-center">
-							<div>
-								<q-icon name="mdi-database-outline" size="18px"></q-icon>{{ element.name }}
-							</div>
-							<div>
-								<q-btn flat round dense icon="mdi-trash-can-outline" size="12px" @click="remove1(index)"></q-btn>
-							</div>
-						</div>
-					</template>
-				</draggable>
-			</div>
+			<Hran />
 		</div>
 
 		<div>
@@ -69,20 +51,26 @@
 
 	</div>
 
-	<AddDialog v-model="showAdd">
-		<template v-slot:header>Новая группа</template>
-		<template v-slot:main>Новая группа</template>
-		<template v-slot:actions>
-			<q-btn flat color="primary" label="Отмена" @click="showAdd = false" />
-			<q-btn unelevated color="primary" label="Отмена" />
-		</template>
-	</AddDialog>
+
+	<q-form @submit="addGroup">
+		<AddDialog v-model="showAdd">
+			<template #header>Новая группа</template>
+			<template v-slot:main>
+				<q-input v-model="newGroupName" autofocus label="Название" />
+			</template>
+			<template v-slot:actions>
+				<q-btn flat color="primary" label="Отмена" @click="showAdd = false" />
+				<q-btn unelevated color="primary" label="Добавить" @click="addGroup" />
+			</template>
+		</AddDialog>
+	</q-form>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
 import draggable from 'vuedraggable'
 import AddDialog from '@/components/setupcomponent/AddDialog.vue'
+import Hran from '@/components/setupcomponent/Hran.vue'
 
 const gr = ref(true)
 const shape = ref(false)
@@ -92,8 +80,13 @@ const list1 = ref([
 	{ name: 'Storage 2', id: 2 },
 ])
 
+const newGroupName = ref()
 const showAdd = ref()
 const list2 = ref([])
+const addGroup = () => {
+	if (newGroupName.value.length === 0) return
+	list2.value.push({ name: 'newGroupName' })
+}
 
 const remove = (n: number) => {
 	list2.value.splice(n, 1)
