@@ -1,69 +1,45 @@
-<template>
-	<div class="outer">
+<template lang="pug">
+.outer
+	div
+		Hran
 
-		<div>
-			<Hran />
-		</div>
+	div
+		.row.items-center.justify-between
+			.zg Группы хранилищ ({{ list2.length + 1 }})
+			q-btn(flat round icon='mdi-plus-circle' @click='showAdd = true')
+		q-expansion-item.exp(v-model='gr')
+			template(#header)
+				.row.items-center.justify-between.full-width
+					.title Common
+					.tog
+						div &KHcy;&rcy;&acy;&ncy;&icy;&lcy;&icy;&shchcy;&acy;
+						q-toggle(size='xs' v-model='shape' val='xs' label='Правила')
+					div &nbsp;
+			q-card.dblist
+				component.list-group(:is='draggable' :list='list2' item-key='id' group='group' ghost-class='ghost' :move='checkMove' @start='dragging = true' @end='dragging = false')
+					template(#item='{ element, index }')
+						.row.justify-between.items-center
+							div
+								q-icon(name='mdi-database-outline' size='18px')
+								| {{ element.name }}
+							div
+								q-btn(flat round dense icon='mdi-trash-can-outline' size='12px' @click='remove(index)')
+	div
+		.row.items-center.justify-between
+			.zg Правила помещения в хранилище (0)
+			q-btn(flat round icon='mdi-plus-circle')
+		.grey
+			p &Scy;&ocy;&zcy;&dcy;&acy;&jcy;&tcy;&iecy; &pcy;&iecy;&rcy;&vcy;&ocy;&iecy; &pcy;&rcy;&acy;&vcy;&icy;&lcy;&ocy;.
 
-		<div>
-			<div class="row items-center justify-between">
-				<div class="zg">Группы хранилищ ({{ list2.length + 1 }})</div>
-				<q-btn flat round icon="mdi-plus-circle" @click="showAdd = true" />
-			</div>
-			<q-expansion-item class="exp" v-model="gr">
-				<template v-slot:header="header">
-					<div class="row items-center justify-between full-width">
-						<div class="title">Common</div>
-						<div class="tog">
-							<div>Хранилища</div>
-							<q-toggle size="xs" v-model="shape" val="xs" label="Правила"></q-toggle>
-						</div>
-						<div>&nbsp;</div>
-					</div>
-				</template>
-				<q-card class="dblist">
-					<component class="list-group" :is="draggable" :list="list2" item-key="id" group="group" ghost-class="ghost"
-						:move="checkMove" @start="dragging = true" @end="dragging = false">
-						<template #item="{ element, index }">
-							<div class="row justify-between items-center">
-								<div>
-									<q-icon name="mdi-database-outline" size="18px"></q-icon>{{ element.name }}
-								</div>
-								<div>
-									<q-btn flat round dense icon="mdi-trash-can-outline" size="12px" @click="remove(index)"></q-btn>
-								</div>
-							</div>
-						</template>
-					</component>
-				</q-card>
-			</q-expansion-item>
-		</div>
+q-form(@submit='addGroup')
+	AddDialog(v-model='showAdd')
+		template(#header) Новая группа
+		template(#main)
+			q-input(v-model='newGroupName' autofocus label='Название')
+		template(#actions)
+			q-btn(flat color='primary' label='Отмена' @click='showAdd = false')
+				q-btn(unelevated color='primary' label='Добавить' @click='addGroup')
 
-		<div>
-			<div class="row items-center justify-between">
-				<div class="zg">Правила помещения в хранилище (0)</div>
-				<q-btn flat round icon="mdi-plus-circle"></q-btn>
-			</div>
-			<div class="grey">
-				<p>Создайте первое правило.</p>
-			</div>
-		</div>
-
-	</div>
-
-
-	<q-form @submit="addGroup">
-		<AddDialog v-model="showAdd">
-			<template #header>Новая группа</template>
-			<template v-slot:main>
-				<q-input v-model="newGroupName" autofocus label="Название" />
-			</template>
-			<template v-slot:actions>
-				<q-btn flat color="primary" label="Отмена" @click="showAdd = false" />
-				<q-btn unelevated color="primary" label="Добавить" @click="addGroup" />
-			</template>
-		</AddDialog>
-	</q-form>
 </template>
 
 <script setup lang="ts">
