@@ -4,32 +4,14 @@
 		Hran
 
 	div
-		.row.items-center.justify-between
-			.zg Группы хранилищ ({{ list2.length + 1 }})
-			q-btn(flat round icon='mdi-plus-circle' @click='showAdd = true')
-		q-expansion-item.exp(v-model='gr')
-			template(#header)
-				.row.items-center.justify-between.full-width
-					.title Common
-					.tog
-						div &KHcy;&rcy;&acy;&ncy;&icy;&lcy;&icy;&shchcy;&acy;
-						q-toggle(size='xs' v-model='shape' val='xs' label='Правила')
-					div &nbsp;
-			q-card.dblist
-				component.list-group(:is='draggable' :list='list2' item-key='id' group='group' ghost-class='ghost' :move='checkMove' @start='dragging = true' @end='dragging = false')
-					template(#item='{ element, index }')
-						.row.justify-between.items-center
-							div
-								q-icon(name='mdi-database-outline' size='18px')
-								| {{ element.name }}
-							div
-								q-btn(flat round dense icon='mdi-trash-can-outline' size='12px' @click='remove(index)')
+		Group
+
 	div
 		.row.items-center.justify-between
 			.zg Правила помещения в хранилище (0)
 			q-btn(flat round icon='mdi-plus-circle')
 		.grey
-			p &Scy;&ocy;&zcy;&dcy;&acy;&jcy;&tcy;&iecy; &pcy;&iecy;&rcy;&vcy;&ocy;&iecy; &pcy;&rcy;&acy;&vcy;&icy;&lcy;&ocy;.
+			p 
 
 q-form(@submit='addGroup')
 	AddDialog(v-model='showAdd')
@@ -44,29 +26,16 @@ q-form(@submit='addGroup')
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import draggable from 'vuedraggable'
+// import draggable from 'vuedraggable'
 import AddDialog from '@/components/setupcomponent/AddDialog.vue'
+import Group from '@/components/setupcomponent/Group.vue'
 import Hran from '@/components/setupcomponent/Hran.vue'
-
-const gr = ref(true)
-const shape = ref(false)
 
 const list1 = ref([
 	{ name: 'Storage 1', id: 1 },
 	{ name: 'Storage 2', id: 2 },
 ])
 
-const newGroupName = ref()
-const showAdd = ref()
-const list2 = ref([])
-const addGroup = () => {
-	if (newGroupName.value.length === 0) return
-	list2.value.push({ name: 'newGroupName' })
-}
-
-const remove = (n: number) => {
-	list2.value.splice(n, 1)
-}
 const remove1 = (n: number) => {
 	list1.value.splice(n, 1)
 }
@@ -74,6 +43,11 @@ const checkMove = () => {
 	console.log(111)
 }
 const dragging = ref(false)
+
+const addGroup = () => {
+	if (newGroupName.value.length === 0) return
+	list2.value.push({ name: 'newGroupName' })
+}
 </script>
 
 <style scoped lang="scss">
@@ -111,22 +85,5 @@ const dragging = ref(false)
 		vertical-align: top;
 		margin-right: 0.5rem;
 	}
-}
-
-.exp {
-	background: var(--bg-grey);
-	// padding: 0;
-}
-
-.dblist {
-	background: var(--bg-grey);
-	padding: 1rem;
-}
-
-.tog {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	font-size: 0.8rem;
 }
 </style>
