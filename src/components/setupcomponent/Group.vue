@@ -5,13 +5,14 @@ import AddDialog from '@/components/setupcomponent/AddDialog.vue'
 
 const list2 = ref([])
 const newGroupName = ref()
-const showAdd = ref()
+const showAdd = ref(false)
 
 const remove = (n: number) => {
 	list2.value.splice(n, 1)
 }
 const gr = ref(true)
 const shape = ref(false)
+const dragging = ref(false)
 </script>
 
 <template lang="pug">
@@ -27,7 +28,7 @@ q-expansion-item.exp(v-model='gr')
 				q-toggle(size='xs' v-model='shape' val='xs' label='Правила')
 			div &nbsp;
 	q-card.dblist
-		component.list-group(:is='draggable' :list='list2' item-key='id' group='group' ghost-class='ghost' :move='checkMove' @start='dragging = true' @end='dragging = false')
+		draggable.list-group(:list='list2' item-key='id' group='group' ghost-class='ghost' @start='dragging = true' @end='dragging = false')
 			template(#item='{ element, index }')
 				.row.justify-between.items-center
 					div
@@ -38,20 +39,22 @@ q-expansion-item.exp(v-model='gr')
 							q-list
 								q-item(clickable v-close-popup @click="remove(index)").pink
 									q-item-section Подтверждаю
-					<!-- div -->
-					<!-- 	q-icon(name='mdi-database-outline' size='18px') -->
-					<!-- 	| {{ element.name }} -->
-					<!-- div -->
-					<!-- 	q-btn(flat round dense icon='mdi-trash-can-outline' size='12px' @click='remove(index)') -->
 
-q-form(@submit='addGroup')
-	AddDialog(v-model='showAdd')
-		template(#header) Новая группа
-		template(#main)
+q-dialog(:model-value="showAdd")
+	q-card(style="min-width: 400px;")
+		q-card-section.row.items-center.q-pb-none
+			.text-h6 Новая группа
+			q-space
+			q-btn(icon="mdi-close" flat round dense v-close-popup)
+
+		q-card-section
 			q-input(v-model='newGroupName' autofocus label='Название')
-		template(#actions)
-			q-btn(flat color='primary' label='Отмена' @click='showAdd = false')
+
+		q-card-section
+			q-card-actions(align="right")
+				q-btn(flat color='primary' label='Отмена' @click='showAdd = false')
 				q-btn(unelevated color='primary' label='Добавить' @click='addGroup')
+		
 </template>
 
 <style scoped lang="scss">
