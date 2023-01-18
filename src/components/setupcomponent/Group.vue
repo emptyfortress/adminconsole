@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import draggable from 'vuedraggable'
-import AddDialog from '@/components/setupcomponent/AddDialog.vue'
 
 const list2 = ref([])
 const newGroupName = ref()

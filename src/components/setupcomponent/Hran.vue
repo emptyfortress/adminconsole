@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import draggable from 'vuedraggable'
-import AddDialog1 from '@/components/setupcomponent/AddDialog1.vue'
-import AddDialog from './AddDialog.vue';
 
 const list1 = ref([
 	{ name: 'Storage 1', id: 1 },
@@ -12,6 +10,9 @@ const list1 = ref([
 const showAdd = ref(false)
 const remove1 = (n: number) => {
 	list1.value.splice(n, 1)
+}
+const close = () => {
+	showAdd.value = false
 }
 </script>
 
@@ -24,22 +25,35 @@ const remove1 = (n: number) => {
 		item-key="id"
 		:group="{ name: 'group', pull: 'clone', put: false }"
 		ghost-class='ghost'
-		:move='checkMove'
-		@start='dragging = true'
-		@end='dragging = false'
 		).list-group
 		template(#item="{ element, index }")
 			.row.justify-between.items-center
 				div
 					q-icon(name="mdi-database-outline" size="18px" style="vertical-align: top;")
 					span.q-ml-sm {{ element.name }}
-				q-btn(flat round dense icon="mdi-trash-can-outline" size="10px" )
-					q-menu
-						q-list
-							q-item(clickable v-close-popup @click="remove1(index)").pink
-								q-item-section Подтверждаю
+				div
+					<!-- q-icon(name="mdi-information" size="sm")  -->
+					q-btn(flat round dense icon="mdi-information" size="12px" )
+					q-btn(flat round dense icon="mdi-pencil" size="12px" )
+					q-btn(flat round dense icon="mdi-trash-can-outline" size="12px" )
+						q-menu
+							q-list
+								q-item(clickable v-close-popup @click="remove1(index)").pink
+									q-item-section Подтверждаю
 
-AddDialog1(v-model="showAdd")
+q-dialog(:model-value="showAdd")
+	q-card
+		q-card-section.row.items-center.q-pb-none
+			.text-h6 Настройки хранилища
+			q-space
+			q-btn(icon="mdi-close" flat round dense @click="close")
+
+		q-card-section
+			Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum repellendus sit voluptate voluptas eveniet porro. Rerum blanditiis perferendis totam, ea at omnis vel numquam exercitationem aut, natus minima, porro labore.
+		q-card-section
+			q-card-actions(align='right')
+				q-btn(flat color="primary" label="Отмена" @click="close") 
+				q-btn(unelevated color="primary" label="Отмена" @click="action") 
 </template>
 
 <style scoped lang="scss">
