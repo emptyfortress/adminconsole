@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import draggable from 'vuedraggable'
+import AddDialog1 from '@/components/setupcomponent/AddDialog1.vue'
+import AddDialog from './AddDialog.vue';
 
 const list1 = ref([
 	{ name: 'Storage 1', id: 1 },
 	{ name: 'Storage 2', id: 2 },
 ])
 
+const showAdd = ref(false)
 const remove1 = (n: number) => {
 	list1.value.splice(n, 1)
 }
@@ -15,7 +18,7 @@ const remove1 = (n: number) => {
 <template lang="pug">
 .row.items-center.justify-between
 	.zg Хранилища ({{ list1.length }})
-	q-btn(flat round icon="mdi-plus-circle")
+	q-btn(flat round icon="mdi-plus-circle" @click="showAdd = true")
 .grey.hran
 	draggable(:list="list1"
 		item-key="id"
@@ -36,6 +39,7 @@ const remove1 = (n: number) => {
 							q-item(clickable v-close-popup @click="remove1(index)").pink
 								q-item-section Подтверждаю
 
+AddDialog1(v-model="showAdd")
 </template>
 
 <style scoped lang="scss">
