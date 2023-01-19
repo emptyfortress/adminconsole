@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { ref } from 'vue'
 import draggable from 'vuedraggable'
 import { useHran } from '@/stores/hran'
 
@@ -14,13 +14,16 @@ const gr = ref(true)
 const shape = ref(false)
 const dragging = ref(false)
 
+const addGroup = () => {
+	console.log(111)
+}
 </script>
 
 <template lang="pug">
 .row.items-center.justify-between
-	.zg Группы хранилищ ({{ hran.list2.length + 1 }})
+	.zg Группы хранилищ ({{ hran.groups.length }})
 	q-btn(flat round icon="mdi-plus-circle" @click="showAdd = true")
-q-expansion-item.exp(v-model="gr")
+q-expansion-item.exp(v-model="group.expanded" v-for="group in hran.groups" :key="group.id")
 	template(#header)
 		.row.items-center.justify-between.full-width
 			.title Common
@@ -29,7 +32,7 @@ q-expansion-item.exp(v-model="gr")
 				q-toggle(size="xs" v-model="shape" val="xs" label="Правила")
 			div &nbsp;
 	q-card.dblist
-		draggable.list-group(:list="hran.list2" item-key="id" group="group" ghost-class="ghost" @start="dragging = true" @end="dragging = false")
+		draggable.list-group(:list="group.list" item-key="id" group="group" ghost-class="ghost" @start="dragging = true" @end="dragging = false")
 			template(#item="{ element, index }")
 				.row.justify-between.items-center
 					div
