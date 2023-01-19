@@ -29,7 +29,8 @@ const removeGroup = ((ind: number) => {
 .row.items-center.justify-between
 	.zg Группы хранилищ ({{ hran.groups.length }})
 	q-btn(flat round icon="mdi-plus-circle" @click="showAdd = true")
-q-expansion-item.exp(v-model="group.expanded" v-for="(group, ind) in hran.groups" :key="group.id").gro
+.empt(v-if="hran.groups.length === 0") Создайте первую группу
+q-expansion-item.exp(v-else v-model="group.expanded" v-for="(group, ind) in hran.groups" :key="group.id").gro
 	template(#header)
 		.row.items-center.justify-between.full-width
 			.title {{ group.name }}
@@ -112,5 +113,10 @@ q-dialog(:model-value="showAdd")
 	padding: 2px 10px;
 	font-weight: 600;
 	text-transform: uppercase;
+}
+
+.empt {
+	padding: 1rem;
+	background: var(--bg-grey);
 }
 </style>

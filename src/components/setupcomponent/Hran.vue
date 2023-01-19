@@ -5,26 +5,29 @@ import { useHran } from '@/stores/hran'
 
 const list1 = reactive([
 	{
-		name: 'Storage 1', id: 1, props: [['Тип', 'Хранилище в базе',],
-		['Состояние', 'Online',],
-		['Разделы', 'Основной, архивный',],
-		['Размер', 100,],
-		]
+		id: 1,
+		name: 'Storage 1',
+		type: 'Хранилище в базе',
+		state: 'Online',
+		sections: 'Основной, архивный',
+		size: 100,
 	},
 	{
-		name: 'Storage 2', id: 2, props: [['Тип', 'Хранилище на диске',],
-		['Состояние', 'Online',],
-		['Разделы', 'Временный',],
-		['Размер', 130,],
-		]
+		id: 2,
+		name: 'Storage 2',
+		type: 'Хранилище на диске',
+		state: 'Online',
+		sections: 'Временный',
+		size: 130,
 	},
 	{
-		name: 'Storage 3', id: 3, props: [['Тип', 'Хранилище на диске',],
-		['Состояние', 'Auto',],
-		['Разделы', 'Временный',],
-		['Размер', 10,],
-		]
-	},
+		id: 3,
+		name: 'Storage 3',
+		type: 'Хранилище на диске',
+		state: 'Online',
+		sections: 'Временный',
+		size: 10,
+	}
 ])
 
 const hran = useHran()
@@ -83,18 +86,23 @@ const options1 = ['Online', 'Auto', 'Disabled', 'Read and delete', 'Reserved']
 				div
 					q-icon(name="mdi-database-outline" size="18px" style="vertical-align: top;")
 					span.q-ml-sm {{ element.name }}
-				.desc {{ element.props[0][1] }}
-				.desc {{ element.props[1][1] }}
-				.desc {{ element.props[2][1] }}
-				.desc {{ element.props[3][1] }} Gb
+				.desc {{ element.type }}
+				.desc {{ element.state }}
+				.desc {{ element.sections }}
+				.desc {{ element.size }} Gb
 				div
 					q-icon(name="mdi-information" size="sm").q-mr-md
 						q-menu
 							q-card(flat)
 								.hrinfo
-									template(v-for="prop in element.props")
-										.label {{ prop[0]}}:
-										.val {{ prop[1]}}
+									.label Тип:
+									.val {{ element.type }}
+									.label Состояние:
+									.val {{ element.state }}
+									.label Разделы:
+									.val {{ element.sections }}
+									.label Размер:
+									.val {{ element.size }} Gb
 
 					q-btn(flat round dense icon="mdi-pencil" size="sm" @click="edit(index)" )
 					q-btn(flat round dense icon="mdi-trash-can-outline" size="sm" )
