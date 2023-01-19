@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
-// import type { Ref } from 'vue'
-
+import { ref, reactive, } from 'vue'
 import draggable from 'vuedraggable'
 
 const list1 = reactive([
@@ -17,6 +15,13 @@ const list1 = reactive([
 		['Состояние', 'Online',],
 		['Разделы', 'Временный',],
 		['Размер', 130,],
+		]
+	},
+	{
+		name: 'Storage 3', id: 3, props: [['Тип', 'Хранилище на диске',],
+		['Состояние', 'Auto',],
+		['Разделы', 'Временный',],
+		['Размер', 10,],
 		]
 	},
 ])
@@ -37,15 +42,13 @@ const clearAdd = (() => {
 	showAdd.value = true
 })
 
-const edit = (index: number) => {
-	console.log('index: ', index)
+const edit = ((index: number) => {
 	name.value = list1[index].name
 	type.value = list1[index].props[0][1]
 	state.value = list1[index].props[1][1]
 	size.value = list1[index].props[3][1]
 	showAdd.value = true
-
-}
+})
 
 const name = ref()
 const type = ref()

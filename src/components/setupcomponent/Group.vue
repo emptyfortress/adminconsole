@@ -1,34 +1,36 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 import draggable from 'vuedraggable'
+import { useHran } from '@/stores/hran'
 
-const list2 = ref([])
+const hran = useHran()
 const newGroupName = ref()
 const showAdd = ref(false)
 
 const remove = (n: number) => {
-	list2.value.splice(n, 1)
+	hran.list2.splice(n, 1)
 }
 const gr = ref(true)
 const shape = ref(false)
 const dragging = ref(false)
+
 </script>
 
 <template lang="pug">
 .row.items-center.justify-between
-	.zg Группы хранилищ ({{ list2.length + 1 }})
-	q-btn(flat round icon='mdi-plus-circle' @click='showAdd = true')
-q-expansion-item.exp(v-model='gr')
+	.zg Группы хранилищ ({{ hran.list2.length + 1 }})
+	q-btn(flat round icon="mdi-plus-circle" @click="showAdd = true")
+q-expansion-item.exp(v-model="gr")
 	template(#header)
 		.row.items-center.justify-between.full-width
 			.title Common
 			.tog
 				div Хранилища
-				q-toggle(size='xs' v-model='shape' val='xs' label='Правила')
+				q-toggle(size="xs" v-model="shape" val="xs" label="Правила")
 			div &nbsp;
 	q-card.dblist
-		draggable.list-group(:list='list2' item-key='id' group='group' ghost-class='ghost' @start='dragging = true' @end='dragging = false')
-			template(#item='{ element, index }')
+		draggable.list-group(:list="hran.list2" item-key="id" group="group" ghost-class="ghost" @start="dragging = true" @end="dragging = false")
+			template(#item="{ element, index }")
 				.row.justify-between.items-center
 					div
 						q-icon(name="mdi-database-outline" size="18px" style="vertical-align: top;")
@@ -47,12 +49,12 @@ q-dialog(:model-value="showAdd")
 			q-btn(icon="mdi-close" flat round dense v-close-popup)
 
 		q-card-section
-			q-input(v-model='newGroupName' autofocus label='Название')
+			q-input(v-model="newGroupName" autofocus label="Название")
 
 		q-card-section
 			q-card-actions(align="right")
-				q-btn(flat color='primary' label='Отмена' @click='showAdd = false')
-				q-btn(unelevated color='primary' label='Добавить' @click='addGroup')
+				q-btn(flat color="primary" label="Отмена" @click="showAdd = false")
+				q-btn(unelevated color="primary" label="Добавить" @click="addGroup")
 		
 </template>
 
@@ -83,6 +85,7 @@ q-dialog(:model-value="showAdd")
 
 .dblist {
 	background: var(--bg-grey);
-	padding: 1rem;
+	padding: 0 .5rem;
+	border-top: 1px solid #ccc;
 }
 </style>

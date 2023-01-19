@@ -19,7 +19,7 @@ import Rule from '@/components/setupcomponent/Rule.vue'
 <style scoped lang="scss">
 .outer {
 	display: grid;
-	grid-template-columns: 2fr 1fr;
+	grid-template-columns: 4fr 3fr;
 	gap: 1rem;
 	padding-top: 1rem;
 }
