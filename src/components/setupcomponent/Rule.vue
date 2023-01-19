@@ -12,16 +12,16 @@ const ext = ref()
 const big = ref()
 const small = ref()
 
-const list = reactive([])
+const list = ref([])
 
 const date = new Date()
 const addRule = (() => {
-	list.push({
-		id: +date,
-		name: newRuleName.value,
-		condition: type,
-		value: ext
-	})
+	let tmp = {}
+	tmp.id = +date
+	tmp.name = newRuleName.value
+	tmp.condition = type.value
+	tmp.value = ext.value
+	list.value.push(tmp)
 	newRuleName.value = ''
 	showAdd.value = false
 })
@@ -44,8 +44,9 @@ const addRule = (() => {
 				div
 					q-icon(name="mdi-gate-nor" size="18px" style="vertical-align: top;")
 					span.q-ml-sm {{ element.name }}
-				.desc some text
-				.desc some text
+				.desc {{ element.condition }}
+				.desc {{ element.value }} Gb
+
 				div
 					q-icon(name="mdi-information" size="sm").q-mr-md
 						q-menu
@@ -75,8 +76,8 @@ q-dialog(v-model="showAdd")
 			.grid
 				q-select(v-model='type' label='Тип' :options="options").full-width
 				q-input(v-model="ext" label="Расширение" v-if="type === 'По расширению файла'").full-width
-				q-input(v-model="ext" label="Размер" v-if="type === 'Размер больше, чем'" type="number").full-width
-				q-input(v-model="ext" label="Размер" v-if="type === 'Размер меньше, чем'" type="number").full-width
+				q-input(v-model="size" label="Размер" v-if="type === 'Размер больше, чем'" type="number").full-width
+				q-input(v-model="size1" label="Размер" v-if="type === 'Размер меньше, чем'" type="number").full-width
 
 		q-card-section
 			q-card-actions(align="right")
@@ -113,12 +114,15 @@ q-dialog(v-model="showAdd")
 }
 
 .tabel {
-	/* background: pink; */
 	width: 100%;
 	display: grid;
-	grid-template-columns: 1fr 150px 150px 100px;
+	grid-template-columns: 1fr 150px 70px 90px;
 	justify-items: start;
 	column-gap: 1rem;
 	row-gap: .2rem;
+}
+
+.desc {
+	font-size: 0.8rem;
 }
 </style>
