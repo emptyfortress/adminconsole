@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
+// import type { Ref } from 'vue'
+
 import draggable from 'vuedraggable'
 
 const list1 = reactive([
@@ -28,9 +30,10 @@ const close = () => {
 }
 
 const clearAdd = (() => {
-	name.value = ''
-	type.value = ''
-	state.value = ''
+	name.value = null
+	type.value = null
+	state.value = null
+	size.value = 0
 	showAdd.value = true
 })
 
@@ -44,10 +47,10 @@ const edit = (index: number) => {
 
 }
 
-const name = ref('')
-const type = ref('')
-const state = ref('')
-const size = ref(0)
+const name = ref()
+const type = ref()
+const state = ref()
+const size = ref()
 const raz1 = ref(true)
 const raz2 = ref(true)
 const raz3 = ref(false)
@@ -110,7 +113,7 @@ q-dialog(:model-value="showAdd")
 		q-card-section
 			q-card-actions(align="right")
 				q-btn(flat color="primary" label="Отмена" @click="close") 
-				q-btn(unelevated color="primary" label="Отмена" @click="action") 
+				q-btn(unelevated color="primary" label="Сохранить") 
 </template>
 
 <style scoped lang="scss">
