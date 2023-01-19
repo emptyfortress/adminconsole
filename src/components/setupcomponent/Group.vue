@@ -7,10 +7,10 @@ const hran = useHran()
 const newGroupName = ref()
 const showAdd = ref(false)
 
-const remove = (n: number) => {
-	hran.list2.splice(n, 1)
-}
-const gr = ref(true)
+const remove = ((ind: number, index: number) => {
+	hran.groups[ind].list.splice(index, 1)
+})
+
 const shape = ref(false)
 const dragging = ref(false)
 
@@ -23,7 +23,7 @@ const addGroup = () => {
 .row.items-center.justify-between
 	.zg Группы хранилищ ({{ hran.groups.length }})
 	q-btn(flat round icon="mdi-plus-circle" @click="showAdd = true")
-q-expansion-item.exp(v-model="group.expanded" v-for="group in hran.groups" :key="group.id")
+q-expansion-item.exp(v-model="group.expanded" v-for="(group, ind) in hran.groups" :key="group.id")
 	template(#header)
 		.row.items-center.justify-between.full-width
 			.title Common
@@ -32,7 +32,7 @@ q-expansion-item.exp(v-model="group.expanded" v-for="group in hran.groups" :key=
 				q-toggle(size="xs" v-model="shape" val="xs" label="Правила")
 			div &nbsp;
 	q-card.dblist
-		draggable.list-group(:list="group.list" item-key="id" group="group" ghost-class="ghost" @start="dragging = true" @end="dragging = false")
+		component(:is="draggable" :list="group.list" item-key="id" group="group" ghost-class="ghost" @start="dragging = true" @end="dragging = false").list-group
 			template(#item="{ element, index }")
 				.row.justify-between.items-center
 					div
@@ -41,7 +41,7 @@ q-expansion-item.exp(v-model="group.expanded" v-for="group in hran.groups" :key=
 					q-btn(flat round dense icon="mdi-trash-can-outline" size="10px" )
 						q-menu
 							q-list
-								q-item(clickable v-close-popup @click="remove(index)").pink
+								q-item(clickable v-close-popup @click="remove(ind, index)").pink
 									q-item-section Подтверждаю
 
 q-dialog(:model-value="showAdd")
