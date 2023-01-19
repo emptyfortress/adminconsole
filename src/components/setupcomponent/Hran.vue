@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, reactive, } from 'vue'
 import draggable from 'vuedraggable'
+import { useHran } from '@/stores/hran'
 
 const list1 = reactive([
 	{
@@ -25,6 +26,11 @@ const list1 = reactive([
 		]
 	},
 ])
+
+const hran = useHran()
+const checkDub = () => {
+	hran.unique()
+}
 
 const showAdd = ref(false)
 const remove1 = (n: number) => {
@@ -70,6 +76,7 @@ const options1 = ['Online', 'Auto', 'Disabled', 'Read and delete', 'Reserved']
 		item-key="id"
 		:group="{ name: 'group', pull: 'clone', put: false }"
 		ghost-class='ghost'
+		@end="checkDub"
 		).list-group
 		template(#item="{ element, index }")
 			.tabel
