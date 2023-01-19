@@ -15,7 +15,8 @@ const shape = ref(false)
 const dragging = ref(false)
 
 const addGroup = () => {
-	console.log(111)
+	hran.addGroup(newGroupName.value)
+	showAdd.value = false
 }
 </script>
 
@@ -23,10 +24,10 @@ const addGroup = () => {
 .row.items-center.justify-between
 	.zg Группы хранилищ ({{ hran.groups.length }})
 	q-btn(flat round icon="mdi-plus-circle" @click="showAdd = true")
-q-expansion-item.exp(v-model="group.expanded" v-for="(group, ind) in hran.groups" :key="group.id")
+q-expansion-item.exp(v-model="group.expanded" v-for="(group, ind) in hran.groups" :key="group.id").gro
 	template(#header)
 		.row.items-center.justify-between.full-width
-			.title Common
+			.title {{ group.name }}
 			.tog
 				div Хранилища
 				q-toggle(size="xs" v-model="shape" val="xs" label="Правила")
@@ -90,5 +91,15 @@ q-dialog(:model-value="showAdd")
 	background: var(--bg-grey);
 	padding: 0 .5rem;
 	border-top: 1px solid #ccc;
+}
+
+.gro {
+	margin-bottom: 1rem;
+}
+
+.title {
+	color: $secondary;
+	font-weight: 600;
+	text-transform: uppercase;
 }
 </style>

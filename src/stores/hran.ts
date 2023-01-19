@@ -1,5 +1,7 @@
 import { defineStore } from 'pinia'
 
+const date = new Date()
+
 export const useHran = defineStore({
 	id: 'hran',
 	state: () => ({
@@ -18,6 +20,15 @@ export const useHran = defineStore({
 				item.list = [...new Map(item.list.map((item) => [item["id"], item])).values()]
 
 			})
+		},
+		addGroup(e: string) {
+			const temp = {
+				id: +date,
+				name: e,
+				expanded: true,
+				list: []
+			}
+			this.groups.push(temp)
 		}
 	},
 })
