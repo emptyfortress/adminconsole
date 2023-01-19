@@ -3,8 +3,16 @@ import { ref } from 'vue'
 import draggable from 'vuedraggable'
 
 const list1 = ref([
-	{ name: 'Storage 1', id: 1 },
-	{ name: 'Storage 2', id: 2 },
+	{
+		name: 'Storage 1', id: 1, props: [['Тип', 'Хранилище в базе',],
+		['Состояние', 'Online',],
+		['Разделы', 'Основной, архивный',],]
+	},
+	{
+		name: 'Storage 2', id: 2, props: [['Тип', 'Хранилище на диске',],
+		['Состояние', 'Online',],
+		['Разделы', 'Временный',],]
+	},
 ])
 
 const showAdd = ref(false)
@@ -14,6 +22,7 @@ const remove1 = (n: number) => {
 const close = () => {
 	showAdd.value = false
 }
+const showInfo = ref(false)
 </script>
 
 <template lang="pug">
@@ -32,10 +41,16 @@ const close = () => {
 					q-icon(name="mdi-database-outline" size="18px" style="vertical-align: top;")
 					span.q-ml-sm {{ element.name }}
 				div
-					<!-- q-icon(name="mdi-information" size="sm")  -->
-					q-btn(flat round dense icon="mdi-information" size="12px" )
-					q-btn(flat round dense icon="mdi-pencil" size="12px" )
-					q-btn(flat round dense icon="mdi-trash-can-outline" size="12px" )
+					q-icon(name="mdi-information" size="sm").q-mr-md
+						q-menu
+							q-card(flat)
+								.hrinfo
+									template(v-for="prop in element.props")
+										.label {{ prop[0]}}:
+										.val {{ prop[1]}}
+
+					q-btn(flat round dense icon="mdi-pencil" size="sm" )
+					q-btn(flat round dense icon="mdi-trash-can-outline" size="sm" )
 						q-menu
 							q-list
 								q-item(clickable v-close-popup @click="remove1(index)").pink
@@ -49,7 +64,7 @@ q-dialog(:model-value="showAdd")
 			q-btn(icon="mdi-close" flat round dense @click="close")
 
 		q-card-section
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum repellendus sit voluptate voluptas eveniet porro. Rerum blanditiis perferendis totam, ea at omnis vel numquam exercitationem aut, natus minima, porro labore.
+			p Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum repellendus sit voluptate voluptas eveniet porro. Rerum blanditiis perferendis totam, ea at omnis vel numquam exercitationem aut, natus minima, porro labore.
 		q-card-section
 			q-card-actions(align='right')
 				q-btn(flat color="primary" label="Отмена" @click="close") 
@@ -67,5 +82,31 @@ q-dialog(:model-value="showAdd")
 	margin-bottom: 1rem;
 	position: relative;
 	padding-top: 1.3rem;
+}
+
+.inf {
+	background: #fff;
+	width: 200px;
+	height: 102px;
+	border: 1px solid #ccc;
+	position: absolute;
+	top: 1rem;
+	left: 1rem;
+	z-index: 100;
+}
+
+.hrinfo {
+	padding: 1rem;
+	display: grid;
+	grid-template-columns: auto 1fr;
+	justify-items: start;
+	align-items: flex-end;
+	column-gap: 1rem;
+	row-gap: 3px;
+
+	.label {
+		color: grey;
+		justify-self: end;
+	}
 }
 </style>
