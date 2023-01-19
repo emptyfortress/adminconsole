@@ -3,7 +3,7 @@
 	div
 		Hran
 
-	div
+	.group
 		Group
 
 	div
@@ -22,5 +22,11 @@ import Rule from '@/components/setupcomponent/Rule.vue'
 	grid-template-columns: 4fr 3fr;
 	gap: 1rem;
 	padding-top: 1rem;
+}
+
+.group {
+	grid-column: 2/3;
+	grid-row: 1/3;
+
 }
 </style>
