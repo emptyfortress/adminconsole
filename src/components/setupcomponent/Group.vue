@@ -17,7 +17,12 @@ const dragging = ref(false)
 const addGroup = () => {
 	hran.addGroup(newGroupName.value)
 	showAdd.value = false
+	newGroupName.value = ''
 }
+
+const removeGroup = ((ind: number) => {
+	hran.removeGroup(ind)
+})
 </script>
 
 <template lang="pug">
@@ -32,6 +37,10 @@ q-expansion-item.exp(v-model="group.expanded" v-for="(group, ind) in hran.groups
 				div Хранилища
 				q-toggle(size="xs" v-model="shape" val="xs" label="Правила")
 			div &nbsp;
+			q-menu(touch-position context-menu)
+				q-list
+					q-item(clickable v-close-popup @click="removeGroup(ind)").pink
+						q-item-section Удалить группу
 	q-card.dblist
 		component(:is="draggable" :list="group.list" item-key="id" group="group" ghost-class="ghost" @start="dragging = true" @end="dragging = false").list-group
 			template(#item="{ element, index }")
@@ -98,7 +107,9 @@ q-dialog(:model-value="showAdd")
 }
 
 .title {
-	color: $secondary;
+	background: $secondary;
+	color: white;
+	padding: 2px 10px;
 	font-weight: 600;
 	text-transform: uppercase;
 }

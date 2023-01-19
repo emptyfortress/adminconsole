@@ -29,6 +29,10 @@ export const useHran = defineStore({
 				list: []
 			}
 			this.groups.push(temp)
+		},
+		removeGroup(ind: number) {
+			this.groups.splice(ind, 1)
 		}
+
 	},
 })
