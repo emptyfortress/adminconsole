@@ -9,6 +9,9 @@ interface Hran {
 	type: string
 	state: string
 	size: number
+	main: boolean
+	arch: boolean
+	temp: boolean
 }
 
 const list1: Hran[] = reactive([
@@ -19,6 +22,9 @@ const list1: Hran[] = reactive([
 		state: 'Online',
 		sections: 'Основной, архивный',
 		size: 100,
+		main: true,
+		arch: true,
+		temp: false
 	},
 	{
 		id: 2,
@@ -27,6 +33,9 @@ const list1: Hran[] = reactive([
 		state: 'Online',
 		sections: 'Временный',
 		size: 130,
+		main: false,
+		arch: false,
+		temp: true
 	},
 	{
 		id: 3,
@@ -35,6 +44,9 @@ const list1: Hran[] = reactive([
 		state: 'Online',
 		sections: 'Временный',
 		size: 10,
+		main: false,
+		arch: false,
+		temp: true
 	}
 ])
 
@@ -56,14 +68,24 @@ const clearAdd = (() => {
 	type.value = null
 	state.value = null
 	size.value = 0
+	main.value = false
+	arch.value = false
+	temp.value = false
 	showAdd.value = true
+	currentItemIndex.value = null
 })
+
+const currentItemIndex = ref()
 
 const edit = ((index: number) => {
 	name.value = list1[index].name
 	type.value = list1[index].type
 	state.value = list1[index].state
 	size.value = list1[index].size
+	main.value = list1[index].main
+	arch.value = list1[index].arch
+	temp.value = list1[index].temp
+	currentItemIndex.value = index
 	showAdd.value = true
 })
 
@@ -76,17 +98,25 @@ const add = (() => {
 	tmp.type = type.value
 	tmp.state = state.value
 	tmp.size = size.value
-	list1.push(tmp)
+	tmp.main = main.value
+	tmp.arch = arch.value
+	tmp.temp = temp.value
+	if (currentItemIndex.value !== null) {
+		list1[currentItemIndex.value] = tmp
+	} else {
+		list1.push(tmp)
+	}
 	showAdd.value = false
+	currentItemIndex.value = null
 })
 
 const name = ref()
 const type = ref()
 const state = ref()
 const size = ref()
-const raz1 = ref(true)
-const raz2 = ref(true)
-const raz3 = ref(false)
+const main = ref(false)
+const arch = ref(false)
+const temp = ref(false)
 const options = ['Хранилище на диске', 'Хранилище во внешней базе MS SQL Server', 'FileStream хранилище во внешней базе данных MS SQL Server', 'FileStream хранилище в базе данных Docsvision', 'Добавить из сборки...']
 const options1 = ['Online', 'Auto', 'Disabled', 'Read and delete', 'Reserved']
 </script>
@@ -134,9 +164,9 @@ q-dialog(:model-value="showAdd")
 					q-select(v-model="state" label="Состояние" :options="options1" lasy-rules :rules="[val => val !== null && val !== '' || 'Обязательное поле']")
 					q-input(v-model="size" label="Макс.размер, Гб" type="number" style="width:150px; margin: 0 auto;" lasy-rules :rules="[val => val > 0 || 'Укажите размер']")
 					br
-					q-checkbox(v-model="raz1" label="Основной раздел")
-					q-checkbox(v-model="raz2" label="Архивный раздел")
-					q-checkbox(v-model="raz3" label="Временный раздел")
+					q-checkbox(v-model="main" label="Основной раздел")
+					q-checkbox(v-model="arch" label="Архивный раздел")
+					q-checkbox(v-model="temp" label="Временный раздел")
 			q-card-section
 				q-card-actions(align="right")
 					q-btn(flat color="primary" label="Отмена" @click="close") 
