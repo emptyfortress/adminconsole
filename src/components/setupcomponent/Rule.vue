@@ -92,7 +92,6 @@ const edit = ((index: number) => {
 		item-key="id"
 		:group="{ name: 'rule', pull: 'clone', put: false }"
 		ghost-class='ghost'
-		@end="checkDub"
 		).list-group
 		template(#item="{ element, index }")
 			.tabel

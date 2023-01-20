@@ -15,7 +15,6 @@ const removeRule = ((ind: number, index: number) => {
 	hran.groups[ind].listRule.splice(index, 1)
 })
 
-const rulegroup = ref(false)
 const dragging = ref(false)
 
 const addGroup = () => {
