@@ -1,4 +1,6 @@
-const headers = [
+import { QTableProps } from 'quasar'
+
+const headers: QTableProps['columns'] = [
 	// { text: '#', align: 'start', sortable: true, value: 'id'},
 	{ label: 'дата', align: 'left', sortable: true, name: 'date', field: 'date' },
 	{ label: 'Пользователь', align: 'left', sortable: true, name: 'level', field: 'level' },

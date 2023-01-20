@@ -28,8 +28,8 @@ q-dialog(:model-value='props.showAdd')
 			p Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil commodi vel accusantium nam, recusandae aliquid ullam cupiditate veritatis ab perspiciatis eligendi alias temporibus aliquam. Quo, consequuntur. Rem fugit nostrum facilis!
 		q-card-section
 			q-card-actions(align='right')
-				q-btn(unelevated color="primary" label="Отмена" @click="action") 
-				q-btn(unelevated color="primary" label="Отмена" @click="action") 
+				q-btn(unelevated color="primary" label="Отмена" ) 
+				q-btn(unelevated color="primary" label="Отмена" ) 
 </template>
 
 <style scoped lang="scss">
