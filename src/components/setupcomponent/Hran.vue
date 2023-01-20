@@ -121,25 +121,26 @@ const options1 = ['Online', 'Auto', 'Disabled', 'Read and delete', 'Reserved']
 
 q-dialog(:model-value="showAdd")
 	q-card(padding)
-		q-card-section.row.items-center.q-pb-none
-			.text-h6 Настройки хранилища
-			q-space
-			q-btn(icon="mdi-close" flat round dense @click="close")
+		q-form(@submit="add")
+			q-card-section.row.items-center.q-pb-none
+				.text-h6 Настройки хранилища
+				q-space
+				q-btn(icon="mdi-close" flat round dense @click="close")
 
-		q-card-section
-			.edittable
-				q-input(v-model="name" label="Название")
-				q-select(v-model="type" label="Тип" :options="options")
-				q-select(v-model="state" label="Состояние" :options="options1")
-				q-input(v-model="size" label="Макс.размер, Гб" type="number" style="width:150px; margin: 0 auto;")
-				br
-				q-checkbox(v-model="raz1" label="Основной раздел")
-				q-checkbox(v-model="raz2" label="Архивный раздел")
-				q-checkbox(v-model="raz3" label="Временный раздел")
-		q-card-section
-			q-card-actions(align="right")
-				q-btn(flat color="primary" label="Отмена" @click="close") 
-				q-btn(unelevated color="primary" label="Сохранить" @click="add") 
+			q-card-section
+				.edittable
+					q-input(v-model="name" autofocus label="Название" lazy-rules :rules="[val => val && val.length > 0 || 'Обязательное поле']")
+					q-select(v-model="type" label="Тип" :options="options" lasy-rules :rules="[val => val !== null && val !== '' || 'Обязательное поле']")
+					q-select(v-model="state" label="Состояние" :options="options1" lasy-rules :rules="[val => val !== null && val !== '' || 'Обязательное поле']")
+					q-input(v-model="size" label="Макс.размер, Гб" type="number" style="width:150px; margin: 0 auto;" lasy-rules :rules="[val => val > 0 || 'Укажите размер']")
+					br
+					q-checkbox(v-model="raz1" label="Основной раздел")
+					q-checkbox(v-model="raz2" label="Архивный раздел")
+					q-checkbox(v-model="raz3" label="Временный раздел")
+			q-card-section
+				q-card-actions(align="right")
+					q-btn(flat color="primary" label="Отмена" @click="close") 
+					q-btn(unelevated color="primary" label="Сохранить" type="submit") 
 </template>
 
 <style scoped lang="scss">
