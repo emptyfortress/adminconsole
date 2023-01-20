@@ -103,19 +103,6 @@ const options1 = ['Online', 'Auto', 'Disabled', 'Read and delete', 'Reserved']
 				.desc {{ element.sections }}
 				.desc {{ element.size }} Gb
 				div
-					q-icon(name="mdi-information" size="sm").q-mr-md
-						q-menu
-							q-card(flat)
-								.hrinfo
-									.label Тип:
-									.val {{ element.type }}
-									.label Состояние:
-									.val {{ element.state }}
-									.label Разделы:
-									.val {{ element.sections }}
-									.label Размер:
-									.val {{ element.size }} Gb
-
 					q-btn(flat round dense icon="mdi-pencil" size="sm" @click="edit(index)" )
 					q-btn(flat round dense icon="mdi-trash-can-outline" size="sm" )
 						q-menu
@@ -194,7 +181,7 @@ q-dialog(:model-value="showAdd")
 	// background: pink;
 	width: 100%;
 	display: grid;
-	grid-template-columns: 1fr 150px 65px 150px 65px 100px;
+	grid-template-columns: 1fr 1fr 65px 150px 65px 50px;
 	justify-items: start;
 	// align-items: stretch;
 	column-gap: 1rem;
