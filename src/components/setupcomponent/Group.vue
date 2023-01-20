@@ -11,6 +11,10 @@ const remove = ((ind: number, index: number) => {
 	hran.groups[ind].list.splice(index, 1)
 })
 
+const removeRule = ((ind: number, index: number) => {
+	hran.groups[ind].listRule.splice(index, 1)
+})
+
 const rulegroup = ref(false)
 const dragging = ref(false)
 
@@ -35,15 +39,17 @@ q-expansion-item.exp(v-else v-model="group.expanded" v-for="(group, ind) in hran
 		.row.items-center.justify-between.full-width
 			.title {{ group.name }}
 			.tog
-				div(@click.stop="rulegroup = !rulegroup") Хранилища
-				q-toggle(size="xs" v-model="rulegroup" val="xs" label="Правила")
+				div(@click.stop="group.switch = !group.switch") Хранилища
+				q-toggle(size="xs" v-model="group.switch" val="xs" label="Правила")
 			div &nbsp;
 			q-menu(touch-position context-menu)
 				q-list
 					q-item(clickable v-close-popup @click="removeGroup(ind)").pink
 						q-item-section Удалить группу
 
-	q-card(v-if="!rulegroup").dblist
+
+	q-card(v-if="!group.switch").dblist
+		.empt(v-if="group.list.length === 0") Добавьте хранилище в группу
 		component(:is="draggable" :list="group.list" item-key="id" group="group" ghost-class="ghost" @start="dragging = true" @end="dragging = false").list-group
 			template(#item="{ element, index }")
 				.row.justify-between.items-center
@@ -56,8 +62,8 @@ q-expansion-item.exp(v-else v-model="group.expanded" v-for="(group, ind) in hran
 								q-item(clickable v-close-popup @click="remove(ind, index)").pink
 									q-item-section Подтверждаю
 
-	q-card(v-else).dblist
-		.q-pa-sm(v-if="group.listRule.length === 0") Назначьте правило на группу перетащив его сюда.
+	q-card(v-if="group.switch").dblist
+		.empt(v-if="group.listRule.length === 0") Назначьте правило на группу перетащив его сюда.
 		component(:is="draggable" :list="group.listRule" item-key="id" group="rule" ghost-class="ghost" @start="dragging = true" @end="dragging = false").list-group
 			template(#item="{ element, index }")
 				.row.justify-between.items-center
@@ -133,5 +139,6 @@ q-dialog(:model-value="showAdd")
 .empt {
 	padding: 1rem;
 	background: var(--bg-grey);
+	font-size: 0.8rem;
 }
 </style>
