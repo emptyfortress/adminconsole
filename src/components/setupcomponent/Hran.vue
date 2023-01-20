@@ -20,18 +20,16 @@ const list1: Hran[] = reactive([
 		name: 'Storage 1',
 		type: 'Хранилище в базе',
 		state: 'Online',
-		sections: 'Основной, архивный',
 		size: 100,
 		main: true,
 		arch: true,
-		temp: false
+		temp: false,
 	},
 	{
 		id: 2,
 		name: 'Storage 2',
 		type: 'Хранилище на диске',
-		state: 'Online',
-		sections: 'Временный',
+		state: 'Auto',
 		size: 130,
 		main: false,
 		arch: false,
@@ -41,8 +39,7 @@ const list1: Hran[] = reactive([
 		id: 3,
 		name: 'Storage 3',
 		type: 'Хранилище на диске',
-		state: 'Online',
-		sections: 'Временный',
+		state: 'Auto',
 		size: 10,
 		main: false,
 		arch: false,
@@ -139,7 +136,14 @@ const options1 = ['Online', 'Auto', 'Disabled', 'Read and delete', 'Reserved']
 					span.q-ml-sm {{ element.name }}
 				.desc {{ element.type }}
 				.desc {{ element.state }}
-				.desc {{ element.sections }}
+				.desc
+					span(v-if="element.main") основной
+					span(v-if="element.main && element.arch") ,&nbsp;
+					span(v-if="element.arch") архивный
+					span(v-if="element.arch && element.temp") ,&nbsp;
+					span(v-if="element.main && element.temp") ,&nbsp;
+					span(v-if="element.temp") временный
+
 				.desc {{ element.size }} Gb
 				div
 					q-btn(flat round dense icon="mdi-pencil" size="sm" @click="edit(index)" )
