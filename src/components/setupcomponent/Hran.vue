@@ -3,7 +3,15 @@ import { ref, reactive, } from 'vue'
 import draggable from 'vuedraggable'
 import { useHran } from '@/stores/hran'
 
-const list1 = reactive([
+interface Hran {
+	id: number
+	name: string
+	type: string
+	state: string
+	size: number
+}
+
+const list1: Hran[] = reactive([
 	{
 		id: 1,
 		name: 'Storage 1',
@@ -60,8 +68,9 @@ const edit = ((index: number) => {
 })
 
 const date = new Date()
+
 const add = (() => {
-	let tmp = {}
+	let tmp = {} as Hran
 	tmp.id = +date
 	tmp.name = name.value
 	tmp.type = type.value
