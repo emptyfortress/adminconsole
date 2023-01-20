@@ -9,8 +9,8 @@ const type = ref('Все')
 const options = ['Все', 'По расширению файла', 'Размер больше, чем', 'Размер меньше, чем', 'Файл справочника', 'Добавить из сборки']
 
 const ext = ref()
-const big = ref()
-const small = ref()
+const size = ref()
+const size1 = ref()
 
 const list = ref([])
 
@@ -19,10 +19,16 @@ const addRule = (() => {
 	let tmp = {}
 	tmp.id = +date
 	tmp.name = newRuleName.value
-	tmp.condition = type.value
-	tmp.value = ext.value
+	tmp.type = type.value
+	tmp.ext = ext.value
+	tmp.size = size.value
+	tmp.size1 = size1.value
 	list.value.push(tmp)
-	newRuleName.value = ''
+	newRuleName.value = null
+	type.value = null
+	ext.value = null
+	size.value = null
+	size1.value = null
 	showAdd.value = false
 })
 
@@ -33,7 +39,7 @@ const remove = ((ind: number) => {
 
 <template lang="pug">
 .row.items-center.justify-between
-	.zg Правила помещения в хранилище (0)
+	.zg Правила помещения в хранилище ({{ list.length }})
 	q-btn(flat round icon='mdi-plus-circle' @click="showAdd = true")
 .grey
 	div(v-if="list.length === 0") Создайте первое правило
@@ -48,8 +54,11 @@ const remove = ((ind: number) => {
 				div
 					q-icon(name="mdi-gate-nor" size="18px" style="vertical-align: top;")
 					span.q-ml-sm {{ element.name }}
-				.desc {{ element.condition }}
-				.desc {{ element.value }} Gb
+				.desc {{ element.type }}
+				.desc(v-if="element.type === 'Все'") &nbsp;
+				.desc(v-if="element.ext") {{ element.ext }}
+				.desc(v-if="element.size") {{ element.size }} Gb
+				.desc(v-if="element.size1") {{ element.size1 }} Gb
 
 				div
 					q-icon(name="mdi-information" size="sm").q-mr-md
