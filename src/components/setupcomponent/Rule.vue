@@ -9,9 +9,9 @@ interface Rule {
 	id: number
 	name: string
 	type: string
-	ext: string
-	size: number
-	size1: number
+	ext?: string
+	size?: number
+	size1?: number
 }
 
 const showAdd = ref(false)
@@ -24,7 +24,13 @@ const ext = ref()
 const size = ref()
 const size1 = ref()
 
-const list: Rule[] = reactive([])
+const list: Rule[] = reactive([
+	{
+		id: 1,
+		name: 'Правило',
+		type: 'Все'
+	}
+])
 
 const date = new Date()
 const currentItemIndex = ref()
@@ -84,7 +90,7 @@ const edit = ((index: number) => {
 	div(v-if="list.length === 0") Создайте первое правило
 	component(:is="draggable" :list="list"
 		item-key="id"
-		:group="{ name: 'group', pull: 'clone', put: false }"
+		:group="{ name: 'rule', pull: 'clone', put: false }"
 		ghost-class='ghost'
 		@end="checkDub"
 		).list-group

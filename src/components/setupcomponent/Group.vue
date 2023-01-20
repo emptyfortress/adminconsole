@@ -11,7 +11,7 @@ const remove = ((ind: number, index: number) => {
 	hran.groups[ind].list.splice(index, 1)
 })
 
-const shape = ref(false)
+const rulegroup = ref(false)
 const dragging = ref(false)
 
 const addGroup = () => {
@@ -35,14 +35,15 @@ q-expansion-item.exp(v-else v-model="group.expanded" v-for="(group, ind) in hran
 		.row.items-center.justify-between.full-width
 			.title {{ group.name }}
 			.tog
-				div Хранилища
-				q-toggle(size="xs" v-model="shape" val="xs" label="Правила")
+				div(@click.stop="rulegroup = !rulegroup") Хранилища
+				q-toggle(size="xs" v-model="rulegroup" val="xs" label="Правила")
 			div &nbsp;
 			q-menu(touch-position context-menu)
 				q-list
 					q-item(clickable v-close-popup @click="removeGroup(ind)").pink
 						q-item-section Удалить группу
-	q-card.dblist
+
+	q-card(v-if="!rulegroup").dblist
 		component(:is="draggable" :list="group.list" item-key="id" group="group" ghost-class="ghost" @start="dragging = true" @end="dragging = false").list-group
 			template(#item="{ element, index }")
 				.row.justify-between.items-center
@@ -53,6 +54,20 @@ q-expansion-item.exp(v-else v-model="group.expanded" v-for="(group, ind) in hran
 						q-menu
 							q-list
 								q-item(clickable v-close-popup @click="remove(ind, index)").pink
+									q-item-section Подтверждаю
+
+	q-card(v-else).dblist
+		.q-pa-sm(v-if="group.listRule.length === 0") Назначьте правило на группу перетащив его сюда.
+		component(:is="draggable" :list="group.listRule" item-key="id" group="rule" ghost-class="ghost" @start="dragging = true" @end="dragging = false").list-group
+			template(#item="{ element, index }")
+				.row.justify-between.items-center
+					div
+						q-icon(name="mdi-gate-nor" size="18px" style="vertical-align: top;")
+						span.q-ml-sm {{ element.name }}
+					q-btn(flat round dense icon="mdi-trash-can-outline" size="10px" )
+						q-menu
+							q-list
+								q-item(clickable v-close-popup @click="removeRule(ind, index)").pink
 									q-item-section Подтверждаю
 
 q-dialog(:model-value="showAdd")
