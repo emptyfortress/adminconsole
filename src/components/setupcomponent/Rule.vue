@@ -25,6 +25,10 @@ const addRule = (() => {
 	newRuleName.value = ''
 	showAdd.value = false
 })
+
+const remove = ((ind: number) => {
+	list.value.splice(ind, 1)
+})
 </script>
 
 <template lang="pug">
@@ -60,7 +64,7 @@ const addRule = (() => {
 					q-btn(flat round dense icon="mdi-trash-can-outline" size="sm" )
 						q-menu
 							q-list
-								q-item(clickable v-close-popup @click="remove1(index)").pink
+								q-item(clickable v-close-popup @click="remove(index)").pink
 									q-item-section Подтверждаю
 
 
