@@ -123,6 +123,7 @@ const options1 = ['Online', 'Auto', 'Disabled', 'Read and delete', 'Reserved']
 	.zg Хранилища ({{ list1.length }})
 	q-btn(flat round icon="mdi-plus-circle" @click="clearAdd")
 .grey.hran
+	.empt(v-if="list1.length === 0") Добавьте хранилища
 	component(:is="draggable" :list="list1"
 		item-key="id"
 		:group="{ name: 'group', pull: 'clone', put: false }"

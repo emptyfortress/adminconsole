@@ -75,6 +75,7 @@ q-expansion-item.exp(v-else v-model="group.expanded" v-for="(group, ind) in hran
 							q-list
 								q-item(clickable v-close-popup @click="removeRule(ind, index)").pink
 									q-item-section Подтверждаю
+	.prav(v-if="group.switch") Правила применяются сверху вниз
 
 q-dialog(:model-value="showAdd")
 	q-card(style="min-width: 400px;")
@@ -140,5 +141,15 @@ q-dialog(:model-value="showAdd")
 	padding: 1rem;
 	background: var(--bg-grey);
 	font-size: 0.8rem;
+}
+
+.prav {
+	font-size: 0.8rem;
+	background: white;
+	padding-top: .5rem;
+	color: grey;
+	text-align: right;
+	padding-right: .5rem;
+	font-style: italic;
 }
 </style>
