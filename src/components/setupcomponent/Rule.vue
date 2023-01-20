@@ -1,21 +1,9 @@
 <script setup lang="ts">
-import { ref, } from 'vue'
-import type { Ref } from 'vue'
+import { ref, reactive } from 'vue'
 import draggable from 'vuedraggable'
-
-
-const showAdd = ref(false)
-
-const newRuleName = ref()
-const type = ref('Все')
-const options = ['Все', 'По расширению файла', 'Размер больше, чем', 'Размер меньше, чем', 'Файл справочника', 'Добавить из сборки']
-
-const ext = ref()
-const size = ref()
-const size1 = ref()
-
-const list: Ref<Rule[]> = ref([])
-const date = new Date()
+// import { useHran } from '@/stores/hran'
+//
+// const hran = useHran()
 
 interface Rule {
 	id: number
@@ -26,33 +14,65 @@ interface Rule {
 	size1: number
 }
 
-const addRule = (() => {
+const showAdd = ref(false)
+
+const name = ref()
+const type = ref('Все')
+const options = ['Все', 'По расширению файла', 'Размер больше, чем', 'Размер меньше, чем', 'Файл справочника', 'Добавить из сборки']
+
+const ext = ref()
+const size = ref()
+const size1 = ref()
+
+const list: Rule[] = reactive([])
+
+const date = new Date()
+const currentItemIndex = ref()
+
+const add = (() => {
 	let tmp = {} as Rule
 	tmp.id = +date
-	tmp.name = newRuleName.value
+	tmp.name = name.value
 	tmp.type = type.value
 	tmp.ext = ext.value
 	tmp.size = size.value
 	tmp.size1 = size1.value
-	list.value.push(tmp)
-	newRuleName.value = null
+	if (currentItemIndex.value !== null) {
+		list[currentItemIndex.value] = tmp
+	} else {
+		list.push(tmp)
+	}
+	showAdd.value = false
+	currentItemIndex.value = null
+	name.value = null
 	type.value = 'Все'
 	ext.value = null
 	size.value = null
 	size1.value = null
-	showAdd.value = false
 })
 
 const showDialog = (() => {
-	newRuleName.value = null
-	type.value = 'Все'
+	name.value = null
+	currentItemIndex.value = null
 	ext.value = null
 	size.value = null
 	size1.value = null
+	type.value = 'Все'
 	showAdd.value = true
 })
 const remove = ((ind: number) => {
-	list.value.splice(ind, 1)
+	list.splice(ind, 1)
+})
+
+
+const edit = ((index: number) => {
+	name.value = list[index].name
+	type.value = list[index].type
+	ext.value = list[index].ext
+	size.value = list[index].size
+	size1.value = list[index].size1
+	currentItemIndex.value = index
+	showAdd.value = true
 })
 </script>
 
@@ -92,14 +112,14 @@ const remove = ((ind: number) => {
 
 q-dialog(v-model="showAdd")
 	q-card(style="min-width: 500px;")
-		q-form(@submit="addRule")
+		q-form(@submit="add")
 			q-card-section.row.items-center.q-pb-none
 				.text-h6 Новое правило
 				q-space
 				q-btn(icon="mdi-close" flat round dense v-close-popup)
 
 			q-card-section
-				q-input(v-model='newRuleName' autofocus label='Название' lazy-rules :rules="[val => val && val.length > 0 || 'Обязательное поле']")
+				q-input(v-model='name' autofocus label='Название' lazy-rules :rules="[val => val && val.length > 0 || 'Обязательное поле']")
 				.grid
 					q-select(v-model='type' label='Тип' :options="options").full-width
 					q-input(v-model="ext" label="Расширение" v-if="type === 'По расширению файла'" lazy-rules :rules="[val => val && val.length > 0 || 'Обязательное поле']").full-width

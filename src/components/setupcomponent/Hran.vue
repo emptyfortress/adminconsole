@@ -64,12 +64,12 @@ const clearAdd = (() => {
 	name.value = null
 	type.value = null
 	state.value = null
+	currentItemIndex.value = null
 	size.value = 0
 	main.value = false
 	arch.value = false
 	temp.value = false
 	showAdd.value = true
-	currentItemIndex.value = null
 })
 
 const currentItemIndex = ref()

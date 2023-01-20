@@ -9,7 +9,7 @@ export const useHran = defineStore({
 			{
 				id: 0, name: 'Common', expanded: true, list: [
 					{ id: 1, name: 'Storage 1', type: 'Хранилища в базе', state: 'Online', sections: 'Основной, архивный', size: 100 }
-				]
+				], listRule: []
 			}
 		],
 	}),
@@ -26,7 +26,8 @@ export const useHran = defineStore({
 				id: +date,
 				name: e,
 				expanded: true,
-				list: []
+				list: [],
+				listRule: []
 			}
 			this.groups.push(temp)
 		},

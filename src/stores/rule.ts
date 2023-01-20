@@ -2,8 +2,8 @@ import { defineStore } from 'pinia'
 
 const date = new Date()
 
-export const useHran = defineStore({
-	id: 'hran',
+export const useRule = defineStore({
+	id: 'rule',
 	state: () => ({
 		groups: [
 			{
