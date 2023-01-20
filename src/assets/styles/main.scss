@@ -207,3 +207,13 @@ fieldset {
 		border-bottom: 1px solid #0000001a;
 	}
 }
+.q-splitter--vertical.q-splitter--workable > .q-splitter__separator {
+	margin-left: .5rem;
+	margin-right: .5rem;
+}
+.q-splitter__separator {
+	&:hover, &:active {
+	border-left: 2px dotted $secondary;
+
+	}
+}
