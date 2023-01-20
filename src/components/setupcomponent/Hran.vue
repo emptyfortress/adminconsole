@@ -53,10 +53,22 @@ const clearAdd = (() => {
 
 const edit = ((index: number) => {
 	name.value = list1[index].name
-	type.value = list1[index].props[0][1]
-	state.value = list1[index].props[1][1]
-	size.value = list1[index].props[3][1]
+	type.value = list1[index].type
+	state.value = list1[index].state
+	size.value = list1[index].size
 	showAdd.value = true
+})
+
+const date = new Date()
+const add = (() => {
+	let tmp = {}
+	tmp.id = +date
+	tmp.name = name.value
+	tmp.type = type.value
+	tmp.state = state.value
+	tmp.size = size.value
+	list1.push(tmp)
+	showAdd.value = false
 })
 
 const name = ref()
@@ -66,7 +78,7 @@ const size = ref()
 const raz1 = ref(true)
 const raz2 = ref(true)
 const raz3 = ref(false)
-const options = ['', '', '', '', '', '']
+const options = ['Хранилище на диске', 'Хранилище во внешней базе MS SQL Server', 'FileStream хранилище во внешней базе данных MS SQL Server', 'FileStream хранилище в базе данных Docsvision', 'Добавить из сборки...']
 const options1 = ['Online', 'Auto', 'Disabled', 'Read and delete', 'Reserved']
 </script>
 
@@ -131,7 +143,7 @@ q-dialog(:model-value="showAdd")
 		q-card-section
 			q-card-actions(align="right")
 				q-btn(flat color="primary" label="Отмена" @click="close") 
-				q-btn(unelevated color="primary" label="Сохранить") 
+				q-btn(unelevated color="primary" label="Сохранить" @click="add") 
 </template>
 
 <style scoped lang="scss">
