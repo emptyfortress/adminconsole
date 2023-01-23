@@ -7,13 +7,13 @@ const hran = useHran()
 const newGroupName = ref()
 const showAdd = ref(false)
 
-const remove = ((ind: number, index: number) => {
+const remove = (ind: number, index: number) => {
 	hran.groups[ind].list.splice(index, 1)
-})
+}
 
-const removeRule = ((ind: number, index: number) => {
+const removeRule = (ind: number, index: number) => {
 	hran.groups[ind].listRule.splice(index, 1)
-})
+}
 
 const dragging = ref(false)
 
@@ -23,9 +23,9 @@ const addGroup = () => {
 	newGroupName.value = ''
 }
 
-const removeGroup = ((ind: number) => {
+const removeGroup = (ind: number) => {
 	hran.removeGroup(ind)
-})
+}
 </script>
 
 <template lang="pug">
@@ -37,17 +37,14 @@ q-expansion-item.exp(v-else v-model="group.expanded" v-for="(group, ind) in hran
 	template(#header)
 		.row.items-center.justify-between.full-width
 			.title {{ group.name }}
-			.tog
-				div(@click.stop="group.switch = !group.switch") Хранилища
-				q-toggle(size="xs" v-model="group.switch" val="xs" label="Правила")
 			div &nbsp;
 			q-menu(touch-position context-menu)
 				q-list
 					q-item(clickable v-close-popup @click="removeGroup(ind)").pink
 						q-item-section Удалить группу
+	q-separator
 
-
-	q-card(v-if="!group.switch").dblist
+	q-card.dblist
 		.empt(v-if="group.list.length === 0") Добавьте хранилище в группу
 		component(:is="draggable" :list="group.list" item-key="id" group="group" ghost-class="ghost" @start="dragging = true" @end="dragging = false").list-group
 			template(#item="{ element, index }")
@@ -61,7 +58,8 @@ q-expansion-item.exp(v-else v-model="group.expanded" v-for="(group, ind) in hran
 								q-item(clickable v-close-popup @click="remove(ind, index)").pink
 									q-item-section Подтверждаю
 
-	q-card(v-if="group.switch").dblist
+	.sep
+	q-card.dblist
 		.empt(v-if="group.listRule.length === 0") Назначьте правило на группу перетащив его сюда.
 		component(:is="draggable" :list="group.listRule" item-key="id" group="rule" ghost-class="ghost" @start="dragging = true" @end="dragging = false").list-group
 			template(#item="{ element, index }")
@@ -120,8 +118,7 @@ q-dialog(:model-value="showAdd")
 
 .dblist {
 	background: var(--bg-grey);
-	padding: 0 .5rem;
-	border-top: 1px solid #ccc;
+	padding: 0 0.5rem;
 }
 
 .gro {
@@ -145,10 +142,13 @@ q-dialog(:model-value="showAdd")
 .prav {
 	font-size: 0.8rem;
 	background: white;
-	padding-top: .5rem;
+	padding-top: 0.5rem;
 	color: grey;
 	text-align: right;
-	padding-right: .5rem;
+	padding-right: 0.5rem;
 	font-style: italic;
+}
+.sep {
+	border: 1px dashed $secondary;
 }
 </style>
