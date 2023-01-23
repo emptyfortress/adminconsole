@@ -15,21 +15,18 @@
 					q-icon(name="mdi-check-bold" size="sm" v-if="props.row.def")
 					q-btn(flat color="primary" label="Назначить" v-else size="sm" @click='assign(props.row.psevdo)')
 				q-td.text-right(key='def' :props='props')
-					q-btn(round flat icon='mdi-dots-horizontal' size='sm')
-						q-menu
-							q-list
-								q-item(clickable v-for="item in tabs" :key="item.id")
+					q-btn(:props="props" round flat icon='mdi-cog' size='sm')
+						q-menu(:props="props")
+							q-list(:props="props")
+								q-item(:props="props" clickable v-for="item in tabs" :key="item.id" @click="editBD(props.row, item.field)" v-close-popup)
 									q-item-section(side)
 										q-icon(name="mdi-database-cog-outline")
 									q-item-section {{ item.label }}
 								q-separator
-								q-item(clickable)
+								q-item(clickable :props="props" @click="remove(props.row)" v-close-popup)
 									q-item-section(side)
 										q-icon(name="mdi-trash-can-outline" color="pink")
 									q-item-section Удалить
-
-					// q-btn(round flat icon='mdi-dots-horizontal' size='sm' @click='editBD(props.row)')
-					// q-btn(round flat icon='mdi-trash-can-outline' size='sm' @click='remove(props.row.psevdo)')
 
 	.master
 		div Чтобы создать новую базу данных, сделать доступной для пользователей существующую базу данных, а также обновить БД, если ее версия отличается от версии сервера Docsvision, воспользуйтесь Мастером баз данных.
@@ -37,7 +34,7 @@
 
 ChangeDialog(v-model="change" :changename="changename" @changeDef="assignDef")
 MasterBD(v-model="master")
-EditBD(v-model="edit" @close="edit = false" :bd="bdRow")
+component(:is="EditBD" v-model="edit" @close="edit = false" :bd="bdRow" :tab="bdTab")
 </template>
 
 <script setup lang="ts">
@@ -47,22 +44,22 @@ import MasterBD from '@/components/setupcomponent/MasterBD.vue'
 import EditBD from '@/components/setupcomponent/EditBD.vue'
 import type { QTableProps } from 'quasar'
 
-// import { useStore } from '@/stores/store'
-
-// const store = useStore()
 const emit = defineEmits(['change', 'haserror', 'noerror'])
 
 const change = ref(false)
 const bdRow = ref()
+const bdTab = ref('prop')
 const master = ref(false)
 const edit = ref(false)
 const changename = ref('')
 
-const remove = (row: string) => {
-	console.log(row)
+const remove = (row: any) => {
+	const index = rows.indexOf(row)
+	rows.splice(index, 1)
 }
-const editBD = (row: any) => {
+const editBD = (row: any, field: string) => {
 	bdRow.value = row
+	bdTab.value = field
 	edit.value = true
 }
 
@@ -94,7 +91,7 @@ const columns: QTableProps['columns'] = [
 	{ name: 'version', align: 'left', label: 'Версия', field: 'version', sortable: true },
 	{ name: 'date', align: 'left', label: 'Дата создания', field: 'date', sortable: true },
 	{ name: 'def', align: 'center', label: 'По умолчанию', field: 'def', sortable: true },
-	{ name: 'action', align: 'right', label: 'Действия', field: '' },
+	{ name: 'action', align: 'right', label: '', field: '' },
 ]
 const rows = reactive([
 	{
@@ -124,13 +121,13 @@ const rows = reactive([
 ])
 
 const tabs = ref([
-	{ id: 0, label: 'Свойства', action: '' },
-	{ id: 1, label: 'Управление', action: '' },
-	{ id: 2, label: 'Внешние хранилища', action: '' },
-	{ id: 3, label: 'Архивирование', action: '' },
-	{ id: 4, label: 'Метаданные', action: '' },
-	{ id: 5, label: 'Журнал', action: '' },
-	{ id: 5, label: 'Кэширование', action: '' },
+	{ id: 0, field: 'prop', label: 'Свойства', action: '' },
+	{ id: 1, field: 'control', label: 'Управление', action: '' },
+	{ id: 2, field: 'outer', label: 'Внешние хранилища', action: '' },
+	{ id: 3, field: 'arch', label: 'Архивирование', action: '' },
+	{ id: 4, field: 'meta', label: 'Метаданные', action: '' },
+	{ id: 5, field: 'journal', label: 'Журнал', action: '' },
+	{ id: 6, field: 'cache', label: 'Кэширование', action: '' },
 ])
 </script>
 

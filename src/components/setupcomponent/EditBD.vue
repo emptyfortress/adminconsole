@@ -1,5 +1,10 @@
 <template>
-	<q-dialog :modelValue="edit" persistent position="bottom" full-width>
+	<q-dialog
+		:modelValue="edit"
+		persistent
+		position="bottom"
+		full-width
+	>
 		<q-card class="edit">
 			<div>
 				<q-card-section>
@@ -8,10 +13,22 @@
 						<span>{{ props.bd.psevdo }}</span>
 					</div>
 				</q-card-section>
-				<q-tabs class="text-secondary" v-model="tabs" dense>
-					<q-tab v-for="tab in tabspanels" :key="tab.name" :name="tab.name" :label="tab.label" />
+				<q-tabs
+					class="text-secondary"
+					v-model="tab"
+					dense
+				>
+					<q-tab
+						v-for="tab in tabspanels"
+						:key="tab.name"
+						:name="tab.name"
+						:label="tab.label"
+					/>
 				</q-tabs>
-				<q-tab-panels v-model="tabs" animated>
+				<q-tab-panels
+					v-model="tab"
+					animated
+				>
 					<q-tab-panel name="outer">
 						<Outer />
 					</q-tab-panel>
@@ -21,8 +38,16 @@
 			<div>
 				<q-separator></q-separator>
 				<q-card-actions align="center">
-					<q-btn flat @click="$emit('close')">Отмена</q-btn>
-					<q-btn flat @click="$emit('close')">Применить</q-btn>
+					<q-btn
+						flat
+						@click="$emit('close')"
+						>Отмена</q-btn
+					>
+					<q-btn
+						flat
+						@click="$emit('close')"
+						>Применить</q-btn
+					>
 				</q-card-actions>
 			</div>
 		</q-card>
@@ -30,7 +55,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, } from 'vue'
+import { ref } from 'vue'
 import Outer from '@/components/setupcomponent/Outer.vue'
 
 const props = defineProps({
@@ -49,17 +74,22 @@ const props = defineProps({
 			sortable: true,
 		},
 	},
+	tab: {
+		type: String,
+		default: 'outer',
+	},
 })
-const tabs = ref('outer')
+
+// const tabs = ref('outer')
 
 const tabspanels = ref([
-	{ name: "prop", label: "Свойства" },
-	{ name: "control", label: "Управление" },
-	{ name: "outer", label: "Внешние хранилища" },
-	{ name: "arh", label: "Архивирование" },
-	{ name: "meta", label: "Метаданные" },
-	{ name: "journal", label: "Журнал" },
-	{ name: "cache", label: "Кэширование" },
+	{ name: 'prop', label: 'Свойства' },
+	{ name: 'control', label: 'Управление' },
+	{ name: 'outer', label: 'Внешние хранилища' },
+	{ name: 'arch', label: 'Архивирование' },
+	{ name: 'meta', label: 'Метаданные' },
+	{ name: 'journal', label: 'Журнал' },
+	{ name: 'cache', label: 'Кэширование' },
 ])
 </script>
 
