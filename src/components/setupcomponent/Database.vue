@@ -12,11 +12,24 @@
 				q-td(key='version' :props='props') {{ props.row.version }}
 				q-td(key='date' :props='props') {{ props.row.date }}
 				q-td.text-center(key='def' :props='props')
-					q-btn(round flat icon='mdi-checkbox-marked-circle' size='sm' v-if='props.row.def')
-					q-btn(round flat icon='mdi-checkbox-blank-circle-outline' size='sm' v-else @click='assign(props.row.psevdo)')
+					q-icon(name="mdi-check-bold" size="sm" v-if="props.row.def")
+					q-btn(flat color="primary" label="Назначить" v-else size="sm" @click='assign(props.row.psevdo)')
 				q-td.text-right(key='def' :props='props')
-					q-btn(round flat icon='mdi-pencil' size='sm' @click='editBD(props.row)')
-					q-btn(round flat icon='mdi-trash-can-outline' size='sm' @click='remove(props.row.psevdo)')
+					q-btn(round flat icon='mdi-dots-horizontal' size='sm')
+						q-menu
+							q-list
+								q-item(clickable v-for="item in tabs" :key="item.id")
+									q-item-section(side)
+										q-icon(name="mdi-database-cog-outline")
+									q-item-section {{ item.label }}
+								q-separator
+								q-item(clickable)
+									q-item-section(side)
+										q-icon(name="mdi-trash-can-outline" color="pink")
+									q-item-section Удалить
+
+					// q-btn(round flat icon='mdi-dots-horizontal' size='sm' @click='editBD(props.row)')
+					// q-btn(round flat icon='mdi-trash-can-outline' size='sm' @click='remove(props.row.psevdo)')
 
 	.master
 		div Чтобы создать новую базу данных, сделать доступной для пользователей существующую базу данных, а также обновить БД, если ее версия отличается от версии сервера Docsvision, воспользуйтесь Мастером баз данных.
@@ -80,7 +93,7 @@ const columns: QTableProps['columns'] = [
 	{ name: 'index', align: 'left', label: 'Индексируется', field: 'index', sortable: true },
 	{ name: 'version', align: 'left', label: 'Версия', field: 'version', sortable: true },
 	{ name: 'date', align: 'left', label: 'Дата создания', field: 'date', sortable: true },
-	{ name: 'def', align: 'left', label: 'По умолчанию', field: 'def', sortable: true },
+	{ name: 'def', align: 'center', label: 'По умолчанию', field: 'def', sortable: true },
 	{ name: 'action', align: 'right', label: 'Действия', field: '' },
 ]
 const rows = reactive([
@@ -108,6 +121,16 @@ const rows = reactive([
 		date: '09.07.2021',
 		def: false,
 	},
+])
+
+const tabs = ref([
+	{ id: 0, label: 'Свойства', action: '' },
+	{ id: 1, label: 'Управление', action: '' },
+	{ id: 2, label: 'Внешние хранилища', action: '' },
+	{ id: 3, label: 'Архивирование', action: '' },
+	{ id: 4, label: 'Метаданные', action: '' },
+	{ id: 5, label: 'Журнал', action: '' },
+	{ id: 5, label: 'Кэширование', action: '' },
 ])
 </script>
 
