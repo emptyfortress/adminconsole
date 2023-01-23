@@ -1,57 +1,22 @@
-<template>
-	<q-dialog
-		:modelValue="edit"
-		persistent
-		position="bottom"
-		full-width
-	>
-		<q-card class="edit">
-			<div>
-				<q-card-section>
-					<div class="title">
-						<q-icon name="mdi-database-cog"></q-icon>
-						<span>{{ props.bd.psevdo }}</span>
-					</div>
-				</q-card-section>
-				<q-tabs
-					class="text-secondary"
-					v-model="tab"
-					dense
-				>
-					<q-tab
-						v-for="tab in tabspanels"
-						:key="tab.name"
-						:name="tab.name"
-						:label="tab.label"
-					/>
-				</q-tabs>
-				<q-tab-panels
-					v-model="tab"
-					animated
-				>
-					<q-tab-panel name="outer">
-						<Outer />
-					</q-tab-panel>
-					<!-- <q-tab-panel name=control>Control</q-tab-panel> -->
-				</q-tab-panels>
-			</div>
-			<div>
-				<q-separator></q-separator>
-				<q-card-actions align="center">
-					<q-btn
-						flat
-						@click="$emit('close')"
-						>Отмена</q-btn
-					>
-					<q-btn
-						flat
-						@click="$emit('close')"
-						>Применить</q-btn
-					>
-				</q-card-actions>
-			</div>
-		</q-card>
-	</q-dialog>
+<template lang="pug">
+q-dialog(:modelvalue='edit' persistent position='bottom' full-width)
+  q-card.edit
+    div
+      q-card-section
+        .title
+          q-icon(name='mdi-database-cog')
+          span {{ props.bd.psevdo }}
+      q-tabs.text-secondary(v-model='tab' dense)
+        q-tab(v-for='tab in tabspanels' :key='tab.name' :name='tab.name' :label='tab.label')
+      q-tab-panels(v-model='tab' animated)
+        q-tab-panel(name='outer')
+          Outer
+    div
+      q-separator
+      q-card-actions(align='center')
+        q-btn(flat @click="$emit('close')") Отмена
+        q-btn(flat @click="$emit('close')") Применить
+
 </template>
 
 <script setup lang="ts">
