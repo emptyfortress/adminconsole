@@ -1,38 +1,30 @@
-<template>
-	<div class="database">
-		<q-table bordered flat :rows="rows" :columns="columns" row-key="name" hide-bottom>
-			<template v-slot:body="props">
-				<q-tr :props="props" :class="{ cool: props.row.def }">
-					<q-td key="psevdo" :props="props">
-						<q-icon class="q-mr-sm" name="mdi-database" size="16px" v-if="props.row.def" />
-						<q-icon class="q-mr-sm" name="mdi-database-outline" size="16px" v-else />
-						<span>{{ props.row.psevdo }}</span>
-					</q-td>
-					<q-td key="server" :props="props">{{ props.row.server }}</q-td>
-					<q-td key="index" :props="props">{{ props.row.index }}</q-td>
-					<q-td key="version" :props="props">{{ props.row.version }}</q-td>
-					<q-td key="date" :props="props">{{ props.row.date }}</q-td>
-					<q-td class="text-center" key="def" :props="props">
-						<q-btn round flat icon="mdi-checkbox-marked-circle" size="sm" v-if="props.row.def" />
-						<q-btn round flat icon="mdi-checkbox-blank-circle-outline" size="sm" v-else
-							@click="assign(props.row.psevdo)" />
-					</q-td>
-					<q-td class="text-right" key="def" :props="props">
-						<q-btn round flat icon="mdi-pencil" size="sm" @click="editBD(props.row)" />
-						<q-btn round flat icon="mdi-trash-can-outline" size="sm" @click="remove(props.row.psevdo)" />
-					</q-td>
-				</q-tr>
-			</template>
-		</q-table>
-		<div class="master">
-			<div>Чтобы создать новую базу данных, сделать доступной для пользователей существующую базу данных, а также
-				обновить БД, если ее версия отличается от версии сервера Docsvision, воспользуйтесь Мастером баз данных.</div>
-			<q-btn unelevated color="primary" @click="master = true">Мастер&nbsp;баз&nbsp;данных</q-btn>
-		</div>
-	</div>
-	<ChangeDialog v-model="change" :changename="changename" @changeDef="assignDef" />
-	<MasterBD v-model="master" />
-	<EditBD v-model="edit" @close="edit = false" :bd="bdRow" />
+<template lang="pug">
+div
+	.database
+		q-table(bordered flat :rows='rows' :columns='columns' row-key='name' hide-bottom)
+			template(v-slot:body='props')
+				q-tr(:props='props' :class='{ cool: props.row.def }')
+					q-td(key='psevdo' :props='props')
+						q-icon.q-mr-sm(name='mdi-database' size='16px' v-if='props.row.def')
+						q-icon.q-mr-sm(name='mdi-database-outline' size='16px' v-else)
+							span {{ props.row.psevdo }}
+					q-td(key='server' :props='props') {{ props.row.server }}
+					q-td(key='index' :props='props') {{ props.row.index }}
+					q-td(key='version' :props='props') {{ props.row.version }}
+					q-td(key='date' :props='props') {{ props.row.date }}
+					q-td.text-center(key='def' :props='props')
+						q-btn(round flat icon='mdi-checkbox-marked-circle' size='sm' v-if='props.row.def')
+						q-btn(round flat icon='mdi-checkbox-blank-circle-outline' size='sm' v-else @click='assign(props.row.psevdo)')
+					q-td.text-right(key='def' :props='props')
+						q-btn(round flat icon='mdi-pencil' size='sm' @click='editBD(props.row)')
+							q-btn(round flat icon='mdi-trash-can-outline' size='sm' @click='remove(props.row.psevdo)')
+		.master
+			div Чтобы создать новую базу данных, сделать доступной для пользователей существующую базу данных, а также обновить БД, если ее версия отличается от версии сервера Docsvision, воспользуйтесь Мастером баз данных.
+			q-btn(unelevated color='primary' @click='master = true') Мастер баз данных
+
+ChangeDialog(v-model="change" :changename="changename" @changeDef="assignDef")
+MasterBD(v-model="master")
+EditBD(v-model="edit" @close="edit = false" :bd="bdRow")
 </template>
 
 <script setup lang="ts">
@@ -40,7 +32,7 @@ import { ref, reactive } from 'vue'
 import ChangeDialog from '@/components/setupcomponent/ChangeDialog.vue'
 import MasterBD from '@/components/setupcomponent/MasterBD.vue'
 import EditBD from '@/components/setupcomponent/EditBD.vue'
-import { QTableProps } from 'quasar'
+import type { QTableProps } from 'quasar'
 
 // import { useStore } from '@/stores/store'
 
@@ -74,6 +66,7 @@ const assignDef = () => {
 	// store.panels[2].change = true
 }
 
+// const columns = [
 const columns: QTableProps['columns'] = [
 	{
 		name: 'psevdo',
@@ -88,7 +81,7 @@ const columns: QTableProps['columns'] = [
 	{ name: 'version', align: 'left', label: 'Версия', field: 'version', sortable: true },
 	{ name: 'date', align: 'left', label: 'Дата создания', field: 'date', sortable: true },
 	{ name: 'def', align: 'left', label: 'По умолчанию', field: 'def', sortable: true },
-	{ name: 'action', align: 'right', label: 'Действия', field: '', },
+	{ name: 'action', align: 'right', label: 'Действия', field: '' },
 ]
 const rows = reactive([
 	{
