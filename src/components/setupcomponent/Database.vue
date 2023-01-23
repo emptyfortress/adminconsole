@@ -1,26 +1,26 @@
 <template lang="pug">
-div
-	.database
-		q-table(bordered flat :rows='rows' :columns='columns' row-key='name' hide-bottom)
-			template(v-slot:body='props')
-				q-tr(:props='props' :class='{ cool: props.row.def }')
-					q-td(key='psevdo' :props='props')
-						q-icon.q-mr-sm(name='mdi-database' size='16px' v-if='props.row.def')
-						q-icon.q-mr-sm(name='mdi-database-outline' size='16px' v-else)
-							span {{ props.row.psevdo }}
-					q-td(key='server' :props='props') {{ props.row.server }}
-					q-td(key='index' :props='props') {{ props.row.index }}
-					q-td(key='version' :props='props') {{ props.row.version }}
-					q-td(key='date' :props='props') {{ props.row.date }}
-					q-td.text-center(key='def' :props='props')
-						q-btn(round flat icon='mdi-checkbox-marked-circle' size='sm' v-if='props.row.def')
-						q-btn(round flat icon='mdi-checkbox-blank-circle-outline' size='sm' v-else @click='assign(props.row.psevdo)')
-					q-td.text-right(key='def' :props='props')
-						q-btn(round flat icon='mdi-pencil' size='sm' @click='editBD(props.row)')
-							q-btn(round flat icon='mdi-trash-can-outline' size='sm' @click='remove(props.row.psevdo)')
-		.master
-			div Чтобы создать новую базу данных, сделать доступной для пользователей существующую базу данных, а также обновить БД, если ее версия отличается от версии сервера Docsvision, воспользуйтесь Мастером баз данных.
-			q-btn(unelevated color='primary' @click='master = true') Мастер баз данных
+.database
+	q-table(bordered flat :rows='rows' :columns='columns' row-key='name' hide-bottom)
+		template(v-slot:body='props')
+			q-tr(:props='props' :class='{ cool: props.row.def }')
+				q-td(key='psevdo' :props='props')
+					q-icon.q-mr-sm(name='mdi-database' size='16px' v-if='props.row.def')
+					q-icon.q-mr-sm(name='mdi-database-outline' size='16px' v-else)
+					span {{ props.row.psevdo }}
+				q-td(key='server' :props='props') {{ props.row.server }}
+				q-td(key='index' :props='props') {{ props.row.index }}
+				q-td(key='version' :props='props') {{ props.row.version }}
+				q-td(key='date' :props='props') {{ props.row.date }}
+				q-td.text-center(key='def' :props='props')
+					q-btn(round flat icon='mdi-checkbox-marked-circle' size='sm' v-if='props.row.def')
+					q-btn(round flat icon='mdi-checkbox-blank-circle-outline' size='sm' v-else @click='assign(props.row.psevdo)')
+				q-td.text-right(key='def' :props='props')
+					q-btn(round flat icon='mdi-pencil' size='sm' @click='editBD(props.row)')
+					q-btn(round flat icon='mdi-trash-can-outline' size='sm' @click='remove(props.row.psevdo)')
+
+	.master
+		div Чтобы создать новую базу данных, сделать доступной для пользователей существующую базу данных, а также обновить БД, если ее версия отличается от версии сервера Docsvision, воспользуйтесь Мастером баз данных.
+		q-btn(unelevated color='primary' @click='master = true') Мастер&nbsp;баз&nbsp;данных 
 
 ChangeDialog(v-model="change" :changename="changename" @changeDef="assignDef")
 MasterBD(v-model="master")
@@ -111,7 +111,7 @@ const rows = reactive([
 ])
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 :deep(.q-table th) {
 	font-size: 0.7rem;
 	font-weight: normal;
@@ -135,6 +135,6 @@ const rows = reactive([
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	gap: 2rem;
+	gap: 1rem;
 }
 </style>
