@@ -40,11 +40,14 @@ q-expansion-item.exp(v-else v-model="group.expanded" v-for="(group, ind) in hran
 	template(#header)
 		.row.items-center.justify-between.full-width
 			.title {{ group.name }}
-			// div &nbsp;
-			// q-menu(touch-position context-menu)
-			// 	q-list
-			// 		q-item(clickable v-close-popup @click="removeGroup(ind)").pink
-			// 			q-item-section Удалить группу
+
+			div
+				q-btn(flat round icon="mdi-pencil" @click.stop="action" size="sm") 
+				q-btn(flat round icon="mdi-trash-can-outline" @click.stop="" size="sm") 
+					q-menu
+						q-list
+							q-item(clickable v-close-popup @click="removeGroup(ind)").pink
+								q-item-section Удалить&nbsp;группу
 	q-separator
 
 	q-card.dblist
