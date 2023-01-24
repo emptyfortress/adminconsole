@@ -27,6 +27,17 @@
 									q-item-section(side)
 										q-icon(name="mdi-trash-can-outline" color="pink")
 									q-item-section Удалить
+			q-menu(touch-position context-menu)
+				q-list(dense)
+					q-item(clickable v-for="item in tabs" :key="item.id" @click="editBD(props.row, item.field)" v-close-popup)
+						q-item-section(side)
+							q-icon(name="mdi-database-cog-outline" size="16px")
+						q-item-section {{ item.label }}
+					q-separator
+					q-item(clickable :props="props" @click="remove(props.row)" v-close-popup)
+						q-item-section(side)
+							q-icon(name="mdi-trash-can-outline" color="pink" size="16px")
+						q-item-section Удалить
 
 	.master
 		div Чтобы создать новую базу данных, сделать доступной для пользователей существующую базу данных, а также обновить БД, если ее версия отличается от версии сервера Docsvision, воспользуйтесь Мастером баз данных.
