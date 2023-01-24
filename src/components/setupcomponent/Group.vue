@@ -93,10 +93,10 @@ q-dialog(:model-value="showAdd")
 				q-btn(icon="mdi-close" flat round dense v-close-popup)
 
 			q-card-section
-				q-input(v-model="newGroupName" autofocus label="Название")
+				q-input(v-model="newGroupName" autofocus label="Название" lazy-rules :rules="[val => val && val.length > 0 || 'Обязательное поле']")
 
 			q-card-section
-				q-select(v-model="newGroupRule" autofocus label="Режим выбора" :options="options")
+				q-select(v-model="newGroupRule" autofocus label="Режим выбора" :options="options" lazy-rules :rules="[val => val && val.length > 0 || 'Обязательное поле']")
 
 			q-card-section
 				q-card-actions(align="right")

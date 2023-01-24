@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, reactive, } from 'vue'
+import { ref, reactive } from 'vue'
 import draggable from 'vuedraggable'
 import { useHran } from '@/stores/hran'
 
@@ -33,7 +33,7 @@ const list1: Hran[] = reactive([
 		size: 130,
 		main: false,
 		arch: false,
-		temp: true
+		temp: true,
 	},
 	{
 		id: 3,
@@ -43,8 +43,8 @@ const list1: Hran[] = reactive([
 		size: 10,
 		main: false,
 		arch: false,
-		temp: true
-	}
+		temp: true,
+	},
 ])
 
 const hran = useHran()
@@ -60,7 +60,7 @@ const close = () => {
 	showAdd.value = false
 }
 
-const clearAdd = (() => {
+const clearAdd = () => {
 	name.value = null
 	type.value = null
 	state.value = null
@@ -70,11 +70,11 @@ const clearAdd = (() => {
 	arch.value = false
 	temp.value = false
 	showAdd.value = true
-})
+}
 
 const currentItemIndex = ref()
 
-const edit = ((index: number) => {
+const edit = (index: number) => {
 	name.value = list1[index].name
 	type.value = list1[index].type
 	state.value = list1[index].state
@@ -84,11 +84,11 @@ const edit = ((index: number) => {
 	temp.value = list1[index].temp
 	currentItemIndex.value = index
 	showAdd.value = true
-})
+}
 
 const date = new Date()
 
-const add = (() => {
+const add = () => {
 	let tmp = {} as Hran
 	tmp.id = +date
 	tmp.name = name.value
@@ -105,7 +105,7 @@ const add = (() => {
 	}
 	showAdd.value = false
 	currentItemIndex.value = null
-})
+}
 
 const name = ref()
 const type = ref()
@@ -114,7 +114,13 @@ const size = ref()
 const main = ref(false)
 const arch = ref(false)
 const temp = ref(false)
-const options = ['Хранилище на диске', 'Хранилище во внешней базе MS SQL Server', 'FileStream хранилище во внешней базе данных MS SQL Server', 'FileStream хранилище в базе данных Docsvision', 'Добавить из сборки...']
+const options = [
+	'Хранилище на диске',
+	'Хранилище во внешней базе MS SQL Server',
+	'FileStream хранилище во внешней базе данных MS SQL Server',
+	'FileStream хранилище в базе данных Docsvision',
+	'Добавить из сборки...',
+]
 const options1 = ['Online', 'Auto', 'Disabled', 'Read and delete', 'Reserved']
 </script>
 
@@ -147,7 +153,7 @@ const options1 = ['Online', 'Auto', 'Disabled', 'Read and delete', 'Reserved']
 
 				.desc {{ element.size }} Gb
 				div
-					q-btn(flat round dense icon="mdi-pencil" size="sm" @click="edit(index)" )
+					q-btn(flat round dense icon="mdi-pencil" size="sm" @click="edit(index)" ).q-mr-sm
 					q-btn(flat round dense icon="mdi-trash-can-outline" size="sm" )
 						q-menu
 							q-list
@@ -215,7 +221,6 @@ q-dialog(:model-value="showAdd")
 		color: grey;
 		justify-self: end;
 	}
-
 }
 
 .desc {
@@ -223,27 +228,18 @@ q-dialog(:model-value="showAdd")
 }
 
 .tabel {
-	// background: pink;
 	width: 100%;
 	display: grid;
-	grid-template-columns: 1fr 1fr 65px 150px 65px 50px;
+	grid-template-columns: 1fr 1fr 65px 150px 65px 60px;
 	justify-items: start;
-	// align-items: stretch;
 	column-gap: 1rem;
-	row-gap: .2rem;
+	row-gap: 0.2rem;
 }
 
 .edittable {
 	min-width: 400px;
-
 	.fl {
 		display: flex;
 	}
-
-	// display: grid;
-	// grid-template-columns: auto 1fr;
-	// gap: 1rem;
-
-
 }
 </style>

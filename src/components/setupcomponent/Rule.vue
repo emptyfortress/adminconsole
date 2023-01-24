@@ -130,7 +130,7 @@ const edit = (index: number) => {
 				.desc(v-if="element.size2") {{ element.size2 }} Gb
 
 				.right
-					q-btn(flat round dense icon="mdi-pencil" size="sm" @click="edit(index)" )
+					q-btn(flat round dense icon="mdi-pencil" size="sm" @click="edit(index)" ).q-mr-sm
 					q-btn(flat round dense icon="mdi-trash-can-outline" size="sm" )
 						q-menu
 							q-list
