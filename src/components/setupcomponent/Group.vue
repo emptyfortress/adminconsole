@@ -29,6 +29,12 @@ const options = ['Самое заполненное хранилище', 'Сам
 const removeGroup = (ind: number) => {
 	hran.removeGroup(ind)
 }
+const editGroup = (group: any) => {
+	// console.log('group: ', group)
+	newGroupName.value = group.name
+	newGroupRule.value = group.rule
+	showAdd.value = true
+}
 </script>
 
 <template lang="pug">
@@ -42,7 +48,7 @@ q-expansion-item.exp(v-else v-model="group.expanded" v-for="(group, ind) in hran
 			.title {{ group.name }}
 
 			div
-				q-btn(flat round icon="mdi-pencil" @click.stop="action" size="sm") 
+				q-btn(flat round icon="mdi-pencil" @click.stop="editGroup(group)" size="sm") 
 				q-btn(flat round icon="mdi-trash-can-outline" @click.stop="" size="sm") 
 					q-menu
 						q-list
@@ -57,7 +63,7 @@ q-expansion-item.exp(v-else v-model="group.expanded" v-for="(group, ind) in hran
 		component(:is="draggable" :list="group.list" item-key="id" group="group" ghost-class="ghost" @start="dragging = true" @end="dragging = false").list-group
 			template(#item="{ element, index }")
 				.row.justify-between.items-center
-					div
+					.q-ml-sm
 						q-icon(name="mdi-database-outline" size="18px" style="vertical-align: top;")
 						span.q-ml-sm {{ element.name }}
 					q-btn(flat round dense icon="mdi-trash-can-outline" size="10px" )
@@ -74,7 +80,7 @@ q-expansion-item.exp(v-else v-model="group.expanded" v-for="(group, ind) in hran
 		component(:is="draggable" :list="group.listRule" item-key="id" group="rule" ghost-class="ghost" @start="dragging = true" @end="dragging = false").list-group
 			template(#item="{ element, index }")
 				.row.justify-between.items-center
-					div
+					.q-ml-sm
 						q-icon(name="mdi-gate-nor" size="18px" style="vertical-align: top;")
 						span.q-ml-sm {{ element.name }}
 					q-btn(flat round dense icon="mdi-trash-can-outline" size="10px" )

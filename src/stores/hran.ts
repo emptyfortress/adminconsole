@@ -11,6 +11,7 @@ export const useHran = defineStore({
 				name: 'Common',
 				expanded: true,
 				switch: false,
+				rule: 'Случайный порядок',
 				list: [
 					{
 						id: 1,
@@ -32,10 +33,11 @@ export const useHran = defineStore({
 				item.list = [...new Map(item.list.map((item) => [item['id'], item])).values()]
 			})
 		},
-		addGroup(e: string) {
+		addGroup(e: string, c: string) {
 			const temp = {
 				id: +date,
 				name: e,
+				rule: c,
 				expanded: true,
 				switch: false,
 				list: [],
