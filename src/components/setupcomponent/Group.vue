@@ -36,20 +36,20 @@ const removeGroup = (ind: number) => {
 	.zg Группы хранилищ ({{ hran.groups.length }})
 	q-btn(flat round icon="mdi-plus-circle" @click="showAdd = true")
 .empt(v-if="hran.groups.length === 0") Создайте первую группу
-q-expansion-item.exp(v-else v-model="group.expanded" v-for="(group, ind) in hran.groups" :key="group.id" ).gro
+q-expansion-item.exp(v-else v-model="group.expanded" v-for="(group, ind) in hran.groups" :key="group.id" switch-toggle-side).gro
 	template(#header)
 		.row.items-center.justify-between.full-width
 			.title {{ group.name }}
-			div &nbsp;
-			q-menu(touch-position context-menu)
-				q-list
-					q-item(clickable v-close-popup @click="removeGroup(ind)").pink
-						q-item-section Удалить группу
+			// div &nbsp;
+			// q-menu(touch-position context-menu)
+			// 	q-list
+			// 		q-item(clickable v-close-popup @click="removeGroup(ind)").pink
+			// 			q-item-section Удалить группу
 	q-separator
 
 	q-card.dblist
 		.empt(v-if="group.list.length === 0")
-			q-icon(name="mdi-database-outline" size="sm").q-mr-sm
+			q-icon(name="mdi-database-outline" size="sm").q-mr-md
 			|Добавьте хранилище в группу.
 		component(:is="draggable" :list="group.list" item-key="id" group="group" ghost-class="ghost" @start="dragging = true" @end="dragging = false").list-group
 			template(#item="{ element, index }")
@@ -66,7 +66,7 @@ q-expansion-item.exp(v-else v-model="group.expanded" v-for="(group, ind) in hran
 	.sep
 	q-card.dblist
 		.empt(v-if="group.listRule.length === 0")
-			q-icon(name="mdi-gate-nor" size="sm").q-mr-sm
+			q-icon(name="mdi-gate-nor" size="sm").q-mr-md
 			|Назначьте правило на группу, перетащив его сюда.
 		component(:is="draggable" :list="group.listRule" item-key="id" group="rule" ghost-class="ghost" @start="dragging = true" @end="dragging = false").list-group
 			template(#item="{ element, index }")
@@ -130,6 +130,7 @@ q-dialog(:model-value="showAdd")
 .dblist {
 	background: var(--bg-grey);
 	padding: 0 0.5rem;
+	padding-left: 0;
 }
 
 .gro {
@@ -142,6 +143,9 @@ q-dialog(:model-value="showAdd")
 	padding: 2px 10px;
 	font-weight: 600;
 	text-transform: uppercase;
+}
+:deep(.q-item__section--avatar) {
+	min-width: 0;
 }
 
 .empt {
