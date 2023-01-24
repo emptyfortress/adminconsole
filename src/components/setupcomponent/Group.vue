@@ -7,6 +7,7 @@ const hran = useHran()
 const newGroupName = ref()
 const newGroupRule = ref()
 const showAdd = ref(false)
+const currentGroupIndex = ref()
 
 const remove = (ind: number, index: number) => {
 	hran.groups[ind].list.splice(index, 1)
@@ -19,20 +20,25 @@ const removeRule = (ind: number, index: number) => {
 const dragging = ref(false)
 
 const addGroup = () => {
-	hran.addGroup(newGroupName.value, newGroupRule.value)
+	if (currentGroupIndex.value == null) {
+		hran.addGroup(newGroupName.value, newGroupRule.value)
+	} else {
+		hran.editGroup(currentGroupIndex.value, newGroupName.value, newGroupRule.value)
+	}
 	showAdd.value = false
 	newGroupName.value = ''
 	newGroupRule.value = ''
+	currentGroupIndex.value = null
 }
 const options = ['Самое заполненное хранилище', 'Самое свободное хранилище', 'Случайный порядок']
 
 const removeGroup = (ind: number) => {
 	hran.removeGroup(ind)
 }
-const editGroup = (group: any) => {
-	// console.log('group: ', group)
+const editGroup = (group: any, index: number) => {
 	newGroupName.value = group.name
 	newGroupRule.value = group.rule
+	currentGroupIndex.value = index
 	showAdd.value = true
 }
 </script>
@@ -48,7 +54,7 @@ q-expansion-item.exp(v-else v-model="group.expanded" v-for="(group, ind) in hran
 			.title {{ group.name }}
 
 			div
-				q-btn(flat round icon="mdi-pencil" @click.stop="editGroup(group)" size="sm") 
+				q-btn(flat round icon="mdi-pencil" @click.stop="editGroup(group, ind)" size="sm") 
 				q-btn(flat round icon="mdi-trash-can-outline" @click.stop="" size="sm") 
 					q-menu
 						q-list
