@@ -1,47 +1,23 @@
 <template lang="pug">
 .database
-	q-table(bordered flat :rows='rows' :columns='columns' row-key='name' hide-bottom)
-		template(v-slot:body='props')
-			q-tr(:props='props' :class='{ cool: props.row.def }')
-				q-td(key='psevdo' :props='props')
-					q-icon.q-mr-sm(name='mdi-database' size='16px' v-if='props.row.def')
-					q-icon.q-mr-sm(name='mdi-database-outline' size='16px' v-else)
-					span {{ props.row.psevdo }}
-				q-td(key='server' :props='props') {{ props.row.server }}
-				q-td(key='index' :props='props') {{ props.row.index }}
-				q-td(key='version' :props='props') {{ props.row.version }}
-				q-td(key='date' :props='props') {{ props.row.date }}
-				q-td.text-center(key='def' :props='props')
-					q-icon(name="mdi-check-bold" size="sm" v-if="props.row.def")
-					q-btn(flat color="primary" label="Назначить" v-else size="sm" @click='assign(props.row.psevdo)')
-				q-td.text-right(key='def' :props='props')
-					q-btn(:props="props" round flat icon='mdi-cog' size='sm')
-						q-menu(:props="props")
-							q-list(:props="props")
-								q-item(:props="props" clickable v-for="item in tabs" :key="item.id" @click="editBD(props.row, item.field)" v-close-popup)
-									q-item-section(side)
-										q-icon(name="mdi-database-cog-outline")
-									q-item-section {{ item.label }}
-								q-separator
-								q-item(clickable :props="props" @click="remove(props.row)" v-close-popup)
-									q-item-section(side)
-										q-icon(name="mdi-trash-can-outline" color="pink")
-									q-item-section Удалить
-			q-menu(touch-position context-menu)
-				q-list(dense)
-					q-item(clickable v-for="item in tabs" :key="item.id" @click="editBD(props.row, item.field)" v-close-popup)
-						q-item-section(side)
-							q-icon(name="mdi-database-cog-outline" size="16px")
-						q-item-section {{ item.label }}
-					q-separator
-					q-item(clickable :props="props" @click="remove(props.row)" v-close-popup)
-						q-item-section(side)
-							q-icon(name="mdi-trash-can-outline" color="pink" size="16px")
-						q-item-section Удалить
+	.bd(v-for="item in rows" :key="item.psevdo")
+		q-btn(flat round icon="mdi-trash-can-outline" size="md" @click="remove(item)").del
+		.label Псевдоним:
+		.title {{item.psevdo}}
+		.label Сервер:
+		.title {{item.server}}
+		.label Индексация:
+		.title {{item.index}}
+		.label Версия:
+		.title {{item.version}}
+		q-checkbox(v-model="item.def" dense label="Использовать по умолчанию").check
 
-	.master
-		div Чтобы создать новую базу данных, сделать доступной для пользователей существующую базу данных, а также обновить БД, если ее версия отличается от версии сервера Docsvision, воспользуйтесь Мастером баз данных.
-		q-btn(unelevated color='primary' @click='master = true') Мастер&nbsp;баз&nbsp;данных 
+		.check
+			q-btn(flat color="primary" size="sm" v-for="bt in tabs" :key="bt.id" :label="bt.label"  @click="editBD(item, bt.field)")
+
+.master
+	div Чтобы создать новую базу данных, сделать доступной для пользователей существующую базу данных, а также обновить БД, если ее версия отличается от версии сервера Docsvision, воспользуйтесь Мастером баз данных.
+	q-btn(unelevated color='primary' @click='master = true') Мастер&nbsp;баз&nbsp;данных 
 
 ChangeDialog(v-model="change" :changename="changename" @changeDef="assignDef")
 MasterBD(v-model="master")
@@ -53,7 +29,6 @@ import { ref, reactive } from 'vue'
 import ChangeDialog from '@/components/setupcomponent/ChangeDialog.vue'
 import MasterBD from '@/components/setupcomponent/MasterBD.vue'
 import EditBD from '@/components/setupcomponent/EditBD.vue'
-import type { QTableProps } from 'quasar'
 
 const emit = defineEmits(['change', 'haserror', 'noerror'])
 
@@ -87,23 +62,6 @@ const assignDef = () => {
 	// store.panels[2].change = true
 }
 
-// const columns = [
-const columns: QTableProps['columns'] = [
-	{
-		name: 'psevdo',
-		required: true,
-		label: 'Псевдоним',
-		align: 'left',
-		field: 'psevdo',
-		sortable: true,
-	},
-	{ name: 'server', align: 'left', label: 'Сервер', field: 'server', sortable: true },
-	{ name: 'index', align: 'left', label: 'Индексируется', field: 'index', sortable: true },
-	{ name: 'version', align: 'left', label: 'Версия', field: 'version', sortable: true },
-	{ name: 'date', align: 'left', label: 'Дата создания', field: 'date', sortable: true },
-	{ name: 'def', align: 'center', label: 'По умолчанию', field: 'def', sortable: true },
-	{ name: 'action', align: 'right', label: '', field: '' },
-]
 const rows = reactive([
 	{
 		psevdo: 'AGSupport',
@@ -143,12 +101,41 @@ const tabs = ref([
 </script>
 
 <style lang="scss" scoped>
-:deep(.q-table th) {
-	font-size: 0.7rem;
-	font-weight: normal;
-	color: hsl(0, 0%, 40%);
+.database {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	justify-items: start;
+	align-items: stretch;
+	gap: 0.5rem;
+	.bd {
+		width: 100%;
+		background: white;
+		border: 1px solid #ccc;
+		padding: 0.5rem;
+		display: grid;
+		grid-template-columns: auto 1fr;
+		justify-items: start;
+		align-items: stretch;
+		column-gap: 1rem;
+		row-gap: 2px;
+		position: relative;
+		.del {
+			position: absolute;
+			top: 5px;
+			right: 5px;
+			:deep(.q-icon) {
+				color: darkred;
+			}
+		}
+	}
+	.label {
+		color: #666;
+	}
+	.check {
+		margin-top: 1rem;
+		grid-column: 1/-1;
+	}
 }
-
 .cool {
 	font-weight: 600;
 	background: var(--bg-selected);
