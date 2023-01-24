@@ -113,7 +113,7 @@ const edit = (index: number) => {
 	div(v-if="list.length === 0") Создайте первое правило
 	component(:is="draggable" :list="list"
 		item-key="id"
-		:group="{ name: 'rule', pull: 'clone', put: false }"
+		group="rule"
 		ghost-class='ghost'
 		).list-group
 		template(#item="{ element, index }")
