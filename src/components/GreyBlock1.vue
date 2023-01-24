@@ -9,7 +9,7 @@ div
 				q-menu
 					q-list
 						q-item(clickable v-close-popup @click="del(name)").pink
-							q-item-section Подтверждаю
+							q-item-section Удалить
 		.current {{ name }}
 		br
 		.form(v-if="props.dv")

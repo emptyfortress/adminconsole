@@ -1,18 +1,9 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
 import draggable from 'vuedraggable'
-// import { useHran } from '@/stores/hran'
-//
-// const hran = useHran()
+import { useHran } from '@/stores/hran'
 
-interface Rule {
-	id: number
-	name: string
-	type: string
-	ext?: string
-	size1?: number
-	size2?: number
-}
+const hran = useHran()
 
 const showAdd = ref(false)
 
@@ -30,32 +21,6 @@ const options = [
 const ext = ref()
 const size1 = ref()
 const size2 = ref()
-
-const list: Rule[] = reactive([
-	{
-		id: 1,
-		name: 'Правило 1',
-		type: 'Все',
-	},
-	{
-		id: 2,
-		name: 'Большие файлы',
-		type: 'Размер больше, чем',
-		size1: 300,
-	},
-	{
-		id: 3,
-		name: 'Маленькие файлы',
-		type: 'Размер меньше, чем',
-		size2: 100,
-	},
-	{
-		id: 4,
-		name: 'Справочники',
-		type: 'Файл справочника',
-	},
-])
-
 const date = new Date()
 const currentItemIndex = ref()
 
@@ -68,9 +33,9 @@ const add = () => {
 	tmp.size1 = size1.value
 	tmp.size2 = size2.value
 	if (currentItemIndex.value !== null) {
-		list[currentItemIndex.value] = tmp
+		hran.rules[currentItemIndex.value] = tmp
 	} else {
-		list.push(tmp)
+		hran.addRule(tmp)
 	}
 	showAdd.value = false
 	currentItemIndex.value = null
@@ -90,16 +55,13 @@ const showDialog = () => {
 	type.value = 'Все'
 	showAdd.value = true
 }
-const remove = (ind: number) => {
-	list.splice(ind, 1)
-}
 
 const edit = (index: number) => {
-	name.value = list[index].name
-	type.value = list[index].type
-	ext.value = list[index].ext
-	size1.value = list[index].size1
-	size2.value = list[index].size2
+	name.value = hran.rules[index].name
+	type.value = hran.rules[index].type
+	ext.value = hran.rules[index].ext
+	size1.value = hran.rules[index].size1
+	size2.value = hran.rules[index].size2
 	currentItemIndex.value = index
 	showAdd.value = true
 }
@@ -107,11 +69,11 @@ const edit = (index: number) => {
 
 <template lang="pug">
 .row.items-center.justify-between
-	.zg Правила помещения в хранилище ({{ list.length }})
+	.zg Правила помещения в хранилище ({{ hran.rules.length }})
 	q-btn(flat round icon='mdi-plus-circle' @click="showDialog")
 .grey
-	div(v-if="list.length === 0") Создайте первое правило
-	component(:is="draggable" :list="list"
+	div(v-if="hran.rules.length === 0") Создайте первое правило
+	component(:is="draggable" :list="hran.rules"
 		item-key="id"
 		group="rule"
 		ghost-class='ghost'
@@ -134,8 +96,8 @@ const edit = (index: number) => {
 					q-btn(flat round dense icon="mdi-trash-can-outline" size="sm" )
 						q-menu
 							q-list
-								q-item(clickable v-close-popup @click="remove(index)").pink
-									q-item-section Подтверждаю
+								q-item(clickable v-close-popup @click="hran.removeRule(index)").pink
+									q-item-section Удалить
 
 
 q-dialog(v-model="showAdd")

@@ -12,19 +12,34 @@ export const useHran = defineStore({
 				expanded: true,
 				switch: false,
 				rule: 'Случайный порядок',
-				list: [
-					{
-						id: 1,
-						name: 'Storage 1',
-						type: 'Хранилища в базе',
-						state: 'Online',
-						sections: 'Основной, архивный',
-						size: 100,
-					},
-				],
+				list: [],
 				listRule: [],
 			},
 		],
+		rules: [
+			{
+				id: 1,
+				name: 'Правило 1',
+				type: 'Все',
+			},
+			{
+				id: 2,
+				name: 'Большие файлы',
+				type: 'Размер больше, чем',
+				size1: 300,
+			},
+			{
+				id: 3,
+				name: 'Маленькие файлы',
+				type: 'Размер меньше, чем',
+				size2: 100,
+			},
+			{
+				id: 4,
+				name: 'Справочники',
+				type: 'Файл справочника',
+			},
+		] as Rule[],
 	}),
 	getters: {},
 	actions: {
@@ -51,6 +66,17 @@ export const useHran = defineStore({
 		},
 		removeGroup(ind: number) {
 			this.groups.splice(ind, 1)
+		},
+		removeRule(ind: number) {
+			this.rules.splice(ind, 1)
+		},
+		addRule(tmp: Rule) {
+			this.rules.push(tmp)
+		},
+		removeRuleFromGroup(ind: number, index: number) {
+			const temp = this.groups[ind].listRule[index]
+			this.groups[ind].listRule.splice(index, 1)
+			this.rules.push(temp)
 		},
 	},
 })

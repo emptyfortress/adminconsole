@@ -158,7 +158,7 @@ const options1 = ['Online', 'Auto', 'Disabled', 'Read and delete', 'Reserved']
 						q-menu
 							q-list
 								q-item(clickable v-close-popup @click="remove1(index)").pink
-									q-item-section Подтверждаю
+									q-item-section Удалить
 
 q-dialog(:model-value="showAdd")
 	q-card(padding)

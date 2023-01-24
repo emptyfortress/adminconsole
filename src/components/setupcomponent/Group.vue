@@ -14,7 +14,7 @@ const remove = (ind: number, index: number) => {
 }
 
 const removeRule = (ind: number, index: number) => {
-	hran.groups[ind].listRule.splice(index, 1)
+	hran.removeRuleFromGroup(ind, index)
 }
 
 const dragging = ref(false)
@@ -76,7 +76,7 @@ q-expansion-item.exp(v-else v-model="group.expanded" v-for="(group, ind) in hran
 						q-menu
 							q-list
 								q-item(clickable v-close-popup @click="remove(ind, index)").pink
-									q-item-section Подтверждаю
+									q-item-section Удалить
 
 	.sep
 	q-card.dblist
@@ -93,8 +93,8 @@ q-expansion-item.exp(v-else v-model="group.expanded" v-for="(group, ind) in hran
 						q-menu
 							q-list
 								q-item(clickable v-close-popup @click="removeRule(ind, index)").pink
-									q-item-section Подтверждаю
-	.prav(v-if="group.switch") Правила применяются сверху вниз
+									q-item-section Удалить
+	.prav Правила применяются сверху вниз
 
 q-dialog(:model-value="showAdd")
 	q-card(style="min-width: 400px;")

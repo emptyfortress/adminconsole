@@ -17,7 +17,7 @@
 						<q-menu>
 							<q-list>
 								<q-item class="pink" clickable v-close-popup @click="del">
-									<q-item-section>Подтверждаю</q-item-section>
+									<q-item-section>Удалить</q-item-section>
 								</q-item>
 							</q-list>
 						</q-menu>
