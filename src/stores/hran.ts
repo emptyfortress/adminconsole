@@ -7,18 +7,29 @@ export const useHran = defineStore({
 	state: () => ({
 		groups: [
 			{
-				id: 0, name: 'Common', expanded: true, switch: false, list: [
-					{ id: 1, name: 'Storage 1', type: 'Хранилища в базе', state: 'Online', sections: 'Основной, архивный', size: 100 }
-				], listRule: []
-			}
+				id: 0,
+				name: 'Common',
+				expanded: true,
+				switch: false,
+				list: [
+					{
+						id: 1,
+						name: 'Storage 1',
+						type: 'Хранилища в базе',
+						state: 'Online',
+						sections: 'Основной, архивный',
+						size: 100,
+					},
+				],
+				listRule: [],
+			},
 		],
 	}),
 	getters: {},
 	actions: {
 		unique() {
-			this.groups.forEach(item => {
-				item.list = [...new Map(item.list.map((item) => [item["id"], item])).values()]
-
+			this.groups.forEach((item) => {
+				item.list = [...new Map(item.list.map((item) => [item['id'], item])).values()]
 			})
 		},
 		addGroup(e: string) {
@@ -28,13 +39,12 @@ export const useHran = defineStore({
 				expanded: true,
 				switch: false,
 				list: [],
-				listRule: []
+				listRule: [],
 			}
 			this.groups.push(temp)
 		},
 		removeGroup(ind: number) {
 			this.groups.splice(ind, 1)
-		}
-
+		},
 	},
 })

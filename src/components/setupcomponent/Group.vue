@@ -5,6 +5,7 @@ import { useHran } from '@/stores/hran'
 
 const hran = useHran()
 const newGroupName = ref()
+const newGroupRule = ref()
 const showAdd = ref(false)
 
 const remove = (ind: number, index: number) => {
@@ -18,10 +19,12 @@ const removeRule = (ind: number, index: number) => {
 const dragging = ref(false)
 
 const addGroup = () => {
-	hran.addGroup(newGroupName.value)
+	hran.addGroup(newGroupName.value, newGroupRule.value)
 	showAdd.value = false
 	newGroupName.value = ''
+	newGroupRule.value = ''
 }
+const options = ['Самое заполненное хранилище', 'Самое свободное хранилище', 'Случайный порядок']
 
 const removeGroup = (ind: number) => {
 	hran.removeGroup(ind)
@@ -33,7 +36,7 @@ const removeGroup = (ind: number) => {
 	.zg Группы хранилищ ({{ hran.groups.length }})
 	q-btn(flat round icon="mdi-plus-circle" @click="showAdd = true")
 .empt(v-if="hran.groups.length === 0") Создайте первую группу
-q-expansion-item.exp(v-else v-model="group.expanded" v-for="(group, ind) in hran.groups" :key="group.id").gro
+q-expansion-item.exp(v-else v-model="group.expanded" v-for="(group, ind) in hran.groups" :key="group.id" ).gro
 	template(#header)
 		.row.items-center.justify-between.full-width
 			.title {{ group.name }}
@@ -80,18 +83,22 @@ q-expansion-item.exp(v-else v-model="group.expanded" v-for="(group, ind) in hran
 
 q-dialog(:model-value="showAdd")
 	q-card(style="min-width: 400px;")
-		q-card-section.row.items-center.q-pb-none
-			.text-h6 Новая группа
-			q-space
-			q-btn(icon="mdi-close" flat round dense v-close-popup)
+		q-form(@submit="addGroup")
+			q-card-section.row.items-center.q-pb-none
+				.text-h6 Новая группа
+				q-space
+				q-btn(icon="mdi-close" flat round dense v-close-popup)
 
-		q-card-section
-			q-input(v-model="newGroupName" autofocus label="Название")
+			q-card-section
+				q-input(v-model="newGroupName" autofocus label="Название")
 
-		q-card-section
-			q-card-actions(align="right")
-				q-btn(flat color="primary" label="Отмена" @click="showAdd = false")
-				q-btn(unelevated color="primary" label="Добавить" @click="addGroup")
+			q-card-section
+				q-select(v-model="newGroupRule" autofocus label="Режим выбора" :options="options")
+
+			q-card-section
+				q-card-actions(align="right")
+					q-btn(flat color="primary" label="Отмена" @click="showAdd = false")
+					q-btn(unelevated color="primary" label="Добавить" type="submit")
 		
 </template>
 
