@@ -45,7 +45,9 @@ q-expansion-item.exp(v-else v-model="group.expanded" v-for="(group, ind) in hran
 	q-separator
 
 	q-card.dblist
-		.empt(v-if="group.list.length === 0") Добавьте хранилище в группу
+		.empt(v-if="group.list.length === 0")
+			q-icon(name="mdi-database-outline" size="sm").q-mr-sm
+			|Добавьте хранилище в группу.
 		component(:is="draggable" :list="group.list" item-key="id" group="group" ghost-class="ghost" @start="dragging = true" @end="dragging = false").list-group
 			template(#item="{ element, index }")
 				.row.justify-between.items-center
@@ -60,7 +62,9 @@ q-expansion-item.exp(v-else v-model="group.expanded" v-for="(group, ind) in hran
 
 	.sep
 	q-card.dblist
-		.empt(v-if="group.listRule.length === 0") Назначьте правило на группу перетащив его сюда.
+		.empt(v-if="group.listRule.length === 0")
+			q-icon(name="mdi-gate-nor" size="sm").q-mr-sm
+			|Назначьте правило на группу, перетащив его сюда.
 		component(:is="draggable" :list="group.listRule" item-key="id" group="rule" ghost-class="ghost" @start="dragging = true" @end="dragging = false").list-group
 			template(#item="{ element, index }")
 				.row.justify-between.items-center

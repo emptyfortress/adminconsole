@@ -10,39 +10,63 @@ interface Rule {
 	name: string
 	type: string
 	ext?: string
-	size?: number
 	size1?: number
+	size2?: number
 }
 
 const showAdd = ref(false)
 
 const name = ref()
 const type = ref('Все')
-const options = ['Все', 'По расширению файла', 'Размер больше, чем', 'Размер меньше, чем', 'Файл справочника', 'Добавить из сборки']
+const options = [
+	'Все',
+	'По расширению файла',
+	'Размер больше, чем',
+	'Размер меньше, чем',
+	'Файл справочника',
+	'Добавить из сборки',
+]
 
 const ext = ref()
-const size = ref()
 const size1 = ref()
+const size2 = ref()
 
 const list: Rule[] = reactive([
 	{
 		id: 1,
-		name: 'Правило',
-		type: 'Все'
-	}
+		name: 'Правило 1',
+		type: 'Все',
+	},
+	{
+		id: 2,
+		name: 'Большие файлы',
+		type: 'Размер больше, чем',
+		size1: 300,
+	},
+	{
+		id: 3,
+		name: 'Маленькие файлы',
+		type: 'Размер меньше, чем',
+		size2: 100,
+	},
+	{
+		id: 4,
+		name: 'Справочники',
+		type: 'Файл справочника',
+	},
 ])
 
 const date = new Date()
 const currentItemIndex = ref()
 
-const add = (() => {
+const add = () => {
 	let tmp = {} as Rule
 	tmp.id = +date
 	tmp.name = name.value
 	tmp.type = type.value
 	tmp.ext = ext.value
-	tmp.size = size.value
 	tmp.size1 = size1.value
+	tmp.size2 = size2.value
 	if (currentItemIndex.value !== null) {
 		list[currentItemIndex.value] = tmp
 	} else {
@@ -53,33 +77,32 @@ const add = (() => {
 	name.value = null
 	type.value = 'Все'
 	ext.value = null
-	size.value = null
 	size1.value = null
-})
+	size2.value = null
+}
 
-const showDialog = (() => {
+const showDialog = () => {
 	name.value = null
 	currentItemIndex.value = null
 	ext.value = null
-	size.value = null
 	size1.value = null
+	size2.value = null
 	type.value = 'Все'
 	showAdd.value = true
-})
-const remove = ((ind: number) => {
+}
+const remove = (ind: number) => {
 	list.splice(ind, 1)
-})
+}
 
-
-const edit = ((index: number) => {
+const edit = (index: number) => {
 	name.value = list[index].name
 	type.value = list[index].type
 	ext.value = list[index].ext
-	size.value = list[index].size
 	size1.value = list[index].size1
+	size2.value = list[index].size2
 	currentItemIndex.value = index
 	showAdd.value = true
-})
+}
 </script>
 
 <template lang="pug">
@@ -103,8 +126,8 @@ const edit = ((index: number) => {
 				.desc(v-if="element.type === 'Файл справочника'") &nbsp;
 				.desc(v-if="element.type === 'Добавить из сборки'") &nbsp;
 				.desc(v-if="element.ext") {{ element.ext }}
-				.desc(v-if="element.size") {{ element.size }} Gb
 				.desc(v-if="element.size1") {{ element.size1 }} Gb
+				.desc(v-if="element.size2") {{ element.size2 }} Gb
 
 				.right
 					q-btn(flat round dense icon="mdi-pencil" size="sm" @click="edit(index)" )
@@ -128,8 +151,8 @@ q-dialog(v-model="showAdd")
 				.grid
 					q-select(v-model='type' label='Тип' :options="options").full-width
 					q-input(v-model="ext" label="Расширение" v-if="type === 'По расширению файла'" lazy-rules :rules="[val => val && val.length > 0 || 'Обязательное поле']").full-width
-					q-input(v-model="size" label="Размер" v-if="type === 'Размер больше, чем'" type="number" lazy-rules :rules="[val => val !== null && val !== '' || 'Обязательное поле']").full-width
-					q-input(v-model="size1" label="Размер" v-if="type === 'Размер меньше, чем'" type="number").full-width
+					q-input(v-model="size1" label="Размер" v-if="type === 'Размер больше, чем'" type="number" lazy-rules :rules="[val => val !== null && val !== '' || 'Обязательное поле']").full-width
+					q-input(v-model="size2" label="Размер" v-if="type === 'Размер меньше, чем'" type="number").full-width
 
 			q-card-section
 				q-card-actions(align="right")
@@ -171,7 +194,7 @@ q-dialog(v-model="showAdd")
 	grid-template-columns: 1fr 150px 70px 100px;
 	justify-items: start;
 	column-gap: 1rem;
-	row-gap: .2rem;
+	row-gap: 0.2rem;
 }
 
 .desc {
