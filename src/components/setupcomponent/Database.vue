@@ -107,6 +107,7 @@ const columns: QTableProps['columns'] = [
 const rows = reactive([
 	{
 		psevdo: 'AGSupport',
+		name: 'AGSupport_1',
 		server: 'Docsvision 1',
 		index: 'yes',
 		version: 4373,
@@ -115,6 +116,7 @@ const rows = reactive([
 	},
 	{
 		psevdo: 'DvTest',
+		name: 'AGSupport_2',
 		server: 'Docsvision 1',
 		index: 'yes',
 		version: 4373,
@@ -123,6 +125,7 @@ const rows = reactive([
 	},
 	{
 		psevdo: 'DvShowCase',
+		name: 'AGSupport_3',
 		server: 'Docsvision 1',
 		index: 'yes',
 		version: 4373,

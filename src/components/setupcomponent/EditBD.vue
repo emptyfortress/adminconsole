@@ -14,7 +14,6 @@ q-dialog(:modelValue='edit' persistent position='bottom' full-width)
 				q-tab-panel(name='outer')
 					component(:is="Outer")
 				q-tab-panel(name='prop')
-					PropertyTab
 		div
 			q-separator
 			q-card-actions(align='center')
@@ -36,6 +35,7 @@ const props = defineProps({
 	},
 	bd: {
 		type: Object,
+		required: false,
 		default: {
 			name: 'psevdo',
 			required: true,
