@@ -1,5 +1,5 @@
 <template lang="pug">
-q-dialog(v-model='edit' persistent position='bottom' full-width)
+q-dialog(:modelValue='edit' persistent position='bottom' full-width)
 	q-card.edit
 		div
 			q-card-section
