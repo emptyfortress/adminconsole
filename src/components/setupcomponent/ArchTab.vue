@@ -11,9 +11,8 @@ const options = ['понедельник', 'вторник', 'среда', 'че
 
 <template lang="pug">
 .all
-	.title Расписание
 	.arch
-		div Архивировать файлы и карточки:
+		.title Расписание&nbsp;&nbsp;архивирования:
 
 		q-list.full-width
 			q-item(tag="label")
@@ -58,9 +57,9 @@ const options = ['понедельник', 'вторник', 'среда', 'че
 					
 					
 	br
-	.title Управление
 	.arch
-		p fuck
+		.title Управление:
+		q-btn(unelevated color="primary" label="Архивировать сейчас").q-ml-md
 </template>
 
 <style scoped lang="scss">
@@ -77,8 +76,9 @@ const options = ['понедельник', 'вторник', 'среда', 'че
 	background: var(--bg-grey);
 	padding: 1rem;
 	display: grid;
-	grid-template-columns: auto 1fr;
+	grid-template-columns: 250px 1fr;
 	align-items: center;
+	justify-items: start;
 	column-gap: 1rem;
 	row-gap: 0.5rem;
 }

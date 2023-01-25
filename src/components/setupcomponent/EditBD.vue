@@ -65,7 +65,7 @@ const props = defineProps({
 	},
 	tab: {
 		type: String,
-		default: 'meta',
+		default: 'prop',
 	},
 })
 
