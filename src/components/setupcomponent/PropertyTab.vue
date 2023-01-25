@@ -21,7 +21,7 @@ const props = defineProps({
 	label Дата последнего обновления:
 	.val(contenteditable) {{props.bd.date}}
 	label Используется по умолчанию:
-	q-checkbox(v-model="props.bd.def" dense readonly)
+	q-checkbox(v-model="props.bd.def" dense)
 </template>
 
 <style scoped lang="scss">

@@ -14,6 +14,7 @@ q-dialog(:modelValue='edit' persistent position='bottom' full-width)
 				q-tab-panel(name='outer')
 					component(:is="Outer")
 				q-tab-panel(name='prop')
+					PropertyTab(:bd="bd")
 		div
 			q-separator
 			q-card-actions(align='center')
@@ -37,17 +38,18 @@ const props = defineProps({
 		type: Object,
 		required: false,
 		default: {
-			name: 'psevdo',
-			required: true,
-			label: 'Псевдоним',
-			align: 'left',
-			field: 'psevdo',
-			sortable: true,
+			psevdo: 'AGSupport',
+			name: 'AGSupport_1',
+			server: 'Docsvision 1',
+			index: 'yes',
+			version: 4373,
+			date: '20.10.2021',
+			def: true,
 		},
 	},
 	tab: {
 		type: String,
-		default: 'outer',
+		default: 'prop',
 	},
 })
 
