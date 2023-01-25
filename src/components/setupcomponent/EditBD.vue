@@ -1,21 +1,6 @@
 <template lang="pug">
 q-dialog(:modelvalue='edit' persistent position='bottom' full-width)
-  q-card.edit
-    div
-      q-card-section
-        .title
-          q-icon(name='mdi-database-cog')
-          span {{ props.bd.psevdo }}
-      q-tabs.text-secondary(v-model='tab' dense)
-        q-tab(v-for='tab in tabspanels' :key='tab.name' :name='tab.name' :label='tab.label')
-      q-tab-panels(v-model='tab' animated)
-        q-tab-panel(name='outer')
-          Outer
-    div
-      q-separator
-      q-card-actions(align='center')
-        q-btn(flat @click="$emit('close')") Отмена
-        q-btn(flat @click="$emit('close')") Применить
+q-dialog(v-model='edit' persistent position='bottom' full-width)
 
 </template>
 
@@ -45,17 +30,17 @@ const props = defineProps({
 	},
 })
 
-// const tabs = ref('outer')
+const tabs = useTabs()
 
-const tabspanels = ref([
-	{ name: 'prop', label: 'Свойства' },
-	{ name: 'control', label: 'Управление' },
-	{ name: 'outer', label: 'Внешние хранилища' },
-	{ name: 'arch', label: 'Архивирование' },
-	{ name: 'meta', label: 'Метаданные' },
-	{ name: 'journal', label: 'Журнал' },
-	{ name: 'cache', label: 'Кэширование' },
-])
+// const tabspanels = ref([
+// 	{ name: 'prop', label: 'Свойства', modified: false },
+// 	{ name: 'control', label: 'Управление', modified: false },
+// 	{ name: 'outer', label: 'Внешние хранилища', modified: false },
+// 	{ name: 'arch', label: 'Архивирование', modified: false },
+// 	{ name: 'meta', label: 'Метаданные', modified: false },
+// 	{ name: 'journal', label: 'Журнал', modified: false },
+// 	{ name: 'cache', label: 'Кэширование', modified: false },
+// ])
 </script>
 
 <style scoped lang="scss">
@@ -90,5 +75,9 @@ const tabspanels = ref([
 		font-size: 1.3rem;
 		margin-right: 0.5rem;
 	}
+}
+.q-badge {
+	padding: 0 4px;
+	min-height: 8px;
 }
 </style>
