@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { useTabs } from '@/stores/tabs'
 
 const date = new Date()
 
@@ -49,6 +50,7 @@ export const useHran = defineStore({
 			})
 		},
 		addGroup(e: string, c: string) {
+			const tabs = useTabs()
 			const temp = {
 				id: +date,
 				name: e,
@@ -59,24 +61,35 @@ export const useHran = defineStore({
 				listRule: [],
 			}
 			this.groups.push(temp)
+			tabs.setTabMod(2)
 		},
 		editGroup(ind: number, name: string, rule: string) {
+			const tabs = useTabs()
 			this.groups[ind].name = name
 			this.groups[ind].rule = rule
+			tabs.setTabMod(2)
 		},
 		removeGroup(ind: number) {
+			const tabs = useTabs()
 			this.groups.splice(ind, 1)
+			tabs.setTabMod(2)
 		},
 		removeRule(ind: number) {
+			const tabs = useTabs()
 			this.rules.splice(ind, 1)
+			tabs.setTabMod(2)
 		},
 		addRule(tmp: Rule) {
+			const tabs = useTabs()
 			this.rules.push(tmp)
+			tabs.setTabMod(2)
 		},
 		removeRuleFromGroup(ind: number, index: number) {
+			const tabs = useTabs()
 			const temp = this.groups[ind].listRule[index]
 			this.groups[ind].listRule.splice(index, 1)
 			this.rules.push(temp)
+			tabs.setTabMod(2)
 		},
 	},
 })

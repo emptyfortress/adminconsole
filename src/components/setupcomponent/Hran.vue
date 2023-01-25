@@ -2,6 +2,7 @@
 import { ref, reactive } from 'vue'
 import draggable from 'vuedraggable'
 import { useHran } from '@/stores/hran'
+import { useTabs } from '@/stores/tabs'
 
 interface Hran {
 	id: number
@@ -48,13 +49,16 @@ const list1: Hran[] = reactive([
 ])
 
 const hran = useHran()
+const tabs = useTabs()
 const checkDub = () => {
 	hran.unique()
+	tabs.setTabMod(2)
 }
 
 const showAdd = ref(false)
 const remove1 = (n: number) => {
 	list1.splice(n, 1)
+	tabs.setTabMod(2)
 }
 const close = () => {
 	showAdd.value = false
@@ -105,6 +109,7 @@ const add = () => {
 	}
 	showAdd.value = false
 	currentItemIndex.value = null
+	tabs.setTabMod(2)
 }
 
 const name = ref()

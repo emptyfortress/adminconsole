@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref } from 'vue'
 import draggable from 'vuedraggable'
 import { useHran } from '@/stores/hran'
+import { useTabs } from '@/stores/tabs'
 
 const hran = useHran()
+const tabs = useTabs()
 
 const showAdd = ref(false)
 
@@ -37,6 +39,7 @@ const add = () => {
 	} else {
 		hran.addRule(tmp)
 	}
+	tabs.setTabMod(2)
 	showAdd.value = false
 	currentItemIndex.value = null
 	name.value = null
@@ -44,6 +47,11 @@ const add = () => {
 	ext.value = null
 	size1.value = null
 	size2.value = null
+}
+
+const remove = (index: number) => {
+	hran.removeRule(index)
+	tabs.setTabMod(2)
 }
 
 const showDialog = () => {
@@ -64,6 +72,11 @@ const edit = (index: number) => {
 	size2.value = hran.rules[index].size2
 	currentItemIndex.value = index
 	showAdd.value = true
+	tabs.setTabMod(2)
+}
+
+const set = () => {
+	tabs.setTabMod(2)
 }
 </script>
 
@@ -76,6 +89,7 @@ const edit = (index: number) => {
 	component(:is="draggable" :list="hran.rules"
 		item-key="id"
 		group="rule"
+		@end="set"
 		ghost-class='ghost'
 		).list-group
 		template(#item="{ element, index }")
@@ -96,7 +110,7 @@ const edit = (index: number) => {
 					q-btn(flat round dense icon="mdi-trash-can-outline" size="sm" )
 						q-menu
 							q-list
-								q-item(clickable v-close-popup @click="hran.removeRule(index)").pink
+								q-item(clickable v-close-popup @click="remove(index)").pink
 									q-item-section Удалить
 
 

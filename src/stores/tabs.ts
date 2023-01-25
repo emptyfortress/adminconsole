@@ -14,5 +14,9 @@ export const useTabs = defineStore({
 		],
 	}),
 	getters: {},
-	actions: {},
+	actions: {
+		setTabMod(n: number) {
+			this.tabs[n].modified = true
+		},
+	},
 })
