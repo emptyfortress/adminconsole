@@ -69,7 +69,7 @@ const props = defineProps({
 	},
 })
 
-const mytab = ref('arch')
+const mytab = ref('meta')
 
 onUpdated(() => {
 	mytab.value = props.tab
