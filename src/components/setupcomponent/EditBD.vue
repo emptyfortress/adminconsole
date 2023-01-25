@@ -69,7 +69,7 @@ const props = defineProps({
 	},
 })
 
-const mytab = ref('meta')
+const mytab = ref('cache')
 
 onUpdated(() => {
 	mytab.value = props.tab
