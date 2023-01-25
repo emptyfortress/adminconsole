@@ -14,7 +14,7 @@ q-dialog(:modelValue='edit' persistent position='bottom' full-width)
 				q-tab-panel(name='outer')
 					component(:is="Outer")
 				q-tab-panel(name='prop')
-					PropertyTab(:bd="bd")
+					PropertyTab(:bd="props.bd")
 		div
 			q-separator
 			q-card-actions(align='center')
@@ -36,16 +36,7 @@ const props = defineProps({
 	},
 	bd: {
 		type: Object,
-		required: false,
-		default: {
-			psevdo: 'AGSupport',
-			name: 'AGSupport_1',
-			server: 'Docsvision 1',
-			index: 'yes',
-			version: 4373,
-			date: '20.10.2021',
-			def: true,
-		},
+		required: true,
 	},
 	tab: {
 		type: String,
@@ -62,7 +53,6 @@ const tabs = useTabs()
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	// align-items: center;
 }
 
 .title {
