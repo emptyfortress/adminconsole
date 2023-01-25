@@ -13,6 +13,8 @@ q-dialog(:modelValue='edit' persistent position='bottom' full-width)
 			q-tab-panels(v-model='tab' animated)
 				q-tab-panel(name='outer')
 					component(:is="Outer")
+				q-tab-panel(name='prop')
+					PropertyTab
 		div
 			q-separator
 			q-card-actions(align='center')
@@ -25,6 +27,7 @@ q-dialog(:modelValue='edit' persistent position='bottom' full-width)
 // import { ref } from 'vue'
 import { useTabs } from '@/stores/tabs'
 import Outer from '@/components/setupcomponent/Outer.vue'
+import PropertyTab from '@/components/setupcomponent/PropertyTab.vue'
 
 const props = defineProps({
 	edit: {
