@@ -1,11 +1,29 @@
 <template lang="pug">
-q-dialog(:modelvalue='edit' persistent position='bottom' full-width)
 q-dialog(v-model='edit' persistent position='bottom' full-width)
+	q-card.edit
+		div
+			q-card-section
+				.title
+					q-icon(name='mdi-database-cog')
+					span {{ props.bd.psevdo }}
+			q-tabs.text-secondary(v-model='tab' dense)
+				q-tab(v-for='tab in tabs.tabs' :key='tab.name' :name='tab.name')
+					span {{tab.label}}
+						q-badge(rounded float color="red" align="top" v-if="tab.modified")
+			q-tab-panels(v-model='tab' animated)
+				q-tab-panel(name='outer')
+					component(:is="Outer")
+		div
+			q-separator
+			q-card-actions(align='center')
+				q-btn(flat @click="$emit('close')") Отмена
+				q-btn(flat @click="$emit('close')") Применить
 
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+// import { ref } from 'vue'
+import { useTabs } from '@/stores/tabs'
 import Outer from '@/components/setupcomponent/Outer.vue'
 
 const props = defineProps({
@@ -31,16 +49,6 @@ const props = defineProps({
 })
 
 const tabs = useTabs()
-
-// const tabspanels = ref([
-// 	{ name: 'prop', label: 'Свойства', modified: false },
-// 	{ name: 'control', label: 'Управление', modified: false },
-// 	{ name: 'outer', label: 'Внешние хранилища', modified: false },
-// 	{ name: 'arch', label: 'Архивирование', modified: false },
-// 	{ name: 'meta', label: 'Метаданные', modified: false },
-// 	{ name: 'journal', label: 'Журнал', modified: false },
-// 	{ name: 'cache', label: 'Кэширование', modified: false },
-// ])
 </script>
 
 <style scoped lang="scss">
