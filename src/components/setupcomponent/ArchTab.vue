@@ -1,4 +1,13 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const rasp = ref('one')
+const hour = ref(1)
+const hour1 = ref(1)
+const hour2 = ref(1)
+const week = ref('понедельник')
+const options = ['понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота', 'воскресенье']
+</script>
 
 <template lang="pug">
 .all
@@ -9,7 +18,7 @@
 		q-list.full-width
 			q-item(tag="label")
 				q-item-section(avatar)
-					q-radio(v-model="rasp" value="one")
+					q-radio(v-model="rasp" val="one")
 				q-item-section
 					.row.justify-start.items-center.q-gutter-sm
 						div Каждые
@@ -19,7 +28,7 @@
 
 			q-item(tag="label")
 				q-item-section(avatar)
-					q-radio(v-model="rasp" value="two")
+					q-radio(v-model="rasp" val="two")
 				q-item-section
 					.row.justify-start.items-center.q-gutter-sm
 						div Ежедневно в
@@ -28,23 +37,23 @@
 
 			q-item(tag="label")
 				q-item-section(avatar)
-					q-radio(v-model="rasp" value="two")
+					q-radio(v-model="rasp" val="three")
 				q-item-section
 					.row.justify-start.items-center.q-gutter-sm
 						div Раз в неделю в
-						q-select(v-model="week" dense).sma
+						q-select(v-model="week" dense :options="options").sma
 						div в
 						q-input(v-model="hour2" type="number" dense).smm
 						div часов
 
 			q-item(tag="label")
 				q-item-section(avatar)
-					q-radio(v-model="rasp" value="two")
+					q-radio(v-model="rasp" val="four")
 				q-item-section Не архивировать файлы и карточки автоматически
 
 			q-item(tag="label")
 				q-item-section(avatar)
-					q-radio(v-model="rasp" value="two")
+					q-radio(v-model="rasp" val="five")
 				q-item-section Нестандартное описание архивирования
 					
 					
@@ -81,5 +90,9 @@ label {
 }
 .sma {
 	width: 200px;
+}
+:deep(.q-field__native) {
+	font-size: 1rem;
+	text-align: center;
 }
 </style>
