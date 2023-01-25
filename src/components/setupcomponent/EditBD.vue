@@ -6,10 +6,12 @@ q-dialog(:modelValue='edit' persistent position='bottom' full-width)
 				.title
 					q-icon(name='mdi-database-cog')
 					span {{ props.bd.psevdo }}
+
 			q-tabs.text-secondary(v-model='tab' dense)
 				q-tab(v-for='tab in tabs.tabs' :key='tab.name' :name='tab.name')
 					span {{tab.label}}
 						q-badge(rounded float color="red" align="top" v-if="tab.modified")
+
 			q-tab-panels(v-model='tab' animated)
 				q-tab-panel(name='prop')
 					PropertyTab(:bd="props.bd")
@@ -34,7 +36,7 @@ q-dialog(:modelValue='edit' persistent position='bottom' full-width)
 </template>
 
 <script setup lang="ts">
-// import { ref } from 'vue'
+import { ref } from 'vue'
 import { useTabs } from '@/stores/tabs'
 import Outer from '@/components/setupcomponent/Outer.vue'
 import PropertyTab from '@/components/setupcomponent/PropertyTab.vue'
@@ -66,6 +68,9 @@ const props = defineProps({
 		default: 'prop',
 	},
 })
+
+const mytab = ref()
+mytab.value = props.tab
 
 const tabs = useTabs()
 </script>
