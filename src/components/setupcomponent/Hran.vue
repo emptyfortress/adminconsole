@@ -146,18 +146,25 @@ const options1 = ['Online', 'Auto', 'Disabled', 'Read and delete', 'Reserved']
 				div
 					q-icon(name="mdi-database-outline" size="18px" style="vertical-align: top;")
 					span.q-ml-sm {{ element.name }}
-				.desc {{ element.type }}
-				.desc {{ element.state }}
-				.desc
-					span(v-if="element.main") основной
-					span(v-if="element.main && element.arch") ,&nbsp;
-					span(v-if="element.arch") архивный
-					span(v-if="element.arch && element.temp") ,&nbsp;
-					span(v-if="element.main && element.temp") ,&nbsp;
-					span(v-if="element.temp") временный
 
-				.desc {{ element.size }} Gb
 				div
+					q-btn(flat round dense icon="mdi-information-outline" size="sm" ).q-mr-sm
+						q-menu
+							q-card.hrinfo
+								.label Псевдоним:
+								div {{ element.name}}
+								.label Тип:
+								div {{ element.type}}
+								.label Состояние:
+								div {{ element.state}}
+								.label Размер:
+								div {{ element.size}} Gb
+								.label Раздел:
+								div
+									span(v-if="element.main") основной, 
+									span(v-if="element.arch") архивный, 
+									span(v-if="element.temp") временный
+
 					q-btn(flat round dense icon="mdi-pencil" size="sm" @click="edit(index)" ).q-mr-sm
 					q-btn(flat round dense icon="mdi-trash-can-outline" size="sm" )
 						q-menu
@@ -202,17 +209,6 @@ q-dialog(:model-value="showAdd")
 	padding-top: 1.3rem;
 }
 
-.inf {
-	background: #fff;
-	width: 200px;
-	height: 102px;
-	border: 1px solid #ccc;
-	position: absolute;
-	top: 1rem;
-	left: 1rem;
-	z-index: 100;
-}
-
 .hrinfo {
 	padding: 1rem;
 	display: grid;
@@ -228,14 +224,10 @@ q-dialog(:model-value="showAdd")
 	}
 }
 
-.desc {
-	font-size: 0.8rem;
-}
-
 .tabel {
 	width: 100%;
 	display: grid;
-	grid-template-columns: 1fr 1fr 65px 150px 65px 60px;
+	grid-template-columns: 1fr 90px;
 	justify-items: start;
 	column-gap: 1rem;
 	row-gap: 0.2rem;

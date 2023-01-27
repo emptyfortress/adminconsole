@@ -2,12 +2,17 @@
 .outer
 	q-splitter(v-model="split1").spl
 		template(#before)
-			// Hran
-			// Rule
+			Hran
 
 		template(#after)
 			q-splitter(v-model="split2").spl
-			// Group
+
+				template(#before)
+					Group
+
+				template(#after)
+					Rule
+			
 </template>
 
 <script setup lang="ts">
