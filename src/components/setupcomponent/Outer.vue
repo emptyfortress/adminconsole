@@ -1,12 +1,13 @@
 <template lang="pug">
 .outer
-	q-splitter(v-model="split").spl
+	q-splitter(v-model="split1").spl
 		template(#before)
-			Hran
-			Rule
+			// Hran
+			// Rule
 
 		template(#after)
-			Group
+			q-splitter(v-model="split2").spl
+			// Group
 </template>
 
 <script setup lang="ts">
@@ -15,7 +16,8 @@ import Group from '@/components/setupcomponent/Group.vue'
 import Hran from '@/components/setupcomponent/Hran.vue'
 import Rule from '@/components/setupcomponent/Rule.vue'
 
-const split = ref(50)
+const split1 = ref(30)
+const split2 = ref(50)
 </script>
 
 <style scoped lang="scss">
