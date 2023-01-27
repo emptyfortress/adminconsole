@@ -44,7 +44,8 @@ const editGroup = (group: any, index: number) => {
 	.zg Группы хранилищ ({{ hran.groups.length }})
 	q-btn(flat round icon="mdi-plus-circle" @click="showAdd = true")
 .empt(v-if="hran.groups.length === 0") Создайте первую группу
-q-expansion-item.exp(v-else v-model="group.expanded" v-for="(group, ind) in hran.groups" :key="group.id" switch-toggle-side).gro
+
+q-expansion-item(v-else v-model="group.expanded" v-for="(group, ind) in hran.groups" :key="group.id" switch-toggle-side).gro.exp
 	template(#header)
 		.row.items-center.justify-between.full-width
 			.title {{ group.name }}

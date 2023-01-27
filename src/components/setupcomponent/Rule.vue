@@ -84,8 +84,31 @@ const set = () => {
 .row.items-center.justify-between
 	.zg Правила помещения в хранилище ({{ hran.rules.length }})
 	q-btn(flat round icon='mdi-plus-circle' @click="showDialog")
-.grey
-	div(v-if="hran.rules.length === 0") Создайте первое правило
+.empt(v-if="hran.rules.length === 0") Создайте первое правило
+
+q-expansion-item(v-else v-model="rule.expanded" v-for="(rule, ind) in hran.rules" :key="rule.id" switch-toggle-side).gro.exp
+	template(#header)
+		.row.items-center.justify-between.full-width
+			.title {{ rule.name }}
+
+			div
+				q-btn(flat round icon="mdi-information-outline" size="sm" )
+					q-menu
+						q-card.hrinfo
+							.label Псевдоним:
+							div дфлоывд
+							.label Тип:
+							div дфлывдолф
+							.label Состояние:
+							div дфлывдолф
+				q-btn(flat round icon="mdi-pencil" @click.stop="editRule(rule, ind)" size="sm").q-mr-sm 
+				q-btn(flat round icon="mdi-trash-can-outline" @click.stop="" size="sm") 
+					q-menu
+						q-list
+							q-item(clickable v-close-popup @click="removeRule(ind)").pink
+								q-item-section Удалить&nbsp;правило
+
+// .grey
 	component(:is="draggable" :list="hran.rules"
 		item-key="id"
 		group="rule"
@@ -211,5 +234,16 @@ q-dialog(v-model="showAdd")
 		color: grey;
 		justify-self: end;
 	}
+}
+.empt {
+	padding: 1rem;
+	background: var(--bg-grey);
+	font-size: 0.8rem;
+}
+.gro {
+	margin-bottom: 0.5rem;
+}
+.exp {
+	background: var(--bg-grey);
 }
 </style>
