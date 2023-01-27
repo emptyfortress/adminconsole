@@ -13,10 +13,6 @@ const remove = (ind: number, index: number) => {
 	hran.groups[ind].list.splice(index, 1)
 }
 
-const removeRule = (ind: number, index: number) => {
-	hran.removeRuleFromGroup(ind, index)
-}
-
 const dragging = ref(false)
 
 const addGroup = () => {
@@ -63,9 +59,7 @@ q-expansion-item.exp(v-else v-model="group.expanded" v-for="(group, ind) in hran
 	q-separator
 
 	q-card.dblist
-		.empt(v-if="group.list.length === 0")
-			q-icon(name="mdi-database-outline" size="sm").q-mr-md
-			|Добавьте хранилище в группу.
+		.empt(v-if="group.list.length === 0") Добавьте хранилище в группу, перетащив его сюда.
 		component(:is="draggable" :list="group.list" item-key="id" group="group" ghost-class="ghost" @start="dragging = true" @end="dragging = false").list-group
 			template(#item="{ element, index }")
 				.row.justify-between.items-center
@@ -78,23 +72,6 @@ q-expansion-item.exp(v-else v-model="group.expanded" v-for="(group, ind) in hran
 								q-item(clickable v-close-popup @click="remove(ind, index)").pink
 									q-item-section Удалить
 
-	.sep
-	q-card.dblist
-		.empt(v-if="group.listRule.length === 0")
-			q-icon(name="mdi-gate-nor" size="sm").q-mr-md
-			|Назначьте правило на группу, перетащив его сюда.
-		component(:is="draggable" :list="group.listRule" item-key="id" group="rule" ghost-class="ghost" @start="dragging = true" @end="dragging = false").list-group
-			template(#item="{ element, index }")
-				.row.justify-between.items-center
-					.q-ml-sm
-						q-icon(name="mdi-gate-nor" size="18px" style="vertical-align: top;")
-						span.q-ml-sm {{ element.name }}
-					q-btn(flat round dense icon="mdi-trash-can-outline" size="10px" )
-						q-menu
-							q-list
-								q-item(clickable v-close-popup @click="removeRule(ind, index)").pink
-									q-item-section Удалить
-	.prav Правила применяются сверху вниз
 
 q-dialog(:model-value="showAdd")
 	q-card(style="min-width: 400px;")
