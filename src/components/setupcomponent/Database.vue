@@ -3,13 +3,17 @@
 	q-table(bordered flat :rows='rows' :columns='columns' row-key='name' hide-bottom)
 		template(v-slot:body='props')
 			q-tr(:props='props' :class='{ cool: props.row.def }')
-				q-td(key='psevdo' :props='props')
-					q-icon.q-mr-sm(name='mdi-database' size='16px' v-if='props.row.def')
-					q-icon.q-mr-sm(name='mdi-database-outline' size='16px' v-else)
+				q-td(key="active" :props="props" auto-width)
+					q-icon(name="mdi-circle-slice-8" color="green" v-if="props.row.active")
+					q-icon(name="mdi-circle-slice-8" color="red" v-else)
+				q-td(key="psevdo" :props='props')
+					// q-icon.q-mr-sm(name='mdi-database' size='16px' v-if='props.row.def')
+					// q-icon.q-mr-sm(name='mdi-database-outline' size='16px' v-else)
 					span {{ props.row.psevdo }}
 				q-td(key='server' :props='props') {{ props.row.server }}
 				q-td(key='index' :props='props') {{ props.row.index }}
 				q-td(key='version' :props='props') {{ props.row.version }}
+				q-td(key='cache' :props='props') {{ props.row.cache }}
 				q-td(key='date' :props='props') {{ props.row.date }}
 				q-td.text-center(key='def' :props='props')
 					q-icon(name="mdi-check-bold" size="sm" v-if="props.row.def")
@@ -87,8 +91,14 @@ const assignDef = () => {
 	// store.panels[2].change = true
 }
 
-// const columns = [
 const columns: QTableProps['columns'] = [
+	{
+		name: 'active',
+		required: true,
+		label: '',
+		field: 'active',
+		sortable: false,
+	},
 	{
 		name: 'psevdo',
 		required: true,
@@ -100,33 +110,40 @@ const columns: QTableProps['columns'] = [
 	{ name: 'server', align: 'left', label: 'Сервер', field: 'server', sortable: true },
 	{ name: 'index', align: 'left', label: 'Индексируется', field: 'index', sortable: true },
 	{ name: 'version', align: 'left', label: 'Версия', field: 'version', sortable: true },
+	{ name: 'cache', align: 'left', label: 'Способ кэширования', field: 'cache', sortable: true },
 	{ name: 'date', align: 'left', label: 'Дата создания', field: 'date', sortable: true },
 	{ name: 'def', align: 'center', label: 'По умолчанию', field: 'def', sortable: true },
 	{ name: 'action', align: 'right', label: '', field: '' },
 ]
 const rows = reactive([
 	{
+		active: true,
 		psevdo: 'AGSupport',
 		name: 'AGSupport_1',
 		server: 'Docsvision 1',
 		index: 'yes',
 		version: 4373,
+		cache: 'InMemory',
 		date: '20.10.2021',
 		def: true,
 	},
 	{
+		active: true,
 		psevdo: 'DvTest',
 		name: 'AGSupport_2',
 		server: 'Docsvision 1',
 		index: 'yes',
+		cache: 'Redis',
 		version: 4373,
 		date: '04.11.2022',
 		def: false,
 	},
 	{
+		active: false,
 		psevdo: 'DvShowCase',
 		name: 'AGSupport_3',
 		server: 'Docsvision 1',
+		cache: 'No cache',
 		index: 'yes',
 		version: 4373,
 		date: '09.07.2021',
