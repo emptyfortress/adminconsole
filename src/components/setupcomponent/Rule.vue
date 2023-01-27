@@ -86,27 +86,38 @@ const set = () => {
 	q-btn(flat round icon='mdi-plus-circle' @click="showDialog")
 .empt(v-if="hran.rules.length === 0") Создайте первое правило
 
-q-expansion-item(v-else v-model="rule.expanded" v-for="(rule, ind) in hran.rules" :key="rule.id" switch-toggle-side).gro.exp
-	template(#header)
-		.row.items-center.justify-between.full-width
-			.title {{ rule.name }}
+component(:is="draggable" :list="hran.rules"
+	item-key="id"
+	group="rule"
+	@end="set"
+	ghost-class='ghost'
+	).list-group
+	template(#item="{ element, index }")
+		q-expansion-item(v-model="element.expanded" switch-toggle-side expand-icon-toggle ).gro.exp
+			template(#header)
+				.line
+					.title
+						q-icon(name="mdi-gate-nor" size="sm").q-mr-sm
+						span {{ element.name }}
 
-			div
-				q-btn(flat round icon="mdi-information-outline" size="sm" )
-					q-menu
-						q-card.hrinfo
-							.label Псевдоним:
-							div дфлоывд
-							.label Тип:
-							div дфлывдолф
-							.label Состояние:
-							div дфлывдолф
-				q-btn(flat round icon="mdi-pencil" @click.stop="editRule(rule, ind)" size="sm").q-mr-sm 
-				q-btn(flat round icon="mdi-trash-can-outline" @click.stop="" size="sm") 
-					q-menu
-						q-list
-							q-item(clickable v-close-popup @click="removeRule(ind)").pink
-								q-item-section Удалить&nbsp;правило
+					.bt
+						q-btn(flat round icon="mdi-pencil" @click.stop="edit(element, ind)" size="sm").q-mr-sm 
+						q-btn(flat round icon="mdi-trash-can-outline" @click.stop="" size="sm") 
+							q-menu
+								q-list
+									q-item(clickable v-close-popup @click="remove(ind)").pink
+										q-item-section Удалить&nbsp;правило
+
+					.des
+						|{{element.type}}
+						span.q-mr-sm {{element.ext}}
+						span.q-mr-sm {{element.size1}}
+						span.q-mr-sm {{element.size2}}
+
+			q-separator
+			q-card.dblist
+				.empt(v-if="element.list.length === 0") Добавьте хранилище в группу, перетащив его сюда.
+
 
 // .grey
 	component(:is="draggable" :list="hran.rules"
@@ -121,13 +132,6 @@ q-expansion-item(v-else v-model="rule.expanded" v-for="(rule, ind) in hran.rules
 					q-icon(name="mdi-gate-nor" size="18px" style="vertical-align: top;")
 					span.q-ml-sm {{ element.name }}
 
-				// .desc {{ element.type }}
-				// .desc(v-if="element.type === 'Все'") &nbsp;
-				// .desc(v-if="element.type === 'Файл справочника'") &nbsp;
-				// .desc(v-if="element.type === 'Добавить из сборки'") &nbsp;
-				// .desc(v-if="element.ext") {{ element.ext }}
-				// .desc(v-if="element.size1") {{ element.size1 }} Gb
-				// .desc(v-if="element.size2") {{ element.size2 }} Gb
 
 				.right
 					q-btn(flat round dense icon="mdi-information-outline" size="sm").q-mr-sm
@@ -245,5 +249,29 @@ q-dialog(v-model="showAdd")
 }
 .exp {
 	background: var(--bg-grey);
+}
+:deep(.q-item__section--avatar) {
+	min-width: 0;
+}
+.line {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr auto;
+	justify-items: start;
+	align-items: center;
+	column-gap: 0.5rem;
+	row-gap: 0.5rem;
+	.title {
+		text-transform: uppercase;
+		color: $secondary;
+		font-weight: 600;
+	}
+	.bt {
+		grid-row: 1/3;
+		grid-column: 2/3;
+	}
+	.des {
+		font-size: 0.8rem;
+	}
 }
 </style>

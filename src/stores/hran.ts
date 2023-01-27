@@ -14,7 +14,6 @@ export const useHran = defineStore({
 				switch: false,
 				rule: 'Случайный порядок',
 				list: [],
-				listRule: [],
 			},
 		],
 		rules: [
@@ -23,6 +22,7 @@ export const useHran = defineStore({
 				name: 'Правило 1',
 				type: 'Все',
 				expanded: true,
+				list: [],
 			},
 			{
 				id: 2,
@@ -30,6 +30,7 @@ export const useHran = defineStore({
 				type: 'Размер больше, чем',
 				size1: 300,
 				expanded: false,
+				list: [],
 			},
 			{
 				id: 3,
@@ -37,12 +38,14 @@ export const useHran = defineStore({
 				type: 'Размер меньше, чем',
 				size2: 100,
 				expanded: false,
+				list: [],
 			},
 			{
 				id: 4,
 				name: 'Справочники',
 				type: 'Файл справочника',
 				expanded: false,
+				list: [],
 			},
 		] as Rule[],
 	}),

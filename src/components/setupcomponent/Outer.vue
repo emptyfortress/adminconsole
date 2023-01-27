@@ -21,8 +21,8 @@ import Group from '@/components/setupcomponent/Group.vue'
 import Hran from '@/components/setupcomponent/Hran.vue'
 import Rule from '@/components/setupcomponent/Rule.vue'
 
-const split1 = ref(30)
-const split2 = ref(50)
+const split1 = ref(32)
+const split2 = ref(42)
 </script>
 
 <style scoped lang="scss">
