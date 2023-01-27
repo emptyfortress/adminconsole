@@ -97,15 +97,32 @@ const set = () => {
 				div
 					q-icon(name="mdi-gate-nor" size="18px" style="vertical-align: top;")
 					span.q-ml-sm {{ element.name }}
-				.desc {{ element.type }}
-				.desc(v-if="element.type === 'Все'") &nbsp;
-				.desc(v-if="element.type === 'Файл справочника'") &nbsp;
-				.desc(v-if="element.type === 'Добавить из сборки'") &nbsp;
-				.desc(v-if="element.ext") {{ element.ext }}
-				.desc(v-if="element.size1") {{ element.size1 }} Gb
-				.desc(v-if="element.size2") {{ element.size2 }} Gb
+
+				// .desc {{ element.type }}
+				// .desc(v-if="element.type === 'Все'") &nbsp;
+				// .desc(v-if="element.type === 'Файл справочника'") &nbsp;
+				// .desc(v-if="element.type === 'Добавить из сборки'") &nbsp;
+				// .desc(v-if="element.ext") {{ element.ext }}
+				// .desc(v-if="element.size1") {{ element.size1 }} Gb
+				// .desc(v-if="element.size2") {{ element.size2 }} Gb
 
 				.right
+					q-btn(flat round dense icon="mdi-information-outline" size="sm").q-mr-sm
+						q-menu
+							q-card.hrinfo
+								.label Псевдоним:
+								div {{ element.name}}
+								.label Тип:
+								div {{ element.type}}
+								.label Состояние:
+								div {{ element.state}}
+								.label Размер:
+								div {{ element.size}} Gb
+								.label Раздел:
+								div
+									span(v-if="element.main") основной, 
+									span(v-if="element.arch") архивный, 
+									span(v-if="element.temp") временный
 					q-btn(flat round dense icon="mdi-pencil" size="sm" @click="edit(index)" ).q-mr-sm
 					q-btn(flat round dense icon="mdi-trash-can-outline" size="sm" )
 						q-menu
@@ -167,7 +184,7 @@ q-dialog(v-model="showAdd")
 .tabel {
 	width: 100%;
 	display: grid;
-	grid-template-columns: 1fr 150px 70px 100px;
+	grid-template-columns: 1fr 100px;
 	justify-items: start;
 	column-gap: 1rem;
 	row-gap: 0.2rem;
@@ -179,5 +196,20 @@ q-dialog(v-model="showAdd")
 
 .right {
 	justify-self: end;
+}
+
+.hrinfo {
+	padding: 1rem;
+	display: grid;
+	grid-template-columns: auto 1fr;
+	justify-items: start;
+	align-items: flex-end;
+	column-gap: 1rem;
+	row-gap: 3px;
+
+	.label {
+		color: grey;
+		justify-self: end;
+	}
 }
 </style>
