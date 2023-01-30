@@ -11,11 +11,10 @@ export const useHran = defineStore({
 				id: 0,
 				name: 'Common',
 				expanded: true,
-				switch: false,
-				rule: 'Случайный порядок',
 				list: [],
 			},
-		],
+		] as Group[],
+
 		rules: [
 			{
 				id: 1,
@@ -87,16 +86,17 @@ export const useHran = defineStore({
 			tabs.setTabMod(2)
 		},
 		addRule(tmp: Rule) {
+			console.log(tmp)
 			const tabs = useTabs()
 			this.rules.push(tmp)
 			tabs.setTabMod(2)
 		},
-		removeRuleFromGroup(ind: number, index: number) {
-			const tabs = useTabs()
-			const temp = this.groups[ind].listRule[index]
-			this.groups[ind].listRule.splice(index, 1)
-			this.rules.push(temp)
-			tabs.setTabMod(2)
-		},
+		// removeRuleFromGroup(ind: number, index: number) {
+		// 	const tabs = useTabs()
+		// 	const temp = this.groups[ind].listRule[index]
+		// 	this.groups[ind].listRule.splice(index, 1)
+		// 	this.rules.push(temp)
+		// 	tabs.setTabMod(2)
+		// },
 	},
 })

@@ -34,10 +34,10 @@ const add = () => {
 	tmp.ext = ext.value
 	tmp.size1 = size1.value
 	tmp.size2 = size2.value
-	if (currentItemIndex.value !== null) {
-		hran.rules[currentItemIndex.value] = tmp
-	} else {
+	if (currentItemIndex.value === null) {
 		hran.addRule(tmp)
+	} else {
+		hran.rules[currentItemIndex.value] = tmp
 	}
 	tabs.setTabMod(2)
 	showAdd.value = false
@@ -92,8 +92,8 @@ component(:is="draggable" :list="hran.rules"
 	@end="set"
 	ghost-class='ghost'
 	).list-group
-	template(#item="{ element, index }")
-		q-expansion-item(v-model="element.expanded" switch-toggle-side expand-icon-toggle ).gro.exp
+	template(#item="{ element, ind }")
+		q-expansion-item(v-model="element.expanded" switch-toggle-side expand-icon-toggle).gro.exp
 			template(#header)
 				.line
 					.title
@@ -101,61 +101,54 @@ component(:is="draggable" :list="hran.rules"
 						span {{ element.name }}
 
 					.bt
-						q-btn(flat round icon="mdi-pencil" @click.stop="edit(element, ind)" size="sm").q-mr-sm 
-						q-btn(flat round icon="mdi-trash-can-outline" @click.stop="" size="sm") 
+						q-btn(flat round icon="mdi-pencil" @click.stop="edit(element, ind)" size="sm").q-mr-sm
+						q-btn(flat round icon="mdi-trash-can-outline" @click.stop="" size="sm")
 							q-menu
 								q-list
 									q-item(clickable v-close-popup @click="remove(ind)").pink
 										q-item-section Удалить&nbsp;правило
 
 					.des
+						q-icon(name="mdi-information").q-mr-sm
 						|{{element.type}}
-						span.q-mr-sm {{element.ext}}
-						span.q-mr-sm {{element.size1}}
-						span.q-mr-sm {{element.size2}}
+						span.q-mr-xs {{element.ext}}
+						span.q-mr-xs {{element.size1}}
+						span.q-mr-xs {{element.size2}}
+						span.q-mr-xs(v-if="element.size1 || element.size2") Gb
 
-			q-separator
-			q-card.dblist
-				.empt(v-if="element.list.length === 0") Добавьте хранилище в группу, перетащив его сюда.
-
-
-// .grey
-	component(:is="draggable" :list="hran.rules"
-		item-key="id"
-		group="rule"
-		@end="set"
-		ghost-class='ghost'
-		).list-group
-		template(#item="{ element, index }")
-			.tabel
-				div
-					q-icon(name="mdi-gate-nor" size="18px" style="vertical-align: top;")
-					span.q-ml-sm {{ element.name }}
-
-
-				.right
-					q-btn(flat round dense icon="mdi-information-outline" size="sm").q-mr-sm
-						q-menu
-							q-card.hrinfo
-								.label Псевдоним:
-								div {{ element.name}}
-								.label Тип:
-								div {{ element.type}}
-								.label Состояние:
-								div {{ element.state}}
-								.label Размер:
-								div {{ element.size}} Gb
-								.label Раздел:
-								div
-									span(v-if="element.main") основной, 
-									span(v-if="element.arch") архивный, 
-									span(v-if="element.temp") временный
-					q-btn(flat round dense icon="mdi-pencil" size="sm" @click="edit(index)" ).q-mr-sm
-					q-btn(flat round dense icon="mdi-trash-can-outline" size="sm" )
-						q-menu
-							q-list
-								q-item(clickable v-close-popup @click="remove(index)").pink
-									q-item-section Удалить
+// component(:is="draggable" :list="hran.rules"
+// 	item-key="id"
+// 	group="rule"
+// 	@end="set"
+// 	ghost-class='ghost'
+// 	).list-group
+// 	template(#item="{ element, ind }")
+// 		q-expansion-item(v-model="element.expanded" switch-toggle-side expand-icon-toggle ).gro.exp
+// 			template(#header)
+// 				.line
+// 					.title
+// 						q-icon(name="mdi-gate-nor" size="sm").q-mr-sm
+// 						span {{ element.name }}
+//
+// 					.bt
+// 						q-btn(flat round icon="mdi-pencil" @click.stop="edit(element, ind)" size="sm").q-mr-sm
+// 						q-btn(flat round icon="mdi-trash-can-outline" @click.stop="" size="sm")
+// 							q-menu
+// 								q-list
+// 									q-item(clickable v-close-popup @click="remove(ind)").pink
+// 										q-item-section Удалить&nbsp;правило
+//
+// 					.des
+// 						q-icon(name="mdi-information").q-mr-sm
+// 						|{{element.type}}
+// 						span.q-mr-xs {{element.ext}}
+// 						span.q-mr-xs {{element.size1}}
+// 						span.q-mr-xs {{element.size2}}
+// 						span.q-mr-xs(v-if="element.size1 || element.size2") Gb
+//
+// 			q-separator
+// 			q-card.dblist
+// 				.empt(v-if="element.list.length === 0") Добавьте хранилище в группу, перетащив его сюда.
 
 
 q-dialog(v-model="showAdd")
