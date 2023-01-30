@@ -11,6 +11,7 @@ export const useHran = defineStore({
 				id: 0,
 				name: 'Common',
 				expanded: true,
+				rule: 'Самое заполненное хранилище',
 				list: [],
 			},
 		] as Group[],
@@ -70,10 +71,11 @@ export const useHran = defineStore({
 			this.groups.push(temp)
 			tabs.setTabMod(2)
 		},
+
 		editGroup(ind: number, name: string, rule: string) {
 			const tabs = useTabs()
 			this.groups[ind].name = name
-			// this.groups[ind].list = rule
+			this.groups[ind].rule = rule
 			tabs.setTabMod(2)
 		},
 		removeGroup(ind: number) {

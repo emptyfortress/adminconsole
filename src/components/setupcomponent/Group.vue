@@ -26,12 +26,18 @@ const addGroup = () => {
 	newGroupRule.value = ''
 	currentGroupIndex.value = null
 }
+const addNew = () => {
+	newGroupName.value = ''
+	newGroupRule.value = ''
+	currentGroupIndex.value = null
+	showAdd.value = true
+}
 const options = ['Самое заполненное хранилище', 'Самое свободное хранилище', 'Случайный порядок']
 
 const removeGroup = (ind: number) => {
 	hran.removeGroup(ind)
 }
-const editGroup = (group: any, index: number) => {
+const editGroup = (group: Group, index: number) => {
 	newGroupName.value = group.name
 	newGroupRule.value = group.rule
 	currentGroupIndex.value = index
@@ -42,7 +48,7 @@ const editGroup = (group: any, index: number) => {
 <template lang="pug">
 .row.items-center.justify-between
 	.zg Группы хранилищ ({{ hran.groups.length }})
-	q-btn(flat round icon="mdi-plus-circle" @click="showAdd = true")
+	q-btn(flat round icon="mdi-plus-circle" @click="addNew")
 .empt(v-if="hran.groups.length === 0") Создайте первую группу
 
 component(:is="draggable"
@@ -90,7 +96,7 @@ q-dialog(:model-value="showAdd")
 	q-card(style="min-width: 400px;")
 		q-form(@submit="addGroup")
 			q-card-section.row.items-center.q-pb-none
-				.text-h6 Новая группа
+				.text-h6 Группа хранилищ
 				q-space
 				q-btn(icon="mdi-close" flat round dense v-close-popup)
 

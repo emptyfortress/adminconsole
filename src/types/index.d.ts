@@ -13,6 +13,7 @@ interface Group {
 	id: number
 	name: string
 	expanded?: boolean
+	rule: string
 	list: Hran[]
 }
 
