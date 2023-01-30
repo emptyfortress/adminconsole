@@ -50,9 +50,13 @@ const add = () => {
 	size2.value = null
 }
 
-const remove = (index: number) => {
+const removeRule = (index: number) => {
 	hran.removeRule(index)
 	tabs.setTabMod(2)
+}
+
+const clearGroup = (index, ind) => {
+	hran.clearGroup(index, ind)
 }
 
 const showDialog = () => {
@@ -106,7 +110,7 @@ component(v-else :is="draggable" :list="hran.rules"
 						q-btn(flat round icon="mdi-trash-can-outline" @click.stop="" size="sm")
 							q-menu
 								q-list
-									q-item(clickable v-close-popup @click="remove(index)").pink
+									q-item(clickable v-close-popup @click="removeRule(index)").pink
 										q-item-section Удалить&nbsp;правило
 
 					.des
@@ -119,17 +123,17 @@ component(v-else :is="draggable" :list="hran.rules"
 
 			div
 				q-separator
-				.empt(v-if="element.gr.length == 0") Добавьте хранилище в группу, перетащив его сюда.
+				.empt(v-if="element.gr.length == 0") Добавьте группу в правило, перетащив ее сюда.
 				component(:is="draggable" :list="element.gr" item-key="id" group="last" ghost-class="ghost" @start="dragging = true" @end="dragging = false").list-group
-					template(#item="{ element, index }")
+					template(#item="{ element: el, index: ind }")
 						.row.justify-between.items-center
 							.q-ml-sm
-								q-icon(name="mdi-database-outline" size="18px" style="vertical-align: top;")
-								span.q-ml-sm {{ element.name }}
+								q-icon(name="mdi-server" size="18px" style="vertical-align: top;")
+								span.q-ml-sm {{ el.name }}
 							q-btn(flat round dense icon="mdi-close" size="10px" )
 								q-menu
 									q-list
-										q-item(clickable v-close-popup @click="remove(ind, index)").orange
+										q-item(clickable v-close-popup @click="clearGroup(index, ind)").orange
 											q-item-section Очистить
 
 

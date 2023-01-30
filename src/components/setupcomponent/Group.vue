@@ -19,7 +19,7 @@ const addGroup = () => {
 	if (currentGroupIndex.value == null) {
 		hran.addGroup(newGroupName.value, newGroupRule.value)
 	} else {
-		hran.editGroup(currentGroupIndex.value, newGroupName.value, newGroupRule.value)
+		hran.editGroup(currentGroupIndex.value, newGroupName.value)
 	}
 	showAdd.value = false
 	newGroupName.value = ''
@@ -43,7 +43,7 @@ const editGroup = (group: any, index: number) => {
 .row.items-center.justify-between
 	.zg Группы хранилищ ({{ hran.groups.length }})
 	q-btn(flat round icon="mdi-plus-circle" @click="showAdd = true")
-// .empt(v-if="hran.groups.length === 0") Создайте первую группу
+.empt(v-if="hran.groups.length === 0") Создайте первую группу
 
 component(:is="draggable"
 	:list="hran.groups" item-key="id"
@@ -52,7 +52,9 @@ component(:is="draggable"
 		q-expansion-item(v-model="element.expanded" switch-toggle-side).gro.exp
 			template(#header)
 				.row.items-center.justify-between.full-width
-					.title {{ element.name }}
+					.title
+						q-icon(name="mdi-server").q-mr-sm
+						span {{ element.name }}
 
 					div
 						q-btn(flat round icon="mdi-pencil" @click.stop="editGroup(element, index)" size="sm") 
@@ -72,15 +74,15 @@ component(:is="draggable"
 					ghost-class="ghost"
 					@start="dragging = true"
 					@end="dragging = false").list-group
-					template(#item="{ element, index }")
+					template(#item="{ element: el, index: ind }")
 						.row.justify-between.items-center
 							.q-ml-sm
 								q-icon(name="mdi-database-outline" size="18px" style="vertical-align: top;")
-								span.q-ml-sm {{ element.name }}
+								span.q-ml-sm {{ el.name }}
 							q-btn(flat round dense icon="mdi-close" size="10px" )
 								q-menu
 									q-list
-										q-item(clickable v-close-popup @click="remove(ind, index)").orange
+										q-item(clickable v-close-popup @click="remove(index, ind)").orange
 											q-item-section Очистить
 
 
@@ -141,9 +143,7 @@ q-dialog(:model-value="showAdd")
 }
 
 .title {
-	background: $secondary;
-	color: white;
-	padding: 2px 10px;
+	color: $secondary;
 	font-weight: 600;
 	text-transform: uppercase;
 }
