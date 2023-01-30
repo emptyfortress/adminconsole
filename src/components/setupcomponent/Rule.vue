@@ -120,6 +120,17 @@ component(v-else :is="draggable" :list="hran.rules"
 			div
 				q-separator
 				.empt(v-if="element.gr.length == 0") Добавьте хранилище в группу, перетащив его сюда.
+				component(:is="draggable" :list="element.gr" item-key="id" group="last" ghost-class="ghost" @start="dragging = true" @end="dragging = false").list-group
+					template(#item="{ element, index }")
+						.row.justify-between.items-center
+							.q-ml-sm
+								q-icon(name="mdi-database-outline" size="18px" style="vertical-align: top;")
+								span.q-ml-sm {{ element.name }}
+							q-btn(flat round dense icon="mdi-close" size="10px" )
+								q-menu
+									q-list
+										q-item(clickable v-close-popup @click="remove(ind, index)").orange
+											q-item-section Очистить
 
 
 q-dialog(v-model="showAdd")

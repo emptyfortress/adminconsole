@@ -43,35 +43,45 @@ const editGroup = (group: any, index: number) => {
 .row.items-center.justify-between
 	.zg Группы хранилищ ({{ hran.groups.length }})
 	q-btn(flat round icon="mdi-plus-circle" @click="showAdd = true")
-.empt(v-if="hran.groups.length === 0") Создайте первую группу
+// .empt(v-if="hran.groups.length === 0") Создайте первую группу
 
-q-expansion-item(v-else v-model="group.expanded" v-for="(group, ind) in hran.groups" :key="group.id" switch-toggle-side).gro.exp
-	template(#header)
-		.row.items-center.justify-between.full-width
-			.title {{ group.name }}
+component(:is="draggable"
+	:list="hran.groups" item-key="id"
+	:group="{ name: 'last', pull: 'clone', put: false }")
+	template(#item="{ element, index }")
+		q-expansion-item(v-model="element.expanded" switch-toggle-side).gro.exp
+			template(#header)
+				.row.items-center.justify-between.full-width
+					.title {{ element.name }}
 
-			div
-				q-btn(flat round icon="mdi-pencil" @click.stop="editGroup(group, ind)" size="sm") 
-				q-btn(flat round icon="mdi-trash-can-outline" @click.stop="" size="sm") 
-					q-menu
-						q-list
-							q-item(clickable v-close-popup @click="removeGroup(ind)").pink
-								q-item-section Удалить&nbsp;группу
-	q-separator
+					div
+						q-btn(flat round icon="mdi-pencil" @click.stop="editGroup(element, index)" size="sm") 
+						q-btn(flat round icon="mdi-trash-can-outline" @click.stop="" size="sm") 
+							q-menu
+								q-list
+									q-item(clickable v-close-popup @click="removeGroup(index)").pink
+										q-item-section Удалить&nbsp;группу
+			q-separator
 
-	q-card.dblist
-		.empt(v-if="group.list.length === 0") Добавьте хранилище в группу, перетащив его сюда.
-		component(:is="draggable" :list="group.list" item-key="id" group="group" ghost-class="ghost" @start="dragging = true" @end="dragging = false").list-group
-			template(#item="{ element, index }")
-				.row.justify-between.items-center
-					.q-ml-sm
-						q-icon(name="mdi-database-outline" size="18px" style="vertical-align: top;")
-						span.q-ml-sm {{ element.name }}
-					q-btn(flat round dense icon="mdi-close" size="10px" )
-						q-menu
-							q-list
-								q-item(clickable v-close-popup @click="remove(ind, index)").orange
-									q-item-section Очистить
+			q-card.dblist
+				.empt(v-if="element.list.length === 0") Добавьте хранилище в группу, перетащив его сюда.
+				component(:is="draggable"
+					:list="element.list"
+					item-key="id"
+					group="group"
+					ghost-class="ghost"
+					@start="dragging = true"
+					@end="dragging = false").list-group
+					template(#item="{ element, index }")
+						.row.justify-between.items-center
+							.q-ml-sm
+								q-icon(name="mdi-database-outline" size="18px" style="vertical-align: top;")
+								span.q-ml-sm {{ element.name }}
+							q-btn(flat round dense icon="mdi-close" size="10px" )
+								q-menu
+									q-list
+										q-item(clickable v-close-popup @click="remove(ind, index)").orange
+											q-item-section Очистить
 
 
 q-dialog(:model-value="showAdd")
