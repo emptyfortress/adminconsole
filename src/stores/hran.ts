@@ -21,7 +21,7 @@ export const useHran = defineStore({
 				name: 'Правило 1',
 				type: 'Все',
 				expanded: true,
-				list: [],
+				gr: [],
 			},
 			{
 				id: 2,
@@ -29,7 +29,7 @@ export const useHran = defineStore({
 				type: 'Размер больше, чем',
 				size1: 300,
 				expanded: false,
-				list: [],
+				gr: [],
 			},
 			{
 				id: 3,
@@ -37,16 +37,17 @@ export const useHran = defineStore({
 				type: 'Размер меньше, чем',
 				size2: 100,
 				expanded: false,
-				list: [],
+				gr: [],
 			},
 			{
 				id: 4,
 				name: 'Справочники',
 				type: 'Файл справочника',
 				expanded: false,
-				list: [],
+				gr: [],
 			},
 		] as Rule[],
+		currentRule: null,
 	}),
 	getters: {},
 	actions: {
@@ -86,17 +87,13 @@ export const useHran = defineStore({
 			tabs.setTabMod(2)
 		},
 		addRule(tmp: Rule) {
-			console.log(tmp)
 			const tabs = useTabs()
 			this.rules.push(tmp)
 			tabs.setTabMod(2)
 		},
-		// removeRuleFromGroup(ind: number, index: number) {
-		// 	const tabs = useTabs()
-		// 	const temp = this.groups[ind].listRule[index]
-		// 	this.groups[ind].listRule.splice(index, 1)
-		// 	this.rules.push(temp)
-		// 	tabs.setTabMod(2)
-		// },
+		updateRule(tmp: Rule) {
+			let ind = this.rules.findIndex(this.currentRule)
+			this.rules[ind] = tmp
+		},
 	},
 })

@@ -6,7 +6,7 @@ interface Rule {
 	size1?: number
 	size2?: number
 	expanded?: boolean
-	list: Group[]
+	gr: Group[]
 }
 
 interface Group {
