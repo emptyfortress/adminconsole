@@ -106,12 +106,12 @@ component(v-else :is="draggable" :list="hran.rules"
 						q-btn(flat round icon="mdi-trash-can-outline" @click.stop="" size="sm")
 							q-menu
 								q-list
-									q-item(clickable v-close-popup @click="remove(ind)").pink
+									q-item(clickable v-close-popup @click="remove(index)").pink
 										q-item-section Удалить&nbsp;правило
 
 					.des
 						q-icon(name="mdi-information-outline" size="14px").q-mr-sm
-						|{{element.type}}
+						span.q-mr-xs {{element.type}}
 						span.q-mr-xs {{element.ext}}
 						span.q-mr-xs {{element.size1}}
 						span.q-mr-xs {{element.size2}}
