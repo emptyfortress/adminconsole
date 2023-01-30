@@ -34,6 +34,7 @@ const add = () => {
 	tmp.ext = ext.value
 	tmp.size1 = size1.value
 	tmp.size2 = size2.value
+	tmp.gr = []
 	if (currentItemIndex.value === null) {
 		hran.addRule(tmp)
 	} else {
@@ -86,13 +87,13 @@ const set = () => {
 	q-btn(flat round icon='mdi-plus-circle' @click="showDialog")
 .empt(v-if="hran.rules.length === 0") Создайте первое правило
 
-component(:is="draggable" :list="hran.rules"
+component(v-else :is="draggable" :list="hran.rules"
 	item-key="id"
 	group="rule"
 	@end="set"
 	ghost-class='ghost'
 	).list-group
-	template(#item="{ element, ind }")
+	template(#item="{ element, index }")
 		q-expansion-item(v-model="element.expanded" switch-toggle-side expand-icon-toggle).gro.exp
 			template(#header)
 				.line
@@ -101,7 +102,7 @@ component(:is="draggable" :list="hran.rules"
 						span {{ element.name }}
 
 					.bt
-						q-btn(flat round icon="mdi-pencil" @click.stop="edit(element, ind)" size="sm").q-mr-sm
+						q-btn(flat round icon="mdi-pencil" @click.stop="edit(index)" size="sm").q-mr-sm
 						q-btn(flat round icon="mdi-trash-can-outline" @click.stop="" size="sm")
 							q-menu
 								q-list
@@ -118,14 +119,15 @@ component(:is="draggable" :list="hran.rules"
 
 			div
 				q-separator
-				.empt(v-if="element.gr.length === 0") Добавьте хранилище в группу, перетащив его сюда.
+				.empt(v-if="element.gr.length == 0") Добавьте хранилище в группу, перетащив его сюда.
 
 
 q-dialog(v-model="showAdd")
 	q-card(style="min-width: 500px;")
 		q-form(@submit="add")
 			q-card-section.row.items-center.q-pb-none
-				.text-h6 Новое правило
+				.text-h6(v-if="currentItemIndex == null") Новое правило
+				.text-h6(v-else) Редактировать
 				q-space
 				q-btn(icon="mdi-close" flat round dense v-close-popup)
 
