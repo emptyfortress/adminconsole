@@ -20,6 +20,7 @@ const options = [
 	'Добавить из сборки',
 ]
 
+const dragging = ref(false)
 const ext = ref()
 const size1 = ref()
 const size2 = ref()
@@ -55,7 +56,7 @@ const removeRule = (index: number) => {
 	tabs.setTabMod(2)
 }
 
-const clearGroup = (index, ind) => {
+const clearGroup = (index: number, ind: number) => {
 	hran.clearGroup(index, ind)
 }
 

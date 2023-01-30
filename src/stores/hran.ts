@@ -97,8 +97,10 @@ export const useHran = defineStore({
 			tabs.setTabMod(2)
 		},
 		updateRule(tmp: Rule) {
-			let ind = this.rules.findIndex(this.currentRule)
-			this.rules[ind] = tmp
+			if (this.currentRule) {
+				let ind = this.rules.findIndex(this.currentRule)
+				this.rules[ind] = tmp
+			}
 		},
 	},
 })
