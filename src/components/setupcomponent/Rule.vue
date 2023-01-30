@@ -87,9 +87,15 @@ const set = () => {
 </script>
 
 <template lang="pug">
-.row.items-center.justify-between
+.row.items-baseline.justify-between
 	.zg Правила помещения в хранилище ({{ hran.rules.length }})
-	q-btn(flat round icon='mdi-plus-circle' @click="showDialog")
+	div
+		q-btn(flat round icon='mdi-information')
+			q-menu
+				ol
+					li Правила применяются последовательно, сверху вниз.
+					li Если правило не содержит групп хранилищ, оно просто пропускается.
+		q-btn(flat round icon='mdi-plus-circle' @click="showDialog")
 .empt(v-if="hran.rules.length === 0") Создайте первое правило
 
 component(v-else :is="draggable" :list="hran.rules"
