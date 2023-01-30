@@ -109,46 +109,16 @@ component(:is="draggable" :list="hran.rules"
 										q-item-section Удалить&nbsp;правило
 
 					.des
-						q-icon(name="mdi-information").q-mr-sm
+						q-icon(name="mdi-information-outline" size="14px").q-mr-sm
 						|{{element.type}}
 						span.q-mr-xs {{element.ext}}
 						span.q-mr-xs {{element.size1}}
 						span.q-mr-xs {{element.size2}}
 						span.q-mr-xs(v-if="element.size1 || element.size2") Gb
 
-// component(:is="draggable" :list="hran.rules"
-// 	item-key="id"
-// 	group="rule"
-// 	@end="set"
-// 	ghost-class='ghost'
-// 	).list-group
-// 	template(#item="{ element, ind }")
-// 		q-expansion-item(v-model="element.expanded" switch-toggle-side expand-icon-toggle ).gro.exp
-// 			template(#header)
-// 				.line
-// 					.title
-// 						q-icon(name="mdi-gate-nor" size="sm").q-mr-sm
-// 						span {{ element.name }}
-//
-// 					.bt
-// 						q-btn(flat round icon="mdi-pencil" @click.stop="edit(element, ind)" size="sm").q-mr-sm
-// 						q-btn(flat round icon="mdi-trash-can-outline" @click.stop="" size="sm")
-// 							q-menu
-// 								q-list
-// 									q-item(clickable v-close-popup @click="remove(ind)").pink
-// 										q-item-section Удалить&nbsp;правило
-//
-// 					.des
-// 						q-icon(name="mdi-information").q-mr-sm
-// 						|{{element.type}}
-// 						span.q-mr-xs {{element.ext}}
-// 						span.q-mr-xs {{element.size1}}
-// 						span.q-mr-xs {{element.size2}}
-// 						span.q-mr-xs(v-if="element.size1 || element.size2") Gb
-//
-// 			q-separator
-// 			q-card.dblist
-// 				.empt(v-if="element.list.length === 0") Добавьте хранилище в группу, перетащив его сюда.
+			div
+				q-separator
+				.empt(v-if="element.gr.length === 0") Добавьте хранилище в группу, перетащив его сюда.
 
 
 q-dialog(v-model="showAdd")
@@ -248,7 +218,7 @@ q-dialog(v-model="showAdd")
 	justify-items: start;
 	align-items: center;
 	column-gap: 0.5rem;
-	row-gap: 0.5rem;
+	row-gap: 3px;
 	.title {
 		text-transform: uppercase;
 		color: $secondary;
