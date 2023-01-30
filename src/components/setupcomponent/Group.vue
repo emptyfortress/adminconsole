@@ -67,11 +67,11 @@ q-expansion-item(v-else v-model="group.expanded" v-for="(group, ind) in hran.gro
 					.q-ml-sm
 						q-icon(name="mdi-database-outline" size="18px" style="vertical-align: top;")
 						span.q-ml-sm {{ element.name }}
-					q-btn(flat round dense icon="mdi-trash-can-outline" size="10px" )
+					q-btn(flat round dense icon="mdi-close" size="10px" )
 						q-menu
 							q-list
-								q-item(clickable v-close-popup @click="remove(ind, index)").pink
-									q-item-section Удалить
+								q-item(clickable v-close-popup @click="remove(ind, index)").orange
+									q-item-section Очистить
 
 
 q-dialog(:model-value="showAdd")
@@ -139,12 +139,6 @@ q-dialog(:model-value="showAdd")
 }
 :deep(.q-item__section--avatar) {
 	min-width: 0;
-}
-
-.empt {
-	padding: 1rem;
-	background: var(--bg-grey);
-	font-size: 0.8rem;
 }
 
 .prav {

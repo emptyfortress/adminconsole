@@ -239,11 +239,6 @@ q-dialog(v-model="showAdd")
 		justify-self: end;
 	}
 }
-.empt {
-	padding: 1rem;
-	background: var(--bg-grey);
-	font-size: 0.8rem;
-}
 .gro {
 	margin-bottom: 0.5rem;
 }
