@@ -19,7 +19,7 @@ const addGroup = () => {
 	if (currentGroupIndex.value == null) {
 		hran.addGroup(newGroupName.value, newGroupRule.value)
 	} else {
-		hran.editGroup(currentGroupIndex.value, newGroupName.value)
+		hran.editGroup(currentGroupIndex.value, newGroupName.value, newGroupRule.value)
 	}
 	showAdd.value = false
 	newGroupName.value = ''
@@ -109,7 +109,7 @@ q-dialog(:model-value="showAdd")
 			q-card-section
 				q-card-actions(align="right")
 					q-btn(flat color="primary" label="Отмена" @click="showAdd = false")
-					q-btn(unelevated color="primary" label="Добавить" type="submit")
+					q-btn(unelevated color="primary" label="Сохранить" type="submit")
 		
 </template>
 

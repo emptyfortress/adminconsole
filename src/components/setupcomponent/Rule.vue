@@ -141,8 +141,7 @@ q-dialog(v-model="showAdd")
 	q-card(style="min-width: 500px;")
 		q-form(@submit="add")
 			q-card-section.row.items-center.q-pb-none
-				.text-h6(v-if="currentItemIndex == null") Новое правило
-				.text-h6(v-else) Редактировать
+				.text-h6 Правило
 				q-space
 				q-btn(icon="mdi-close" flat round dense v-close-popup)
 
@@ -157,7 +156,7 @@ q-dialog(v-model="showAdd")
 			q-card-section
 				q-card-actions(align="right")
 					q-btn(flat color='primary' label='Отмена' @click='showAdd = false')
-					q-btn(unelevated color='primary' label='Добавить' type="submit")
+					q-btn(unelevated color='primary' label='Сохранить' type="submit")
 </template>
 
 <style scoped lang="scss">
