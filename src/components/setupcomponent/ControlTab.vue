@@ -6,9 +6,11 @@ const day = ref(0)
 const hour = ref(1)
 const hour1 = ref(10)
 const hour2 = ref(10)
+const hour3 = ref(600)
 const rasp = ref('one')
 const week = ref('понедельник')
 const options = ['понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота', 'воскресенье']
+const path = ref('')
 </script>
 
 <template lang="pug">
@@ -61,7 +63,17 @@ const options = ['понедельник', 'вторник', 'среда', 'че
 
 	br
 	.arch
-		.title Управление:
+		.title Сценарий обслуживания
+		.column
+			.check
+				q-input(dense v-model="path" label="Путь к файлу сценария").cs
+				q-btn(unelevated round icon="mdi-dots-horizontal" dense).wh 
+			.check
+				div Таймаут
+				q-input(v-model="hour3" type="number" dense).smm
+				div сек.
+				q-btn(unelevated color="secondary" label="Выполнить" size="sm").q-ml-xl
+		
 </template>
 
 <style scoped lang="scss">
@@ -84,7 +96,7 @@ const options = ['понедельник', 'вторник', 'среда', 'че
 	}
 }
 .smm {
-	width: 50px;
+	width: 70px;
 	:deep(.q-field__native) {
 		text-align: center;
 		font-size: 1.1rem;
@@ -110,5 +122,11 @@ label {
 	width: 220px;
 	margin-top: 1rem;
 	margin-left: 1.2rem;
+}
+.cs {
+	width: 350px;
+}
+.wh .q-icon {
+	color: red;
 }
 </style>
