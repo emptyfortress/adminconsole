@@ -63,7 +63,7 @@ const emit = defineEmits(['change', 'haserror', 'noerror'])
 
 const change = ref(false)
 const bdRow = ref()
-const bdTab = ref('prop')
+const bdTab = ref('control')
 const master = ref(false)
 const edit = ref(false)
 const changename = ref('')

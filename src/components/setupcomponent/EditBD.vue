@@ -69,7 +69,7 @@ const props = defineProps({
 	},
 })
 
-const mytab = ref('outer')
+const mytab = ref('control')
 
 onUpdated(() => {
 	mytab.value = props.tab
