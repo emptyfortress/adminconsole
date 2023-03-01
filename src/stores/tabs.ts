@@ -12,7 +12,9 @@ export const useTabs = defineStore({
 			{ id: 5, field: 'cache', name: 'cache', label: 'Кэширование', modified: false },
 		],
 	}),
+
 	getters: {},
+
 	actions: {
 		setTabMod(n: number) {
 			this.tabs[n].modified = true
