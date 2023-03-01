@@ -1,67 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const hran = ref(false)
-const day = ref(0)
-const hour = ref(1)
-const hour1 = ref(10)
-const hour2 = ref(10)
 const hour3 = ref(600)
-const rasp = ref('one')
-const week = ref('понедельник')
-const options = ['понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота', 'воскресенье']
 const path = ref('')
 </script>
 
 <template lang="pug">
 .all
-	.arch
-		.title Корзина
-		.column
-			.check
-				q-checkbox(v-model="hran")
-				div Не хранить карточки более
-				q-input(dense type="number" v-model="day").smm
-				div дней. (0 - хранить всегда)
-			br
-			div Очищать корзину:
-				q-list.full-width
-					q-item(tag="label" dense)
-						q-item-section(avatar)
-							q-radio(v-model="rasp" val="one")
-						q-item-section
-							.row.justify-start.items-center.q-gutter-sm
-								div Каждые
-								q-input(v-model="hour" type="number" dense).smm
-								div часов
-					q-item(tag="label" dense)
-						q-item-section(avatar)
-							q-radio(v-model="rasp" val="two")
-						q-item-section
-							.row.justify-start.items-center.q-gutter-sm
-								div Ежедневно в
-								q-input(v-model="hour1" type="number" dense).smm
-								div часов
-
-					q-item(tag="label" dense)
-						q-item-section(avatar)
-							q-radio(v-model="rasp" val="three")
-						q-item-section
-							.row.justify-start.items-center.q-gutter-sm
-								div Раз в неделю в
-								q-select(v-model="week" dense :options="options").sma
-								div в
-								q-input(v-model="hour2" type="number" dense).smm
-								div часов
-
-					q-item(tag="label" dense)
-						q-item-section(avatar)
-							q-radio(v-model="rasp" val="four")
-						q-item-section Не очищать корзину автоматически
-
-			q-btn(unelevated color="primary" label="Очистить немедленно").bt
-
-	br
 	.arch
 		.title Сценарий обслуживания
 		.column
@@ -74,6 +19,8 @@ const path = ref('')
 				div сек.
 				q-btn(unelevated color="secondary" label="Выполнить" size="sm").q-ml-xl
 		
+		div
+		q-btn(unelevated color="secondary" label="Пересоздать задания БД" size="sm").q-mt-xl
 </template>
 
 <style scoped lang="scss">
