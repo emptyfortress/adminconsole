@@ -59,7 +59,7 @@ const options = ['понедельник', 'вторник', 'среда', 'че
 	br
 	.arch
 		.title Управление:
-		q-btn(unelevated color="primary" label="Архивировать сейчас").q-ml-md
+		q-btn(unelevated color="primary" label="Выполнить архивирование сейчас").q-ml-md
 </template>
 
 <style scoped lang="scss">

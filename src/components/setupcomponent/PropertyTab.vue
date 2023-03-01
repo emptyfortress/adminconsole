@@ -25,6 +25,11 @@ const props = defineProps({
 			.val(contenteditable) {{props.bd.date}}
 			label Используется по умолчанию:
 			q-checkbox(v-model="props.bd.def" dense)
+	br
+	.arch
+		.title Таблицы
+		.proper
+			q-btn(unelevated color="primary" label="Местоположение служебных таблиц")
 </template>
 
 <style scoped lang="scss">

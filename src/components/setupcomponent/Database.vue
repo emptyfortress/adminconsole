@@ -22,7 +22,7 @@
 					q-btn(:props="props" round flat icon='mdi-cog' size='sm')
 						q-menu(:props="props")
 							q-list(:props="props")
-								q-item(:props="props" clickable v-for="item in tabs" :key="item.id" @click="editBD(props.row, item.field)" v-close-popup)
+								q-item(:props="props" clickable v-for="item in tabs.tabs" :key="item.id" @click="editBD(props.row, item.field)" v-close-popup)
 									q-item-section(side)
 										q-icon(name="mdi-database-cog-outline")
 									q-item-section {{ item.label }}
@@ -33,7 +33,7 @@
 									q-item-section Удалить
 			q-menu(touch-position context-menu)
 				q-list(dense)
-					q-item(clickable v-for="item in tabs" :key="item.id" @click="editBD(props.row, item.field)" v-close-popup)
+					q-item(clickable v-for="item in tabs.tabs" :key="item.id" @click="editBD(props.row, item.field)" v-close-popup)
 						q-item-section(side)
 							q-icon(name="mdi-database-cog-outline" size="16px")
 						q-item-section {{ item.label }}
@@ -58,7 +58,9 @@ import ChangeDialog from '@/components/setupcomponent/ChangeDialog.vue'
 import MasterBD from '@/components/setupcomponent/MasterBD.vue'
 import EditBD from '@/components/setupcomponent/EditBD.vue'
 import type { QTableProps } from 'quasar'
+import { useTabs } from '@/stores/tabs'
 
+const tabs = useTabs()
 const emit = defineEmits(['change', 'haserror', 'noerror'])
 
 const change = ref(false)
@@ -149,16 +151,6 @@ const rows = reactive([
 		date: '09.07.2021',
 		def: false,
 	},
-])
-
-const tabs = ref([
-	{ id: 0, field: 'prop', label: 'Свойства', action: '' },
-	{ id: 1, field: 'control', label: 'Управление', action: '' },
-	{ id: 2, field: 'outer', label: 'Внешние хранилища', action: '' },
-	{ id: 3, field: 'arch', label: 'Архивирование', action: '' },
-	{ id: 4, field: 'meta', label: 'Метаданные', action: '' },
-	{ id: 5, field: 'journal', label: 'Журнал', action: '' },
-	{ id: 6, field: 'cache', label: 'Кэширование', action: '' },
 ])
 </script>
 

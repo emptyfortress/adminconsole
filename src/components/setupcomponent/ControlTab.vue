@@ -17,10 +17,10 @@ const path = ref('')
 				div Таймаут
 				q-input(v-model="hour3" type="number" dense).smm
 				div сек.
-				q-btn(unelevated color="secondary" label="Выполнить" size="sm").q-ml-xl
+				q-btn(outline color="primary" label="Выполнить" size="sm").q-ml-xl
 		
 		div
-		q-btn(unelevated color="secondary" label="Пересоздать задания БД" size="sm").q-mt-xl
+		q-btn(unelevated color="primary" label="Пересоздать задания БД").q-mt-xl
 </template>
 
 <style scoped lang="scss">

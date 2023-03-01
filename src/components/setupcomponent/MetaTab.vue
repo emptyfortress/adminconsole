@@ -5,10 +5,6 @@
 	.arch
 		.title Статус
 		div В БД используются расширенные метаданные.
-	br
-	.arch
-		.title Таблицы
-		q-btn(unelevated color="primary" label="Местоположение служебных таблиц")
 </template>
 
 <style scoped lang="scss">
