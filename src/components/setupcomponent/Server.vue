@@ -12,14 +12,6 @@ q-form(ref="form" @validation-error="$emit('haserror')" @validation-success="$em
 			q-checkbox(dense v-model="store.server.server.counters" label="Включить счетчики производительности")
 			q-btn(unelevated color="secondary" size="sm").q-ml-lg Обнулить счетчики
 	fieldset
-		legend Контроль сети
-		q-checkbox(dense v-model="store.server.server.netcontrol" label="Использовать контроль сети")
-		.blo
-			.label Время отклика на стандартных операциях, не более (сек.)
-			q-input(dense outlined type="number" v-model="store.server.server.simpletime" bg-color="white").dig
-			.label Время отклика на сложных операциях, не более (сек.)
-			q-input(dense outlined type="number" v-model="store.server.server.complextime" bg-color="white").dig
-	fieldset
 		legend Режим кэширования
 		q-checkbox(dense v-model="store.server.server.filecache" label="Файлы").q-mr-lg
 		q-checkbox(dense v-model="store.server.server.cardcache" label="Карточки").q-mr-lg
