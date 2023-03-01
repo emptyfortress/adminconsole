@@ -49,6 +49,7 @@
 					</div>
 				</div>
 			</template>
+
 			<div class="pcard">
 				<component
 					:is="calcComponent(panel.id)"

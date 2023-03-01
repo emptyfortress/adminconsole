@@ -5,6 +5,8 @@ q-form(ref="form" @validation-error="$emit('haserror')" @validation-success="$em
 		q-input(dense outlined v-model="store.server.server.journal" bg-color="white" :rules="req" @blur="form.validate()")
 		.label Адрес хранилища настроек:
 		q-input(dense outlined v-model="store.server.server.address" bg-color="white" :rules="req" @blur="form.validate()")
+		.label Адрес сайта документации:
+		q-input(dense outlined v-model="store.server.server.addressdoc" bg-color="white" :rules="req" @blur="form.validate()")
 		div
 		q-checkbox(dense v-model="store.server.server.checkversion" label="Проверять версию базы данных")
 		div
@@ -17,6 +19,10 @@ q-form(ref="form" @validation-error="$emit('haserror')" @validation-success="$em
 		q-checkbox(dense v-model="store.server.server.cardcache" label="Карточки").q-mr-lg
 		q-checkbox(dense v-model="store.server.server.spravcache" label="Справочники" disable).q-mr-lg
 		q-btn(unelevated color="secondary" size="sm") Очистить клиентский кэш
+	fieldset
+		legend Модули
+		q-checkbox(dense v-model="store.server.server.quiet" label="Использовать тихий режим установки модулей").q-mr-lg
+		q-checkbox(dense v-model="store.server.server.skip" label="Пропускать обновление БД при установке модулей").q-mr-lg
 	//- q-btn(type="submit" label="submit")
 
 </template>
