@@ -32,9 +32,9 @@ export const useStore = defineStore({
 			{ id: 12, key: 'KRBS_KTNAME', value: '' },
 		],
 		panels: [
-			{ id: 1, neg: false, expanded: false, change: false, title: 'Общие настройки' },
 			{ id: 0, neg: false, expanded: false, change: false, title: 'Лицензия' },
-			{ id: 2, neg: false, expanded: false, change: false, title: 'Подключенные базы данных' },
+			{ id: 2, neg: false, expanded: false, change: false, title: 'Базы данных' },
+			{ id: 1, neg: false, expanded: false, change: false, title: 'Общие настройки' },
 			{ id: 4, neg: false, expanded: false, change: false, title: 'Управление доступом' },
 			{ id: 9, neg: false, expanded: false, change: false, title: 'Расширенная аутентификация' },
 		],
