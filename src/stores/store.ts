@@ -15,7 +15,12 @@ export const useStore = defineStore({
 			{ id: '0', name: 'SOL2016' },
 			{ id: '1', name: 'SOL2017' },
 		],
+		conputer: [
+			{ id: 0, name: 'AGSupport' },
+			{ id: 1, name: 'test' },
+		],
 		tabs: 'SOL2016',
+		tabs1: 'AGSupport',
 		params: [
 			{ id: 0, key: 'DV_Docsvision_Platform_5.5_Server Databases Docsvision DB', value: '' },
 			{ id: 1, key: 'DV_Docsvision__Platform_5.5_Server_DefaultBaseName', value: '' },
@@ -54,6 +59,9 @@ export const useStore = defineStore({
 		},
 		addConnection(e: string) {
 			this.connections.push({ name: e })
+		},
+		addComputer(e: string) {
+			this.conputer.push({ id: Date.now(), name: e })
 		},
 		addConfig(e: string) {
 			let temp = { id: uid(), name: e }

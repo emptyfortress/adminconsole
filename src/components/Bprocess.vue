@@ -1,12 +1,33 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import { useStore } from '@/stores/store'
+import AddComputer from '@/components/AddComputer.vue'
 
 const store = useStore()
+
+const dialog = ref(false)
+const add = () => {
+	dialog.value = !dialog.value
+}
+// const addComp = (e: string) => {
+// 	console.log(e)
+// }
 </script>
 
 <template lang="pug">
 div
+	AddComputer(v-model="dialog")
 	.zag Настройки службы управления бизнес-процессами
+	.bar
+		q-chip(color="warning") Всего компьютеров: {{ store.conputer.length}}
+		q-btn(flat round icon="mdi-plus-circle" @click="add") 
+			q-tooltip Добавить компьютер
+		q-space
+		.alltab
+			q-tabs(v-model="store.tabs1" active-color="primary" inline-label).text-secondary
+				q-tab(v-for="item in store.conputer" :key="item.id" :name="item.name" :label="item.name")
+		
+
 	q-card.card
 		.grey
 			q-list(separator)
@@ -27,6 +48,34 @@ div
 </template>
 
 <style scoped lang="scss">
+.bar {
+	background: #dedede;
+	max-width: clamp(600px, 80%, 1200px);
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+	padding: 0 0.5rem;
+
+	@media screen and (max-width: 1233px) {
+		display: block;
+	}
+}
+
+.card {
+	max-width: clamp(600px, 80%, 1200px);
+	margin: 0 auto;
+}
+
+.plus {
+	:deep(.q-icon) {
+		color: $primary;
+	}
+}
+
+.alltab {
+	max-width: 700px;
+}
+
 .q-expansion-item {
 	transition: 0.2s ease all;
 }
