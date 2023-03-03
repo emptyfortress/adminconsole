@@ -23,11 +23,12 @@ const route = useRoute()
 const router = useRouter()
 
 const items = [
-	{ id: 0, label: 'Сервер DV', to: '/setup/dvserver' },
-	{ id: 1, label: 'Сервер DV 1', to: '/setup/dvserver1' },
+	// { id: 0, label: 'Сервер DV', to: '/setup/dvserver' },
+	{ id: 1, label: 'Сервер DV', to: '/setup/dvserver1' },
 	{ id: 2, label: 'Соединения', to: '/setup/connection' },
 	{ id: 3, label: 'Почтовый сервер', to: '/setup/email' },
 	{ id: 4, label: 'СФО', to: '/setup/worker', tooltip: 'Служба фоновых операций' },
+	{ id: 5, label: 'СУБП', to: '/setup/bprocess', tooltip: 'Служба управления бизнес-процессами' },
 ]
 </script>
 

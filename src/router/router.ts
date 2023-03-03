@@ -47,9 +47,9 @@ export const router = createRouter({
 					},
 				},
 				{
-					path: 'dvserver',
-					name: 'dvserver',
-					component: () => import('@/components/Dvserver.vue'),
+					path: 'bprocess',
+					name: 'bprocess',
+					component: () => import('@/components/Bprocess.vue'),
 					meta: {
 						title: 'Настройки',
 						nav: true,

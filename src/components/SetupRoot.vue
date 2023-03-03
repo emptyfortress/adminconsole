@@ -9,12 +9,12 @@ div
 			q-icon(name="mdi-magnify")
 	br
 	.mygrid
-		router-link(to="/setup/dvserver").bl
-			.icon.serverdv
-			.tit Сервер Docsvision
+		// router-link(to="/setup/dvserver").bl
+		// 	.icon.serverdv
+		// 	.tit Сервер Docsvision
 		router-link(to="/setup/dvserver1").bl
 			.icon.serverdv
-			.tit Сервер Docsvision 1
+			.tit Сервер Docsvision
 		router-link(to="/setup/connection").bl
 			.icon.connection
 			.tit Соединения
@@ -24,6 +24,9 @@ div
 		router-link(to="/setup/worker").bl
 			.icon.worker
 			.tit Служба фоновых операций
+		router-link(to="/setup/bprocess").bl
+			.icon.workflow
+			.tit Сервис бизнес-процессов
 		.bl.disable
 			.icon.webclient
 			.tit Web-клиент
