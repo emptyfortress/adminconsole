@@ -1,4 +1,11 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const path = ref(
+	'C:\\Program Files\\Docsvision\\Workflow\\5.5\\Templates\\1049\\ProcessTemplate.xml'
+)
+const cert = ref('')
+</script>
 
 <template lang="pug">
 div
@@ -6,19 +13,18 @@ div
 		legend Шаблоны и настройки бизнес процессов
 		.form1
 			.label Путь к справочникам и шаблонам:
-			q-input(dense outlined bg-color="white")
-			q-btn(flat round icon="mdi-dots-horizontal" color="primary") 
+			q-input(v-model="path" dense outlined bg-color="white")
+			div
+				q-btn(flat round icon="mdi-dots-horizontal" color="primary").q-mr-sm
+				q-btn(unelevated color="primary" label="Установить") 
 
 	fieldset
 		legend Дополнительно
 		.form1
 			.label Сертификат:
-			q-input( dense outlined bg-color="white")
+			q-input(v-model="cert" dense outlined bg-color="white")
 			q-btn(flat round icon="mdi-dots-horizontal" color="primary") 
 
-	fieldset
-		legend Сервисы для обработки БД
-		p laskjlajk
 </template>
 
 <style scoped lang="scss">

@@ -45,7 +45,7 @@ export const useStore = defineStore({
 		],
 		panelsBP: [
 			{ id: 0, neg: false, expanded: false, change: false, title: 'Общие настройки' },
-			{ id: 1, neg: false, expanded: false, change: false, title: 'Бизнес-процессы' },
+			{ id: 1, neg: false, expanded: true, change: false, title: 'Сервис бизнес-процессов' },
 			{ id: 2, neg: false, expanded: false, change: false, title: 'Сервисы workflow' },
 			{ id: 3, neg: false, expanded: false, change: false, title: 'Настройки почты' },
 		],

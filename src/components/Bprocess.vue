@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref } from 'vue'
 import { useStore } from '@/stores/store'
 import AddComputer from '@/components/AddComputer.vue'
 import Nastroyki from '@/components/Nastroyki.vue'
+import BpExpand from '@/components/BpExpand.vue'
 
 const store = useStore()
 
@@ -19,13 +20,16 @@ const calcComponent = (e: number) => {
 		case 0:
 			return Nastroyki
 		case 1:
-			return null
+			return BpExpand
 		case 2:
 			return null
 		case 3:
 			return null
 	}
 }
+const bd = ref('agsupport_1')
+const dol = ref(1)
+const options = ['agsupport_1']
 </script>
 
 <template lang="pug">
@@ -56,10 +60,14 @@ div
 											q-item-section удалить
 						.current {{ item.name }}
 
-						q-form
-							.form
-								.label Имя компьютера:
-								q-input(v-model="store.tabs1" dense outlined bg-color="white" lazy-rules :rules="req")
+						.newform
+							.label Имя компьютера:
+							q-input(v-model="store.tabs1" dense outlined bg-color="white" lazy-rules :rules="req").inp
+							.label Сервис баз данных:
+							q-select(v-model="bd" :options="options" dense outlined bg-color="white" lazy-rules :rules="req").inp
+							.dol Доля процессов:
+							q-input(v-model="dol" dense outlined type="number" min="1" bg-color="white").inp1
+							q-btn(unelevated color="primary" label="Подключить") 
 
 
 						q-list(separator)
@@ -93,6 +101,28 @@ div
 
 	@media screen and (max-width: 1233px) {
 		display: block;
+	}
+}
+.newform {
+	margin-top: 1rem;
+	display: grid;
+	grid-template-columns: 160px 360px 120px 70px 100px;
+	justify-items: start;
+	align-items: baseline;
+	column-gap: 1rem;
+	row-gap: 0;
+	.label {
+		grid-column: 1/2;
+	}
+	.inp {
+		grid-column: 2/3;
+		width: 100%;
+		margin-bottom: 0;
+	}
+	.inp1 {
+		grid-column: 4/5;
+		width: 100%;
+		margin-bottom: 0;
 	}
 }
 
