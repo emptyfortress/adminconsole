@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 import { useStore } from '@/stores/store'
 import AddComputer from '@/components/AddComputer.vue'
+import Nastroyki from '@/components/Nastroyki.vue'
 
 const store = useStore()
 
@@ -9,9 +10,22 @@ const dialog = ref(false)
 const add = () => {
 	dialog.value = !dialog.value
 }
-// const addComp = (e: string) => {
-// 	console.log(e)
-// }
+
+const req = [(val: string) => (val && val.length > 0) || 'Это обязательное поле']
+
+const key = ref(0)
+const calcComponent = (e: number) => {
+	switch (e) {
+		case 0:
+			return Nastroyki
+		case 1:
+			return null
+		case 2:
+			return null
+		case 3:
+			return null
+	}
+}
 </script>
 
 <template lang="pug">
@@ -29,21 +43,42 @@ div
 		
 
 	q-card.card
-		.grey
-			q-list(separator)
-				q-expansion-item(
-					v-for="(panel, index) in store.panelsBP"
-					v-model="panel.expanded"
-					switch-toggle-side
-					:key="panel.id"
-					:class="{ er: panel.neg }"
-					:label="panel.title"
-					)
-					template(v-slot:header)
-						.head
-							.title {{ panel.title }}
-							.icon
-								q-btn(flat round icon="mdi-close" color="primary" @click="") 
+		q-tab-panels(v-model="store.tabs1" animated)
+			template(v-for="item in store.conputer" :key="item.id")
+				q-tab-panel(:name="item.name")
+					.grey()
+						.close
+							q-btn(round flat icon="mdi-trash-can-outline")
+								q-tooltip удалить
+								q-menu
+									q-list
+										q-item(clickable v-close-popup @click="").pink
+											q-item-section удалить
+						.current {{ item.name }}
+
+						q-form
+							.form
+								.label Имя компьютера:
+								q-input(v-model="store.tabs1" dense outlined bg-color="white" lazy-rules :rules="req")
+
+
+						q-list(separator)
+							q-expansion-item(
+								v-for="(panel, index) in store.panelsBP"
+								v-model="panel.expanded"
+								switch-toggle-side
+								:key="panel.id"
+								:class="{ er: panel.neg }"
+								:label="panel.title"
+								)
+								template(v-slot:header)
+									.head
+										.title {{ panel.title }}
+										.icon
+											q-btn(flat round icon="mdi-close" color="primary" @click="") 
+
+								.pcard
+									component(:is="calcComponent(panel.id)" :key="key")
 		
 </template>
 

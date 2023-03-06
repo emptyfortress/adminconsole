@@ -44,9 +44,10 @@ export const useStore = defineStore({
 			{ id: 9, neg: false, expanded: false, change: false, title: 'Расширенная аутентификация' },
 		],
 		panelsBP: [
-			{ id: 0, neg: false, expanded: false, change: false, title: 'Бизнес-процессы' },
+			{ id: 0, neg: false, expanded: false, change: false, title: 'Общие настройки' },
+			{ id: 1, neg: false, expanded: false, change: false, title: 'Бизнес-процессы' },
 			{ id: 2, neg: false, expanded: false, change: false, title: 'Сервисы workflow' },
-			{ id: 1, neg: false, expanded: false, change: false, title: 'Настройки почты' },
+			{ id: 3, neg: false, expanded: false, change: false, title: 'Настройки почты' },
 		],
 		server: useServer(),
 		access: useAccess(),
