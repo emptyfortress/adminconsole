@@ -78,5 +78,9 @@ export const useStore = defineStore({
 		setTabs(e: string) {
 			this.tabs = e
 		},
+		removeComputer(e: number) {
+			this.conputer = this.conputer.filter((item) => item.id !== e)
+			this.tabs1 = this.conputer[0].name
+		},
 	},
 })

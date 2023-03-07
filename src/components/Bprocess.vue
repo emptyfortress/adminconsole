@@ -57,7 +57,7 @@ div
 								q-tooltip удалить
 								q-menu
 									q-list
-										q-item(clickable v-close-popup @click="").pink
+										q-item(clickable v-close-popup @click="store.removeComputer(item.id)").pink
 											q-item-section удалить
 						.current {{ item.name }}
 
