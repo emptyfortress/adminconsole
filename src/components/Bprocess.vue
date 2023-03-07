@@ -64,11 +64,12 @@ div
 						.newform
 							.label Имя компьютера:
 							q-input(v-model="store.tabs1" dense outlined bg-color="white" lazy-rules :rules="req").inp
+
 							.label Сервис баз данных:
 							q-select(v-model="bd" :options="options" dense outlined bg-color="white" lazy-rules :rules="req").inp
 							.dol Доля процессов:
 							q-input(v-model="dol" dense outlined type="number" min="1" bg-color="white").inp1
-							q-btn(unelevated color="primary" label="Подключить") 
+							q-btn(unelevated color="primary" label="Подключить").bt
 
 
 						q-list(separator)
@@ -176,6 +177,20 @@ div
 
 	.title {
 		color: $negative;
+	}
+}
+@media screen and (max-width: 1345px) {
+	.dol {
+		grid-column: 1/2;
+	}
+	.newform .inp1 {
+		grid-column: 2/3;
+	}
+}
+@media screen and (max-width: 1070px) {
+	.bt {
+		grid-column: 2/3;
+		margin-top: 0.5rem;
 	}
 }
 </style>
