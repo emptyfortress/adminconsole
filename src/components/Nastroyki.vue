@@ -16,7 +16,8 @@ div
 			q-input(v-model="path" dense outlined bg-color="white")
 			div
 				q-btn(flat round icon="mdi-dots-horizontal" color="primary").q-mr-sm
-				q-btn(unelevated color="primary" label="Установить") 
+				q-btn(unelevated color="secondary" size="sm" label="Настроить").q-mr-sm 
+				q-btn(unelevated color="secondary" size="sm" label="Установить") 
 
 	fieldset
 		legend Дополнительно
