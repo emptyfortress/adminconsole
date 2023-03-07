@@ -4,6 +4,7 @@ import { useStore } from '@/stores/store'
 import AddComputer from '@/components/AddComputer.vue'
 import Nastroyki from '@/components/Nastroyki.vue'
 import BpExpand from '@/components/BpExpand.vue'
+import Post from '@/components/Post.vue'
 
 const store = useStore()
 
@@ -22,8 +23,8 @@ const calcComponent = (e: number) => {
 		case 1:
 			return BpExpand
 		case 2:
-			return null
-		case 3:
+			return Post
+		default:
 			return null
 	}
 }
