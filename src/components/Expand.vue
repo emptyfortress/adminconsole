@@ -54,7 +54,7 @@
 				<component
 					:is="calcComponent(panel.id)"
 					:key="key"
-					@change="change"
+					@change="change(index)"
 					@haserror="setNeg(index)"
 					@noerror="setPos(index)"
 				></component>
@@ -113,7 +113,8 @@ const reset = (e: number) => {
 	store.panels[e].neg = false
 }
 const change = () => {
-	emit('change')
+	// store.panels[0].change = true
+	// emit('change')
 }
 </script>
 

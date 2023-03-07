@@ -31,6 +31,15 @@ const calcComponent = (e: number) => {
 const bd = ref('agsupport_1')
 const dol = ref(1)
 const options = ['agsupport_1']
+
+const editMode = ref(false)
+
+const otmena = () => {
+	editMode.value = false
+}
+const save = () => {
+	editMode.value = false
+}
 </script>
 
 <template lang="pug">
@@ -51,7 +60,7 @@ div
 		q-tab-panels(v-model="store.tabs1" animated)
 			template(v-for="item in store.conputer" :key="item.id")
 				q-tab-panel(:name="item.name")
-					.grey()
+					.grey(:class="{ edit: editMode }")
 						.close
 							q-btn(round flat icon="mdi-trash-can-outline")
 								q-tooltip удалить
@@ -89,6 +98,10 @@ div
 
 								.pcard
 									component(:is="calcComponent(panel.id)" :key="key")
+
+						q-card-actions(align="right" v-if="editMode")
+							q-btn(flat label="Отмена" @click="otmena")
+							q-btn(unelevated color="primary" label="Сохранить все" @click="save")
 		
 </template>
 

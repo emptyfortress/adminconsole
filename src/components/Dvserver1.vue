@@ -5,7 +5,7 @@
 			@add="addConfig"
 			dv
 		/>
-		<div class="zag">Настройки сервера Docsvision 1</div>
+		<div class="zag">Настройки сервера Docsvision</div>
 		<div class="bar">
 			<q-chip color="warning">Всего конфигураций: {{ store.config.length }}</q-chip>
 			<q-btn
