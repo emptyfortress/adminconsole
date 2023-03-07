@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 import { useStore } from '@/stores/store'
 import AddComputer from '@/components/AddComputer.vue'
 import Nastroyki from '@/components/Nastroyki.vue'
@@ -28,8 +28,13 @@ const calcComponent = (e: number) => {
 			return null
 	}
 }
-const bd = ref('agsupport_1')
-const dol = ref(1)
+const form = reactive({
+	name: 'AGSupport',
+	bd: 'agsupport_1',
+	dol: 1,
+})
+// const bd = ref('agsupport_1')
+// const dol = ref(1)
 const options = ['agsupport_1']
 
 const editMode = ref(false)
@@ -72,12 +77,12 @@ div
 
 						.newform
 							.label Имя компьютера:
-							q-input(v-model="store.tabs1" dense outlined bg-color="white" lazy-rules :rules="req").inp
+							q-input(v-model="form.name" dense outlined bg-color="white" lazy-rules :rules="req").inp
 
 							.label Сервис баз данных:
-							q-select(v-model="bd" :options="options" dense outlined bg-color="white" lazy-rules :rules="req").inp
+							q-select(v-model="form.bd" :options="options" dense outlined bg-color="white" lazy-rules :rules="req").inp
 							.dol Доля процессов:
-							q-input(v-model="dol" dense outlined type="number" min="1" bg-color="white").inp1
+							q-input(v-model="form.dol" dense outlined type="number" min="1" bg-color="white").inp1
 							q-btn(unelevated color="primary" label="Подключить").bt
 
 

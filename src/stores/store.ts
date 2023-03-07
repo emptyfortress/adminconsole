@@ -38,10 +38,10 @@ export const useStore = defineStore({
 		],
 		panels: [
 			{ id: 0, neg: false, expanded: false, change: false, title: 'Лицензия' },
-			{ id: 2, neg: false, expanded: false, change: false, title: 'Базы данных' },
-			{ id: 1, neg: false, expanded: false, change: false, title: 'Общие настройки' },
-			{ id: 4, neg: false, expanded: false, change: false, title: 'Управление доступом' },
-			{ id: 9, neg: false, expanded: false, change: false, title: 'Расширенная аутентификация' },
+			{ id: 1, neg: false, expanded: false, change: false, title: 'Базы данных' },
+			{ id: 2, neg: false, expanded: false, change: false, title: 'Общие настройки' },
+			{ id: 3, neg: false, expanded: false, change: false, title: 'Управление доступом' },
+			{ id: 4, neg: false, expanded: false, change: false, title: 'Расширенная аутентификация' },
 		],
 		panelsBP: [
 			{ id: 0, neg: false, expanded: false, change: false, title: 'Общие настройки' },

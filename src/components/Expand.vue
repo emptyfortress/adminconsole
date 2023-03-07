@@ -54,7 +54,7 @@
 				<component
 					:is="calcComponent(panel.id)"
 					:key="key"
-					@change="change(index)"
+					@change="change"
 					@haserror="setNeg(index)"
 					@noerror="setPos(index)"
 				></component>
@@ -69,7 +69,7 @@ import Licence from '@/components/setupcomponent/Licence.vue'
 import Server from '@/components/setupcomponent/Server.vue'
 import Database from '@/components/setupcomponent/Database.vue'
 import Access from '@/components/setupcomponent/Access.vue'
-import Client from '@/components/setupcomponent/Client.vue'
+// import Client from '@/components/setupcomponent/Client.vue'
 import { useStore } from '@/stores/store'
 
 const emit = defineEmits(['change'])
@@ -87,25 +87,25 @@ const calcComponent = (e: number) => {
 		case 0:
 			return Licence
 		case 1:
-			return Server
-		case 2:
 			return Database
+		case 2:
+			return Server
 		case 3:
-			return Client
-		case 4:
 			return Access
+		case 4:
+			return null
 	}
 }
 const key = ref(0)
 
 const reset = (e: number) => {
-	if (e === 1) {
+	if (e === 2) {
 		store.server.$reset()
 		store.panels[e].change = false
 	}
 	key.value += 1
 	store.panels[e].neg = false
-	if (e === 4) {
+	if (e === 3) {
 		store.access.$reset()
 		store.panels[e].change = false
 	}
@@ -113,8 +113,7 @@ const reset = (e: number) => {
 	store.panels[e].neg = false
 }
 const change = () => {
-	// store.panels[0].change = true
-	// emit('change')
+	emit('change')
 }
 </script>
 
@@ -133,7 +132,6 @@ const change = () => {
 	border: 1px solid $primary;
 	margin-top: 1rem;
 	margin-bottom: 1rem;
-	// border-radius: 4px;
 }
 
 .head {

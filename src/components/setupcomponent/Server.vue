@@ -40,7 +40,7 @@ const emit = defineEmits(['change', 'haserror', 'noerror'])
 
 watch(store.server.server, (value) => {
 	if (value) {
-		store.changeDefaults(1)
+		store.changeDefaults(2)
 		emit('change')
 	}
 })

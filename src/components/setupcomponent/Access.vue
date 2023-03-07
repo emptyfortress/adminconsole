@@ -60,7 +60,7 @@ const emit = defineEmits(['change', 'haserror', 'noerror'])
 
 watch(store.access.access, (value) => {
 	if (value) {
-		store.changeDefaults(4)
+		store.changeDefaults(3)
 		emit('change')
 	}
 })

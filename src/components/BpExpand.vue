@@ -10,6 +10,8 @@ const iso = ref(false)
 const jour = ref('')
 const port = ref(8090)
 const level = ref('Предупреждения')
+
+const req = [(val: string) => (val && val.length > 0) || 'Это обязательное поле']
 </script>
 
 <template lang="pug">

@@ -8,6 +8,7 @@ const version = ref('2007 SP1')
 const auth = ref('Простая')
 const name = ref('')
 const pass = ref('')
+const email = ref('')
 const ssl = ref(false)
 </script>
 
