@@ -1,22 +1,50 @@
 <template>
-	<div class="grey" :class="{ edit: editMode }">
+	<div
+		class="grey"
+		:class="{ edit: editMode }"
+	>
 		<div class="current">{{ props.name }}</div>
 		<q-form>
 			<div class="form">
 				<div class="label">Название конфигурации:</div>
-				<q-input v-model="form.name" dense outlined bg-color="white" lazy-rules :rules="req" />
+				<q-input
+					v-model="form.name"
+					dense
+					outlined
+					bg-color="white"
+					lazy-rules
+					:rules="req"
+				/>
 				<div class="def">
-					<q-checkbox v-model="form.def" dense label="Использовать по умолчанию"></q-checkbox>
+					<q-checkbox
+						v-model="form.def"
+						dense
+						label="Использовать по умолчанию"
+					></q-checkbox>
 				</div>
 				<div class="but">
-					<q-btn round flat icon="mdi-content-duplicate" @click="duble">
+					<q-btn
+						round
+						flat
+						icon="mdi-content-duplicate"
+						@click="duble"
+					>
 						<q-tooltip>Дублировать</q-tooltip>
 					</q-btn>
-					<q-btn round flat icon="mdi-trash-can-outline">
+					<q-btn
+						round
+						flat
+						icon="mdi-trash-can-outline"
+					>
 						<q-tooltip>Удалить</q-tooltip>
 						<q-menu>
 							<q-list>
-								<q-item class="pink" clickable v-close-popup @click="del">
+								<q-item
+									class="pink"
+									clickable
+									v-close-popup
+									@click="del"
+								>
 									<q-item-section>Удалить</q-item-section>
 								</q-item>
 							</q-list>
@@ -26,9 +54,21 @@
 			</div>
 			<Expand @change="setEditMode" />
 		</q-form>
-		<q-card-actions align="right" v-if="editMode">
-			<q-btn flat label="Отмена" @click="otmena"></q-btn>
-			<q-btn unelevated color="primary" label="Сохранить все" @click="save"></q-btn>
+		<q-card-actions
+			align="right"
+			v-if="editMode"
+		>
+			<q-btn
+				flat
+				label="Отмена"
+				@click="otmena"
+			></q-btn>
+			<q-btn
+				unelevated
+				color="primary"
+				label="Сохранить все"
+				@click="save"
+			></q-btn>
 		</q-card-actions>
 	</div>
 </template>
@@ -74,7 +114,9 @@ const setEditMode = () => {
 }
 
 const otmena = () => {
+	console.log('fuck')
 	editMode.value = false
+	store.server.$reset()
 }
 
 const $q = useQuasar()

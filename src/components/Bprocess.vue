@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref, reactive, watch } from 'vue'
 import { useStore } from '@/stores/store'
 import AddComputer from '@/components/AddComputer.vue'
 import Nastroyki from '@/components/Nastroyki.vue'
@@ -33,16 +33,25 @@ const form = reactive({
 	bd: 'agsupport_1',
 	dol: 1,
 })
-// const bd = ref('agsupport_1')
-// const dol = ref(1)
-const options = ['agsupport_1']
 
+watch(form, (value) => {
+	if (value) {
+		editMode.value = true
+	}
+})
+const change = () => {
+	editMode.value = true
+}
+const options = ['agsupport_1']
 const editMode = ref(false)
 
 const otmena = () => {
+	store.bp.$reset()
 	editMode.value = false
 }
-const save = () => {
+const save = (item: any) => {
+	item.name = form.name
+	store.tabs1 = form.name
 	editMode.value = false
 }
 </script>
@@ -102,11 +111,11 @@ div
 											q-btn(flat round icon="mdi-close" color="primary" @click="") 
 
 								.pcard
-									component(:is="calcComponent(panel.id)" :key="key")
+									component(:is="calcComponent(panel.id)" :key="key" @change="change")
 
 						q-card-actions(align="right" v-if="editMode")
 							q-btn(flat label="Отмена" @click="otmena")
-							q-btn(unelevated color="primary" label="Сохранить все" @click="save")
+							q-btn(unelevated color="primary" label="Сохранить все" @click="save(item)")
 		
 </template>
 

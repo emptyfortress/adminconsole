@@ -2,6 +2,7 @@ import { uid } from 'quasar'
 import { defineStore } from 'pinia'
 import { useServer } from '@/stores/server'
 import { useAccess } from '@/stores/access'
+import { useBp } from '@/stores/bp'
 
 interface Connection {
 	name: string
@@ -51,6 +52,7 @@ export const useStore = defineStore({
 		],
 		server: useServer(),
 		access: useAccess(),
+		bp: useBp(),
 	}),
 	getters: {},
 	actions: {

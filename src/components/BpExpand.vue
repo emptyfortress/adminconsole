@@ -89,7 +89,7 @@ div
 .form {
 	grid-template-columns: auto 1fr;
 	justify-items: start;
-	align-items: center;
+	align-items: baseline;
 	column-gap: 1rem;
 	row-gap: 0.5rem;
 	width: 100%;
