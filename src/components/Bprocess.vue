@@ -66,6 +66,9 @@ const save = (item: any) => {
 	item.name = form.name
 	store.tabs1 = form.name
 	editMode.value = false
+	store.panelsBP.map((item) => (item.change = false))
+	store.panelsBP.map((item) => (item.neg = false))
+	key.value += 1
 }
 </script>
 
