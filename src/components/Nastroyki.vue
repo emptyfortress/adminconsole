@@ -50,15 +50,4 @@ fieldset:first-child {
 	/* width: 100%; */
 	margin-top: -0.5rem;
 }
-.radio {
-	display: grid;
-	grid-template-columns: auto 1fr;
-	justify-items: start;
-	align-items: baseline;
-	column-gap: 1rem;
-	row-gap: 0.5rem;
-}
-.q-radio {
-	margin-right: 1rem;
-}
 </style>

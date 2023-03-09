@@ -59,4 +59,16 @@ watch(store.server.server, (value) => {
 })
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.radio {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	justify-items: start;
+	align-items: baseline;
+	column-gap: 1rem;
+	row-gap: 0.5rem;
+}
+.q-radio {
+	margin-right: 1rem;
+}
+</style>
