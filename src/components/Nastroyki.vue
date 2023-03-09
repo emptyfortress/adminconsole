@@ -1,25 +1,28 @@
 <script setup lang="ts">
-import { watch } from 'vue'
+import { ref, watch } from 'vue'
 import { useBp } from '@/stores/bp'
 
-const emit = defineEmits(['change'])
+const emit = defineEmits(['change', 'haserror', 'noerror'])
 
 const bp = useBp()
+
+const req = [(val: string) => (val && val.length > 0) || 'Это обязательное поле']
 
 watch(bp.nastr, (value) => {
 	if (value) {
 		emit('change')
 	}
 })
+const myform = ref()
 </script>
 
 <template lang="pug">
-div
+q-form(ref="myform" @validation-error="$emit('haserror')" @validation-success="$emit('noerror')" no-error-focus)
 	fieldset
 		legend Шаблоны и настройки бизнес процессов
 		.form1
 			.label Путь к справочникам и шаблонам:
-			q-input(v-model="bp.nastr.path" dense outlined bg-color="white")
+			q-input(v-model="bp.nastr.path" dense outlined bg-color="white" lazy-rules :rules="req" @blur="myform.validate()")
 			div
 				q-btn(flat round icon="mdi-dots-horizontal" color="primary").q-mr-sm
 				q-btn(unelevated color="secondary" size="sm" label="Настроить").q-mr-sm 

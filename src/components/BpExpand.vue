@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { watch } from 'vue'
+import { ref, watch } from 'vue'
 import { useBp } from '@/stores/bp'
 
-const emit = defineEmits(['change'])
+const emit = defineEmits(['change', 'haserror', 'noerror'])
+
 const bp = useBp()
 
 const req = [(val: string) => (val && val.length > 0) || 'Это обязательное поле']
@@ -12,20 +13,21 @@ watch(bp.bp, (value) => {
 		emit('change')
 	}
 })
+const myform = ref()
 </script>
 
 <template lang="pug">
-div
+q-form(ref="myform" @validation-error="$emit('haserror')" @validation-success="$emit('noerror')" no-error-focus)
 	.divide
 		.form
 			.label Имя службы:
-			q-input(v-model="bp.bp.name" dense outlined bg-color="white" lazy-rules :rules="req").inp
+			q-input(v-model="bp.bp.name" dense outlined bg-color="white" lazy-rules :rules="req" @blur="myform.validate()").inp
 			.label Тип запуска:
-			q-select(v-model="bp.bp.typ" dense outlined bg-color="white" lazy-rules :rules="req").inp
+			q-select(v-model="bp.bp.typ" dense outlined bg-color="white" lazy-rules :rules="req" @blur="myform.validate()").inp
 			.label Учетная запись:
-			q-input(v-model="bp.bp.user" dense outlined bg-color="white" lazy-rules :rules="req").inp
+			q-input(v-model="bp.bp.user" dense outlined bg-color="white" lazy-rules :rules="req" @blur="myform.validate()").inp
 			.label Пароль:
-			q-input(v-model="bp.bp.pass" type="password" dense outlined bg-color="white" lazy-rules :rules="req").inp
+			q-input(v-model="bp.bp.pass" type="password" dense outlined bg-color="white" lazy-rules :rules="req" @blur="myform.validate()").inp
 
 		fieldset.first
 			legend Управление службой

@@ -16,6 +16,7 @@ const add = () => {
 const req = [(val: string) => (val && val.length > 0) || 'Это обязательное поле']
 
 const key = ref(0)
+
 const calcComponent = (e: number) => {
 	switch (e) {
 		case 0:
@@ -28,6 +29,14 @@ const calcComponent = (e: number) => {
 			return null
 	}
 }
+
+const setNeg = (e: number) => {
+	store.panelsBP[e].neg = true
+}
+const setPos = (e: number) => {
+	store.panelsBP[e].neg = false
+}
+
 const form = reactive({
 	name: 'AGSupport',
 	bd: 'agsupport_1',
@@ -48,6 +57,8 @@ const editMode = ref(false)
 
 const otmena = () => {
 	store.bp.$reset()
+	store.panelsBP.map((item) => (item.neg = false))
+	store.panelsBP.map((item) => (item.change = false))
 	editMode.value = false
 }
 const save = (item: any) => {
@@ -101,7 +112,7 @@ div
 								v-for="(panel, index) in store.panelsBP"
 								v-model="panel.expanded"
 								switch-toggle-side
-								:key="panel.id"
+								:key="key"
 								:class="{ er: panel.neg }"
 								:label="panel.title"
 								)
@@ -114,7 +125,11 @@ div
 											q-icon(v-if="panel.neg" name="mdi-alert-circle" size="20px" color="negative")
 
 								.pcard
-									component(:is="calcComponent(panel.id)" :key="key" @change="change(index)")
+									component(:is="calcComponent(panel.id)"
+										:key="key"
+										@haserror="setNeg(index)"
+										@noerror="setPos(index)"
+										@change="change(index)")
 
 						q-card-actions(align="right" v-if="editMode")
 							q-btn(flat label="Отмена" @click="otmena")
