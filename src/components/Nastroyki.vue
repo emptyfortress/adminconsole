@@ -5,6 +5,8 @@ const path = ref(
 	'C:\\Program Files\\Docsvision\\Workflow\\5.5\\Templates\\1049\\ProcessTemplate.xml'
 )
 const cert = ref('')
+const def = ref('ru')
+const reg = ref('one')
 </script>
 
 <template lang="pug">
@@ -18,6 +20,21 @@ div
 				q-btn(flat round icon="mdi-dots-horizontal" color="primary").q-mr-sm
 				q-btn(unelevated color="secondary" size="sm" label="Настроить").q-mr-sm 
 				q-btn(unelevated color="secondary" size="sm" label="Установить") 
+
+	fieldset
+		legend Локализация полей
+		.radio
+			.label Язык по умолчанию:
+			div
+				q-radio(v-model="def" val="ru" label="Русский")
+				q-radio(v-model="def" val="en" label="English")
+			.label Режим локализации полей:
+			div
+				q-radio(v-model="reg" val="one" label="Выкл.")
+				q-radio(v-model="reg" val="two" label="Только чтение")
+				q-radio(v-model="reg" val="three" label="Только запись")
+				q-radio(v-model="reg" val="foru" label="Вкл.")
+				q-radio(v-model="reg" val="five" label="Особый режим")
 
 	fieldset
 		legend Дополнительно
@@ -36,5 +53,20 @@ div
 	justify-content: start;
 	row-gap: 0.4rem;
 	column-gap: 1rem;
+}
+fieldset:first-child {
+	/* width: 100%; */
+	margin-top: -0.5rem;
+}
+.radio {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	justify-items: start;
+	align-items: baseline;
+	column-gap: 1rem;
+	row-gap: 0.5rem;
+}
+.q-radio {
+	margin-right: 1rem;
 }
 </style>
