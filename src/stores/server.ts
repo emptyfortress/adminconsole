@@ -17,6 +17,8 @@ export const useServer = defineStore({
 			addressdoc: 'http://online.docs.docsvision.com',
 			quiet: false,
 			skip: false,
+			def: 'ru',
+			reg: 'one',
 		},
 	}),
 	getters: {},

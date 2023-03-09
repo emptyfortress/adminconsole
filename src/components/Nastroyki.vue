@@ -29,21 +29,6 @@ q-form(ref="myform" @validation-error="$emit('haserror')" @validation-success="$
 				q-btn(unelevated color="secondary" size="sm" label="Установить") 
 
 	fieldset
-		legend Локализация полей
-		.radio
-			.label Язык по умолчанию:
-			div
-				q-radio(v-model="bp.nastr.def" val="ru" label="Русский")
-				q-radio(v-model="bp.nastr.def" val="en" label="English")
-			.label Режим локализации полей:
-			div
-				q-radio(v-model="bp.nastr.reg" val="one" label="Выкл.")
-				q-radio(v-model="bp.nastr.reg" val="two" label="Только чтение")
-				q-radio(v-model="bp.nastr.reg" val="three" label="Только запись")
-				q-radio(v-model="bp.nastr.reg" val="foru" label="Вкл.")
-				q-radio(v-model="bp.nastr.reg" val="five" label="Особый режим")
-
-	fieldset
 		legend Дополнительно
 		.form1
 			.label Сертификат:

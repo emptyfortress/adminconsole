@@ -6,8 +6,6 @@ export const useBp = defineStore({
 		nastr: {
 			path: 'C:\\Program Files\\Docsvision\\Workflow\\5.5\\Templates\\1049\\ProcessTemplate.xml',
 			cert: '',
-			def: 'ru',
-			reg: 'one',
 		},
 		bp: {
 			name: 'Docsvision 5.5 Workflow Server',

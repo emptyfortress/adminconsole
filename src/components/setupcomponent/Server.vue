@@ -23,7 +23,20 @@ q-form(ref="form" @validation-error="$emit('haserror')" @validation-success="$em
 		legend Модули
 		q-checkbox(dense v-model="store.server.server.quiet" label="Использовать тихий режим установки модулей").q-mr-lg
 		q-checkbox(dense v-model="store.server.server.skip" label="Пропускать обновление БД при установке модулей").q-mr-lg
-	//- q-btn(type="submit" label="submit")
+	fieldset
+		legend Локализация полей
+		.radio
+			.label Язык по умолчанию:
+			div
+				q-radio(v-model="store.server.server.def" val="ru" label="Русский")
+				q-radio(v-model="store.server.server.def" val="en" label="English")
+			.label Режим локализации полей:
+			div
+				q-radio(v-model="store.server.server.reg" val="one" label="Выкл.")
+				q-radio(v-model="store.server.server.reg" val="two" label="Только чтение")
+				q-radio(v-model="store.server.server.reg" val="three" label="Только запись")
+				q-radio(v-model="store.server.server.reg" val="foru" label="Вкл.")
+				q-radio(v-model="store.server.server.reg" val="five" label="Особый режим")
 
 </template>
 
