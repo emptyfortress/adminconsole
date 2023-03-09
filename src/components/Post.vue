@@ -43,7 +43,7 @@ q-form(ref="myform" @validation-error="$emit('haserror')" @validation-success="$
 			.label.text-bold SMPT Server
 			.myrow
 				q-input(v-model="bp.post.address" dense outlined bg-color="white" lazy-rules :rules="req" @blur="myform.validate()")
-				q-checkbox(v-model="ssl" label="SSL" dense)
+				q-checkbox(v-model="bp.post.ssl" label="SSL" dense)
 			.label Аутентификация:
 			q-select(v-model="bp.post.auth" dense outlined bg-color="white" lazy-rules :rules="req" @blur="myform.validate()").inp
 			.label Имя пользователя:
