@@ -57,6 +57,7 @@ const editMode = ref(false)
 
 const otmena = () => {
 	store.bp.$reset()
+	key.value += 1
 	store.panelsBP.map((item) => (item.neg = false))
 	store.panelsBP.map((item) => (item.change = false))
 	editMode.value = false
