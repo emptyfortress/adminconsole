@@ -26,6 +26,7 @@ div
 			q-input(v-model="user" dense outlined bg-color="white" lazy-rules :rules="req").inp
 			.label Пароль:
 			q-input(v-model="user" dense outlined bg-color="white" lazy-rules :rules="req").inp
+
 		fieldset.first
 			legend Управление службой
 			q-card-actions(align="left")
@@ -38,6 +39,7 @@ div
 					q-input(v-model="delay" min="0" dense outlined bg-color="white" type="number")
 					.label Очищать счетчик попыток, сек:
 					q-input(v-model="delay" min="0" dense outlined bg-color="white" type="number")
+
 	.second
 		fieldset
 			legend Параметры управления
@@ -117,6 +119,9 @@ fieldset {
 		width: 90px;
 	}
 }
+:deep(.q-field--with-bottom) {
+	padding-bottom: 0.5rem;
+}
 .second {
 	display: grid;
 	grid-template-columns: 6fr 4fr;
@@ -124,6 +129,11 @@ fieldset {
 	align-items: stretch;
 	column-gap: 0.5rem;
 	row-gap: 0.5rem;
+}
+@media screen and (max-width: 1600px) {
+	.second {
+		grid-template-columns: 1fr;
+	}
 }
 .third {
 	display: grid;
