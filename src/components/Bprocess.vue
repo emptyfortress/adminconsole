@@ -39,8 +39,9 @@ watch(form, (value) => {
 		editMode.value = true
 	}
 })
-const change = () => {
+const change = (e: number) => {
 	editMode.value = true
+	store.panelsBP[e].change = true
 }
 const options = ['agsupport_1']
 const editMode = ref(false)
@@ -108,10 +109,12 @@ div
 									.head
 										.title {{ panel.title }}
 										.icon
-											q-btn(flat round icon="mdi-close" color="primary" @click="") 
+											q-btn(v-if="panel.change" flat round icon="mdi-reload" color="primary" @click.stop="otmena" style="transform: scaleX(-1)") 
+											q-btn(v-if="panel.change" flat size="sm" color="primary" @click.stop="save(item)" label="Сохранить") 
+											q-icon(v-if="panel.neg" name="mdi-alert-circle" size="20px" color="negative")
 
 								.pcard
-									component(:is="calcComponent(panel.id)" :key="key" @change="change")
+									component(:is="calcComponent(panel.id)" :key="key" @change="change(index)")
 
 						q-card-actions(align="right" v-if="editMode")
 							q-btn(flat label="Отмена" @click="otmena")

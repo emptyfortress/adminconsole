@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { watch } from 'vue'
-import { useStore } from '@/stores/store'
+import { useBp } from '@/stores/bp'
 
 const emit = defineEmits(['change'])
 
-const store = useStore()
+const bp = useBp()
 
-watch(store.bp.bp, (value) => {
+watch(bp.nastr, (value) => {
 	if (value) {
 		emit('change')
 	}
@@ -19,7 +19,7 @@ div
 		legend Шаблоны и настройки бизнес процессов
 		.form1
 			.label Путь к справочникам и шаблонам:
-			q-input(v-model="store.bp.bp.path" dense outlined bg-color="white")
+			q-input(v-model="bp.nastr.path" dense outlined bg-color="white")
 			div
 				q-btn(flat round icon="mdi-dots-horizontal" color="primary").q-mr-sm
 				q-btn(unelevated color="secondary" size="sm" label="Настроить").q-mr-sm 
@@ -30,21 +30,21 @@ div
 		.radio
 			.label Язык по умолчанию:
 			div
-				q-radio(v-model="store.bp.bp.def" val="ru" label="Русский")
-				q-radio(v-model="store.bp.bp.def" val="en" label="English")
+				q-radio(v-model="bp.nastr.def" val="ru" label="Русский")
+				q-radio(v-model="bp.nastr.def" val="en" label="English")
 			.label Режим локализации полей:
 			div
-				q-radio(v-model="store.bp.bp.reg" val="one" label="Выкл.")
-				q-radio(v-model="store.bp.bp.reg" val="two" label="Только чтение")
-				q-radio(v-model="store.bp.bp.reg" val="three" label="Только запись")
-				q-radio(v-model="store.bp.bp.reg" val="foru" label="Вкл.")
-				q-radio(v-model="store.bp.bp.reg" val="five" label="Особый режим")
+				q-radio(v-model="bp.nastr.reg" val="one" label="Выкл.")
+				q-radio(v-model="bp.nastr.reg" val="two" label="Только чтение")
+				q-radio(v-model="bp.nastr.reg" val="three" label="Только запись")
+				q-radio(v-model="bp.nastr.reg" val="foru" label="Вкл.")
+				q-radio(v-model="bp.nastr.reg" val="five" label="Особый режим")
 
 	fieldset
 		legend Дополнительно
 		.form1
 			.label Сертификат:
-			q-input(v-model="store.bp.bp.cert" dense outlined bg-color="white")
+			q-input(v-model="bp.nastr.cert" dense outlined bg-color="white")
 			q-btn(flat round icon="mdi-dots-horizontal" color="primary") 
 
 </template>
