@@ -28,8 +28,8 @@ q-form(ref="form" @validation-error="$emit('haserror')" @validation-success="$em
 		.radio
 			.label Язык по умолчанию:
 			div
-				q-radio(v-model="store.server.server.def" val="ru" label="РУС")
-				q-radio(v-model="store.server.server.def" val="en" label="ENG")
+				q-radio(v-model="store.server.server.def" val="ru" label="Русский")
+				q-radio(v-model="store.server.server.def" val="en" label="English")
 			.label Режим локализации полей:
 			div
 				q-radio(v-model="store.server.server.reg" val="one" label="Выкл.")
