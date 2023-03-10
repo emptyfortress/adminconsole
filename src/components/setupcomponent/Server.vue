@@ -28,14 +28,14 @@ q-form(ref="form" @validation-error="$emit('haserror')" @validation-success="$em
 		.radio
 			.label Язык по умолчанию:
 			div
-				q-radio(v-model="store.server.server.def" val="ru" label="Русский")
-				q-radio(v-model="store.server.server.def" val="en" label="English")
+				q-radio(v-model="store.server.server.def" val="ru" label="РУС")
+				q-radio(v-model="store.server.server.def" val="en" label="ENG")
 			.label Режим локализации полей:
 			div
 				q-radio(v-model="store.server.server.reg" val="one" label="Выкл.")
 				q-radio(v-model="store.server.server.reg" val="foru" label="Вкл.")
-				q-radio(v-model="store.server.server.reg" val="two" label="Только чтение")
-				q-radio(v-model="store.server.server.reg" val="three" label="Только запись")
+				q-radio(v-model="store.server.server.reg" val="two" label="Чтение")
+				q-radio(v-model="store.server.server.reg" val="three" label="Запись")
 				q-radio(v-model="store.server.server.reg" val="five" label="Особый *")
 		q-separator
 		div *  Новое значение поля будет сохраняться и для основной локали, и для локали клиентского приложения.
