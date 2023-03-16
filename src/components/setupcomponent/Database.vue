@@ -5,7 +5,9 @@
 			q-tr(:props='props' :class='{ cool: props.row.def }')
 				q-td(key="active" :props="props" auto-width)
 					q-icon(name="mdi-circle-slice-8" color="green" v-if="props.row.active")
+						q-tooltip Доступна
 					q-icon(name="mdi-circle-slice-8" color="red" v-else)
+						q-tooltip Недоступна
 				q-td(key="psevdo" :props='props')
 					// q-icon.q-mr-sm(name='mdi-database' size='16px' v-if='props.row.def')
 					// q-icon.q-mr-sm(name='mdi-database-outline' size='16px' v-else)
@@ -31,17 +33,17 @@
 									q-item-section(side)
 										q-icon(name="mdi-trash-can-outline" color="pink")
 									q-item-section Удалить
-			q-menu(touch-position context-menu)
-				q-list(dense)
-					q-item(clickable v-for="item in tabs.tabs" :key="item.id" @click="editBD(props.row, item.field)" v-close-popup)
-						q-item-section(side)
-							q-icon(name="mdi-database-cog-outline" size="16px")
-						q-item-section {{ item.label }}
-					q-separator
-					q-item(clickable :props="props" @click="remove(props.row)" v-close-popup)
-						q-item-section(side)
-							q-icon(name="mdi-trash-can-outline" color="pink" size="16px")
-						q-item-section Удалить
+				q-menu(touch-position context-menu)
+					q-list(dense)
+						q-item(clickable :props="props" @click="assign(props.row.psevdo)" v-close-popup)
+							q-item-section(side)
+								q-icon(name="mdi-check-bold" size="16px")
+							q-item-section По умолчанию
+						q-separator
+						q-item(clickable :props="props" @click="remove(props.row)" v-close-popup)
+							q-item-section(side)
+								q-icon(name="mdi-trash-can-outline" color="pink" size="16px")
+							q-item-section Удалить
 
 	.master
 		div Чтобы создать новую базу данных, сделать доступной для пользователей существующую базу данных, а также обновить БД, если ее версия отличается от версии сервера Docsvision, воспользуйтесь Мастером баз данных.
@@ -83,6 +85,9 @@ const editBD = (row: any, field: string) => {
 const assign = (e: string) => {
 	changename.value = e
 	change.value = true
+}
+const assign1 = (e: any) => {
+	console.log(e)
 }
 
 const assignDef = () => {
