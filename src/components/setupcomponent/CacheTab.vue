@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const prov = ref()
+const prov = ref('InMemory')
 const line = ref('')
 const pass = ref('')
 const schet = ref(false)

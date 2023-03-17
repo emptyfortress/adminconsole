@@ -31,6 +31,7 @@ q-dialog(:modelValue='edit' persistent position='bottom' full-width)
 				q-btn(flat @click="$emit('close')") Отмена
 				q-btn(flat @click="$emit('close')") Применить
 
+		q-btn(flat round icon="mdi-close" color="primary" @click="$emit('close')").close 
 </template>
 
 <script setup lang="ts">
@@ -81,6 +82,7 @@ const tabs = useTabs()
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+	position: relative;
 }
 
 .title {
@@ -110,5 +112,10 @@ const tabs = useTabs()
 .q-badge {
 	padding: 0 4px;
 	min-height: 8px;
+}
+.close {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
 }
 </style>

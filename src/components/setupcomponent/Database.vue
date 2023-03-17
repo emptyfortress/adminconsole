@@ -112,7 +112,7 @@ const columns: QTableProps['columns'] = [
 	},
 	{ name: 'server', align: 'left', label: 'Сервер SQL', field: 'server', sortable: true },
 	{ name: 'servertype', align: 'left', label: 'Тип сервера', field: 'servertype', sortable: true },
-	{ name: 'index', align: 'left', label: 'Индексируется', field: 'index', sortable: true },
+	{ name: 'index', align: 'left', label: 'Индексация', field: 'index', sortable: true },
 	{ name: 'version', align: 'left', label: 'Версия', field: 'version', sortable: true },
 	{ name: 'cache', align: 'left', label: 'Способ кэширования', field: 'cache', sortable: true },
 	{ name: 'date', align: 'left', label: 'Дата создания', field: 'date', sortable: true },
