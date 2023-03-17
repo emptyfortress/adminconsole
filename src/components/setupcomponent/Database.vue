@@ -9,10 +9,9 @@
 					q-icon(name="mdi-circle-slice-8" color="red" v-else)
 						q-tooltip Недоступна
 				q-td(key="psevdo" :props='props')
-					// q-icon.q-mr-sm(name='mdi-database' size='16px' v-if='props.row.def')
-					// q-icon.q-mr-sm(name='mdi-database-outline' size='16px' v-else)
 					span {{ props.row.psevdo }}
 				q-td(key='server' :props='props') {{ props.row.server }}
+				q-td(key='servertype' :props='props') {{ props.row.servertype }}
 				q-td(key='index' :props='props') {{ props.row.index }}
 				q-td(key='version' :props='props') {{ props.row.version }}
 				q-td(key='cache' :props='props') {{ props.row.cache }}
@@ -86,9 +85,6 @@ const assign = (e: string) => {
 	changename.value = e
 	change.value = true
 }
-const assign1 = (e: any) => {
-	console.log(e)
-}
 
 const assignDef = () => {
 	let index = rows.findIndex((item) => item.psevdo === changename.value)
@@ -114,7 +110,8 @@ const columns: QTableProps['columns'] = [
 		field: 'psevdo',
 		sortable: true,
 	},
-	{ name: 'server', align: 'left', label: 'Сервер', field: 'server', sortable: true },
+	{ name: 'server', align: 'left', label: 'Сервер SQL', field: 'server', sortable: true },
+	{ name: 'servertype', align: 'left', label: 'Тип сервера', field: 'servertype', sortable: true },
 	{ name: 'index', align: 'left', label: 'Индексируется', field: 'index', sortable: true },
 	{ name: 'version', align: 'left', label: 'Версия', field: 'version', sortable: true },
 	{ name: 'cache', align: 'left', label: 'Способ кэширования', field: 'cache', sortable: true },
@@ -127,6 +124,7 @@ const rows = reactive([
 		active: true,
 		psevdo: 'AGSupport',
 		name: 'AGSupport_1',
+		servertype: 'SQL Server',
 		server: 'Docsvision 1',
 		index: 'yes',
 		version: 4373,
@@ -138,6 +136,7 @@ const rows = reactive([
 		active: true,
 		psevdo: 'DvTest',
 		name: 'AGSupport_2',
+		servertype: 'SQL Server',
 		server: 'Docsvision 1',
 		index: 'yes',
 		cache: 'Redis',
@@ -149,6 +148,7 @@ const rows = reactive([
 		active: false,
 		psevdo: 'DvShowCase',
 		name: 'AGSupport_3',
+		servertype: 'PostgreSQL',
 		server: 'Docsvision 1',
 		cache: 'No cache',
 		index: 'yes',

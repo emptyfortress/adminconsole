@@ -10,9 +10,9 @@ const tabs = useTabs()
 const showAdd = ref(false)
 
 const name = ref()
-const type = ref('Все')
+const type = ref('Все файлы')
 const options = [
-	'Все',
+	'Все файлы',
 	'По расширению файла',
 	'Размер больше, чем',
 	'Размер меньше, чем',
@@ -24,6 +24,7 @@ const dragging = ref(false)
 const ext = ref()
 const size1 = ref()
 const size2 = ref()
+const sborka = ref()
 const date = new Date()
 const currentItemIndex = ref()
 
@@ -45,7 +46,7 @@ const add = () => {
 	showAdd.value = false
 	currentItemIndex.value = null
 	name.value = null
-	type.value = 'Все'
+	type.value = 'Все файлы'
 	ext.value = null
 	size1.value = null
 	size2.value = null
@@ -66,7 +67,7 @@ const showDialog = () => {
 	ext.value = null
 	size1.value = null
 	size2.value = null
-	type.value = 'Все'
+	type.value = 'Все файлы'
 	showAdd.value = true
 }
 
@@ -156,9 +157,10 @@ q-dialog(v-model="showAdd")
 				q-input(v-model='name' autofocus label='Название' lazy-rules :rules="[val => val && val.length > 0 || 'Обязательное поле']")
 				.grid
 					q-select(v-model='type' label='Тип' :options="options").full-width
-					q-input(v-model="ext" label="Расширение" v-if="type === 'По расширению файла'" lazy-rules :rules="[val => val && val.length > 0 || 'Обязательное поле']").full-width
-					q-input(v-model="size1" label="Размер" v-if="type === 'Размер больше, чем'" type="number" lazy-rules :rules="[val => val !== null && val !== '' || 'Обязательное поле']").full-width
-					q-input(v-model="size2" label="Размер" v-if="type === 'Размер меньше, чем'" type="number").full-width
+					q-input(v-model="ext" placeholder="*.jpg, *.mp3, *.tiff" label="Расширение" v-if="type === 'По расширению файла'" lazy-rules :rules="[val => val && val.length > 0 || 'Обязательное поле']").full-width
+					q-input(v-model="size1" label="Размер, kB" v-if="type === 'Размер больше, чем'" type="number" lazy-rules :rules="[val => val !== null && val !== '' || 'Обязательное поле']").full-width
+					q-input(v-model="size2" label="Размер, kB" v-if="type === 'Размер меньше, чем'" type="number").full-width
+					q-input(v-model="sborka" label="Путь" v-if="type === 'Добавить из сборки'").full-width
 
 			q-card-section
 				q-card-actions(align="right")
@@ -183,15 +185,9 @@ q-dialog(v-model="showAdd")
 .grid {
 	display: grid;
 	grid-template-columns: 2fr 1fr;
-	justify-items: start;
+	justify-items: baseline;
 	align-items: stretch;
 	gap: 1rem;
-
-	div {
-		height: 30px;
-		width: 100%;
-		background: #ccc;
-	}
 }
 
 .tabel {

@@ -21,8 +21,8 @@ q-dialog(:modelValue='edit' persistent position='bottom' full-width)
 					component(:is="Outer")
 				q-tab-panel(name='arch')
 					ArchTab(:bd="props.bd")
-				q-tab-panel(name='meta')
-					MetaTab(:bd="props.bd")
+				// q-tab-panel(name='meta')
+				// 	MetaTab(:bd="props.bd")
 				q-tab-panel(name='cache')
 					CacheTab(:bd="props.bd")
 		div
@@ -40,7 +40,7 @@ import Outer from '@/components/setupcomponent/Outer.vue'
 import PropertyTab from '@/components/setupcomponent/PropertyTab.vue'
 import ControlTab from '@/components/setupcomponent/ControlTab.vue'
 import ArchTab from '@/components/setupcomponent/ArchTab.vue'
-import MetaTab from '@/components/setupcomponent/MetaTab.vue'
+// import MetaTab from '@/components/setupcomponent/MetaTab.vue'
 import CacheTab from '@/components/setupcomponent/CacheTab.vue'
 
 const props = defineProps({

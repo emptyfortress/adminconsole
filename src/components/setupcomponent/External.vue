@@ -59,7 +59,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref } from 'vue'
 import draggable from 'vuedraggable'
 
 const list1 = ref([
@@ -101,7 +101,7 @@ const dragging = ref(false)
 	padding: 1rem;
 }
 
-.list-group>div {
+.list-group > div {
 	font-size: 1rem;
 	padding: 0.5rem 1rem;
 	cursor: pointer;
