@@ -1,4 +1,5 @@
 <template lang="pug">
+.change Изменения, выполняемые на этой вкладке, применяются сразу.
 .outer
 	q-splitter(v-model="split1").spl
 		template(#before)
@@ -12,7 +13,6 @@
 
 				template(#after)
 					Rule
-			
 </template>
 
 <script setup lang="ts">
@@ -27,10 +27,18 @@ const split2 = ref(42)
 
 <style scoped lang="scss">
 .spl {
-	height: calc(100vh - 360px);
+	height: calc(100vh - 390px);
 }
 
 .outer {
 	padding-top: 1rem;
+}
+.change {
+	color: darkred;
+	background: #d3e8ff;
+	font-size: 0.8rem;
+	text-align: center;
+	margin: 0 auto;
+	width: 600px;
 }
 </style>

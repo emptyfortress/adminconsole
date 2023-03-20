@@ -151,7 +151,7 @@ const options1 = ['Online', 'Auto', 'Disabled', 'Read and delete', 'Reserved']
 					q-btn(flat round dense icon="mdi-information-outline" size="sm" ).q-mr-sm
 						q-menu
 							q-card.hrinfo
-								.label Псевдоним:
+								.label Название:
 								div {{ element.name}}
 								.label Тип:
 								div {{ element.type}}

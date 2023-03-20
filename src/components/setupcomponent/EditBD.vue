@@ -28,8 +28,8 @@ q-dialog(:modelValue='edit' persistent position='bottom' full-width)
 		div
 			q-separator
 			q-card-actions(align='center')
-				q-btn(flat @click="$emit('close')") Отмена
-				q-btn(flat @click="$emit('close')") Применить
+				q-btn(flat color="primary" @click="$emit('close')") Отмена
+				q-btn(unelevated color="primary" @click="$emit('close')") Применить
 
 		q-btn(flat round icon="mdi-close" color="primary" @click="$emit('close')").close 
 </template>

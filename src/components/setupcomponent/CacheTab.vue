@@ -17,7 +17,9 @@ const options = ['InMemory', 'NoCache', 'Redis']
 			label Провайдер:
 			q-select(v-model="prov" :options="options" dense)
 			label Строка подключения:
-			q-input(v-model="line" dense)
+			.row.items-center
+				q-input(v-model="line" dense)
+				q-btn(unelevated color="primary" size="xs" label="Тест").q-ml-md 
 			label Пароль:
 			q-input(v-model="pass" dense)
 			label

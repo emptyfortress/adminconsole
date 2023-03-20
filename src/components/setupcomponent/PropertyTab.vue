@@ -16,7 +16,7 @@ const options = [
 	'UseTemporaryDatabase',
 ]
 const tables = [
-	{ id: 0, label: 'ChangeObjectDataBase', val: 'UseTemporaryDatabase' },
+	{ id: 0, label: 'ChangeObjectDataBaseType', val: 'UseTemporaryDatabase' },
 	{ id: 1, label: 'CursorDataBaseType', val: 'UseTemporaryDatabase' },
 	{ id: 2, label: 'FileCursorDataBaseType', val: 'UseOwnDatabase' },
 	{ id: 3, label: 'IconDataBaseType', val: 'UseTemporaryDatabase' },
@@ -35,12 +35,14 @@ const tables = [
 			.val(contenteditable) {{props.bd.name}}
 			label Псевдоним:
 			.val(contenteditable) {{props.bd.psevdo}}
-			label SQL server:
+			label Server SQL:
 			.val(contenteditable) {{props.bd.server}}
+			label Тип сервера:
+			.val(contenteditable) {{ props.bd.servertype }}
 			label Версия:
 			.val(contenteditable) {{props.bd.version}}
 			label Дата последнего обновления:
-			.val(contenteditable) {{props.bd.date}}
+			.val(contenteditable) {{props.bd.date}} 14:53
 			label Используется по умолчанию:
 			q-checkbox(v-model="props.bd.def" dense)
 	br
@@ -99,5 +101,8 @@ label {
 	column-gap: 2rem;
 	row-gap: 0.2rem;
 	padding-left: 1rem;
+	.q-select {
+		width: 220px;
+	}
 }
 </style>

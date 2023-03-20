@@ -12,7 +12,7 @@ const options = ['понедельник', 'вторник', 'среда', 'че
 <template lang="pug">
 .all
 	.arch
-		.title Расписание&nbsp;&nbsp;архивирования:
+		.title Расписание&nbsp;&nbsp;архивирования файлов и карточек:
 
 		q-list.full-width
 			q-item(tag="label")
