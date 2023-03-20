@@ -160,7 +160,7 @@ q-dialog(v-model="showAdd")
 					q-input(v-model="ext" placeholder="*.jpg, *.mp3, *.tiff" label="Расширение" v-if="type === 'По расширению файла'" lazy-rules :rules="[val => val && val.length > 0 || 'Обязательное поле']").full-width
 					q-input(v-model="size1" label="Размер, kB" v-if="type === 'Размер больше, чем'" type="number" lazy-rules :rules="[val => val !== null && val !== '' || 'Обязательное поле']").full-width
 					q-input(v-model="size2" label="Размер, kB" v-if="type === 'Размер меньше, чем'" type="number").full-width
-					q-input(v-model="sborka" label="Путь" v-if="type === 'Добавить из сборки'").full-width
+					q-input(v-model="sborka" label="Сборка" v-if="type === 'Добавить из сборки'").full-width
 
 			q-card-section
 				q-card-actions(align="right")
