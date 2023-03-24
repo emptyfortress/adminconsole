@@ -8,7 +8,6 @@ const props = defineProps({
 	},
 })
 
-const tabl1 = ref('laksdlkj')
 const options = [
 	'UseDefaultOrCurrent',
 	'UseOwnDatabase',
@@ -45,8 +44,7 @@ const tables = [
 			.val(contenteditable) {{props.bd.date}} 14:53
 			label Используется по умолчанию:
 			q-checkbox(v-model="props.bd.def" dense)
-	br
-	.arch
+	.arch.q-mt-xs
 		.title Расположение таблиц
 		.tabl
 			template(v-for="item in tables" :key="item.id")

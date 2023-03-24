@@ -14,22 +14,20 @@ q-dialog(:modelValue='edit' persistent position='bottom' full-width)
 
 			q-tab-panels(v-model='mytab' animated)
 				q-tab-panel(name='prop')
-					PropertyTab(:bd="props.bd")
+					PropertyTab(:bd="props.bd" )
 				q-tab-panel(name='control')
 					ControlTab(:bd="props.bd")
 				q-tab-panel(name='outer')
 					component(:is="Outer")
 				q-tab-panel(name='arch')
 					ArchTab(:bd="props.bd")
-				// q-tab-panel(name='meta')
-				// 	MetaTab(:bd="props.bd")
 				q-tab-panel(name='cache')
 					CacheTab(:bd="props.bd")
 		div
 			q-separator
 			q-card-actions(align='center')
-				q-btn(flat color="primary" @click="$emit('close')") Отмена
-				q-btn(unelevated color="primary" @click="$emit('close')") Применить
+				q-btn(:disable="mytab === 'outer'" flat color="primary" @click="$emit('close')") Отмена
+				q-btn(:disable="mytab === 'outer'" unelevated color="primary" @click="$emit('close')") Применить
 
 		q-btn(flat round icon="mdi-close" color="primary" @click="$emit('close')").close 
 </template>
@@ -41,7 +39,6 @@ import Outer from '@/components/setupcomponent/Outer.vue'
 import PropertyTab from '@/components/setupcomponent/PropertyTab.vue'
 import ControlTab from '@/components/setupcomponent/ControlTab.vue'
 import ArchTab from '@/components/setupcomponent/ArchTab.vue'
-// import MetaTab from '@/components/setupcomponent/MetaTab.vue'
 import CacheTab from '@/components/setupcomponent/CacheTab.vue'
 
 const props = defineProps({
@@ -78,7 +75,7 @@ const tabs = useTabs()
 
 <style scoped lang="scss">
 .edit {
-	height: calc(100vh - 150px);
+	height: calc(100vh - 120px);
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;

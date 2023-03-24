@@ -16,14 +16,16 @@ const options = ['InMemory', 'NoCache', 'Redis']
 		.more
 			label Провайдер:
 			q-select(v-model="prov" :options="options" dense)
-			label Строка подключения:
+			label(:class="{dis : prov !=='Redis'}") Строка подключения:
 			.row.items-center
-				q-input(v-model="line" dense)
-				q-btn(unelevated color="primary" size="xs" label="Тест").q-ml-md 
-			label Пароль:
-			q-input(v-model="pass" dense)
+				q-input(v-model="line" dense :disable="prov !== 'Redis'")
+				q-btn(unelevated color="primary" size="xs" label="Тест" :disable="prov !== 'Redis'").q-ml-md 
+			label(:class="{dis : prov !=='Redis'}") Пароль:
+			q-input(v-model="pass" dense :disable="prov !== 'Redis'")
 			label
-			q-checkbox(v-model="schet" label="Включить счетчики производительности")
+	.arch.q-mt-xs
+		div
+		q-checkbox(v-model="schet" label="Включить счетчики производительности")
 </template>
 
 <style scoped lang="scss">
@@ -35,6 +37,9 @@ const options = ['InMemory', 'NoCache', 'Redis']
 	font-size: 0.8rem;
 	text-transform: uppercase;
 	color: $secondary;
+}
+.dis {
+	opacity: 0.3;
 }
 .arch {
 	background: var(--bg-grey);

@@ -19,8 +19,9 @@ const path = ref('')
 				div сек.
 				q-btn(outline color="primary" label="Выполнить" size="sm").q-ml-xl
 		
+	.arch.q-mt-xs
 		div
-		q-btn(unelevated color="primary" label="Пересоздать задания БД").q-mt-xl
+		q-btn(unelevated color="primary" label="Пересоздать задания БД")
 </template>
 
 <style scoped lang="scss">

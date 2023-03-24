@@ -56,8 +56,7 @@ const options = ['понедельник', 'вторник', 'среда', 'че
 				q-item-section Нестандартное описание архивирования
 					
 					
-	br
-	.arch
+	.arch.q-mt-xs
 		.title Управление:
 		q-btn(unelevated color="primary" label="Выполнить архивирование сейчас").q-ml-md
 </template>
