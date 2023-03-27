@@ -1,12 +1,21 @@
 <template lang="pug">
 q-dialog(:model-value="props.dialog" position="bottom" full-width persistent)
 	q-card.edit
+		q-btn.close(flat round icon="mdi-close" color="primary" @click="close")
+
 		div
 			q-card-section
 				.title
 					q-icon(name='mdi-database-cog')
 					span Мастер баз данных
-		q-btn(flat round icon="mdi-close" color="primary" @click="close").close 
+
+			q-tabs.text-secondary(v-model='mytab' dense)
+				q-tab(v-for='tab in tabs' :key='tab.name' :name='tab.name') {{tab.label}}
+
+			// q-stepper(v-model="step" ref="stepper" color="primary" animated flat)
+			// 	q-step(:name="1" title="Select campaign settings" icon="settings" :done="step > 1") laksjl
+    
+
 		div
 			q-separator
 			q-card-actions(align='center')
@@ -15,7 +24,7 @@ q-dialog(:model-value="props.dialog" position="bottom" full-width persistent)
 </template>
 
 <script setup lang="ts">
-// import { ref, reactive } from 'vue'
+import { ref } from 'vue'
 
 const props = defineProps({
 	dialog: {
@@ -28,6 +37,21 @@ const emit = defineEmits(['update:modelValue'])
 const close = () => {
 	emit('update:modelValue', false)
 }
+
+const mytab = ref('create')
+const tabs = [
+	{ id: 0, field: 'create', name: 'create', label: 'Создание БД', modified: false },
+	{ id: 1, field: 'update', name: 'update', label: 'Обновление БД', modified: false },
+	{
+		id: 2,
+		field: 'connect',
+		name: 'connect',
+		label: 'Подключение к существующей БД',
+		modified: false,
+	},
+]
+
+// const step = ref(1)
 </script>
 
 <style scoped lang="scss">
