@@ -26,16 +26,21 @@ q-dialog(:model-value="props.dialog" position="bottom" full-width persistent)
 									span.q-ml-sm {{ element.name }}
 								q-checkbox(v-model="act" :val="element.id" dense)
 
+			.column.all.q-pt-lg(v-if="start" vertical)
+				q-radio(v-model="choose" val="one" label="Создать новую БД и подключить ее к серверу")
+				q-radio(v-model="choose" val="two" label="Подключить существующую БД, не представленную в списке")
+				q-radio(v-model="choose" val="three" label="Обновить выбранную в списке БД" :disable="selected")
+
 		div
 			q-separator
 			q-card-actions(align='center')
 				q-btn(flat color="primary" @click="close") Отмена
-				q-btn(unelevated color="primary" @click="close") Применить
+				q-btn(unelevated color="primary" @click="close") Далее
 		q-btn.close(flat round icon="mdi-close" color="primary" @click="close")
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref, reactive, computed } from 'vue'
 import draggable from 'vuedraggable'
 
 const props = defineProps({
@@ -78,6 +83,15 @@ const select = (ind: number) => {
 	list.map((item) => (item.selected = false))
 	list[ind].selected = true
 }
+const selected = computed(() => {
+	const temp = list.filter((item) => item.selected === true)
+	if (temp.length > 0) {
+		return false
+	}
+	return true
+})
+const start = ref(true)
+const choose = ref()
 </script>
 
 <style scoped lang="scss">
