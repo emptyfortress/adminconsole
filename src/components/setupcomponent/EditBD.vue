@@ -1,5 +1,5 @@
 <template lang="pug">
-q-dialog(:modelValue='edit' persistent position='bottom' full-width)
+q-dialog(:modelValue='props.edit' persistent position='bottom' full-width)
 	q-card.edit
 		div
 			q-card-section
@@ -26,10 +26,10 @@ q-dialog(:modelValue='edit' persistent position='bottom' full-width)
 		div
 			q-separator
 			q-card-actions(align='center')
-				q-btn(:disable="mytab === 'outer'" flat color="primary" @click="$emit('close')") Отмена
-				q-btn(:disable="mytab === 'outer'" unelevated color="primary" @click="$emit('close')") Применить
+				q-btn(:disable="mytab === 'outer'" flat color="primary" @click="close") Отмена
+				q-btn(:disable="mytab === 'outer'" unelevated color="primary" @click="close") Применить
 
-		q-btn(flat round icon="mdi-close" color="primary" @click="$emit('close')").close 
+		q-btn(flat round icon="mdi-close" color="primary" @click="close").close 
 </template>
 
 <script setup lang="ts">
@@ -44,7 +44,7 @@ import CacheTab from '@/components/setupcomponent/CacheTab.vue'
 const props = defineProps({
 	edit: {
 		type: Boolean,
-		default: true,
+		default: false,
 	},
 	bd: {
 		type: Object,
@@ -63,6 +63,11 @@ const props = defineProps({
 		default: 'prop',
 	},
 })
+
+const emit = defineEmits(['update:modelValue'])
+const close = () => {
+	emit('update:modelValue', false)
+}
 
 const mytab = ref('control')
 

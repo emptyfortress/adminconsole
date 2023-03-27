@@ -50,7 +50,7 @@
 
 ChangeDialog(v-model="change" :changename="changename" @changeDef="assignDef")
 MasterBD(v-model="master")
-component(:is="EditBD" v-model="edit" @close="edit = false" :bd="bdRow" :tab="bdTab")
+component(:is="EditBD" v-model="edit" :bd="bdRow" :tab="bdTab")
 </template>
 
 <script setup lang="ts">
