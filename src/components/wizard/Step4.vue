@@ -21,7 +21,7 @@ const table = [
 </script>
 
 <template lang="pug">
-div Параметры базы данных:
+div Конфигурация:
 q-list.q-mt-md(separator)
 	q-expansion-item(v-for="panel in check" :key="panel.id" :label="panel.label")
 		template(v-slot:header)

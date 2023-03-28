@@ -35,7 +35,6 @@ q-dialog(:model-value="props.dialog" position="bottom" full-width persistent)
 								q-radio(v-model="wiz.choose" val="update" label="Обновить выбранную в списке БД" :disable="selected")
 
 					q-tab-panel(name="create")
-						// p fuck
 						component(:is="CreateBd")
 					q-tab-panel(name="connect")
 						p Connect

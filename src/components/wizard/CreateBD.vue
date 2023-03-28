@@ -4,6 +4,8 @@ import Step1 from '@/components/wizard/Step1.vue'
 import Step2 from '@/components/wizard/Step2.vue'
 import Step3 from '@/components/wizard/Step3.vue'
 import Step4 from '@/components/wizard/Step4.vue'
+import Step5 from '@/components/wizard/Step5.vue'
+import Step6 from '@/components/wizard/Step6.vue'
 
 const step = ref(1)
 </script>
@@ -23,13 +25,19 @@ const step = ref(1)
 			.all900
 				.arch
 					component(:is="Step3")
-		q-step(:name="4" prefix="4" title="Параметры БД" :done="step > 4" )
+		q-step(:name="4" prefix="4" title="Конфигурация" :done="step > 4" )
 			.all900
 				.arch
 					component(:is="Step4")
-		q-step(:name="5" prefix="5" title="Дополнительно" :done="step > 5" )
-			| second laksjdlajk
-		q-step(:name="6" prefix="6" title="Завершение" :done="step > 6" )
+		q-step(:name="5" prefix="5" title="Параметры БД" :done="step > 5" )
+			.all900
+				.arch
+					component(:is="Step5")
+		q-step(:name="6" prefix="6" title="Дополнительно" :done="step > 6" )
+			.all900
+				.arch
+					component(:is="Step6")
+		q-step(:name="7" prefix="7" title="Завершение" :done="step > 7" )
 			| second laksjdlajk
 </template>
 
