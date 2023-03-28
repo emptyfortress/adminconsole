@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template lang="pug">
-div Выберите сервер БД, под управлением которого будет работать создаваемая база данных:
+div Параметры базы данных:
 q-form.q-mt-md
 	.form
 		label Тип сервера:

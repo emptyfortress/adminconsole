@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import Step1 from '@/components/wizard/Step1.vue'
+import Step2 from '@/components/wizard/Step2.vue'
+import Step3 from '@/components/wizard/Step3.vue'
+import Step4 from '@/components/wizard/Step4.vue'
 
 const step = ref(1)
 </script>
@@ -13,11 +16,17 @@ const step = ref(1)
 				.arch
 					component(:is="Step1")
 		q-step(:name="2" prefix="2" title="Скрипт создания" :done="step > 2" )
-			| second laksjdlajk
+			.all900
+				.arch
+					component(:is="Step2")
 		q-step(:name="3" prefix="3" title="База данных" :done="step > 3" )
-			| second laksjdlajk
-		q-step(:name="4" prefix="4" title="Параметры" :done="step > 4" )
-			| second laksjdlajk
+			.all900
+				.arch
+					component(:is="Step3")
+		q-step(:name="4" prefix="4" title="Параметры БД" :done="step > 4" )
+			.all900
+				.arch
+					component(:is="Step4")
 		q-step(:name="5" prefix="5" title="Дополнительно" :done="step > 5" )
 			| second laksjdlajk
 		q-step(:name="6" prefix="6" title="Завершение" :done="step > 6" )
