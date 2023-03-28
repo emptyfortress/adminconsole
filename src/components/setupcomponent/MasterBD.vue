@@ -4,44 +4,57 @@ q-dialog(:model-value="props.dialog" position="bottom" full-width persistent)
 		div
 			q-card-section
 				.title
-					q-icon(name='mdi-database-cog')
+					q-icon(name='mdi-wizard-hat')
 					span Мастер баз данных
 
-			.all
-				.arch
-					component(:is="draggable" :list="list"
-						item-key="id"
-						ghost-class='ghost'
-						).list-group
 
-						template(#header)
-							.tabel.gr
-								div Название БД
-								div Доступно пользователям ДВ
+				q-tab-panels(v-model="panel" animated)
+					q-tab-panel(name="start")
+						.all
+							.arch
+								component(:is="draggable" :list="list"
+									item-key="id"
+									ghost-class='ghost'
+									).list-group
 
-						template(#item="{ element, index }")
-							.tabel(:class="{ selected : element.selected }" @click="select(index)")
-								div
-									q-icon(name="mdi-database-outline" size="18px" style="vertical-align: top;")
-									span.q-ml-sm {{ element.name }}
-								q-checkbox(v-model="act" :val="element.id" dense)
+									template(#header)
+										.tabel.gr
+											div Название БД
+											div Доступно пользователям ДВ
 
-			.column.all.q-pt-lg(v-if="start" vertical)
-				q-radio(v-model="choose" val="one" label="Создать новую БД и подключить ее к серверу")
-				q-radio(v-model="choose" val="two" label="Подключить существующую БД, не представленную в списке")
-				q-radio(v-model="choose" val="three" label="Обновить выбранную в списке БД" :disable="selected")
+									template(#item="{ element, index }")
+										.tabel(:class="{ selected : element.selected }" @click="select(index)")
+											div
+												q-icon(name="mdi-database-outline" size="18px" style="vertical-align: top;")
+												span.q-ml-sm {{ element.name }}
+											q-checkbox(v-model="act" :val="element.id" dense)
+
+							.column.q-mt-md
+								q-radio(v-model="wiz.choose" val="create" label="Создать новую БД и подключить ее к серверу")
+								q-radio(v-model="wiz.choose" val="connect" label="Подключить существующую БД, не представленную в списке")
+								q-radio(v-model="wiz.choose" val="update" label="Обновить выбранную в списке БД" :disable="selected")
+
+					q-tab-panel(name="create")
+						// p fuck
+						component(:is="CreateBd")
+					q-tab-panel(name="connect")
+						p Connect
+					q-tab-panel(name="update")
+						p Update
 
 		div
 			q-separator
-			q-card-actions(align='center')
+			q-card-actions(align="center")
 				q-btn(flat color="primary" @click="close") Отмена
-				q-btn(unelevated color="primary" @click="close") Далее
+				q-btn(unelevated color="primary" @click="next") Далее
 		q-btn.close(flat round icon="mdi-close" color="primary" @click="close")
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, computed } from 'vue'
 import draggable from 'vuedraggable'
+import { useWiz } from '@/stores/wiz'
+import CreateBd from '@/components/wizard/CreateBd.vue'
 
 const props = defineProps({
 	dialog: {
@@ -49,6 +62,8 @@ const props = defineProps({
 		default: false,
 	},
 })
+
+const wiz = useWiz()
 const emit = defineEmits(['update:modelValue'])
 
 const close = () => {
@@ -90,8 +105,12 @@ const selected = computed(() => {
 	}
 	return true
 })
-const start = ref(true)
-const choose = ref()
+
+const panel = ref('create')
+
+const next = () => {
+	panel.value = wiz.choose
+}
 </script>
 
 <style scoped lang="scss">
