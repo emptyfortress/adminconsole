@@ -39,7 +39,7 @@ const step = ref(1)
 }
 
 .all900 {
-	width: clamp(350px, calc(100% - 1rem), 900px);
+	width: clamp(350px, calc(100% - 1rem), 800px);
 	margin: 0 auto;
 }
 .arch {
