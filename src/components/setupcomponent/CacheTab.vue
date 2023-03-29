@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 const prov = ref('InMemory')
 const line = ref('')
@@ -7,6 +7,22 @@ const pass = ref('')
 const schet = ref(false)
 
 const options = ['InMemory', 'NoCache', 'Redis']
+const loading = ref(false)
+const check = ref(false)
+
+const test = () => {
+	loading.value = true
+	setTimeout(() => {
+		loading.value = false
+		check.value = true
+	}, 2000)
+}
+const calcColor = computed(() => {
+	if (check.value === true) {
+		return 'teal'
+	}
+	return 'primary'
+})
 </script>
 
 <template lang="pug">
@@ -19,7 +35,9 @@ const options = ['InMemory', 'NoCache', 'Redis']
 			label(:class="{dis : prov !=='Redis'}") Строка подключения:
 			.row.items-center
 				q-input(v-model="line" dense :disable="prov !== 'Redis'")
-				q-btn(unelevated color="primary" size="xs" label="Тест" :disable="prov !== 'Redis'").q-ml-md 
+				q-btn(unelevated :color="calcColor" size="xs" :loading="loading" :disable="prov !== 'Redis'" @click="test").q-ml-md
+					q-icon(v-if="check" name="mdi-check-bold" color="white")
+					span(v-else) Test
 			label(:class="{dis : prov !=='Redis'}") Пароль:
 			q-input(v-model="pass" dense :disable="prov !== 'Redis'")
 			label
