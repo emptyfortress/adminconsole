@@ -50,7 +50,7 @@
 
 component(:is="ChangeDialog" v-model="change" :changename="changename" @changeDef="assignDef")
 component(:is="MasterDatabase")
-component(:is="EditBd" v-model="edit" :bd="bdRow" :tab="bdTab")
+component(:is="EditDatabase" v-model="edit" :bd="bdRow" :tab="bdTab")
 
 </template>
 
@@ -58,7 +58,7 @@ component(:is="EditBd" v-model="edit" :bd="bdRow" :tab="bdTab")
 import { ref, reactive } from 'vue'
 import ChangeDialog from '@/components/setupcomponent/ChangeDialog.vue'
 import MasterDatabase from '@/components/setupcomponent/MasterDatabase.vue'
-import EditBd from '@/components/setupcomponent/EditBd.vue'
+import EditDatabase from '@/components/setupcomponent/EditDatabase.vue'
 import { useTabs } from '@/stores/tabs'
 import type { QTableProps } from 'quasar'
 
