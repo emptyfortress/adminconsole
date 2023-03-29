@@ -57,7 +57,7 @@ q-dialog(:model-value="props.dialog" position="bottom" full-width persistent)
 import { ref, reactive, computed } from 'vue'
 import draggable from 'vuedraggable'
 import { useWiz } from '@/stores/wiz'
-import CreateBd from '@/components/wizard/CreateBd.vue'
+import CreateDatabase from '@/components/wizard/CreateDatabase.vue'
 
 const props = defineProps({
 	dialog: {
