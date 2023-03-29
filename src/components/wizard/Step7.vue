@@ -8,7 +8,7 @@ onMounted(() => {
 	setTimeout(() => {
 		visible.value = false
 		showSimulatedReturnData.value = true
-	}, 2000)
+	}, 3000)
 })
 </script>
 

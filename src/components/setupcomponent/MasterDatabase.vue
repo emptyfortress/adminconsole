@@ -38,7 +38,7 @@ q-dialog(:model-value="props.dialog" position="bottom" full-width persistent)
 								q-radio(v-model="wiz.choose" val="update" label="Обновить выбранную в списке БД" :disable="selected")
 
 					q-tab-panel(name="create")
-						component(:is="CreateDatabase")
+						component(:is="CreateDatabase" ref="cr")
 					q-tab-panel(name="connect")
 						p Connect
 					q-tab-panel(name="update")
@@ -47,9 +47,12 @@ q-dialog(:model-value="props.dialog" position="bottom" full-width persistent)
 		.bottom
 			q-separator
 			q-card-actions(align="center")
-				q-btn(flat color="primary" @click="close") Отмена
-				q-btn(unelevated color="primary" @click="next" v-if="panel === 'start'") Далее
-				q-btn(unelevated color="primary" @click="" v-else) Далее1
+				q-btn(flat color="primary" @click="close").q-mr-xl Отмена
+				template(v-if="panel === 'start'")
+					q-btn(unelevated color="primary" @click="next" padding="xs xl") Далее
+				template(v-else)
+					q-btn(flat color="primary" @click="cr.prevStep") Назад
+					q-btn(unelevated color="primary" @click="cr.nextStep" padding="xs xl") Далее
 		q-btn.close(flat round icon="mdi-close" color="primary" @click="close")
 </template>
 
@@ -66,7 +69,7 @@ const props = defineProps({
 	},
 })
 
-const stepper = ref()
+const cr = ref()
 
 const wiz = useWiz()
 const emit = defineEmits(['update:modelValue'])
@@ -121,7 +124,7 @@ const next = () => {
 
 <style scoped lang="scss">
 .edit {
-	height: calc(100vh - 120px);
+	height: calc(100vh - 100px);
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;

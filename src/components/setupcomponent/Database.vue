@@ -49,7 +49,7 @@
 		q-btn(unelevated color='primary' @click='master = true') Мастер&nbsp;баз&nbsp;данных 
 
 component(:is="ChangeDialog" v-model="change" :changename="changename" @changeDef="assignDef")
-component(:is="MasterDatabase")
+component(:is="MasterDatabase" v-model="master")
 component(:is="EditDatabase" v-model="edit" :bd="bdRow" :tab="bdTab")
 
 </template>

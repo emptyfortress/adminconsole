@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, defineExpose } from 'vue'
 import Step1 from '@/components/wizard/Step1.vue'
 import Step2 from '@/components/wizard/Step2.vue'
 import Step3 from '@/components/wizard/Step3.vue'
@@ -10,6 +10,15 @@ import Step7 from '@/components/wizard/Step7.vue'
 
 const step = ref(1)
 const live = ref(false)
+const stepper = ref()
+
+const nextStep = () => {
+	stepper.value.next()
+}
+const prevStep = () => {
+	stepper.value.previous()
+}
+defineExpose({ nextStep, prevStep })
 </script>
 
 <template lang="pug">
@@ -43,6 +52,7 @@ const live = ref(false)
 			.all900
 				.arch
 					component(:is="Step7")
+
 </template>
 
 <style scoped lang="scss">
