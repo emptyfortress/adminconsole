@@ -133,7 +133,7 @@ const options1 = ['Online', 'Auto', 'Disabled', 'Read and delete', 'Reserved']
 .row.items-center.justify-between
 	.zg Хранилища ({{ list1.length }})
 	q-btn(flat round icon="mdi-plus-circle" @click="clearAdd")
-.grey.hran
+.hran
 	.empt(v-if="list1.length === 0") Добавьте хранилища
 	component(:is="draggable" :list="list1"
 		item-key="id"
@@ -231,6 +231,7 @@ q-dialog(:model-value="showAdd")
 	justify-items: start;
 	column-gap: 1rem;
 	row-gap: 0.2rem;
+	background: var(--bg-light);
 }
 
 .edittable {

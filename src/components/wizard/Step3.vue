@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template lang="pug">
-div Укажите название и расположение(?) базы данных:
+.text-bold Укажите название и расположение(?) базы данных:
 q-form.q-mt-md
 	.form
 		label Имя:

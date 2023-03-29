@@ -31,14 +31,19 @@ const split2 = ref(42)
 }
 
 .outer {
-	padding-top: 1rem;
+	padding: 1rem;
+	background: #fff;
+	box-shadow: 0 0 4px rgba($color: #000000, $alpha: 0.3);
 }
 .change {
 	color: darkred;
-	background: #d3e8ff;
+	background: $primary;
+	color: white;
+	font-weight: 600;
 	font-size: 0.8rem;
 	text-align: center;
 	margin: 0 auto;
+	margin-bottom: 1rem;
 	width: 600px;
 }
 </style>

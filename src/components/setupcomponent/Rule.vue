@@ -251,4 +251,7 @@ q-dialog(v-model="showAdd")
 		font-size: 0.8rem;
 	}
 }
+.list-group > div {
+	background: var(--bg-light);
+}
 </style>

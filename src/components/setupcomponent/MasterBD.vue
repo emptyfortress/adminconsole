@@ -6,6 +6,9 @@ q-dialog(:model-value="props.dialog" position="bottom" full-width persistent)
 				.title
 					q-icon(name='mdi-wizard-hat')
 					span Мастер баз данных
+					span.q-ml-md(v-if="panel === 'create'") (Создание)
+					span.q-ml-md(v-if="panel === 'connect'") (Подключение)
+					span.q-ml-md(v-if="panel === 'update'") (Обновление)
 
 
 				q-tab-panels(v-model="panel" animated)
@@ -41,11 +44,12 @@ q-dialog(:model-value="props.dialog" position="bottom" full-width persistent)
 					q-tab-panel(name="update")
 						p Update
 
-		div
+		.bottom
 			q-separator
 			q-card-actions(align="center")
 				q-btn(flat color="primary" @click="close") Отмена
-				q-btn(unelevated color="primary" @click="next") Далее
+				q-btn(unelevated color="primary" @click="next" v-if="panel === 'start'") Далее
+				q-btn(unelevated color="primary" @click="" v-else) Далее1
 		q-btn.close(flat round icon="mdi-close" color="primary" @click="close")
 </template>
 
@@ -62,11 +66,14 @@ const props = defineProps({
 	},
 })
 
+const stepper = ref()
+
 const wiz = useWiz()
 const emit = defineEmits(['update:modelValue'])
 
 const close = () => {
 	emit('update:modelValue', false)
+	panel.value = 'start'
 }
 
 const act = ref([0, 1])
@@ -105,7 +112,7 @@ const selected = computed(() => {
 	return true
 })
 
-const panel = ref('create')
+const panel = ref('start')
 
 const next = () => {
 	panel.value = wiz.choose
@@ -119,6 +126,7 @@ const next = () => {
 	flex-direction: column;
 	justify-content: space-between;
 	position: relative;
+	background: var(--bg-grey);
 }
 .title {
 	font-size: 1.5rem;
@@ -141,9 +149,8 @@ const next = () => {
 	width: 900px;
 	margin: 0 auto;
 }
-.arch {
-	background: var(--bg-grey);
-	padding: 1rem;
+.list-group > div {
+	background: var(--bg-light);
 }
 .titl {
 	font-size: 0.9rem;
@@ -163,5 +170,11 @@ const next = () => {
 	&.selected {
 		background: var(--bg-selected);
 	}
+}
+.q-tab-panels {
+	background: transparent;
+}
+.bottom {
+	background: white;
 }
 </style>

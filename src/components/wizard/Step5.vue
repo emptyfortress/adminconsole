@@ -13,7 +13,7 @@ const num = ref(600)
 </script>
 
 <template lang="pug">
-div Создать базу данных со следующими параметрами:
+.text-bold Создать базу данных со следующими параметрами:
 .form.q-mt-md(flat)
 	template(v-for="item in table" :key="item.id")
 		label {{item.label}}:

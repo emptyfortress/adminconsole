@@ -169,4 +169,7 @@ q-dialog(:model-value="showAdd")
 .sep {
 	border: 1px dashed $secondary;
 }
+.list-group > div {
+	background: var(--bg-light);
+}
 </style>

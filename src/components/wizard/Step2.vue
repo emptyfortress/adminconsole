@@ -5,7 +5,7 @@ const item = ref()
 </script>
 
 <template lang="pug">
-div Выберите SQL-скрипт для создания базы данных:
+.text-bold Выберите SQL-скрипт для создания базы данных:
 q-form.q-mt-md.column
 	q-radio(v-model="item" val="one" label="Стандартный (рекомендуется)")
 	.row.items-center

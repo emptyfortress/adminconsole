@@ -23,7 +23,7 @@ q-dialog(:modelValue='props.edit' persistent position='bottom' full-width)
 					ArchTab(:bd="props.bd")
 				q-tab-panel(name='cache')
 					CacheTab(:bd="props.bd")
-		div
+		.bottom
 			q-separator
 			q-card-actions(align='center')
 				q-btn(:disable="mytab === 'outer'" flat color="primary" @click="close") Отмена
@@ -80,11 +80,15 @@ const tabs = useTabs()
 
 <style scoped lang="scss">
 .edit {
-	height: calc(100vh - 120px);
+	height: calc(100vh - 100px);
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	position: relative;
+	background: var(--bg-grey);
+}
+.q-tab-panels {
+	background: transparent;
 }
 
 .title {
@@ -119,5 +123,8 @@ const tabs = useTabs()
 	position: absolute;
 	top: 1rem;
 	right: 1rem;
+}
+.bottom {
+	background: white;
 }
 </style>
