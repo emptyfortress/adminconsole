@@ -23,7 +23,7 @@
 					q-btn(:props="props" round flat icon='mdi-cog' size='sm')
 						q-menu(:props="props")
 							q-list(:props="props")
-								q-item(:props="props" clickable v-for="item in tabs.tabs" :key="item.id" @click="editBD(props.row, item.field)" v-close-popup)
+								q-item(:props="props" clickable v-for="item in tabs.tabs" :key="item.id" @click="edBD(props.row, item.field)" v-close-popup)
 									q-item-section(side)
 										q-icon(name="mdi-database-cog-outline")
 									q-item-section {{ item.label }}
@@ -75,7 +75,7 @@ const remove = (row: any) => {
 	const index = rows.indexOf(row)
 	rows.splice(index, 1)
 }
-const editBD = (row: any, field: string) => {
+const edBD = (row: any, field: string) => {
 	bdRow.value = row
 	bdTab.value = field
 	edit.value = true
