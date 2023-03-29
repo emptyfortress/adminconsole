@@ -48,7 +48,7 @@
 		div Чтобы создать новую базу данных, сделать доступной для пользователей существующую базу данных, а также обновить БД, если ее версия отличается от версии сервера Docsvision, воспользуйтесь Мастером баз данных.
 		q-btn(unelevated color='primary' @click='master = true') Мастер&nbsp;баз&nbsp;данных 
 
-ChangeDialog(v-model="change" :changename="changename" @changeDef="assignDef")
+component(:is="ChangeDialog" v-model="change" :changename="changename" @changeDef="assignDef")
 component(:is="MasterBd")
 component(:is="EditBd" v-model="edit" :bd="bdRow" :tab="bdTab")
 </template>
@@ -58,8 +58,8 @@ import { ref, reactive } from 'vue'
 import ChangeDialog from '@/components/setupcomponent/ChangeDialog.vue'
 import MasterBd from '@/components/setupcomponent/MasterBd.vue'
 import EditBd from '@/components/setupcomponent/EditBd.vue'
-import type { QTableProps } from 'quasar'
 import { useTabs } from '@/stores/tabs'
+import type { QTableProps } from 'quasar'
 
 const tabs = useTabs()
 const emit = defineEmits(['change', 'haserror', 'noerror'])
