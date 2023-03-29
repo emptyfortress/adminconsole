@@ -51,6 +51,7 @@
 component(:is="ChangeDialog" v-model="change" :changename="changename" @changeDef="assignDef")
 component(:is="MasterBd")
 component(:is="EditBd" v-model="edit" :bd="bdRow" :tab="bdTab")
+
 </template>
 
 <script setup lang="ts">
