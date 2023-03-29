@@ -49,7 +49,7 @@
 		q-btn(unelevated color='primary' @click='master = true') Мастер&nbsp;баз&nbsp;данных 
 
 component(:is="ChangeDialog" v-model="change" :changename="changename" @changeDef="assignDef")
-component(:is="MasterBd")
+component(:is="MasterDatabase")
 component(:is="EditBd" v-model="edit" :bd="bdRow" :tab="bdTab")
 
 </template>
@@ -57,7 +57,7 @@ component(:is="EditBd" v-model="edit" :bd="bdRow" :tab="bdTab")
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
 import ChangeDialog from '@/components/setupcomponent/ChangeDialog.vue'
-import MasterBd from '@/components/setupcomponent/MasterBd.vue'
+import MasterDatabase from '@/components/setupcomponent/MasterDatabase.vue'
 import EditBd from '@/components/setupcomponent/EditBd.vue'
 import { useTabs } from '@/stores/tabs'
 import type { QTableProps } from 'quasar'
