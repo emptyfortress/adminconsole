@@ -1,4 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const type = ref('')
+</script>
 
 <template lang="pug">
 .text-bold Выберите сервер БД, под управлением которого будет работать создаваемая база данных:
