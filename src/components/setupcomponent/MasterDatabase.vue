@@ -38,7 +38,7 @@ q-dialog(:model-value="props.dialog" position="bottom" full-width persistent)
 								q-radio(v-model="wiz.choose" val="update" label="Обновить выбранную в списке БД" :disable="selected")
 
 					q-tab-panel(name="create")
-						component(:is="CreateBd")
+						component(:is="CreateDatabase")
 					q-tab-panel(name="connect")
 						p Connect
 					q-tab-panel(name="update")
@@ -57,7 +57,7 @@ q-dialog(:model-value="props.dialog" position="bottom" full-width persistent)
 import { ref, reactive, computed } from 'vue'
 import draggable from 'vuedraggable'
 import { useWiz } from '@/stores/wiz'
-import CreateDatabase from '@/components/wizard/CreateDatabase.vue'
+import CreateDatabase from '@/components/setupcomponents/CreateDatabase.vue'
 
 const props = defineProps({
 	dialog: {
