@@ -1,8 +1,8 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from '@/pages/Home.vue'
 // import External from '@/components//setupcomponent/External.vue'
-// import EditBD from '@/components/setupcomponent/EditBD.vue'
-// import CreateBD from '@/components/wizard/CreateBD.vue'
+// import editBD from '@/components/setupcomponent/editBD.vue'
+// import createBD from '@/components/wizard/createBD.vue'
 
 declare module 'vue-router' {
 	interface Bread {
@@ -28,7 +28,7 @@ export const router = createRouter({
 		// {
 		// 	path: '/test',
 		// 	name: 'create',
-		// 	component: CreateBD,
+		// 	component: createBD,
 		// 	meta: { title: 'Admin console', bread: [{ label: 'Dashboard', to: '/' }] },
 		// },
 		{
@@ -145,7 +145,7 @@ export const router = createRouter({
 				// {
 				// 	path: '/edit',
 				// 	name: 'edit',
-				// 	component: EditBD,
+				// 	component: editBD,
 				// 	meta: {
 				// 		title: 'Вкладка',
 				// 		nav: false,
