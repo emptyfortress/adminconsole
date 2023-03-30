@@ -1,11 +1,18 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
+const props = defineProps({
+	text: {
+		type: String,
+		default: 'Выберите сервер БД, под управлением которого будет работать создаваемая база данных:',
+	},
+})
+
 const type = ref('')
 </script>
 
 <template lang="pug">
-.text-bold Выберите сервер БД, под управлением которого будет работать создаваемая база данных:
+.text-bold {{ props.text }}
 q-form.q-mt-md
 	.form
 		label Тип сервера:

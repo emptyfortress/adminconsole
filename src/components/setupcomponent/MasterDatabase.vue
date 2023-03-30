@@ -40,7 +40,7 @@ q-dialog(:model-value="props.dialog" position="bottom" full-width persistent)
 					q-tab-panel(name="create")
 						component(:is="CreateDatabase" ref="cr")
 					q-tab-panel(name="connect")
-						p Connect
+						component(:is="ConnectDatabase" ref="con")
 					q-tab-panel(name="update")
 						p Update
 
@@ -61,6 +61,7 @@ import { ref, reactive, computed } from 'vue'
 import draggable from 'vuedraggable'
 import { useWiz } from '@/stores/wiz'
 import CreateDatabase from '@/components/setupcomponent/CreateDatabase.vue'
+import ConnectDatabase from '@/components/setupcomponent/ConnectDatabase.vue'
 
 const props = defineProps({
 	dialog: {
@@ -70,6 +71,7 @@ const props = defineProps({
 })
 
 const cr = ref()
+const con = ref()
 
 const wiz = useWiz()
 const emit = defineEmits(['update:modelValue'])

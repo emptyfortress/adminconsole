@@ -1,6 +1,17 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 
+const props = defineProps({
+	hint: {
+		type: String,
+		default: 'Идет установка...',
+	},
+	result: {
+		type: String,
+		default: 'Установка прошла успешно!',
+	},
+})
+
 const visible = ref(true)
 const showSimulatedReturnData = ref(false)
 
@@ -19,10 +30,10 @@ onMounted(() => {
 		transition(appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut")
 			.suc(v-show="showSimulatedReturnData")
 				q-icon(name="mdi-check-bold" color="teal" size="md").q-mr-md
-				|Успешно
+				|{{ props.result }}
 	q-inner-loading(:showing="visible")
 		q-spinner-gears(size="50px" color="primary")
-		.wait Идет установка...
+		.wait {{ props.hint }}
 
 </template>
 
