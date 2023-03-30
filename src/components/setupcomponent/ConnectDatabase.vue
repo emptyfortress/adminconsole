@@ -29,10 +29,6 @@ defineExpose({ nextStep, prevStep })
 			.all900
 				.arch
 					component(:is="Step1" text="Выберите сервер БД, под управлением которого будет работать подключаемая база данных:")
-		// q-step(:name="2" prefix="2" title="Скрипт создания" :done="step > 2" )
-		// 	.all900
-		// 		.arch
-		// 			component(:is="Step2")
 		q-step(:name="3" prefix="3" title="База данных" :done="step > 3" )
 			.all900
 				.arch

@@ -6,9 +6,9 @@ q-dialog(:model-value="props.dialog" position="bottom" full-width persistent)
 				.title
 					q-icon(name='mdi-wizard-hat')
 					span Мастер баз данных
-					span.q-ml-md(v-if="panel === 'create'") (Создание)
-					span.q-ml-md(v-if="panel === 'connect'") (Подключение)
-					span.q-ml-md(v-if="panel === 'update'") (Обновление)
+					span.q-ml-md(v-if="wiz.choose === 'create'") (Создание)
+					span.q-ml-md(v-if="wiz.choose === 'connect'") (Подключение)
+					span.q-ml-md(v-if="wiz.choose === 'update'") (Обновление)
 
 
 				q-tab-panels(v-model="panel" animated)
@@ -50,9 +50,12 @@ q-dialog(:model-value="props.dialog" position="bottom" full-width persistent)
 				q-btn(flat color="primary" @click="close").q-mr-xl Отмена
 				template(v-if="panel === 'start'")
 					q-btn(unelevated color="primary" @click="next" padding="xs xl") Далее
-				template(v-else)
+				template(v-if="panel === 'create'")
 					q-btn(flat color="primary" @click="cr.prevStep") Назад
 					q-btn(unelevated color="primary" @click="cr.nextStep" padding="xs xl") Далее
+				template(v-if="panel === 'connect'")
+					q-btn(flat color="primary" @click="con.prevStep") Назад
+					q-btn(unelevated color="primary" @click="con.nextStep" padding="xs xl") Далее
 		q-btn.close(flat round icon="mdi-close" color="primary" @click="close")
 </template>
 
