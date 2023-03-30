@@ -29,29 +29,29 @@ defineExpose({ nextStep, prevStep })
 			.all900
 				.arch
 					component(:is="Step1" text="Выберите сервер БД, под управлением которого будет работать подключаемая база данных:")
-		q-step(:name="3" prefix="3" title="База данных" :done="step > 3" )
+		q-step(:name="3" prefix="2" title="База данных" :done="step > 3" )
 			.all900
 				.arch
 					component(:is="Step3")
 			.all900
 				.arch.q-mt-sm
 					component(:is="Step25")
-		q-step(:name="4" prefix="4" title="Конфигурация" :done="step > 4" )
+		q-step(:name="4" prefix="3" title="Конфигурация" :done="step > 4" )
 			.all900
 				.arch
 					component(:is="Step4")
-		q-step(:name="5" prefix="5" title="Параметры БД" :done="step > 5" )
+		q-step(:name="5" prefix="4" title="Параметры БД" :done="step > 5" )
 			.all900
 				.arch
 					component(:is="Step5")
 			.all900
 				.arch.q-mt-sm
 					component(:is="Step26")
-		q-step(:name="6" prefix="6" title="Дополнительно" :done="step > 6" )
+		q-step(:name="6" prefix="5" title="Дополнительно" :done="step > 6" )
 			.all900
 				.arch
 					component(:is="Step6")
-		q-step(:name="7" prefix="7" title="Завершение" :done="step > 7" )
+		q-step(:name="7" prefix="6" title="Завершение" :done="step > 7" )
 			.all900
 				.arch
 					component(:is="Step7" hint="Идет подключение..." result="Подключение прошло успешно!")

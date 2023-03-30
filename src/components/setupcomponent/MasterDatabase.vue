@@ -42,7 +42,7 @@ q-dialog(:model-value="props.dialog" position="bottom" full-width persistent)
 					q-tab-panel(name="connect")
 						component(:is="ConnectDatabase" ref="con")
 					q-tab-panel(name="update")
-						p Update
+						component(:is="UpdateDatabase" ref="up")
 
 		.bottom
 			q-separator
@@ -56,6 +56,9 @@ q-dialog(:model-value="props.dialog" position="bottom" full-width persistent)
 				template(v-if="panel === 'connect'")
 					q-btn(flat color="primary" @click="con.prevStep") Назад
 					q-btn(unelevated color="primary" @click="con.nextStep" padding="xs xl") Далее
+				template(v-if="panel === 'update'")
+					q-btn(flat color="primary" @click="up.prevStep") Назад
+					q-btn(unelevated color="primary" @click="up.nextStep" padding="xs xl") Далее
 		q-btn.close(flat round icon="mdi-close" color="primary" @click="close")
 </template>
 
@@ -65,6 +68,7 @@ import draggable from 'vuedraggable'
 import { useWiz } from '@/stores/wiz'
 import CreateDatabase from '@/components/setupcomponent/CreateDatabase.vue'
 import ConnectDatabase from '@/components/setupcomponent/ConnectDatabase.vue'
+import UpdateDatabase from '@/components/setupcomponent/UpdateDatabase.vue'
 
 const props = defineProps({
 	dialog: {
@@ -75,6 +79,7 @@ const props = defineProps({
 
 const cr = ref()
 const con = ref()
+const up = ref()
 
 const wiz = useWiz()
 const emit = defineEmits(['update:modelValue'])
