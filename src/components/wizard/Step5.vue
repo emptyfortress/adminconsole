@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
+const props = defineProps({
+	text: {
+		type: String,
+		default: 'Создать базу данных со следующими параметрами',
+	},
+})
+
 const table = [
 	{ id: 0, label: 'Имя базы данных', val: 'lyahhova_gbl_2926' },
 	{ id: 1, label: 'Псевдоним', val: 'lyahhova_gbl_2926' },
@@ -13,7 +20,7 @@ const num = ref(600)
 </script>
 
 <template lang="pug">
-.text-bold Создать базу данных со следующими параметрами:
+.text-bold {{ props.text }}:
 .form.q-mt-md(flat)
 	template(v-for="item in table" :key="item.id")
 		label {{item.label}}:
