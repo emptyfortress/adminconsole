@@ -16,7 +16,7 @@ const nextStep = () => {
 const prevStep = () => {
 	stepper.value.previous()
 }
-defineExpose({ nextStep, prevStep })
+defineExpose({ step, nextStep, prevStep })
 </script>
 
 <template lang="pug">
