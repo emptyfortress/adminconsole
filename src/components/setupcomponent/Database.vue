@@ -113,10 +113,10 @@ const columns: QTableProps['columns'] = [
 	},
 	{ name: 'server', align: 'left', label: 'Сервер SQL', field: 'server', sortable: true },
 	{ name: 'servertype', align: 'left', label: 'Тип сервера', field: 'servertype', sortable: true },
-	{ name: 'index', align: 'left', label: 'Индексация', field: 'index', sortable: true },
+	{ name: 'index', align: 'left', label: 'Индекс', field: 'index', sortable: true },
 	{ name: 'version', align: 'left', label: 'Версия', field: 'version', sortable: true },
-	{ name: 'cache', align: 'left', label: 'Способ кэширования', field: 'cache', sortable: true },
-	{ name: 'date', align: 'left', label: 'Дата создания', field: 'date', sortable: true },
+	{ name: 'cache', align: 'left', label: 'Кэш', field: 'cache', sortable: true },
+	{ name: 'date', align: 'left', label: 'Создано', field: 'date', sortable: true },
 	{ name: 'def', align: 'center', label: 'По умолчанию', field: 'def', sortable: true },
 	{ name: 'action', align: 'right', label: '', field: '' },
 ]
@@ -185,5 +185,9 @@ const rows = reactive([
 	justify-content: space-between;
 	align-items: center;
 	gap: 1rem;
+}
+.q-table th,
+.q-table td {
+	padding: 5px 8px;
 }
 </style>
