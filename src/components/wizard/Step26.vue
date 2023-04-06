@@ -1,11 +1,19 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const props = defineProps({
+	text: {
+		type: String,
+		default:
+			'Обновление базы данных может занять длительное время. Пользователи и сервисы, использующие эту базу данных, будут отключены, и не смогут подключиться к ней до окончания процесса обновления.',
+	},
+})
+</script>
 
 <template lang="pug">
 .mygrid
 	.text-bold.text-negative
 		q-icon(name="mdi-alert" color="negative" size="md").q-mr-md
 		span Внимание!
-	div Обновление базы данных может занять длительное время. Пользователи и сервисы, использующие эту базу данных, будут отключены, и не смогут подключиться к ней до окончания процесса обновления.
+	div {{ props.text }}
 </template>
 
 <style scoped lang="scss">

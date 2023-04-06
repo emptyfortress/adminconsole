@@ -25,7 +25,7 @@ defineExpose({ step, nextStep, prevStep })
 <template lang="pug">
 .create
 	q-stepper(v-model="step" ref="stepper" alternative-labels animated header-nav flat done-color="teal" :keep-alive="live")
-		q-step(:name="1" prefix="1" title="SQL сервер" :done="step > 1" )
+		q-step(:name="1" prefix="1" title="Сервер SQL" :done="step > 1" )
 			.all900
 				.arch
 					component(:is="Step1" text="Выберите сервер БД, под управлением которого будет работать подключаемая база данных:")
@@ -40,13 +40,13 @@ defineExpose({ step, nextStep, prevStep })
 			.all900
 				.arch
 					component(:is="Step4")
-		q-step(:name="5" prefix="4" title="Параметры БД" :done="step > 5" )
+		q-step(:name="5" prefix="4" title="Подтверждение параметров БД" :done="step > 5" )
 			.all900
 				.arch
 					component(:is="Step5")
 			.all900
 				.arch.q-mt-sm
-					component(:is="Step26")
+					component(:is="Step26" text="Подключение к базе данных может занять длительное время.")
 		q-step(:name="6" prefix="5" title="Дополнительно" :done="step > 6" )
 			.all900
 				.arch

@@ -29,7 +29,7 @@ const options = [
 <style scoped lang="scss">
 .mygrid {
 	display: grid;
-	grid-template-columns: auto 220px;
+	grid-template-columns: auto 300px;
 	justify-content: start;
 	align-items: center;
 	column-gap: 1rem;

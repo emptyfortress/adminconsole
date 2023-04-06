@@ -9,7 +9,7 @@ const check = reactive([
 </script>
 
 <template lang="pug">
-.text-bold Дополнительно подгрузить в базу следующие модули:
+.text-bold Загрузить дополнительные настройки следующих модулей:
 .column.q-mt-md
 	q-checkbox(v-for="item in check" :key="item.id" :label="item.label" v-model="item.val")
 

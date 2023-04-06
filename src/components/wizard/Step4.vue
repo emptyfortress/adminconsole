@@ -15,9 +15,23 @@ const table = [
 	{ id: 0, label: 'Имя', val: 'Конструктор согласований' },
 	{ id: 1, label: 'Версия пакета установки', val: '5220' },
 	{ id: 2, label: 'Версия генератора скрипта', val: '5443' },
+	{ id: 5, label: 'Версия установленного пакета', val: '3212' },
 	{ id: 3, label: 'Версия БД', val: '--' },
 	{ id: 4, label: 'Пользовательские метаданные', val: 'Нет' },
 ]
+const simple = [
+	{
+		label: 'WindowsClient',
+		disabled: false,
+		children: [
+			{ label: 'Platform', disabled: true },
+			{ label: 'TakeOffice', disabled: true },
+		],
+	},
+	{ label: 'Workflow', children: [], disabled: true },
+	{ label: 'Platform', children: [], disabled: true },
+]
+const ticked = ref(['WindowsClient', 'Workflow', 'Platform', 'TakeOffice'])
 </script>
 
 <template lang="pug">
@@ -29,24 +43,45 @@ q-list.q-mt-md(separator)
 				.title
 					q-checkbox(v-model="panel.mod" dense :label="panel.label")
 
-		q-card.form(flat)
-			template(v-for="item in table" :key="item.id")
-				label {{item.label}}:
-				div {{item.val}}
+		q-card.mygrid
+			.form(flat)
+				template(v-for="item in table" :key="item.id")
+					label {{item.label}}:
+					div {{item.val}}
+			.preview
+				.zg.q-mb-md Зависимости
+				q-tree(
+					:nodes="simple"
+					icon="mdi-chevron-right"
+					tick-strategy="leaf"
+					v-model:ticked="ticked"
+					color="secondary"
+					dense
+					node-key="label"
+					default-expand-all)
 
 </template>
 
 <style scoped lang="scss">
+.mygrid {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	justify-items: start;
+	align-items: center;
+	column-gap: 1rem;
+	row-gap: 0.5rem;
+	background: transparent;
+}
 .form {
-	width: 600px;
 	display: grid;
 	grid-template-columns: auto 1fr;
 	justify-items: start;
 	align-items: baseline;
-	column-gap: 1rem;
+	column-gap: 2rem;
 	row-gap: 0.5rem;
-	margin: 1rem auto;
+	margin: 1rem;
 	padding: 1rem;
+	background: white;
 }
 label {
 	color: #666;
@@ -74,5 +109,14 @@ label {
 	justify-content: space-between;
 	font-size: 1rem;
 	color: $secondary;
+}
+.preview .zg {
+	color: $secondary;
+	font-size: 0.8rem;
+	text-transform: uppercase;
+}
+:deep(.q-checkbox--dense .q-checkbox__bg) {
+	width: 70%;
+	height: 70%;
 }
 </style>

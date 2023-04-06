@@ -67,6 +67,7 @@ import { useWiz } from '@/stores/wiz'
 import CreateDatabase from '@/components/setupcomponent/CreateDatabase.vue'
 import ConnectDatabase from '@/components/setupcomponent/ConnectDatabase.vue'
 import UpdateDatabase from '@/components/setupcomponent/UpdateDatabase.vue'
+import { useForm } from '@/stores/form'
 
 const props = defineProps({
 	dialog: {
@@ -75,6 +76,7 @@ const props = defineProps({
 	},
 })
 
+const forms = useForm()
 const cr = ref()
 const con = ref()
 const up = ref()
@@ -87,7 +89,12 @@ const close = () => {
 	panel.value = 'start'
 }
 const crNext = () => {
-	if (!!cr.value) cr.value.nextStep()
+	// cr.value.validate()
+	cr.value.nextStep()
+
+	// if (forms.step1.success === true) {
+	// 	cr.value.nextStep()
+	// }
 }
 const conNext = () => {
 	if (!!con.value) con.value.nextStep()

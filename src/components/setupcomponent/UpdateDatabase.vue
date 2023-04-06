@@ -26,7 +26,7 @@ defineExpose({ step, nextStep, prevStep })
 			.all900
 				.arch
 					component(:is="Step4")
-		q-step(:name="5" prefix="2" title="Параметры БД" :done="step > 5")
+		q-step(:name="5" prefix="2" title="Подтверждение параметров БД" :done="step > 5")
 			.all900
 				.arch
 					component(:is="Step5" text="Обновить базу данных со следующими параметрами")
