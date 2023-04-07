@@ -15,6 +15,7 @@ q-dialog(:model-value="props.dialog" position="bottom" full-width persistent)
 					q-tab-panel(name="start")
 						.all
 							.arch
+								.text-bold Доступные базы данных:
 								q-table(:columns="headers"
 									row-key="id"
 									selection="single"
@@ -89,12 +90,7 @@ const close = () => {
 	panel.value = 'start'
 }
 const crNext = () => {
-	// cr.value.validate()
 	cr.value.nextStep()
-
-	// if (forms.step1.success === true) {
-	// 	cr.value.nextStep()
-	// }
 }
 const conNext = () => {
 	if (!!con.value) con.value.nextStep()
@@ -130,7 +126,7 @@ const selected = ref([])
 const headers: QTableProps['columns'] = [
 	{ label: 'Название', align: 'left', sortable: true, name: 'name', field: 'name' },
 	{ label: 'Псевдоним', align: 'left', sortable: true, name: 'psevdo', field: 'psevdo' },
-	{ label: 'Активна', align: 'left', sortable: true, name: 'active', field: 'active' },
+	// { label: 'Активна', align: 'left', sortable: true, name: 'active', field: 'active' },
 ]
 
 const list = [
@@ -158,19 +154,6 @@ const list = [
 		cache: 'Redis',
 		version: 4373,
 		date: '04.11.2022',
-		def: false,
-	},
-	{
-		id: 2,
-		active: false,
-		psevdo: 'DvShowCase',
-		name: 'AGSupport_3',
-		servertype: 'PostgreSQL',
-		server: 'Docsvision 1',
-		cache: 'No cache',
-		index: 'yes',
-		version: 4373,
-		date: '09.07.2021',
 		def: false,
 	},
 ]

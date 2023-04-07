@@ -51,7 +51,7 @@ defineExpose({ step, nextStep, prevStep })
 			.all900
 				.arch
 					component(:is="Step6")
-		q-step(:name="7" prefix="6" title="Завершение" :done="step > 7" )
+		q-step(:name="7" prefix="6" title="Подключение" :done="step > 7" )
 			.all900
 				.arch
 					component(:is="Step7" hint="Идет подключение..." result="Подключение прошло успешно!")

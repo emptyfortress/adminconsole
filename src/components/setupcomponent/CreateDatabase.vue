@@ -64,13 +64,13 @@ defineExpose({ step, nextStep, prevStep })
 				.arch
 					component(:is="Step5")
 			.all900
-				.arch
-					component(:is="Step26" text="Создание базы данных может занять длительное время.")
+				.arch.q-mt-sm
+					component(:is="Step26" color="orange" text="Создание базы данных может занять длительное время.")
 		q-step(:name="6" prefix="6" title="Дополнительно" :done="step > 6" )
 			.all900
 				.arch
 					component(:is="Step6")
-		q-step(:name="7" prefix="7" title="Завершение" :done="step > 7" )
+		q-step(:name="7" prefix="7" title="Создание" :done="step > 7" )
 			.all900
 				.arch
 					component(:is="Step7")
