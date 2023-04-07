@@ -1,52 +1,77 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import { useIntervalFn } from '@vueuse/core'
+import { rand } from '@vueuse/shared'
 
 const props = defineProps({
 	hint: {
 		type: String,
-		default: 'Идет установка...',
+		default: 'Создание БД...',
 	},
 	result: {
 		type: String,
-		default: 'Установка прошла успешно!',
+		default: 'Завершено успешно!',
 	},
 })
 
 const visible = ref(true)
-const showSimulatedReturnData = ref(false)
+const showData = ref(false)
 
 onMounted(() => {
 	setTimeout(() => {
 		visible.value = false
-		showSimulatedReturnData.value = true
-	}, 3000)
+		showData.value = true
+	}, 5000)
 })
+
+const greetings = [
+	'Hello',
+	'Привет',
+	'Здравствуйте',
+	'Наше вам с кисточкой',
+	'Hi',
+	'Yo!',
+	'Hey',
+	'Hola',
+	'こんにちは',
+	'Bonjour',
+	'Salut!',
+	'你好',
+]
+const word = ref('Hello')
+const interval = ref(500)
+
+const { pause, resume, isActive } = useIntervalFn(() => {
+	word.value = greetings[rand(0, greetings.length - 1)]
+}, interval)
 </script>
 
 <template lang="pug">
-.text-bold Завершение:
-.min(flat)
-	q-card-section
-		transition(appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut")
-			.suc(v-show="showSimulatedReturnData")
-				q-icon(name="mdi-check-bold" color="teal" size="md").q-mr-md
-				|{{ props.result }}
-	q-inner-loading(:showing="visible")
-		q-spinner-gears(size="50px" color="primary")
-		.wait {{ props.hint }}
+.text-bold {{props.hint}}
+.all
+	template(v-if="visible")
+		q-linear-progress.q-mt-lg(indeterminate)
+		.text-center.q-mt-md {{ word }}
+	.min
+		q-card-section.suc(v-show="showData")
+			q-icon(name="mdi-check-bold" color="teal" size="md").q-mr-md
+			|{{ props.result }}
 
 </template>
 
 <style scoped lang="scss">
+.all {
+	min-height: 200px;
+}
 .min {
-	min-height: 300px;
+	min-height: 200px;
 	width: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	div {
-		text-align: center;
-	}
+	// div {
+	// 	text-align: center;
+	// }
 }
 .wait {
 	margin-top: 1rem;
@@ -55,5 +80,6 @@ onMounted(() => {
 .suc {
 	color: teal;
 	font-weight: 600;
+	text-align: center;
 }
 </style>

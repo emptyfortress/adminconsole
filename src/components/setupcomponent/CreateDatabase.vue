@@ -70,7 +70,7 @@ defineExpose({ step, nextStep, prevStep })
 			.all900
 				.arch
 					component(:is="Step6")
-		q-step(:name="7" prefix="7" title="Создание" :done="step > 7" )
+		q-step(:name="7" prefix="7" title="Создание БД" :done="step > 7" )
 			.all900
 				.arch
 					component(:is="Step7")
