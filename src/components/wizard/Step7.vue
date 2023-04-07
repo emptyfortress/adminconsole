@@ -6,7 +6,7 @@ import { rand } from '@vueuse/shared'
 const props = defineProps({
 	hint: {
 		type: String,
-		default: 'Создание БД...',
+		default: 'Создание БД',
 	},
 	result: {
 		type: String,
