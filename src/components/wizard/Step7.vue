@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 import { useIntervalFn } from '@vueuse/core'
 import { rand } from '@vueuse/shared'
+import { useWiz } from '@/stores/wiz'
 
 const props = defineProps({
 	hint: {
@@ -14,6 +15,7 @@ const props = defineProps({
 	},
 })
 
+const wiz = useWiz()
 const visible = ref(true)
 const showData = ref(false)
 
@@ -21,6 +23,7 @@ onMounted(() => {
 	setTimeout(() => {
 		visible.value = false
 		showData.value = true
+		wiz.finish = true
 	}, 5000)
 })
 

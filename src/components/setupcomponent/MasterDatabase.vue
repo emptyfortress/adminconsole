@@ -6,9 +6,9 @@ q-dialog(:model-value="props.dialog" position="bottom" full-width persistent)
 				.title
 					q-icon(name='mdi-wizard-hat')
 					span Мастер баз данных
-					span.q-ml-md(v-if="wiz.choose === 'create'") (Создание)
-					span.q-ml-md(v-if="wiz.choose === 'connect'") (Подключение)
-					span.q-ml-md(v-if="wiz.choose === 'update'") (Обновление)
+					span.q-ml-md(v-if="panel !== 'start' && wiz.choose === 'create'") (Создание)
+					span.q-ml-md(v-if="panel !== 'start' && wiz.choose === 'connect'") (Подключение)
+					span.q-ml-md(v-if="panel !== 'start' && wiz.choose === 'update'") (Обновление)
 
 
 				q-tab-panels(v-model="panel" animated)
@@ -45,7 +45,9 @@ q-dialog(:model-value="props.dialog" position="bottom" full-width persistent)
 
 		.bottom
 			q-separator
-			q-card-actions(align="center")
+			q-card-actions(v-if="wiz.finish" align="center")
+				q-btn(unelevated color="primary" @click="close" padding="xs xl") Готово
+			q-card-actions(v-else align="center")
 				q-btn(flat color="primary" @click="close").q-mr-xl Отмена
 				template(v-if="panel === 'start'")
 					q-btn(unelevated color="primary" @click="next" padding="xs xl") Далее
@@ -68,7 +70,6 @@ import { useWiz } from '@/stores/wiz'
 import CreateDatabase from '@/components/setupcomponent/CreateDatabase.vue'
 import ConnectDatabase from '@/components/setupcomponent/ConnectDatabase.vue'
 import UpdateDatabase from '@/components/setupcomponent/UpdateDatabase.vue'
-import { useForm } from '@/stores/form'
 
 const props = defineProps({
 	dialog: {
@@ -77,7 +78,6 @@ const props = defineProps({
 	},
 })
 
-const forms = useForm()
 const cr = ref()
 const con = ref()
 const up = ref()
