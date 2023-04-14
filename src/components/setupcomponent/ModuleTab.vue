@@ -17,6 +17,8 @@ const wiz = useWiz()
 				:key="item.id"
 				:label="item.label"
 				v-model="item.val")
+		div
+		q-btn(unelevated color="primary" label="Обновить" @click="") 
 </template>
 
 <style scoped lang="scss">
