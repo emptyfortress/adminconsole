@@ -1,17 +1,12 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
-const check = reactive([
-	{ id: 0, label: 'Базовые объекты', val: false },
-	{ id: 1, label: 'Управление документами', val: false },
-	{ id: 2, label: 'Web-client', val: false },
-	{ id: 3, label: 'Управление процессами', val: false },
-])
+import { useWiz } from '@/stores/wiz'
+const wiz = useWiz()
 </script>
 
 <template lang="pug">
 .text-bold Загрузить дополнительные настройки следующих модулей:
 .column.q-mt-md
-	q-checkbox(v-for="item in check" :key="item.id" :label="item.label" v-model="item.val")
+	q-checkbox(v-for="item in wiz.check" :key="item.id" :label="item.label" v-model="item.val")
 
 </template>
 

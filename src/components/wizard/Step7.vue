@@ -23,7 +23,8 @@ onMounted(() => {
 	setTimeout(() => {
 		visible.value = false
 		showData.value = true
-		wiz.finish = true
+		wiz.done = true
+		wiz.finish++
 	}, 5000)
 })
 
@@ -63,18 +64,11 @@ const { pause, resume, isActive } = useIntervalFn(() => {
 </template>
 
 <style scoped lang="scss">
-.all {
-	min-height: 200px;
-}
 .min {
-	min-height: 200px;
 	width: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	// div {
-	// 	text-align: center;
-	// }
 }
 .wait {
 	margin-top: 1rem;

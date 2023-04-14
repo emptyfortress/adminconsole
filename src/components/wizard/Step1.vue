@@ -47,7 +47,7 @@ q-form.q-mt-md(ref="foorm" greedy)
 			outlined
 			bg-color="white"
 			:rules="req")
-		template(v-if="forms.step1.type !== 'SQL Server'")
+		template(v-if="forms.step1.type !== 'MS SQL Server'")
 			label Порт:
 			q-input(v-model="forms.step1.port"
 				dense
@@ -64,21 +64,20 @@ q-form.q-mt-md(ref="foorm" greedy)
 			outlined
 			bg-color="white"
 			:rules="req")
-		template(v-if="forms.step1.check !== 'Windows'")
-			label Логин:
-			q-input(v-model="forms.step1.login"
-				dense
-				hide-bottom-space
-				outlined
-				bg-color="white"
-				:rules="req")
-			label Пароль:
-			q-input(v-model="forms.step1.pass"
-				dense
-				hide-bottom-space
-				outlined
-				bg-color="white"
-				:rules="req")
+		label Логин:
+		q-input(v-model="forms.step1.login"
+			dense
+			hide-bottom-space
+			outlined
+			bg-color="white"
+			:rules="req")
+		label Пароль:
+		q-input(v-model="forms.step1.pass"
+			dense
+			hide-bottom-space
+			outlined
+			bg-color="white"
+			:rules="req")
 </template>
 
 <style scoped lang="scss">

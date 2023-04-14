@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, defineExpose } from 'vue'
 import { useForm } from '@/stores/form'
+import { useWiz } from '@/stores/wiz'
 import Step1 from '@/components/wizard/Step1.vue'
 import Step2 from '@/components/wizard/Step2.vue'
 import Step3 from '@/components/wizard/Step3.vue'
@@ -10,6 +11,7 @@ import Step6 from '@/components/wizard/Step6.vue'
 import Step7 from '@/components/wizard/Step7.vue'
 import Step25 from '@/components/wizard/Step25.vue'
 import Step26 from '@/components/wizard/Step26.vue'
+import Finish from '@/components/wizard/Finish.vue'
 
 const step = ref(1)
 const live = ref(false)
@@ -18,6 +20,7 @@ const stepper = ref()
 const st1 = ref()
 
 const forms = useForm()
+const wiz = useWiz()
 
 const nextStep = () => {
 	if (step.value === 1) {
@@ -25,6 +28,9 @@ const nextStep = () => {
 		if (forms.step1.success === true) {
 			stepper.value.next()
 		}
+	} else if (step.value === 6 && wiz.dopModules === false) {
+		wiz.finish = 2
+		stepper.value.next()
 	} else stepper.value.next()
 }
 
@@ -52,7 +58,7 @@ defineExpose({ step, nextStep, prevStep })
 			.all900
 				.arch
 					component(:is="Step3")
-			.all900
+			.all900(v-if="forms.step1.type === 'MS SQL Server'")
 				.arch.q-mt-sm(style="padding: 0")
 					component(:is="Step25")
 		q-step(:name="4" prefix="4" title="Конфигурация" :done="step > 4" )
@@ -66,14 +72,25 @@ defineExpose({ step, nextStep, prevStep })
 			.all900
 				.arch.q-mt-sm
 					component(:is="Step26" color="orange" text="Создание базы данных может занять длительное время.")
-		q-step(:name="6" prefix="6" title="Дополнительно" :done="step > 6" )
+
+		q-step(:name="6" prefix="6" title="Создание БД" :done="step > 6" )
 			.all900
 				.arch
+					component(:is="Step7" result="База данных создана успешно!" )
+			.all900(v-if="wiz.done")
+				.arch.q-mt-sm
 					component(:is="Step6")
-		q-step(:name="7" prefix="7" title="Создание БД" :done="step > 7" )
-			.all900
+
+		q-step(:name="7" prefix="7" title="Завершение" :done="step > 7" )
+			.all900(v-if="wiz.dopModules")
 				.arch
-					component(:is="Step7")
+					component(:is="Step7" hint="Установка доп.модулей" result="Модули установлены!")
+			// .all900(v-if="wiz.done && !wiz.dopModules")
+			// 	.arch.q-mt-sm
+			// 		component(:is="Finish")
+			.all900(v-if="wiz.finish > 1")
+				.arch.q-mt-sm
+					component(:is="Finish")
 
 </template>
 

@@ -4,8 +4,8 @@ export const useForm = defineStore({
 	id: 'form',
 	state: () => ({
 		step1: {
-			type: 'SQL Server',
-			options: ['SQL Server', 'PostreSQL'],
+			type: 'MS SQL Server',
+			options: ['MS SQL Server', 'PostreSQL'],
 			options1: ['SQL Server', 'Windows'],
 			name: '',
 			port: '',

@@ -18,8 +18,6 @@ q-dialog(:model-value="props.dialog" position="bottom" full-width persistent)
 								.text-bold Доступные базы данных:
 								q-table(:columns="headers"
 									row-key="id"
-									selection="single"
-									v-model:selected="selected"
 									color="primary"
 									flat
 									:rows="list"
@@ -34,7 +32,7 @@ q-dialog(:model-value="props.dialog" position="bottom" full-width persistent)
 							.column.q-mt-md
 								q-radio(v-model="wiz.choose" val="create" label="Создать новую БД и подключить ее к серверу")
 								q-radio(v-model="wiz.choose" val="connect" label="Подключить существующую БД, не представленную в списке")
-								q-radio(v-model="wiz.choose" val="update" label="Обновить выбранную в списке БД" :disable="selected.length === 0")
+								// q-radio(v-model="wiz.choose" val="update" label="Обновить выбранную в списке БД" :disable="selected.length === 0")
 
 					q-tab-panel(name="create")
 						component(:is="CreateDatabase" ref="cr")
@@ -45,7 +43,7 @@ q-dialog(:model-value="props.dialog" position="bottom" full-width persistent)
 
 		.bottom
 			q-separator
-			q-card-actions(v-if="wiz.finish" align="center")
+			q-card-actions(v-if="wiz.finish > 1" align="center")
 				q-btn(unelevated color="primary" @click="close" padding="xs xl") Готово
 			q-card-actions(v-else align="center")
 				q-btn(flat color="primary" @click="close").q-mr-xl Отмена
@@ -89,6 +87,7 @@ const close = () => {
 	emit('update:modelValue', false)
 	panel.value = 'start'
 	wiz.choose = 'start'
+	wiz.done = false
 	wiz.finish = false
 }
 const crNext = () => {
@@ -123,7 +122,7 @@ const upBack = () => {
 	}
 }
 
-const selected = ref([])
+// const selected = ref([])
 
 const headers: QTableProps['columns'] = [
 	{ label: 'Название', align: 'left', sortable: true, name: 'name', field: 'name' },

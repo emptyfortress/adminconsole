@@ -35,7 +35,7 @@ const ticked = ref(['WindowsClient', 'Workflow', 'Platform', 'TakeOffice'])
 </script>
 
 <template lang="pug">
-.text-bold Конфигурация:
+.text-bold Выбор библиотек карточек для загрузки:
 q-list.q-mt-md(separator)
 	q-expansion-item(v-for="panel in check" :key="panel.id" :label="panel.label")
 		template(v-slot:header)

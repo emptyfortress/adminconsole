@@ -45,7 +45,7 @@
 							q-item-section Удалить
 
 	.master
-		div Чтобы создать новую базу данных, подключить существующую БД, не представленную в списке, а также обновить БД, если ее версия отличается от версии сервера Docsvision, воспользуйтесь Мастером баз данных.
+		div Чтобы создать новую базу данных или подключить существующую БД, не представленную в списке, воспользуйтесь <span class="text-bold">Мастером баз данных</span>.
 		q-btn(unelevated color='primary' @click='master = true') Мастер&nbsp;баз&nbsp;данных 
 
 component(:is="ChangeDialog" v-model="change" :changename="changename" @changeDef="assignDef")
