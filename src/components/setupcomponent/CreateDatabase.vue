@@ -85,9 +85,6 @@ defineExpose({ step, nextStep, prevStep })
 			.all900(v-if="wiz.dopModules")
 				.arch
 					component(:is="Step7" hint="Установка доп.модулей" result="Модули установлены!")
-			// .all900(v-if="wiz.done && !wiz.dopModules")
-			// 	.arch.q-mt-sm
-			// 		component(:is="Finish")
 			.all900(v-if="wiz.finish > 1")
 				.arch.q-mt-sm
 					component(:is="Finish")

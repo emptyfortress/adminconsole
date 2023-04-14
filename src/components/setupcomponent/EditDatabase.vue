@@ -23,6 +23,8 @@ q-dialog(:modelValue='props.edit' persistent position='bottom' full-width)
 					ArchTab(:bd="props.bd")
 				q-tab-panel(name='cache')
 					CacheTab(:bd="props.bd")
+				q-tab-panel(name='module')
+					ModuleTab(:bd="props.bd")
 		.bottom
 			q-separator
 			q-card-actions(align='center')
@@ -40,6 +42,7 @@ import PropertyTab from '@/components/setupcomponent/PropertyTab.vue'
 import ControlTab from '@/components/setupcomponent/ControlTab.vue'
 import ArchTab from '@/components/setupcomponent/ArchTab.vue'
 import CacheTab from '@/components/setupcomponent/CacheTab.vue'
+import ModuleTab from '@/components/setupcomponent/ModuleTab.vue'
 
 const props = defineProps({
 	edit: {

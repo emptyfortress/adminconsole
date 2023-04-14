@@ -13,6 +13,13 @@ export const useWiz = defineStore({
 			{ id: 3, label: 'Управление процессами', val: false },
 			{ id: 4, label: 'КС', val: false },
 		],
+		check1: [
+			{ id: 0, label: 'Базовые объекты', val: true },
+			{ id: 1, label: 'Управление документами', val: true },
+			{ id: 2, label: 'Web-client', val: true },
+			{ id: 3, label: 'Управление процессами', val: false },
+			{ id: 4, label: 'КС', val: false },
+		],
 	}),
 	getters: {
 		dopModules(state) {
