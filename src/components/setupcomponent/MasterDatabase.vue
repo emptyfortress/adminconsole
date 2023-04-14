@@ -88,6 +88,8 @@ const emit = defineEmits(['update:modelValue'])
 const close = () => {
 	emit('update:modelValue', false)
 	panel.value = 'start'
+	wiz.choose = 'start'
+	wiz.finish = false
 }
 const crNext = () => {
 	cr.value.nextStep()

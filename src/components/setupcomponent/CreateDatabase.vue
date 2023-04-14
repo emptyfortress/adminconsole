@@ -53,7 +53,7 @@ defineExpose({ step, nextStep, prevStep })
 				.arch
 					component(:is="Step3")
 			.all900
-				.arch.q-mt-sm
+				.arch.q-mt-sm(style="padding: 0")
 					component(:is="Step25")
 		q-step(:name="4" prefix="4" title="Конфигурация" :done="step > 4" )
 			.all900

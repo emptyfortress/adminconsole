@@ -19,11 +19,11 @@ const options = [
 </script>
 
 <template lang="pug">
-.text-bold Настройки:
-.mygrid.q-mt-md
-	template(v-for="item in items")
-		label {{item.label}}:
-		q-select(v-model="item.val" :options="options" dense outlined bg-color="white")
+q-expansion-item(label="Дополнительные настройки" header-class="text-bold")
+	.mygrid.q-pa-md
+		template(v-for="item in items")
+			label {{item.label}}:
+			q-select(v-model="item.val" :options="options" dense outlined bg-color="white")
 </template>
 
 <style scoped lang="scss">
