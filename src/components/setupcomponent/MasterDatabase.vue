@@ -88,7 +88,7 @@ const close = () => {
 	panel.value = 'start'
 	wiz.choose = 'start'
 	wiz.done = false
-	wiz.finish = false
+	wiz.finish = 0
 }
 const crNext = () => {
 	cr.value.nextStep()
