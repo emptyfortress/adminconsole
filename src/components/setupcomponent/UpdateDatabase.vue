@@ -5,13 +5,19 @@ import Step4 from '@/components/wizard/Step4.vue'
 import Step5 from '@/components/wizard/Step5.vue'
 import Step6 from '@/components/wizard/Step6.vue'
 import Step7 from '@/components/wizard/Step7.vue'
+import Finish from '@/components/wizard/Finish.vue'
+import { useWiz } from '@/stores/wiz'
 
 const step = ref(4)
 const live = ref(false)
 const stepper = ref()
+const wiz = useWiz()
 
 const nextStep = () => {
-	stepper.value.next()
+	if (step.value === 6 && wiz.dopModules === false) {
+		wiz.finish = 2
+		stepper.value.next()
+	} else stepper.value.next()
 }
 const prevStep = () => {
 	stepper.value.previous()
@@ -33,14 +39,31 @@ defineExpose({ step, nextStep, prevStep })
 			.all900
 				.arch.q-mt-sm
 					component(:is="Step26")
-		q-step(:name="6" prefix="3" title="Дополнительно" :done="step > 6" )
+
+		q-step(:name="6" prefix="6" title="Обновление БД" :done="step > 6" )
 			.all900
 				.arch
+					component(:is="Step7" hint="Обновление БД" result="База данных успешно обновлена!" )
+			.all900(v-if="wiz.done")
+				.arch.q-mt-sm
 					component(:is="Step6")
-		q-step(:name="7" prefix="4" title="Обновление" :done="step > 7" )
-			.all900
+
+		q-step(:name="7" prefix="7" title="Завершение" :done="step > 7" )
+			.all900(v-if="wiz.dopModules")
 				.arch
-					component(:is="Step7" hint="Обновление БД" result="Обновление прошло успешно!")
+					component(:is="Step7" hint="Установка доп.модулей" result="Модули установлены!")
+			.all900(v-if="wiz.finish > 1")
+				.arch.q-mt-sm
+					component(:is="Finish")
+
+		// q-step(:name="6" prefix="3" title="Дополнительно" :done="step > 6" )
+		// 	.all900
+		// 		.arch
+		// 			component(:is="Step6")
+		// q-step(:name="7" prefix="4" title="Обновление" :done="step > 7" )
+		// 	.all900
+		// 		.arch
+		// 			component(:is="Step7" hint="Обновление БД" result="Обновление прошло успешно!")
 
 </template>
 
