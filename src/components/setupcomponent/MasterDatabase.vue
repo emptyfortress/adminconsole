@@ -20,6 +20,8 @@ q-dialog(:model-value="props.dialog" position="bottom" full-width persistent)
 									row-key="id"
 									color="primary"
 									flat
+									selection="single"
+									v-model:selected="selected"
 									:rows="list"
 									hide-bottom)
 									template(v-slot:body-cell-active="props")
@@ -32,7 +34,7 @@ q-dialog(:model-value="props.dialog" position="bottom" full-width persistent)
 							.column.q-mt-md
 								q-radio(v-model="wiz.choose" val="create" label="Создать новую БД и подключить ее к серверу")
 								q-radio(v-model="wiz.choose" val="connect" label="Подключить существующую БД, не представленную в списке")
-								// q-radio(v-model="wiz.choose" val="update" label="Обновить выбранную в списке БД" :disable="selected.length === 0")
+								q-radio(v-model="wiz.choose" val="update" label="Обновить выбранную в списке БД" :disable="selected.length === 0")
 
 					q-tab-panel(name="create")
 						component(:is="CreateDatabase" ref="cr")
@@ -122,7 +124,7 @@ const upBack = () => {
 	}
 }
 
-// const selected = ref([])
+const selected = ref([])
 
 const headers: QTableProps['columns'] = [
 	{ label: 'Название', align: 'left', sortable: true, name: 'name', field: 'name' },
