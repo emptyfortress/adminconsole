@@ -19,7 +19,7 @@ const options = [
 </script>
 
 <template lang="pug">
-q-expansion-item(label="Дополнительные настройки" header-class="text-bold")
+q-expansion-item(label="Размещение таблиц" header-class="text-bold")
 	.mygrid.q-pa-md
 		template(v-for="item in items")
 			label {{item.label}}:
