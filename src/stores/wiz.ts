@@ -6,19 +6,19 @@ export const useWiz = defineStore({
 		choose: 'start',
 		done: false,
 		finish: 0,
+		// check: [
+		// 	{ id: 0, label: 'Базовые объекты', val: false },
+		// 	{ id: 1, label: 'Управление документами', val: false },
+		// 	{ id: 2, label: 'Web-client', val: false },
+		// 	{ id: 3, label: 'Управление процессами', val: false },
+		// 	{ id: 4, label: 'КС', val: false },
+		// ],
 		check: [
-			{ id: 0, label: 'Базовые объекты', val: false },
-			{ id: 1, label: 'Управление документами', val: false },
-			{ id: 2, label: 'Web-client', val: false },
-			{ id: 3, label: 'Управление процессами', val: false },
-			{ id: 4, label: 'КС', val: false },
-		],
-		check1: [
-			{ id: 0, label: 'Базовые объекты', val: true },
-			{ id: 1, label: 'Управление документами', val: true },
-			{ id: 2, label: 'Web-client', val: true },
-			{ id: 3, label: 'Управление процессами', val: false },
-			{ id: 4, label: 'КС', val: false },
+			{ id: 0, block: 1, label: 'Базовые объекты', val: false },
+			{ id: 1, block: 1, label: 'Управление документами', val: false },
+			{ id: 3, block: 1, label: 'Управление процессами', val: false },
+			{ id: 4, block: 2, label: 'КС', val: false },
+			{ id: 2, block: 2, label: 'Web-client', val: false },
 		],
 	}),
 	getters: {
@@ -28,7 +28,35 @@ export const useWiz = defineStore({
 			}
 			return false
 		},
+		check1(state) {
+			return state.check.filter((e) => e.block === 1)
+		},
+		check2(state) {
+			return state.check.filter((e) => e.block === 2)
+		},
+		checkState1(state) {
+			if (state.check1.filter((e) => e.val === true).length === 0) {
+				return true
+			}
+			return false
+		},
+		checkState2(state) {
+			if (state.check2.filter((e) => e.val === true).length === 0) {
+				return true
+			}
+			return false
+		},
 	},
 
-	actions: {},
+	actions: {
+		resetCheck() {
+			this.check.map((e) => (e.val = false))
+		},
+		moveCheck() {
+			const temp = this.check.filter((e) => e.val === true)
+			if (temp.length > 0) {
+				temp.forEach((item) => (item.block = 1))
+			}
+		},
+	},
 })
