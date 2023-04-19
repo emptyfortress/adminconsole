@@ -34,14 +34,14 @@ export const useWiz = defineStore({
 		check2(state) {
 			return state.check.filter((e) => e.block === 2)
 		},
-		checkState1(state) {
-			if (state.check1.filter((e) => e.val === true).length === 0) {
+		checkState1() {
+			if (this.check1.filter((e: any) => e.val === true).length === 0) {
 				return true
 			}
 			return false
 		},
-		checkState2(state) {
-			if (state.check2.filter((e) => e.val === true).length === 0) {
+		checkState2() {
+			if (this.check2.filter((e: any) => e.val === true).length === 0) {
 				return true
 			}
 			return false
