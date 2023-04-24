@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUpdated } from 'vue'
 import { useIntervalFn } from '@vueuse/core'
 import { rand } from '@vueuse/shared'
 import { useWiz } from '@/stores/wiz'
@@ -20,6 +20,14 @@ const visible = ref(true)
 const showData = ref(false)
 
 onMounted(() => {
+	setTimeout(() => {
+		visible.value = false
+		showData.value = true
+		wiz.done = true
+		wiz.finish++
+	}, 5000)
+})
+onUpdated(() => {
 	setTimeout(() => {
 		visible.value = false
 		showData.value = true
@@ -51,8 +59,7 @@ const { pause, resume, isActive } = useIntervalFn(() => {
 </script>
 
 <template lang="pug">
-.text-bold {{props.hint}}
-.all
+div
 	template(v-if="visible")
 		q-linear-progress.q-mt-lg(indeterminate)
 		.text-center.q-mt-md {{ word }}

@@ -6,16 +6,11 @@ import Step7 from '@/components/wizard/Step7.vue'
 const wiz = useWiz()
 
 const updateState = ref(false)
-const installState = ref(false)
+const key = ref(0)
 
-const update = () => {
+const start = () => {
 	updateState.value = true
-	setTimeout(() => {
-		wiz.resetCheck()
-	}, 5000)
-}
-const load = () => {
-	installState.value = true
+	key.value += 1
 	setTimeout(() => {
 		wiz.moveCheck()
 		wiz.resetCheck()
@@ -26,27 +21,23 @@ const load = () => {
 <template lang="pug">
 .all
 	.arch.archnew
-		.title Дополнительные настройки модулей
 		.column
-			.text-bold Обновить модули:
+			.text-bold Обновить настройки для модулей:
 			q-checkbox(v-for="item in wiz.check1"
 				:key="item.id"
 				:label="item.label"
 				v-model="item.val")
 		.column
-			.text-bold Загрузить модули:
-			.done(v-if="wiz.check2.length === 0") Все модули загружены
-			q-checkbox(v-for="item in wiz.check2"
-				:key="item.id"
-				:label="item.label"
-				v-model="item.val")
-		div
-		q-btn(unelevated color="primary" :disable="wiz.checkState1" size="sm" label="Обновить" @click="update").q-mt-md 
-		q-btn(unelevated color="primary" :disable="wiz.checkState2" size="sm" label="Загрузить" @click="load").q-mt-md 
+			template(v-if="wiz.check2.length > 0")
+				.text-bold Загрузить настройки для модулей:
+				q-checkbox(v-for="item in wiz.check2"
+					:key="item.id"
+					:label="item.label"
+					v-model="item.val")
+		q-btn(unelevated color="primary" :disable="wiz.checkState1 && wiz.checkState2" size="md" label="Начать" @click="start").q-mt-md 
+
 	.arch.q-mt-sm(v-if="updateState")
-		component(:is="Step7" hint="Обновление модулей" result="Модули обновлены!" )
-	.arch.q-mt-sm(v-if="installState")
-		component(:is="Step7" hint="Загрузка модулей" result="Модули загружены!" )
+		component(:is="Step7" hint="Обновление и/или загрузка дополнительных настроек:" result="Завершено успешно!" :key="key" )
 </template>
 
 <style scoped lang="scss">
@@ -67,11 +58,14 @@ const load = () => {
 	background: var(--bg-grey);
 	padding: 1rem;
 	display: grid;
-	grid-template-columns: 200px 1fr 1fr;
+	grid-template-columns: 1fr 1fr 0.6fr;
 	align-items: top;
-	justify-items: start;
+	// justify-items: start;
 	column-gap: 1rem;
 	row-gap: 0.5rem;
+	.q-btn {
+		align-self: center;
+	}
 }
 .more {
 	display: grid;
