@@ -35,6 +35,7 @@ const load = () => {
 				v-model="item.val")
 		.column
 			.text-bold Загрузить модули:
+			.done(v-if="wiz.check2.length === 0") Все модули загружены
 			q-checkbox(v-for="item in wiz.check2"
 				:key="item.id"
 				:label="item.label"
@@ -87,5 +88,8 @@ const load = () => {
 }
 .q-checkbox {
 	margin-left: -0.5rem;
+}
+.done {
+	margin-top: 2rem;
 }
 </style>
