@@ -16,7 +16,7 @@
 						q-list
 							q-item.pink(clickable v-close-popup @click="del")
 								q-item-section Удалить
-		Expand(@change="setEditMode")
+		// Expand(@change="setEditMode")
 	q-card-actions(align="right" v-if="editMode")
 		q-btn(flat label="Отмена" @click="otmena")
 		q-btn(unelevated color="primary" label="Сохранить все" @click="save")
@@ -75,15 +75,14 @@ const save = () => {
 			message: 'Заполните обязательные поля',
 			color: 'negative',
 		})
-	} else if (form.name !== props.name) {
 	}
-	store.server.$reset()
-	store.panels[1].change = false
+	// store.server.$reset()
+	// store.panels[1].change = false
 	editMode.value = false
 	if (form.name.length > 0 && form.name !== props.name) {
-		let currentConfigIndex = store.config.findIndex((item) => item.name === props.name)
-		store.config[currentConfigIndex].name = form.name
-		store.setTabs(form.name)
+		let currentConfigIndex = store.webconfig.findIndex((item) => item.name === props.name)
+		store.webconfig[currentConfigIndex].name = form.name
+		store.setTabs2(form.name)
 	}
 }
 </script>
