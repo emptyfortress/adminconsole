@@ -1,63 +1,25 @@
 <template>
-	<q-list
-		class="q-mt-md"
-		separator
-	>
-		<q-expansion-item
-			v-for="(panel, index) in store.panels"
-			group="group"
-			v-model="panel.expanded"
-			switch-toggle-side
-			:key="panel.id"
-			:class="{ er: panel.neg }"
-			:label="panel.title"
-		>
+	<q-list class="q-mt-md" separator>
+		<q-expansion-item v-for="(panel, index) in store.panels" group="group" v-model="panel.expanded" switch-toggle-side
+			:key="panel.id" :class="{ er: panel.neg }" :label="panel.title">
 			<template v-slot:header>
-				<div
-					class="head"
-					:class="{ er: panel.neg }"
-				>
+				<div class="head" :class="{ er: panel.neg }">
 					<div class="title">{{ panel.title }}</div>
 					<div class="icon">
-						<q-btn
-							dense
-							flat
-							round
-							@click.stop="reset(panel.id)"
-							v-if="panel.change"
-						>
-							<q-icon
-								name="mdi-reload"
-								style="transform: scaleX(-1)"
-							></q-icon>
+						<q-btn dense flat round @click.stop="reset(panel.id)" v-if="panel.change">
+							<q-icon name="mdi-reload" style="transform: scaleX(-1)"></q-icon>
 							<q-tooltip>Восстановить значения по умолчанию</q-tooltip>
 						</q-btn>
-						<q-btn
-							flat
-							color="primary"
-							size="sm"
-							label="Сохранить"
-							@click.stop="reset(panel.id)"
-							v-if="panel.change"
-						></q-btn>
-						<q-icon
-							name="mdi-alert-circle"
-							size="20px"
-							color="negative"
-							v-if="panel.neg"
-						></q-icon>
+						<q-btn flat color="primary" size="sm" label="Сохранить" @click.stop="reset(panel.id)"
+							v-if="panel.change"></q-btn>
+						<q-icon name="mdi-alert-circle" size="20px" color="negative" v-if="panel.neg"></q-icon>
 					</div>
 				</div>
 			</template>
 
 			<div class="pcard">
-				<component
-					:is="calcComponent(panel.id)"
-					:key="key"
-					@change="change"
-					@haserror="setNeg(index)"
-					@noerror="setPos(index)"
-				></component>
+				<component :is="calcComponent(panel.id)" :key="key" @change="change" @haserror="setNeg(index)"
+					@noerror="setPos(index)"></component>
 			</div>
 		</q-expansion-item>
 	</q-list>
@@ -82,7 +44,7 @@ const setPos = (e: number) => {
 }
 
 const store = useStore()
-const calcComponent = (e: number) => {
+const calcComponent: any = (e: number) => {
 	switch (e) {
 		case 0:
 			return Licence

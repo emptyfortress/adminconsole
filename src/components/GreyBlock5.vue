@@ -16,7 +16,7 @@
 						q-list
 							q-item.pink(clickable v-close-popup @click="del")
 								q-item-section Удалить
-		// Expand(@change="setEditMode")
+		WebExpand(@change="setEditMode" )
 	q-card-actions(align="right" v-if="editMode")
 		q-btn(flat label="Отмена" @click="otmena")
 		q-btn(unelevated color="primary" label="Сохранить все" @click="save")
@@ -27,7 +27,7 @@ import { ref, reactive, watch } from 'vue'
 import { useQuasar } from 'quasar'
 
 import { useStore } from '@/stores/store'
-import Expand from '@/components/Expand.vue'
+import WebExpand from '@/components/WebExpand.vue'
 
 const store = useStore()
 
