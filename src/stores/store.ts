@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 import { useServer } from '@/stores/server'
 import { useAccess } from '@/stores/access'
 import { useBp } from '@/stores/bp'
+import { useWebConfig } from '@/stores/webconfig'
 
 interface Connection {
 	name: string
@@ -56,7 +57,7 @@ export const useStore = defineStore({
 			// { id: 2, neg: false, expanded: false, change: false, title: 'Сервисы workflow' },
 		],
 		panelsWeb: [
-			{ id: 0, neg: false, expanded: false, change: false, title: 'Общие настройки' },
+			{ id: 0, neg: false, expanded: true, change: false, title: 'Общие настройки' },
 			{ id: 1, neg: false, expanded: false, change: false, title: 'Кэширование' },
 			{ id: 2, neg: false, expanded: false, change: false, title: 'Система' },
 			{ id: 3, neg: false, expanded: false, change: false, title: 'Облачная подпись' },
@@ -66,6 +67,7 @@ export const useStore = defineStore({
 		server: useServer(),
 		access: useAccess(),
 		bp: useBp(),
+		wc: useWebConfig(),
 	}),
 	getters: {},
 	actions: {
