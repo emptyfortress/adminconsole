@@ -20,8 +20,13 @@ export const useStore = defineStore({
 			{ id: 0, name: 'AGSupport' },
 			{ id: 1, name: 'test' },
 		],
+		webconfig: [
+			{ id: 0, name: 'Config 1' },
+			{ id: 1, name: 'Config 2' },
+		],
 		tabs: 'SOL2016',
 		tabs1: 'AGSupport',
+		tabs2: 'Config 1',
 		params: [
 			{ id: 0, key: 'DV_Docsvision_Platform_5.5_Server Databases Docsvision DB', value: '' },
 			{ id: 1, key: 'DV_Docsvision__Platform_5.5_Server_DefaultBaseName', value: '' },
@@ -66,6 +71,15 @@ export const useStore = defineStore({
 		addComputer(e: string) {
 			this.conputer.push({ id: Date.now(), name: e })
 		},
+		addWebConfig(e: string) {
+			let temp = { id: Date.now(), name: e }
+			this.webconfig.push(temp)
+		},
+		removeWebConfig(e: any) {
+			let index = this.webconfig.indexOf(e)
+			this.webconfig.splice(index, 1)
+			this.tabs2 = this.webconfig[0].name
+		},
 		addConfig(e: string) {
 			let temp = { id: uid(), name: e }
 			this.config.push(temp)
@@ -79,6 +93,9 @@ export const useStore = defineStore({
 		},
 		setTabs(e: string) {
 			this.tabs = e
+		},
+		setTabs2(e: string) {
+			this.tabs2 = e
 		},
 		removeComputer(e: number) {
 			this.conputer = this.conputer.filter((item) => item.id !== e)

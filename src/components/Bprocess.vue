@@ -17,7 +17,7 @@ const req = [(val: string) => (val && val.length > 0) || 'Это обязате�
 
 const key = ref(0)
 
-const calcComponent = (e: number) => {
+const calcComponent: any = (e: number) => {
 	switch (e) {
 		case 0:
 			return Nastroyki
@@ -78,7 +78,7 @@ div
 	.zag Настройки службы управления бизнес-процессами
 	.bar
 		q-chip(color="warning") Всего компьютеров: {{ store.conputer.length }}
-		q-btn(flat round icon="mdi-plus-circle" @click="add") 
+		q-btn.plus(flat round icon="mdi-plus-circle" @click="add") 
 			q-tooltip Добавить компьютер
 		q-space
 		.alltab
@@ -250,4 +250,5 @@ div
 		grid-column: 2/3;
 		margin-top: 0.5rem;
 	}
-}</style>
+}
+</style>
