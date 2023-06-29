@@ -77,14 +77,14 @@ div
 	AddComputer(v-model="dialog")
 	.zag Настройки службы управления бизнес-процессами
 	.bar
-		q-chip(color="warning") Всего компьютеров: {{ store.conputer.length}}
+		q-chip(color="warning") Всего компьютеров: {{ store.conputer.length }}
 		q-btn(flat round icon="mdi-plus-circle" @click="add") 
 			q-tooltip Добавить компьютер
 		q-space
 		.alltab
 			q-tabs(v-model="store.tabs1" active-color="primary" inline-label).text-secondary
 				q-tab(v-for="item in store.conputer" :key="item.id" :name="item.name" :label="item.name")
-		
+
 
 	q-card.card
 		q-tab-panels(v-model="store.tabs1" animated)
@@ -154,6 +154,7 @@ div
 		display: block;
 	}
 }
+
 .newform {
 	margin-top: 1rem;
 	display: grid;
@@ -162,14 +163,17 @@ div
 	align-items: baseline;
 	column-gap: 1rem;
 	row-gap: 0;
+
 	.label {
 		grid-column: 1/2;
 	}
+
 	.inp {
 		grid-column: 2/3;
 		width: 100%;
 		margin-bottom: 0;
 	}
+
 	.inp1 {
 		grid-column: 4/5;
 		width: 100%;
@@ -207,6 +211,7 @@ div
 	margin-top: 1rem;
 	margin-bottom: 1rem;
 }
+
 .head {
 	width: 100%;
 	display: flex;
@@ -215,6 +220,7 @@ div
 	font-size: 1rem;
 	color: $secondary;
 }
+
 .pcard {
 	padding: 1rem;
 	font-size: 0.85rem;
@@ -228,18 +234,20 @@ div
 		color: $negative;
 	}
 }
+
 @media screen and (max-width: 1345px) {
 	.dol {
 		grid-column: 1/2;
 	}
+
 	.newform .inp1 {
 		grid-column: 2/3;
 	}
 }
+
 @media screen and (max-width: 1070px) {
 	.bt {
 		grid-column: 2/3;
 		margin-top: 0.5rem;
 	}
-}
-</style>
+}</style>

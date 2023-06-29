@@ -124,6 +124,20 @@ export const router = createRouter({
 					},
 				},
 				{
+					path: 'webclient',
+					name: 'webclient',
+					component: () => import('@/components/Webclient.vue'),
+					meta: {
+						title: 'Настройки',
+						nav: true,
+						bread: [
+							{ label: 'Dashboard', to: '/' },
+							{ label: 'Настройки', to: '/setup' },
+							{ label: 'Worker service', to: '/setup/worker' },
+						],
+					},
+				},
+				{
 					path: '/ext',
 					name: 'external',
 					component: () => import('@/components/setupcomponent/External.vue'),

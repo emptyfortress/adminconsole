@@ -5,10 +5,8 @@ q-page(padding)
 			q-btn(round color="secondary" size="sm" @click="router.push('/setup')")
 				q-icon(name="mdi-arrow-left" color="white")
 			router-link(v-for="item in items" :to="item.to").bl
-				div {{item.label}}
-				q-tooltip(v-if="item.tooltip") {{item.tooltip}}
-			.bl1
-				div Web-клиент
+				div {{ item.label }}
+				q-tooltip(v-if="item.tooltip") {{ item.tooltip }}
 
 	router-view(v-slot="{ Component, route }")
 		transition(name="slide-left" mode="out-in")
@@ -29,6 +27,7 @@ const items = [
 	{ id: 3, label: 'Почтовый сервер', to: '/setup/email' },
 	{ id: 4, label: 'СФО', to: '/setup/worker', tooltip: 'Служба фоновых операций' },
 	{ id: 5, label: 'СУБП', to: '/setup/bprocess', tooltip: 'Служба управления бизнес-процессами' },
+	{ id: 6, label: 'Web-клиент', to: '/setup/webclient', },
 ]
 </script>
 
@@ -40,6 +39,7 @@ const items = [
 	gap: 0.5rem;
 	margin-bottom: 2rem;
 }
+
 .bl1 {
 	font-size: 0.8rem;
 	color: $secondary;
@@ -47,6 +47,7 @@ const items = [
 	opacity: 0.7;
 	margin-left: 0.5rem;
 }
+
 .bl {
 	background: var(--bg-drawer);
 	font-size: 0.8rem;
@@ -55,14 +56,17 @@ const items = [
 	border: 1px dotted $secondary;
 	cursor: pointer;
 	text-decoration: none;
+
 	&:hover {
 		border: 1px solid $primary;
 		color: #000;
 	}
 }
+
 .router-link-active {
 	color: #fff;
 	background: $secondary;
+
 	&:hover {
 		background: $secondary;
 		color: white;
