@@ -6,6 +6,14 @@ import { req } from '@/utils/utils'
 const store = useStore()
 
 const form = ref()
+const emit = defineEmits(['change', 'haserror', 'noerror'])
+
+watch(store.wc.common, (value) => {
+	if (value) {
+		store.changeWebDefaults(0)
+		emit('change')
+	}
+})
 </script>
 
 <template lang="pug">
@@ -14,11 +22,14 @@ q-form(ref="form" @validation-error="$emit('haserror')" @validation-success="$em
 		.label Размещение расширений:
 		q-input(dense outlined v-model="store.wc.common.extensions" bg-color="white" :rules="req" @blur="form.validate()")
 			q-tooltip(anchor="top middle" self="bottom middle") ExtensionsPath
-		.label.twoline Шаблон определения моб. устройств нового поколения:
+		.label Адрес установщика утилиты dvwebtool:
+		q-input(dense outlined v-model="store.wc.common.dvwebtool" bg-color="white" :rules="req" @blur="form.validate()")
+			q-tooltip(anchor="top middle" self="bottom middle") ExtensionsPath
+		.label Шаблон определения новых моб. устройств:
 		q-input(dense outlined v-model="store.wc.common.template1" bg-color="white" :rules="req" @blur="form.validate()")
-		.label.twoline Шаблон определения старых мобильных устройств:
+		.label Шаблон определения старых моб. устройств:
 		q-input(dense outlined v-model="store.wc.common.template2" bg-color="white" :rules="req" @blur="form.validate()")
-		.label.twoline Шаблон определения планшетов:
+		.label Шаблон определения планшетов:
 		q-input(dense outlined v-model="store.wc.common.tablet" bg-color="white" :rules="req" @blur="form.validate()")
 		.label Режим удаления карточек:
 		div
@@ -29,15 +40,28 @@ q-form(ref="form" @validation-error="$emit('haserror')" @validation-success="$em
 			q-radio.q-mr-lg(v-model="store.wc.common.buttons" val="auto") Auto
 			q-radio.q-mr-lg(v-model="store.wc.common.buttons" val="one") OK, Cancel
 			q-radio(v-model="store.wc.common.buttons" val="two") Cancel, OK
+		.label Прятать боковую панель по клику на странице:
+		div
+			q-radio.q-mr-lg(v-model="store.wc.common.sidebar" val="hide") Да
+			q-radio.q-mr-lg(v-model="store.wc.common.sidebar" val="one") Нет
+		.label Оффлайн-режим после паузы, мин.:
+		q-input.short(dense outlined type="number" v-model="store.wc.common.offline" bg-color="white" :rules="req" @blur="form.validate()")
+		.label Закрытие сессии после паузы, мин.:
+		q-input.short(dense outlined type="number" v-model="store.wc.common.close" bg-color="white" :rules="req" @blur="form.validate()")
+		.label Показывать сообщение о переходе в оффлайн:
+		div
+			q-radio.q-mr-lg(v-model="store.wc.common.offlineMessage" val="yes") Да
+			q-radio.q-mr-lg(v-model="store.wc.common.offlineMessage" val="one") Нет
+		.label Максимальный размер файла, байт:
+		q-input.short(dense outlined type="number" v-model="store.wc.common.size" bg-color="white" :rules="req" @blur="form.validate()")
 </template>
 
 <style scoped lang="scss">
 .blo {
-	grid-template-columns: 200px 1fr;
+	grid-template-columns: 310px 1fr;
+}
 
-	.twoline {
-		align-self: start;
-	}
-
+.short {
+	width: 150px;
 }
 </style>

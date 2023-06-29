@@ -23,10 +23,10 @@ import { useStore } from '@/stores/store'
 const emit = defineEmits(['change'])
 
 const setNeg = (e: number) => {
-	store.panels[e].neg = true
+	store.panelsWeb[e].neg = true
 }
 const setPos = (e: number) => {
-	store.panels[e].neg = false
+	store.panelsWeb[e].neg = false
 }
 
 const store = useStore()
@@ -51,18 +51,19 @@ const calcComponent: any = (e: number) => {
 const key = ref(0)
 
 const reset = (e: number) => {
-	if (e === 2) {
-		store.server.$reset()
-		store.panels[e].change = false
-	}
-	key.value += 1
-	store.panels[e].neg = false
-	if (e === 3) {
-		store.access.$reset()
-		store.panels[e].change = false
-	}
-	key.value += 1
-	store.panels[e].neg = false
+	console.log(e)
+	// if (e === 2) {
+	// 	store.server.$reset()
+	// 	store.panels[e].change = false
+	// }
+	// key.value += 1
+	// store.panels[e].neg = false
+	// if (e === 3) {
+	// 	store.access.$reset()
+	// 	store.panels[e].change = false
+	// }
+	// key.value += 1
+	// store.panels[e].neg = false
 }
 const change = () => {
 	emit('change')

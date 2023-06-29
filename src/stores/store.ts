@@ -101,6 +101,9 @@ export const useStore = defineStore({
 		changeDefaults(e: number) {
 			this.panels[e].change = true
 		},
+		changeWebDefaults(e: number) {
+			this.panelsWeb[e].change = true
+		},
 		setTabs(e: string) {
 			this.tabs = e
 		},

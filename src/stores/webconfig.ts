@@ -10,7 +10,12 @@ export const useWebConfig = defineStore({
 			tablet: '',
 			del: 'trash',
 			buttons: 'auto',
-
+			dvwebtool: 'C:/Program Files (x86)/Docsvision/WebClient/5.5/Site/dvwebtool',
+			sidebar: 'hide',
+			offline: 10,
+			close: 300,
+			offlineMessage: 'yes',
+			size: 50000000,
 		}
 	}),
 	getters: {},

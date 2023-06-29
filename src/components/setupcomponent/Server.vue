@@ -70,10 +70,8 @@ watch(store.server.server, (value) => {
 	column-gap: 1rem;
 	row-gap: 0.5rem;
 }
+
 .q-radio {
 	margin-right: 1rem;
-}
-.star {
-	/* font-size: 1.3rem; */
 }
 </style>
