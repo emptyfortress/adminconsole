@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { useStore } from '@/stores/store'
-import { req, reqnum } from '@/utils/utils'
+import { req, reqnum, reqtrue } from '@/utils/utils'
 
 const store = useStore()
 const form = ref()
@@ -24,12 +24,12 @@ q-form(ref="form" @validation-error="$emit('haserror')" @validation-success="$em
 		q-input.short(dense outlined type="number" v-model="store.wc.system.counters" bg-color="white" :rules="reqnum" @blur="form.validate()")
 		.label Автоматическое логирование:
 		div
-			q-radio.q-mr-lg(v-model="store.wc.system.log" :val="true") Да
-			q-radio(v-model="store.wc.system.log" :val="false") Нет
+			q-radio.q-mr-lg(v-model="store.wc.system.log" val="yes") Да
+			q-radio(v-model="store.wc.system.log" val="no") Нет
 		.label Порт:
 		q-input.short(dense outlined type="number" v-model="store.wc.system.port" bg-color="white" :rules="reqnum" @blur="form.validate()")
 		.label Автоматическое обновление справочников:
-		q-select.short(dense outlined v-model="store.wc.system.autorefresh" bg-color="white" rules="true" @blur="form.validate()")
+		q-select.short(dense outlined v-model="store.wc.system.autorefresh" bg-color="white" :rules="reqtrue" @blur="form.validate()")
 		.label Интервал обновления справочников, сек.:
 		q-input.short(dense outlined type="number" v-model="store.wc.system.interval" bg-color="white" :rules="reqnum" @blur="form.validate()")
 		.label Адрес формы обратной связи:

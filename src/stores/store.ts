@@ -59,8 +59,8 @@ export const useStore = defineStore({
 		panelsWeb: [
 			{ id: 0, neg: false, expanded: false, change: false, title: 'Общие настройки' },
 			{ id: 1, neg: false, expanded: false, change: false, title: 'Кэширование' },
-			{ id: 2, neg: false, expanded: true, change: false, title: 'Система' },
-			{ id: 3, neg: false, expanded: false, change: false, title: 'Облачная подпись' },
+			{ id: 2, neg: false, expanded: false, change: false, title: 'Система' },
+			{ id: 3, neg: false, expanded: true, change: false, title: 'Облачная подпись' },
 			{ id: 4, neg: false, expanded: false, change: false, title: 'Грид' },
 			{ id: 5, neg: false, expanded: false, change: false, title: 'Сервер' },
 		],
