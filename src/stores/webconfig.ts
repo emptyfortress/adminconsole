@@ -16,6 +16,21 @@ export const useWebConfig = defineStore({
 			close: 300,
 			offlineMessage: 'yes',
 			size: 50000000,
+		},
+		cache: {
+			layout: false,
+			folders: true,
+			search: true,
+		},
+		system: {
+			timeout: 0,
+			counters: 3000,
+			log: true,
+			port: 5413,
+			autorefresh: 2,
+			interval: 60,
+			warnup: false,
+			form: 'https://forms.yandex.ru/cloud/63a40f6b84227c76f60dc68e/?iframe=1'
 		}
 	}),
 	getters: {},

@@ -18,6 +18,8 @@ q-list.q-mt-md(separator)
 <script setup lang="ts">
 import { ref } from 'vue'
 import WebCommon from '@/components/webconfig/WebCommon.vue'
+import WebCache from '@/components/webconfig/WebCache.vue'
+import WebSystem from '@/components/webconfig/WebSystem.vue'
 import { useStore } from '@/stores/store'
 
 const emit = defineEmits(['change'])
@@ -36,10 +38,10 @@ const calcComponent: any = (e: number) => {
 			return WebCommon
 		default:
 			return null
-		// case 1:
-		// 	return WebCache
-		// case 2:
-		// 	return WebSystem
+		case 1:
+			return WebCache
+		case 2:
+			return WebSystem
 		// case 3:
 		// 	return WebSign
 		// case 4:
@@ -51,11 +53,16 @@ const calcComponent: any = (e: number) => {
 const key = ref(0)
 
 const reset = (e: number) => {
-	console.log(e)
-	// if (e === 2) {
-	// 	store.server.$reset()
-	// 	store.panels[e].change = false
-	// }
+	if (e === 0) {
+		store.wc.$reset()
+		store.panelsWeb[e].change = false
+		store.panels[e].neg = false
+	}
+	if (e === 1) {
+		store.wc.$reset()
+		store.panelsWeb[e].change = false
+		store.panels[e].neg = false
+	}
 	// key.value += 1
 	// store.panels[e].neg = false
 	// if (e === 3) {

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { useStore } from '@/stores/store'
-import { req } from '@/utils/utils'
+import { req, reqnum } from '@/utils/utils'
 
 const store = useStore()
 
@@ -45,15 +45,15 @@ q-form(ref="form" @validation-error="$emit('haserror')" @validation-success="$em
 			q-radio.q-mr-lg(v-model="store.wc.common.sidebar" val="hide") Да
 			q-radio.q-mr-lg(v-model="store.wc.common.sidebar" val="one") Нет
 		.label Оффлайн-режим после паузы, мин.:
-		q-input.short(dense outlined type="number" v-model="store.wc.common.offline" bg-color="white" :rules="req" @blur="form.validate()")
+		q-input.short(dense outlined type="number" v-model="store.wc.common.offline" bg-color="white" :rules="reqnum" @blur="form.validate()")
 		.label Закрытие сессии после паузы, мин.:
-		q-input.short(dense outlined type="number" v-model="store.wc.common.close" bg-color="white" :rules="req" @blur="form.validate()")
+		q-input.short(dense outlined type="number" v-model="store.wc.common.close" bg-color="white" :rules="reqnum" @blur="form.validate()")
 		.label Показывать сообщение о переходе в оффлайн:
 		div
 			q-radio.q-mr-lg(v-model="store.wc.common.offlineMessage" val="yes") Да
 			q-radio.q-mr-lg(v-model="store.wc.common.offlineMessage" val="one") Нет
 		.label Максимальный размер файла, байт:
-		q-input.short(dense outlined type="number" v-model="store.wc.common.size" bg-color="white" :rules="req" @blur="form.validate()")
+		q-input.short(dense outlined type="number" v-model="store.wc.common.size" bg-color="white" :rules="reqnum" @blur="form.validate()")
 </template>
 
 <style scoped lang="scss">
