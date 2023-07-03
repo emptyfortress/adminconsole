@@ -64,7 +64,6 @@ export const useWebConfig = defineStore({
 				id: 0,
 				psevdo: 'AGSupport',
 				def: true,
-				selected: true,
 				lang: [
 					{ id: 0, active: true, name: 'Russian (Russia)', def: 'ru' },
 					{ id: 1, active: true, name: 'English (United States)', def: 'en' },
@@ -77,7 +76,6 @@ export const useWebConfig = defineStore({
 				id: 1,
 				psevdo: 'DvTest',
 				def: false,
-				selected: false,
 				lang: [
 					{ id: 0, active: true, name: 'Russian (Russia)', def: 'ru' },
 					{ id: 1, active: false, name: 'English (United States)', def: 'en' },
@@ -90,7 +88,6 @@ export const useWebConfig = defineStore({
 				id: 2,
 				psevdo: 'DvShowCase',
 				def: false,
-				selected: false,
 				lang: [
 					{ id: 0, active: true, name: 'Russian (Russia)', def: 'ru' },
 					{ id: 1, active: false, name: 'English (United States)', def: 'en' },

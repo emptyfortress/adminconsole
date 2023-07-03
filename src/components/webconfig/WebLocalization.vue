@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { computed, watch } from 'vue'
+import { ref, watch, computed } from 'vue'
 import { useStore } from '@/stores/store'
 
 const store = useStore()
 const emit = defineEmits(['change', 'haserror', 'noerror'])
+const selection = ref('AGSupport')
 
 watch(store.wc.localization, (value) => {
 	if (value) {
@@ -12,21 +13,30 @@ watch(store.wc.localization, (value) => {
 	}
 })
 
+const kkey = ref(0)
+watch(selection, (value) => {
+	if (value) {
+		kkey.value += 1
+	}
+})
+
 const select = ((e: any) => {
-	store.wc.localization.map(item => item.selected = false)
-	e.selected = true
+	selection.value = e.psevdo
 })
-const selection = computed(() => {
-	return store.wc.localization.filter(e => e.selected === true)
+const current = computed(() => {
+	return store.wc.localization.filter(item => item.psevdo === selection.value)[0]
 })
+
+
 </script>
 
 <template lang="pug">
 q-form(ref="form" @validation-error="$emit('haserror')" @validation-success="$emit('noerror')" no-error-focus)
 	.lang
 		.wh
+			.text-weight-bold.q-pa-sm Базы данных:
 			q-list
-				q-item.db(clickable v-for="item in store.wc.localization" :key="item.id" @click="select(item)" :class="{ sel: item.selected }")
+				q-item.db(clickable v-for="item in store.wc.localization" :key="item.id" @click="select(item)" :class="{ sel: item.psevdo === selection }")
 					q-item-section(side)
 						q-icon(name="mdi-database-outline")
 					q-item-section
@@ -40,12 +50,13 @@ q-form(ref="form" @validation-error="$emit('haserror')" @validation-success="$em
 					tr
 						th Язык
 						th По умолчанию
-				tbody
-					tr(v-for="item in selection[0].lang" :key="item.id")
-						td
-							q-checkbox(v-model="item.active") {{ item.name }}
-						td
-							q-radio(v-model="selection[0].defLang" :val="item.def")
+				transition(name="fade" mode="out-in")
+					tbody(:key="kkey")
+						tr(v-for="item in current.lang" :key="item.id")
+							td
+								q-checkbox(v-model="item.active") {{ item.name }}
+							td
+								q-radio(v-model="current.defLang" :val="item.def")
 </template>
 
 <style scoped lang="scss">
