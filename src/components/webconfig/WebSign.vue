@@ -43,8 +43,8 @@ q-form(ref="form" @validation-error="$emit('haserror')" @validation-success="$em
 		.label Обновление агрегатов и списков карточек: 
 		div
 			q-radio.q-mr-lg(v-model="store.wc.sign.autorefresh" val="auto") Автоматически
-			q-radio(v-model="store.wc.sign.autorefresh" val="not") Через кнопку "Применить"
-		.label Автообновление через, мс: 
+			q-radio(v-model="store.wc.sign.autorefresh" val="not") По кнопке "Применить"
+		.label Автообновление через, мс:
 		q-input.short(dense outlined type="number" v-model="store.wc.sign.aggregatTime" bg-color="white" :rules="reqnum" @blur="form.validate()")
 </template>
 

@@ -21,6 +21,9 @@ import WebCommon from '@/components/webconfig/WebCommon.vue'
 import WebCache from '@/components/webconfig/WebCache.vue'
 import WebSystem from '@/components/webconfig/WebSystem.vue'
 import WebSign from '@/components/webconfig/WebSign.vue'
+import WebGrid from '@/components/webconfig/WebGrid.vue'
+import WebServer from '@/components/webconfig/WebServer.vue'
+import WebLocalization from '@/components/webconfig/WebLocalization.vue'
 import { useStore } from '@/stores/store'
 
 const emit = defineEmits(['change'])
@@ -37,18 +40,20 @@ const calcComponent: any = (e: number) => {
 	switch (e) {
 		case 0:
 			return WebCommon
-		default:
-			return null
 		case 1:
 			return WebCache
 		case 2:
 			return WebSystem
 		case 3:
 			return WebSign
-		// case 4:
-		// 	return WebGrid
-		// case 5:
-		// 	return WebServer
+		case 4:
+			return WebGrid
+		case 5:
+			return WebServer
+		case 6:
+			return WebLocalization
+		default:
+			return null
 	}
 }
 const key = ref(0)

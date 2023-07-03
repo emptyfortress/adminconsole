@@ -4,6 +4,10 @@ export const useWebConfig = defineStore({
 	id: 'webconfig',
 	state: () => ({
 		common: {
+			mainFolder: 'C:/Program Files (x86)/Docsvision/WebClient/5.5/',
+			virtual: 'http://DVSN-TV6VF0OS3H.digdes.com/',
+			virt1: 'DocsvisionWebClient',
+			iis: 'Default Web Site',
 			extensions: 'C:/Program Files (x86)/Docsvision/WebClient/5.5/Site/Extensions',
 			template1: '',
 			template2: '',
@@ -45,8 +49,57 @@ export const useWebConfig = defineStore({
 			logo: 'Content/App/Assets/Images/shield.png',
 			aggregatTime: 1000,
 			autorefresh: 'auto',
-
-		}
+		},
+		grid: {
+			autorefresh: 'auto',
+			timeout: 1000
+		},
+		server: {
+			address: '',
+			psevdo: '',
+			adminPath: ''
+		},
+		localization: [
+			{
+				id: 0,
+				psevdo: 'AGSupport',
+				def: true,
+				selected: true,
+				lang: [
+					{ id: 0, active: true, name: 'Russian (Russia)', def: 'ru' },
+					{ id: 1, active: true, name: 'English (United States)', def: 'en' },
+					{ id: 2, active: true, name: 'Kazakh (Kazahstan)', def: 'kz' },
+					{ id: 3, active: true, name: 'Latvian (Latvia)', def: 'lv' },
+				],
+				defLang: 'ru'
+			},
+			{
+				id: 1,
+				psevdo: 'DvTest',
+				def: false,
+				selected: false,
+				lang: [
+					{ id: 0, active: true, name: 'Russian (Russia)', def: 'ru' },
+					{ id: 1, active: false, name: 'English (United States)', def: 'en' },
+					{ id: 2, active: true, name: 'Kazakh (Kazahstan)', def: 'kz' },
+					{ id: 3, active: false, name: 'Latvian (Latvia)', def: 'lv' },
+				],
+				defLang: 'kz'
+			},
+			{
+				id: 2,
+				psevdo: 'DvShowCase',
+				def: false,
+				selected: false,
+				lang: [
+					{ id: 0, active: true, name: 'Russian (Russia)', def: 'ru' },
+					{ id: 1, active: false, name: 'English (United States)', def: 'en' },
+					{ id: 2, active: false, name: 'Kazakh (Kazahstan)', def: 'kz' },
+					{ id: 3, active: true, name: 'Latvian (Latvia)', def: 'lv' },
+				],
+				defLang: 'lv'
+			},
+		]
 	}),
 	getters: {},
 	actions: {},
