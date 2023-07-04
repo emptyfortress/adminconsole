@@ -63,7 +63,7 @@ q-form(ref="form" @validation-error="$emit('haserror')" @validation-success="$em
 .lang {
 	margin: 0 2rem;
 	display: grid;
-	grid-template-columns: .5fr 100px 1fr;
+	grid-template-columns: .4fr auto 1fr;
 	gap: 1rem;
 
 	&>div.wh {

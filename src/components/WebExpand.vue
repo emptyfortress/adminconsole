@@ -24,6 +24,7 @@ import WebSign from '@/components/webconfig/WebSign.vue'
 import WebGrid from '@/components/webconfig/WebGrid.vue'
 import WebServer from '@/components/webconfig/WebServer.vue'
 import WebLocalization from '@/components/webconfig/WebLocalization.vue'
+import WebCards from '@/components/webconfig/WebCards.vue'
 import { useStore } from '@/stores/store'
 
 const emit = defineEmits(['change'])
@@ -52,6 +53,8 @@ const calcComponent: any = (e: number) => {
 			return WebServer
 		case 6:
 			return WebLocalization
+		case 7:
+			return WebCards
 		default:
 			return null
 	}

@@ -96,7 +96,16 @@ export const useWebConfig = defineStore({
 				],
 				defLang: 'lv'
 			},
-		]
+		],
+		cards: [
+			{
+				id: 0, psevdo: 'AGSupport', types: [
+					{ id: 0, name: 'Задание', vid: 'На исполнение', key: 7, par: [0, 1, 5] },
+					{ id: 1, name: 'Документ', vid: 'Исходящий', key: 26, par: [0, 2] },
+					{ id: 2, name: 'Группа заданий', vid: 'Группа заданий УД', key: 44, par: [0, 3] },
+					{ id: 3, name: 'Согласование', vid: 'Согласование КС', key: 15, par: [0, 1, 6, 12] },
+				]
+			}]
 	}),
 	getters: {},
 	actions: {},
