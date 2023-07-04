@@ -46,8 +46,9 @@ const showDialog = (async (e: any) => {
 })
 const choose = (() => {
 	let temp = tree.value.getNodeByKey(selBranch.value)
-	console.log(currentRow.value)
 	currentRow.value.vid = temp.label
+	currentRow.value.key = temp.id
+	currentRow.value.par = [...temp.par]
 	dialog.value = false
 })
 </script>
