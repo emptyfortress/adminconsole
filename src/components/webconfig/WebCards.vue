@@ -11,9 +11,9 @@ const filter = ref('')
 const tree = ref()
 
 const kkey = ref(0)
-watch(store.wc.common, (value) => {
+watch(store.wc.cards, (value) => {
 	if (value) {
-		store.changeWebDefaults(0)
+		store.changeWebDefaults(7)
 		emit('change')
 	}
 })
