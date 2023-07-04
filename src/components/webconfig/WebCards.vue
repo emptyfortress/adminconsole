@@ -21,6 +21,7 @@ const selection = ref('AGSupport')
 
 const select = ((e: any) => {
 	selection.value = e.psevdo
+	kkey.value += 1
 })
 const current = computed(() => {
 	return store.wc.cards.filter(item => item.psevdo === selection.value)[0]
