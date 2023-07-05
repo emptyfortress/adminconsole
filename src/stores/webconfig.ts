@@ -122,6 +122,26 @@ export const useWebConfig = defineStore({
 					{ id: 3, name: 'Согласование', vid: 'Согласование КС', key: 15, par: [0, 1, 6, 12] },
 				]
 			},
+		],
+		funcs: [
+			{
+				id: 0, psevdo: 'AGSupport', fun: [
+					{ id: 0, name: 'Контрол комментариев', used: true, vid: [], },
+					{ id: 1, name: 'Общие справочники', used: true, vid: [], },
+				]
+			},
+			{
+				id: 1, psevdo: 'DvTest', fun: [
+					{ id: 0, name: 'Контрол комментариев', used: true, vid: [], },
+					{ id: 1, name: 'Общие справочники', used: true, vid: [], },
+				]
+			},
+			{
+				id: 2, psevdo: 'DvShowCase', fun: [
+					{ id: 0, name: 'Контрол комментариев', used: true, vid: [], },
+					{ id: 1, name: 'Общие справочники', used: true, vid: [], },
+				]
+			},
 		]
 	}),
 	getters: {},

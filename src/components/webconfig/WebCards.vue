@@ -89,7 +89,7 @@ q-form(ref="form" @validation-error="$emit('haserror')" @validation-success="$em
 				q-input(v-model="filter" dense clearable placeholder="Поиск")
 					template(v-slot:prepend)
 						q-icon(name="mdi-magnify")
-			q-card-section
+			q-scroll-area.scr
 				q-tree(:nodes="cards"
 					ref="tree"
 					icon="mdi-chevron-right"
@@ -100,7 +100,7 @@ q-form(ref="form" @validation-error="$emit('haserror')" @validation-success="$em
 					v-model:expanded="expanded")
 			q-card-actions(align="right")
 				q-btn(flat color="primary" label="Отмена" v-close-popup ) 
-				q-btn(unelevated color="primary" label="Выбрать" @click="choose") 
+				q-btn(unelevated color="primary" label="Выбрать" @click="choose" :disable="selBranch === null") 
 
 </template>
 
@@ -145,5 +145,9 @@ th {
 	.q-tree__node-header-content.text-secondary {
 		color: $blue-10 !important;
 	}
+}
+
+.scr {
+	height: calc(100vh - 350px);
 }
 </style>

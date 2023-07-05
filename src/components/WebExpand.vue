@@ -25,6 +25,7 @@ import WebGrid from '@/components/webconfig/WebGrid.vue'
 import WebServer from '@/components/webconfig/WebServer.vue'
 import WebLocalization from '@/components/webconfig/WebLocalization.vue'
 import WebCards from '@/components/webconfig/WebCards.vue'
+import WebExp from '@/components/webconfig/WebExp.vue'
 import { useStore } from '@/stores/store'
 
 const emit = defineEmits(['change'])
@@ -55,6 +56,8 @@ const calcComponent: any = (e: number) => {
 			return WebLocalization
 		case 7:
 			return WebCards
+		case 8:
+			return WebExp
 		default:
 			return null
 	}
@@ -65,21 +68,6 @@ const reset = (e: number) => {
 	store.wc.$reset()
 	store.panelsWeb[e].change = false
 	store.panels[e].neg = false
-	// if (e === 0) {
-	// 	store.wc.$reset()
-	// 	store.panelsWeb[e].change = false
-	// 	store.panels[e].neg = false
-	// }
-	// if (e === 1) {
-	// 	store.wc.$reset()
-	// 	store.panelsWeb[e].change = false
-	// 	store.panels[e].neg = false
-	// }
-	// if (e === 2) {
-	// 	store.wc.$reset()
-	// 	store.panelsWeb[e].change = false
-	// 	store.panels[e].neg = false
-	// }
 }
 const change = () => {
 	emit('change')
