@@ -22,9 +22,9 @@ export const useWebConfig = defineStore({
 			size: 50000000,
 		},
 		cache: {
-			layout: false,
-			folders: true,
-			search: true,
+			layout: 'yes',
+			folders: 'yes',
+			search: 'no',
 		},
 		system: {
 			timeout: 0,

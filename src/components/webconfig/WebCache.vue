@@ -18,16 +18,16 @@ q-form(ref="form" @validation-error="$emit('haserror')" @validation-success="$em
 	.blo
 		.label Кэширование разметок:
 		div
-			q-radio.q-mr-lg(v-model="store.wc.cache.layout" :val="true") Да
-			q-radio(v-model="store.wc.cache.layout" :val="false") Нет
+			q-radio.q-mr-lg(v-model="store.wc.cache.layout" val="yes") Да
+			q-radio(v-model="store.wc.cache.layout" val="no") Нет
 		.label Кэширование папок:
 		div
-			q-radio.q-mr-lg(v-model="store.wc.cache.folders" :val="true") Да
-			q-radio(v-model="store.wc.cache.folders" :val="false") Нет
+			q-radio.q-mr-lg(v-model="store.wc.cache.folders" val="yes") Да
+			q-radio(v-model="store.wc.cache.folders" val="no") Нет
 		.label Кэширование поисковых запросов:
 		div
-			q-radio.q-mr-lg(v-model="store.wc.cache.search" :val="true") Да
-			q-radio(v-model="store.wc.cache.search" :val="false") Нет
+			q-radio.q-mr-lg(v-model="store.wc.cache.search" val="yes") Да
+			q-radio(v-model="store.wc.cache.search" val="no") Нет
 </template>
 
 <style scoped lang="scss"></style>
