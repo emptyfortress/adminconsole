@@ -114,7 +114,6 @@ const setEditMode = () => {
 }
 
 const otmena = () => {
-	console.log('fuck')
 	editMode.value = false
 	store.server.$reset()
 }

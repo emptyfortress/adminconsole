@@ -65,7 +65,7 @@ export const useStore = defineStore({
 			{ id: 5, neg: false, expanded: false, change: false, title: 'Сервер' },
 			{ id: 6, neg: false, expanded: false, change: false, title: 'Локализации' },
 			{ id: 7, neg: false, expanded: false, change: false, title: 'Виды карточек' },
-			{ id: 8, neg: false, expanded: true, change: false, title: 'Экспериментальные функции' },
+			{ id: 8, neg: false, expanded: false, change: false, title: 'Экспериментальные функции' },
 		],
 		server: useServer(),
 		access: useAccess(),

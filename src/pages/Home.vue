@@ -15,11 +15,14 @@ q-page
 	gap: 1rem;
 	height: calc(100vh - 64px - 64px);
 }
+
 .q-page {
 	padding: 1rem;
 }
+
 .q-card {
 	height: 100%;
+
 	div {
 		font-size: 2rem;
 		color: #ccc;
