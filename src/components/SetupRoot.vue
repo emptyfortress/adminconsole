@@ -9,9 +9,10 @@ div
 			q-icon(name="mdi-magnify")
 	br
 	.mygrid
-		// router-link(to="/setup/dvserver").bl
-		// 	.icon.serverdv
-		// 	.tit Сервер Docsvision
+		router-link.bl.conf(to="/setup/configuration")
+			.icon.config
+			.tit Конфигурации и компьютеры
+			.icon.config
 		router-link.bl(to="/setup/dvserver1")
 			.icon.serverdv
 			.tit Сервер Docsvision
@@ -33,7 +34,7 @@ div
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref } from 'vue'
 
 const search = ref()
 </script>
@@ -50,10 +51,11 @@ const search = ref()
 	display: grid;
 	grid-template-columns: repeat(3, 230px);
 	margin: 0 auto;
+	// background: pink;
 	max-width: 692px;
 
 	.bl {
-		width: 230px;
+		// width: 230px;
 		font-size: 1.2rem;
 		color: $secondary;
 		padding: 1rem;
@@ -91,6 +93,10 @@ const search = ref()
 			&.workflow {
 				background: url('@/assets/img/workflow.svg');
 			}
+
+			&.config {
+				background: url('@/assets/img/configuration.svg');
+			}
 		}
 
 		&:hover {
@@ -101,6 +107,7 @@ const search = ref()
 			.serverdv,
 			.worker,
 			.connection,
+			.config,
 			.workflow {
 				background-position: bottom;
 			}
@@ -126,5 +133,20 @@ const search = ref()
 			margin-bottom: 0.5rem;
 		}
 	}
+}
+
+.conf {
+	grid-column: 1 / -1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
+	border-top: 1px solid #ccc !important;
+
+	&:hover {
+		border-top-color: $primary !important;
+
+	}
+
 }
 </style>

@@ -4,8 +4,7 @@ q-page(padding)
 		.nav(v-if="route.meta.nav")
 			q-btn(round color="secondary" size="sm" @click="router.push('/setup')")
 				q-icon(name="mdi-arrow-left" color="white")
-			router-link(v-for="item in items" :to="item.to").bl
-				div {{ item.label }}
+			router-link(v-for="item in items" :to="item.to").bl {{ item.label }}
 				q-tooltip(v-if="item.tooltip") {{ item.tooltip }}
 
 	router-view(v-slot="{ Component, route }")
@@ -28,6 +27,7 @@ const items = [
 	{ id: 4, label: 'СФО', to: '/setup/worker', tooltip: 'Служба фоновых операций' },
 	{ id: 5, label: 'СУБП', to: '/setup/bprocess', tooltip: 'Служба управления бизнес-процессами' },
 	{ id: 6, label: 'Web-клиент', to: '/setup/webclient', },
+	{ id: 7, label: 'Конфигурации', to: '/setup/configuration', },
 ]
 </script>
 

@@ -54,6 +54,20 @@ export const router = createRouter({
 					},
 				},
 				{
+					path: 'configuration',
+					name: 'configuration',
+					component: () => import('@/components/Configuration.vue'),
+					meta: {
+						title: 'Настройки',
+						nav: true,
+						bread: [
+							{ label: 'Dashboard', to: '/' },
+							{ label: 'Настройки', to: '/setup' },
+							{ label: 'Конфигурации', to: '/setup/configuration' },
+						],
+					},
+				},
+				{
 					path: 'bprocess',
 					name: 'bprocess',
 					component: () => import('@/components/Bprocess.vue'),
