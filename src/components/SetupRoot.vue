@@ -141,10 +141,10 @@ const search = ref()
 	justify-content: center;
 	align-items: center;
 	gap: 1rem;
-	border-top: 1px solid #ccc !important;
+	border-bottom: 1px solid #ccc !important;
 
 	&:hover {
-		border-top-color: $primary !important;
+		border-bottom-color: $primary !important;
 
 	}
 

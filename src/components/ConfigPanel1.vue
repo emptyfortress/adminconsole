@@ -7,8 +7,8 @@ const config = useConfig()
 const selChip = ref(0)
 const chips = reactive([
 	{ id: 0, selected: true, label: 'Все' },
-	{ id: 1, selected: false, label: 'Тестовая среда' },
-	{ id: 2, selected: false, label: 'Прод' },
+	{ id: 1, selected: false, label: 'Windows' },
+	{ id: 2, selected: false, label: 'Linux' },
 ])
 
 const select = ((e: any) => {
@@ -18,23 +18,23 @@ const select = ((e: any) => {
 })
 
 const pagination = {
-	sortBy: 'name',
-	rowsPerPage: 0
+	rowsPerPage: 0,
+	// sortBy: 'name',
 }
 
 const filteredRows = computed(() => {
 	switch (selChip.value) {
 		case 1:
-			return config.rows.filter(e => e.env === 'test')
+			return config.rows1.filter(e => e.os === 'Windows')
 		case 2:
-			return config.rows.filter(e => e.env === 'prod')
+			return config.rows1.filter(e => e.os === 'Linux')
 		default:
-			return config.rows
+			return config.rows1
 	}
 })
 
-const compRows = computed(() => {
-	return config.selectedRow.computers
+const compRows1 = computed(() => {
+	return config.selectedRow1.config
 })
 </script>
 
@@ -44,7 +44,7 @@ const compRows = computed(() => {
 .grid
 	.left.wh
 		q-table(flat
-			:columns="config.columns"
+			:columns="config.columns1"
 			:rows="filteredRows"
 			row-key="id"
 			hide-bottom
@@ -52,16 +52,14 @@ const compRows = computed(() => {
 			color="primary")
 
 			template(v-slot:body='props')
-				q-tr(:props='props' @click="config.selectRow(props.row)" :class='{ cool: props.row.selected }')
+				q-tr(:props='props' @click="config.selectRow1(props.row)" :class='{ cool: props.row.selected }')
 					q-td(:props="props" key="name" ) {{ props.row.name }}
-					q-td(:props="props" key="module" ) {{ props.row.module }}
-					q-td(:props="props" key="env" ) {{ props.row.env }}
-					q-td(:props="props" key="computers" ) {{ props.row.computers }}
+					q-td(:props="props" key="os" ) {{ props.row.os }}
 
 	.to
 		q-icon(name="mdi-arrow-right-bold" size="lg")
 	.right.wh
-		q-table(flat :columns="config.columns1" :rows="compRows" hide-bottom)
+		q-table(flat :columns="config.columns2" :rows="compRows1" hide-pagination no-data-label="Конфигурации не обнаружены.")
 </template>
 
 <style scoped lang="scss">
@@ -87,6 +85,7 @@ const compRows = computed(() => {
 .to {
 	margin-top: 3rem;
 }
+
 .q-table tr {
 	cursor: pointer;
 }
