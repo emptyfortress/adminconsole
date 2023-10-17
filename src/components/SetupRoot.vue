@@ -12,7 +12,7 @@ div
 		router-link.bl.conf(to="/setup/configuration")
 			.icon.config
 			.tit Конфигурации и компьютеры
-			.icon.config
+			.icon.comp
 		router-link.bl(to="/setup/dvserver1")
 			.icon.serverdv
 			.tit Сервер Docsvision
@@ -97,6 +97,10 @@ const search = ref()
 			&.config {
 				background: url('@/assets/img/configuration.svg');
 			}
+
+			&.comp {
+				background: url('@/assets/img/comp.svg');
+			}
 		}
 
 		&:hover {
@@ -108,6 +112,7 @@ const search = ref()
 			.worker,
 			.connection,
 			.config,
+			.comp,
 			.workflow {
 				background-position: bottom;
 			}
