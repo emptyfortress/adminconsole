@@ -4,7 +4,7 @@ q-drawer(show-if-above behavior="desktop" v-model="leftDrawer" side="left" borde
 		q-item(v-for="item in menu" :key="item.url" clickable :to="item.url")
 			q-item-section(avatar)
 				q-icon(:name="item.icon" color="secondary")
-			q-item-section {{item.text}}
+			q-item-section {{ item.text }}
 
 	q-btn(round flat dense :icon="minitoogle" @click="toggleMini" color="secondary").mini.gt-sm
 </template>
@@ -26,6 +26,7 @@ const minitoogle = computed(() => {
 const menu = [
 	{ url: '/', icon: 'mdi-monitor-dashboard', text: 'Dashboard' },
 	{ url: '/setup', icon: 'mdi-hammer-wrench', text: 'Настройка' },
+	{ url: '/setup1', icon: 'mdi-hammer-wrench', text: 'Настройка' },
 	{ url: '/logs', icon: 'mdi-script-text-outline', text: 'Логи' },
 ]
 </script>
@@ -38,6 +39,7 @@ const menu = [
 	left: 0.5rem;
 	overflow-x: hidden;
 }
+
 .q-router-link--active {
 	background: #cad4e9;
 	color: var(--text-color);
