@@ -8,7 +8,7 @@ div
 	.mygrid
 		router-link.bl.conf(to="/setup1/configuration1")
 			.icon.config
-			.tit Конфигурации и компьютеры
+			.tit Конфигурации и серверы
 			.icon.comp
 		router-link.bl.big(to="/setup/dvserver1")
 			.icon.serverdv
