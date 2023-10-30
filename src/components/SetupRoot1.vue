@@ -2,7 +2,7 @@
 div
 	.inf
 		span Адрес хранилища настроек:
-		span.q-ml-md.text-bold http://sol2016.digdes.com:5200/api
+		span.q-ml-md.text-bold http://sol2016.digdes.com:5200/api/Settings
 	.zag Настройки
 	br
 	.mygrid
@@ -172,8 +172,6 @@ const search = ref()
 
 	&:hover {
 		border-bottom-color: $primary !important;
-
 	}
-
 }
 </style>
