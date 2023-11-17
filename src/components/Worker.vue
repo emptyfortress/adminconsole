@@ -17,24 +17,23 @@
 						q-btn(flat round @click="add" icon="mdi-plus-circle")
 						q-btn(flat round icon="mdi-reload")
 							q-tooltip Перезапустить службу
-
-			.pcard lkajsl
-	// 	q-card( v-for="item in store.config" :key="item.name").flcard
-	// 		component(:is="Uzel" :name="item.name")
+			.pcard
+				GreyBlock2( v-for="item in processes" :key="item.name" :name="item.name" )
 
 	component(:is="AddConnection" :show="dialog" @close="dialog = false" @add="addConnection")
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 import { useStore } from '@/stores/store'
+import GreyBlock2 from '@/components/GreyBlock2.vue'
 
 import AddConnection from '@/components/AddConnection.vue'
-import Uzel from '@/components/Uzel.vue'
 
 const store = useStore()
 
 const dialog = ref(false)
+const processes = reactive([{ name: 'Coolname' }])
 
 const workers = [
 	{ id: 0, text: 'dv-agent' },
@@ -86,6 +85,7 @@ const addConnection = (e: string) => {
 .pcard {
 	padding: 1rem;
 	font-size: 0.85rem;
+	background: #fff;
 }
 
 :deep(.er.q-expansion-item--collapsed) {
