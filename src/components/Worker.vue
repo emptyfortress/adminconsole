@@ -18,7 +18,7 @@
 						q-btn(flat round icon="mdi-reload")
 							q-tooltip Перезапустить службу
 
-	// .grid
+			.pcard lkajsl
 	// 	q-card( v-for="item in store.config" :key="item.name").flcard
 	// 		component(:is="Uzel" :name="item.name")
 
@@ -37,10 +37,12 @@ const store = useStore()
 const dialog = ref(false)
 
 const workers = [
-	{ id: 0, text: 'One' },
-	{ id: 1, text: 'Woe' },
-	{ id: 2, text: 'lkajs' },
-	{ id: 3, text: 'lakj' },
+	{ id: 0, text: 'dv-agent' },
+	{ id: 1, text: 'webclient-worker' },
+	{ id: 2, text: 'dvDocKontur' },
+	{ id: 3, text: 'testWorker_1' },
+	{ id: 4, text: 'testWorker_2' },
+	{ id: 5, text: 'testWorker_3' },
 ]
 
 const addConnection = (e: string) => {
@@ -64,6 +66,28 @@ const addConnection = (e: string) => {
 	gap: 1rem;
 	font-size: 1.1rem;
 }
+
+.q-expansion-item {
+	transition: 0.2s ease all;
+}
+
+.q-expansion-item--expanded :deep(.q-item) {
+	border-bottom: 1px dotted $secondary;
+	border-top: 1px solid $primary;
+}
+
+.q-expansion-item--expanded {
+	box-shadow: 0 2px 7px rgba(0, 0, 0, 0.5);
+	border: 1px solid $primary;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+}
+
+.pcard {
+	padding: 1rem;
+	font-size: 0.85rem;
+}
+
 :deep(.er.q-expansion-item--collapsed) {
 	background: $pink-1;
 	border: 1px solid $negative;
@@ -82,19 +106,5 @@ const addConnection = (e: string) => {
 }
 .q-select {
 	width: 200px;
-}
-.flcard {
-	width: clamp(640px, 47%, 900px);
-	margin: 0.5rem auto;
-	padding: 1rem;
-}
-.grid {
-	// display: grid;
-	// grid-template-rows: masonry;
-	// grid-template-columns: repeat(2, 1fr);
-	display: flex;
-	justify-content: center;
-	align-items: flex-start;
-	flex-wrap: wrap;
 }
 </style>
