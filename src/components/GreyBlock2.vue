@@ -13,29 +13,30 @@ div
 
 		.current {{ name }}
 		br
-		.form
-			.label Имя процесса:
-			q-input(v-model="form.name" dense outlined bg-color="white").rem
-			div
-			.label Тип конфигурации:
-			q-select(v-model="form.configtype" dense outlined :options="options" bg-color="white").rem
-
-		.grids
-			.border
+		.threecol
+			.border.zero
 				.form
+					.label Имя процесса:
+					q-input(v-model="form.name" dense outlined bg-color="white").rem
+					.label Тип конфигурации:
+					q-select(v-model="form.configtype" dense outlined :options="options" bg-color="white").rem
+
+			.border
+				.form.form1
 					.label Соединение Docsvision:
 					q-select(v-model="form.connection" dense outlined :options="options" bg-color="white").rem
 					.label Соединение Почтовый сервер:
 					q-select(v-model="form.email" dense outlined :options="options" bg-color="white").rem
+
 			.border
 				.row.items-center.q-gutter-x-sm
-					.label Таймаут:
+					.label Таймаут, сек.:
 					q-input(v-model="form.timeout" dense outlined bg-color="white" type="number").small
 				.column.q-mt-sm
 					q-checkbox(v-model="form.turn" dense label="Отключено")
 					q-checkbox(v-model="form.x86" dense label="Использовать x86")
 
-		q-checkbox(v-model="form.def1" dense label="Использовать по умолчанию")
+		q-checkbox.q-mt-md(v-model="form.def1" dense label="Использовать по умолчанию")
 		q-card-actions(align="right" v-if="editMode1")
 			q-btn(flat label="Отмена" @click="editMode1 = false")
 			q-btn(unelevated color="primary" label="Сохранить" @click="save1")
@@ -67,7 +68,7 @@ const form = reactive({
 	def1: false,
 })
 
-watch(form, (value) => {
+watch(form, value => {
 	if (value) {
 		editMode1.value = true
 	}
@@ -82,10 +83,28 @@ const del = (e: string) => {
 </script>
 
 <style scoped lang="scss">
+.threecol {
+	display: grid;
+	grid-template-columns: 2fr 2fr 1fr;
+	gap: 0.5rem;
+}
+@media screen and (max-width: 1024px) {
+	.threecol {
+		grid-template-columns: 2fr 1fr;
+	}
+	.zero {
+		grid-column: 1/-1;
+	}
+}
+@media screen and (max-width: 700px) {
+	.threecol {
+		grid-template-columns: 1fr;
+	}
+}
 .border {
 	border: 4px double #ccc;
 	padding: 0.5rem;
-	margin: 1rem 0;
+	// margin: 1rem 0;
 	.form {
 		column-gap: 0.3rem;
 	}
@@ -95,12 +114,15 @@ const del = (e: string) => {
 	height: 28px;
 }
 .form {
-	grid-template-columns: 160px 1fr 95px;
+	grid-template-columns: 200px 1fr;
+}
+.form1 {
+	grid-template-columns: 200px 1fr;
 }
 .grids {
 	margin-top: 0.5rem;
 	display: grid;
-	grid-template-columns: auto 194px;
+	grid-template-columns: auto 210px;
 	gap: 1rem;
 	.form {
 		grid-template-columns: 160px 1fr;
@@ -109,5 +131,8 @@ const del = (e: string) => {
 .small {
 	width: 80px;
 	font-size: 1rem;
+}
+.close {
+	top: 0;
 }
 </style>

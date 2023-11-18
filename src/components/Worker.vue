@@ -6,7 +6,7 @@
 			q-icon(name="mdi-magnify")
 
 	q-list.q-mt-md(separator)
-		q-expansion-item(v-for="panel in workers" :key="panel.id" switch-toggle-side)
+		q-expansion-item(v-for="panel in filtered" :key="panel.id" switch-toggle-side)
 			template(v-slot:header)
 				.head
 					.title
@@ -18,16 +18,15 @@
 						q-btn(flat round icon="mdi-reload")
 							q-tooltip Перезапустить службу
 			.pcard
-				GreyBlock2( v-for="item in processes" :key="item.name" :name="item.name" )
+				GreyBlock2(v-for="item in processes" :key="item.name" :name="item.name" )
 
 	component(:is="AddConnection" :show="dialog" @close="dialog = false" @add="addConnection")
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref, reactive, computed } from 'vue'
 import { useStore } from '@/stores/store'
 import GreyBlock2 from '@/components/GreyBlock2.vue'
-
 import AddConnection from '@/components/AddConnection.vue'
 
 const store = useStore()
@@ -43,6 +42,11 @@ const workers = [
 	{ id: 4, text: 'testWorker_2' },
 	{ id: 5, text: 'testWorker_3' },
 ]
+const filter = ref('')
+const filtered = computed(() => {
+	if (filter.value === '') return workers
+	else return workers.filter(item => item.text.includes(filter.value))
+})
 
 const addConnection = (e: string) => {
 	store.addConnection(e)
