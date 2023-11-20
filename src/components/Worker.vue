@@ -27,7 +27,7 @@
 				GreyBlock2( v-for="item in panel.processes" :key="item.name" :name="item.name" @del="remove(panel.id, item)")
 
 	AddConnection(v-model="dialog" @close="dialog = false" @add="addProcess" worker)
-	RenameWorker(v-model="dialog2" @close="dialog2 = false" @rename="rename" :name="curPanel.text")
+	RenameWorker(v-model="dialog2" @close="dialog2 = false" @rename="rename" :name="curName")
 </template>
 
 <script setup lang="ts">
@@ -59,7 +59,10 @@ let workers = reactive([
 	{ id: 4, text: 'testWorker_2', processes: [{ name: 'Test2' }] },
 	{ id: 5, text: 'testWorker_3', processes: [{ name: 'Test3' }] },
 ])
-const curPanel = reactive<Worker>(workers[0])
+
+const curName = ref('')
+const curPanel = ref()
+
 const filter = ref('')
 const filtered = computed(() => {
 	if (filter.value === '') return workers
@@ -69,17 +72,15 @@ const filtered = computed(() => {
 		)
 })
 const add = (panel: Worker) => {
-	Object.assign(curPanel, panel)
+	curName.value = panel.text
 	dialog.value = true
 }
 const ren = (e: Worker) => {
-	Object.assign(curPanel, e)
-	console.log(curPanel)
+	curName.value = e.text
 	dialog2.value = true
 }
 const rename = (e: string) => {
-	console.log(e)
-	// curPanel.value?.text = e
+	// console.log(e)
 }
 const remove = (id: number, e: any) => {
 	const index = workers[id].processes.findIndex(el => el === e)
@@ -87,7 +88,7 @@ const remove = (id: number, e: any) => {
 }
 
 const addProcess = (e: string) => {
-	curPanel.processes.push({ name: e })
+	curPanel.value.processes.push({ name: e })
 	dialog.value = false
 }
 const calColor = (id: number) => {

@@ -7,7 +7,7 @@ q-dialog(:model-value="props.modelValue")
 			q-btn(icon="close" flat round dense @click="close")
 		q-form(@submit="addConnection(newname)")
 			q-card-section
-				q-input(autofocus v-model="newname" label="Имя службы" @submit="addConnection(newname)")
+				q-input(autofocus :model-value="props.name" label="Имя службы" @submit="addConnection($event.target.value)")
 			q-card-actions(align="right")
 				q-btn(flat color="primary" label="Отмена" @click="close")
 				q-btn(unelevated color="primary" type="submit" label="Сохранить")
@@ -22,15 +22,15 @@ const props = defineProps({
 		type: Boolean,
 		default: false,
 	},
-	name: string,
+	name: String,
 })
 const emit = defineEmits(['rename', 'update:modelValue'])
 
-const newname = ref(props.name)
-
 const addConnection = (e: string) => {
-	emit('rename', e)
-	close()
+	// emit('rename', e)
+	console.log(e)
+	console.log('fuck')
+	// close()
 }
 const close = () => {
 	emit('update:modelValue', false)
