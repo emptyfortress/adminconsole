@@ -21,13 +21,13 @@
 							q-tooltip Переименовать
 						q-btn(flat round icon="mdi-reload" @click.stop)
 							q-tooltip Перезапустить все процессы
-						q-btn(flat round icon="mdi-trash-can-outline" @click.stop)
-							q-tooltip Перезапустить службу
+						q-btn(flat round icon="mdi-trash-can-outline" @click.stop="removeService(panel)")
+							q-tooltip Остановить службу
 			.pcard
 				GreyBlock2( v-for="item in panel.processes" :key="item.name" :name="item.name" @del="remove(panel.id, item)")
 
 	AddConnection(v-model="dialog" @close="dialog = false" @add="addProcess" worker)
-	// RenameWorker(v-model="dialog2" @close="dialog2 = false" @rename="rename" :name="curName")
+
 	q-dialog(v-model="dialog2")
 		q-card(style="min-width: 400px; padding: 1rem;")
 			.row.items-center.q-pb-none
@@ -46,7 +46,6 @@
 import { ref, reactive, computed } from 'vue'
 import GreyBlock2 from '@/components/GreyBlock2.vue'
 import AddConnection from '@/components/AddConnection.vue'
-// import RenameWorker from '@/components/RenameWorker.vue'
 
 interface Proc {
 	name: string
@@ -99,6 +98,10 @@ const rename = () => {
 const remove = (id: number, e: any) => {
 	const index = workers[id].processes.findIndex(el => el === e)
 	workers[id].processes.splice(index, 1)
+}
+const removeService = (e: Worker) => {
+	const ind = workers.findIndex(el => el === e)
+	workers.splice(ind, 1)
 }
 
 const addProcess = (e: string) => {
