@@ -20,7 +20,7 @@
 						q-btn(flat round icon="mdi-reload" @click.stop)
 							q-tooltip Перезапустить службу
 			.pcard
-				GreyBlock2(v-for="item in processes" :key="item.name" :name="item.name" )
+				GreyBlock2(v-for="item in panel.processes" :key="item.name" :name="item.name" )
 
 	component(:is="AddConnection" :show="dialog" @close="dialog = false" @add="addConnection")
 </template>
@@ -37,17 +37,20 @@ const dialog = ref(false)
 const processes = reactive([{ name: 'Coolname' }])
 
 const workers = reactive([
-	{ id: 0, text: 'dv-agent' },
-	{ id: 1, text: 'webclient-worker' },
-	{ id: 2, text: 'dvDocKontur' },
-	{ id: 3, text: 'testWorker_1' },
-	{ id: 4, text: 'testWorker_2' },
-	{ id: 5, text: 'testWorker_3' },
+	{ id: 0, text: 'dv-agent', processes: [{ name: 'Coolprocess' }] },
+	{ id: 1, text: 'webclient-worker', processes: [{ name: 'Coolprocess' }] },
+	{ id: 2, text: 'KonturDoc', processes: [{ name: 'Test0' }] },
+	{ id: 3, text: 'testWorker_1', processes: [{ name: 'Test1' }] },
+	{ id: 4, text: 'testWorker_2', processes: [{ name: 'Test2' }] },
+	{ id: 5, text: 'testWorker_3', processes: [{ name: 'Test3' }] },
 ])
 const filter = ref('')
 const filtered = computed(() => {
 	if (filter.value === '') return workers
-	else return workers.filter(item => item.text.includes(filter.value))
+	else
+		return workers.filter(item =>
+			item.text.toLowerCase().includes(filter.value.toLowerCase())
+		)
 })
 
 const addConnection = (e: string) => {
