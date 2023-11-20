@@ -27,14 +27,26 @@
 				GreyBlock2( v-for="item in panel.processes" :key="item.name" :name="item.name" @del="remove(panel.id, item)")
 
 	AddConnection(v-model="dialog" @close="dialog = false" @add="addProcess" worker)
-	RenameWorker(v-model="dialog2" @close="dialog2 = false" @rename="rename" :name="curName")
+	// RenameWorker(v-model="dialog2" @close="dialog2 = false" @rename="rename" :name="curName")
+	q-dialog(v-model="dialog2")
+		q-card(style="min-width: 400px; padding: 1rem;")
+			.row.items-center.q-pb-none
+				.text-h6 Переименовать службу
+				q-space
+				q-btn(icon="close" flat round dense @click="close")
+			q-form(@submit="rename")
+				q-card-section
+					q-input(autofocus v-model="curName" label="Имя службы")
+				q-card-actions(align="right")
+					q-btn(flat color="primary" label="Отмена" @click="close")
+					q-btn(unelevated color="primary" type="submit" label="Сохранить")
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, computed } from 'vue'
 import GreyBlock2 from '@/components/GreyBlock2.vue'
 import AddConnection from '@/components/AddConnection.vue'
-import RenameWorker from '@/components/RenameWorker.vue'
+// import RenameWorker from '@/components/RenameWorker.vue'
 
 interface Proc {
 	name: string
@@ -76,11 +88,13 @@ const add = (panel: Worker) => {
 	dialog.value = true
 }
 const ren = (e: Worker) => {
+	curPanel.value = e
 	curName.value = e.text
 	dialog2.value = true
 }
-const rename = (e: string) => {
-	// console.log(e)
+const rename = () => {
+	curPanel.value.text = curName.value
+	dialog2.value = false
 }
 const remove = (id: number, e: any) => {
 	const index = workers[id].processes.findIndex(el => el === e)
@@ -94,6 +108,9 @@ const addProcess = (e: string) => {
 const calColor = (id: number) => {
 	if (id === 1) return 'red'
 	return 'green'
+}
+const close = () => {
+	dialog2.value = false
 }
 </script>
 

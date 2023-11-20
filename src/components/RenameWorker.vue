@@ -5,9 +5,9 @@ q-dialog(:model-value="props.modelValue")
 			.text-h6 Переименовать службу
 			q-space
 			q-btn(icon="close" flat round dense @click="close")
-		q-form(@submit="addConnection(newname)")
+		q-form(@submit="addConnection")
 			q-card-section
-				q-input(autofocus :model-value="props.name" label="Имя службы" @submit="addConnection($event.target.value)")
+				q-input(autofocus :model-value="props.name" label="Имя службы" @update:model-value="test($event.target.value)")
 			q-card-actions(align="right")
 				q-btn(flat color="primary" label="Отмена" @click="close")
 				q-btn(unelevated color="primary" type="submit" label="Сохранить")
@@ -26,10 +26,12 @@ const props = defineProps({
 })
 const emit = defineEmits(['rename', 'update:modelValue'])
 
-const addConnection = (e: string) => {
+const test = e => {
+	console.log(e)
+}
+const addConnection = e => {
 	// emit('rename', e)
 	console.log(e)
-	console.log('fuck')
 	// close()
 }
 const close = () => {
