@@ -10,23 +10,25 @@
 			template(v-slot:header)
 				.head
 					.title
-						q-icon(name="mdi-circle-slice-8" size="26px" color="green")
+						q-icon(name="mdi-circle-slice-8" size="26px" :color="calColor(panel.id)")
 						div {{ panel.text }}
 							q-popup-edit(v-model="panel.text" auto-save v-slot="scope")
 								q-input(v-model="scope.value" dense autofocus @keyup.enter="scope.set")
-					.row.q-gutter-x-sm.text-right
-						q-chip(color="warning") Всего процессов: {{panel.processes.length}}
+					.row.items-center.q-gutter-x-sm.text-right
+						.span Всего процессов:
+						q-chip(color="warning") {{panel.processes.length}}
 						q-btn(flat round @click.stop="add(panel)" icon="mdi-plus-circle")
+							q-tooltip Перезапустить службу
 						q-btn(flat round icon="mdi-reload" @click.stop)
 							q-tooltip Перезапустить службу
 			.pcard
-				GreyBlock2(v-for="item in panel.processes" :key="item.name" :name="item.name" )
+				GreyBlock2(v-for="item in panel.processes" :key="item.name" :name="item.name")
 
 	AddConnection(v-model="dialog" @close="dialog = false" @add="addProcess" worker)
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed, Teleport } from 'vue'
+import { ref, reactive, computed } from 'vue'
 import GreyBlock2 from '@/components/GreyBlock2.vue'
 import AddConnection from '@/components/AddConnection.vue'
 
@@ -69,6 +71,11 @@ const add = (panel: Worker) => {
 const addProcess = (e: string) => {
 	curPanel.value?.processes.push({ name: e })
 	dialog.value = false
+}
+const calColor = (id: number) => {
+	if (id === 1) return 'red'
+	if (id === 5) return ''
+	return 'green'
 }
 </script>
 
@@ -128,5 +135,8 @@ const addProcess = (e: string) => {
 }
 .q-select {
 	width: 200px;
+}
+.span {
+	font-size: 0.8rem;
 }
 </style>
