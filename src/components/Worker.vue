@@ -18,11 +18,11 @@
 						q-btn(flat round @click.stop="add(panel)" icon="mdi-plus-circle")
 							q-tooltip( anchor="top middle" self="bottom middle") Добавить процесс
 						q-btn(flat round icon="mdi-pencil" @click.stop="ren(panel)")
-							q-tooltip( anchor="top middle" self="bottom middle") Переименовать
+							q-tooltip( anchor="top middle" self="bottom middle") Переименовать экземпляр службы
 						q-btn(flat round icon="mdi-reload" @click.stop)
 							q-tooltip( anchor="top middle" self="bottom middle") Перезапустить все процессы
 						q-btn(flat round icon="mdi-trash-can-outline" @click.stop="")
-							q-tooltip( anchor="top middle" self="bottom middle") Остановить службу
+							q-tooltip( anchor="top middle" self="bottom middle") Удалить экземпляр службы
 							q-menu
 								q-list
 									q-item(clickable v-close-popup @click="removeService(panel)").pink
