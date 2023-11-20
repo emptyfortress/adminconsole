@@ -12,10 +12,12 @@
 					.title
 						q-icon(name="mdi-circle-slice-8" size="26px" color="green")
 						div {{ panel.text }}
+							q-popup-edit(v-model="panel.text" auto-save v-slot="scope")
+								q-input(v-model="scope.value" dense autofocus @keyup.enter="scope.set")
 					.row.q-gutter-x-sm.text-right
 						q-chip(color="warning") Всего процессов: 4
-						q-btn(flat round @click="add" icon="mdi-plus-circle")
-						q-btn(flat round icon="mdi-reload")
+						q-btn(flat round @click.stop="add" icon="mdi-plus-circle")
+						q-btn(flat round icon="mdi-reload" @click.stop)
 							q-tooltip Перезапустить службу
 			.pcard
 				GreyBlock2(v-for="item in processes" :key="item.name" :name="item.name" )
@@ -34,14 +36,14 @@ const store = useStore()
 const dialog = ref(false)
 const processes = reactive([{ name: 'Coolname' }])
 
-const workers = [
+const workers = reactive([
 	{ id: 0, text: 'dv-agent' },
 	{ id: 1, text: 'webclient-worker' },
 	{ id: 2, text: 'dvDocKontur' },
 	{ id: 3, text: 'testWorker_1' },
 	{ id: 4, text: 'testWorker_2' },
 	{ id: 5, text: 'testWorker_3' },
-]
+])
 const filter = ref('')
 const filtered = computed(() => {
 	if (filter.value === '') return workers
