@@ -12,25 +12,29 @@
 					.title
 						q-icon(name="mdi-circle-slice-8" size="26px" :color="calColor(panel.id)")
 						div {{ panel.text }}
-							q-popup-edit(v-model="panel.text" auto-save v-slot="scope")
-								q-input(v-model="scope.value" dense autofocus @keyup.enter="scope.set")
 					.row.items-center.q-gutter-x-sm.text-right
 						.span Всего процессов:
 						q-chip(color="warning") {{panel.processes.length}}
 						q-btn(flat round @click.stop="add(panel)" icon="mdi-plus-circle")
 							q-tooltip Добавить процесс
+						q-btn(flat round icon="mdi-pencil" @click.stop="ren(panel)")
+							q-tooltip Переименовать
 						q-btn(flat round icon="mdi-reload" @click.stop)
+							q-tooltip Перезапустить все процессы
+						q-btn(flat round icon="mdi-trash-can-outline" @click.stop)
 							q-tooltip Перезапустить службу
 			.pcard
 				GreyBlock2( v-for="item in panel.processes" :key="item.name" :name="item.name" @del="remove(panel.id, item)")
 
-	AddConnection( v-model="dialog" @close="dialog = false" @add="addProcess" worker)
+	AddConnection(v-model="dialog" @close="dialog = false" @add="addProcess" worker)
+	RenameWorker(v-model="dialog2" @close="dialog2 = false" @rename="rename" :name="curPanel.text")
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, computed } from 'vue'
 import GreyBlock2 from '@/components/GreyBlock2.vue'
 import AddConnection from '@/components/AddConnection.vue'
+import RenameWorker from '@/components/RenameWorker.vue'
 
 interface Proc {
 	name: string
@@ -42,8 +46,8 @@ interface Worker {
 }
 
 const dialog = ref(false)
-const curPanel = ref<Worker | null>(null)
-const workers = reactive([
+const dialog2 = ref(false)
+let workers = reactive([
 	{ id: 0, text: 'dv-agent', processes: [{ name: 'Coolprocess' }] },
 	{
 		id: 1,
@@ -55,6 +59,7 @@ const workers = reactive([
 	{ id: 4, text: 'testWorker_2', processes: [{ name: 'Test2' }] },
 	{ id: 5, text: 'testWorker_3', processes: [{ name: 'Test3' }] },
 ])
+const curPanel = reactive<Worker>(workers[0])
 const filter = ref('')
 const filtered = computed(() => {
 	if (filter.value === '') return workers
@@ -64,8 +69,17 @@ const filtered = computed(() => {
 		)
 })
 const add = (panel: Worker) => {
+	Object.assign(curPanel, panel)
 	dialog.value = true
-	curPanel.value = panel
+}
+const ren = (e: Worker) => {
+	Object.assign(curPanel, e)
+	console.log(curPanel)
+	dialog2.value = true
+}
+const rename = (e: string) => {
+	console.log(e)
+	// curPanel.value?.text = e
 }
 const remove = (id: number, e: any) => {
 	const index = workers[id].processes.findIndex(el => el === e)
@@ -73,12 +87,11 @@ const remove = (id: number, e: any) => {
 }
 
 const addProcess = (e: string) => {
-	curPanel.value?.processes.push({ name: e })
+	curPanel.processes.push({ name: e })
 	dialog.value = false
 }
 const calColor = (id: number) => {
 	if (id === 1) return 'red'
-	if (id === 5) return ''
 	return 'green'
 }
 </script>
