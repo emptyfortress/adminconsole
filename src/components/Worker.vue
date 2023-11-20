@@ -3,8 +3,8 @@
 	.zag Настройки службы фоновых операций
 	.bt-filter
 		.q-gutter-x-xs
-			q-btn(outline color="primary" label="Распахнуть все" @click="expandAll" size="sm") 
-			q-btn(outline color="primary" label="Свернуть все" @click="collapseAll" size="sm") 
+			q-btn(flat color="primary" label="Распахнуть все" @click="expandAll" size="sm") 
+			q-btn(flat color="primary" label="Свернуть все" @click="collapseAll" size="sm") 
 
 		q-input.filter(v-model="filter" dense clearable placeholder="Фильтр" @clear="filter = ''")
 			template(v-slot:prepend)
