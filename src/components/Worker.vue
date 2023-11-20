@@ -1,7 +1,7 @@
 <template lang="pug">
 .al
 	.zag Настройки службы фоновых операций
-	q-input.filter(v-model="filter" dense clearable placeholder="Фильтр")
+	q-input.filter(v-model="filter" dense clearable placeholder="Фильтр" @clear="filter = ''")
 		template(v-slot:prepend)
 			q-icon(name="mdi-magnify")
 
@@ -15,30 +15,39 @@
 							q-popup-edit(v-model="panel.text" auto-save v-slot="scope")
 								q-input(v-model="scope.value" dense autofocus @keyup.enter="scope.set")
 					.row.q-gutter-x-sm.text-right
-						q-chip(color="warning") Всего процессов: 4
-						q-btn(flat round @click.stop="add" icon="mdi-plus-circle")
+						q-chip(color="warning") Всего процессов: {{panel.processes.length}}
+						q-btn(flat round @click.stop="add(panel)" icon="mdi-plus-circle")
 						q-btn(flat round icon="mdi-reload" @click.stop)
 							q-tooltip Перезапустить службу
 			.pcard
 				GreyBlock2(v-for="item in panel.processes" :key="item.name" :name="item.name" )
 
-	component(:is="AddConnection" :show="dialog" @close="dialog = false" @add="addConnection")
+	AddConnection(v-model="dialog" @close="dialog = false" @add="addProcess" worker)
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed } from 'vue'
-import { useStore } from '@/stores/store'
+import { ref, reactive, computed, Teleport } from 'vue'
 import GreyBlock2 from '@/components/GreyBlock2.vue'
 import AddConnection from '@/components/AddConnection.vue'
 
-const store = useStore()
+interface Proc {
+	name: string
+}
+interface Worker {
+	id: number
+	text: string
+	processes: Proc[]
+}
 
 const dialog = ref(false)
-const processes = reactive([{ name: 'Coolname' }])
-
+const curPanel = ref<Worker | null>(null)
 const workers = reactive([
 	{ id: 0, text: 'dv-agent', processes: [{ name: 'Coolprocess' }] },
-	{ id: 1, text: 'webclient-worker', processes: [{ name: 'Coolprocess' }] },
+	{
+		id: 1,
+		text: 'webclient-worker',
+		processes: [{ name: 'Coolprocess' }, { name: 'Notsocool' }],
+	},
 	{ id: 2, text: 'KonturDoc', processes: [{ name: 'Test0' }] },
 	{ id: 3, text: 'testWorker_1', processes: [{ name: 'Test1' }] },
 	{ id: 4, text: 'testWorker_2', processes: [{ name: 'Test2' }] },
@@ -52,9 +61,13 @@ const filtered = computed(() => {
 			item.text.toLowerCase().includes(filter.value.toLowerCase())
 		)
 })
+const add = (panel: Worker) => {
+	dialog.value = true
+	curPanel.value = panel
+}
 
-const addConnection = (e: string) => {
-	store.addConnection(e)
+const addProcess = (e: string) => {
+	curPanel.value?.processes.push({ name: e })
 	dialog.value = false
 }
 </script>
