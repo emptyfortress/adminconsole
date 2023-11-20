@@ -18,13 +18,13 @@
 						.span Всего процессов:
 						q-chip(color="warning") {{panel.processes.length}}
 						q-btn(flat round @click.stop="add(panel)" icon="mdi-plus-circle")
-							q-tooltip Перезапустить службу
+							q-tooltip Добавить процесс
 						q-btn(flat round icon="mdi-reload" @click.stop)
 							q-tooltip Перезапустить службу
 			.pcard
-				GreyBlock2(v-for="item in panel.processes" :key="item.name" :name="item.name")
+				GreyBlock2( v-for="item in panel.processes" :key="item.name" :name="item.name" @del="remove(panel.id, item)")
 
-	AddConnection(v-model="dialog" @close="dialog = false" @add="addProcess" worker)
+	AddConnection( v-model="dialog" @close="dialog = false" @add="addProcess" worker)
 </template>
 
 <script setup lang="ts">
@@ -66,6 +66,10 @@ const filtered = computed(() => {
 const add = (panel: Worker) => {
 	dialog.value = true
 	curPanel.value = panel
+}
+const remove = (id: number, e: any) => {
+	const index = workers[id].processes.findIndex(el => el === e)
+	workers[id].processes.splice(index, 1)
 }
 
 const addProcess = (e: string) => {
