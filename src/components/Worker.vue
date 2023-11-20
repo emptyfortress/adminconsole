@@ -1,12 +1,17 @@
 <template lang="pug">
 .al
 	.zag Настройки службы фоновых операций
-	q-input.filter(v-model="filter" dense clearable placeholder="Фильтр" @clear="filter = ''")
-		template(v-slot:prepend)
-			q-icon(name="mdi-magnify")
+	.bt-filter
+		.q-gutter-x-xs
+			q-btn(outline color="primary" label="Распахнуть все" @click="expandAll" size="sm") 
+			q-btn(outline color="primary" label="Свернуть все" @click="collapseAll" size="sm") 
+
+		q-input.filter(v-model="filter" dense clearable placeholder="Фильтр" @clear="filter = ''")
+			template(v-slot:prepend)
+				q-icon(name="mdi-magnify")
 
 	q-list.q-mt-md(separator)
-		q-expansion-item(v-for="panel in filtered" :key="panel.id" switch-toggle-side)
+		q-expansion-item(v-for="panel in filtered" :key="panel.id" switch-toggle-side v-model="panel.expanded")
 			template(v-slot:header)
 				.head
 					.title
@@ -58,21 +63,43 @@ interface Worker {
 	id: number
 	text: string
 	processes: Proc[]
+	expanded: boolean
 }
 
 const dialog = ref(false)
 const dialog2 = ref(false)
 let workers = reactive([
-	{ id: 0, text: 'dv-agent', processes: [{ name: 'Coolprocess' }] },
+	{
+		id: 0,
+		text: 'dv-agent',
+		processes: [{ name: 'Coolprocess' }],
+		expanded: false,
+	},
 	{
 		id: 1,
 		text: 'webclient-worker',
 		processes: [{ name: 'Coolprocess' }, { name: 'Notsocool' }],
+		expanded: false,
 	},
-	{ id: 2, text: 'KonturDoc', processes: [{ name: 'Test0' }] },
-	{ id: 3, text: 'testWorker_1', processes: [{ name: 'Test1' }] },
-	{ id: 4, text: 'testWorker_2', processes: [{ name: 'Test2' }] },
-	{ id: 5, text: 'testWorker_3', processes: [{ name: 'Test3' }] },
+	{ id: 2, text: 'KonturDoc', processes: [{ name: 'Test0' }], expanded: false },
+	{
+		id: 3,
+		text: 'testWorker_1',
+		processes: [{ name: 'Test1' }],
+		expanded: false,
+	},
+	{
+		id: 4,
+		text: 'testWorker_2',
+		processes: [{ name: 'Test2' }],
+		expanded: false,
+	},
+	{
+		id: 5,
+		text: 'testWorker_3',
+		processes: [{ name: 'Test3' }],
+		expanded: false,
+	},
 ])
 
 const curName = ref('')
@@ -87,6 +114,7 @@ const filtered = computed(() => {
 		)
 })
 const add = (panel: Worker) => {
+	panel.expanded = true
 	curName.value = panel.text
 	curPanel.value = panel
 	dialog.value = true
@@ -119,6 +147,12 @@ const calColor = (id: number) => {
 }
 const close = () => {
 	dialog2.value = false
+}
+const expandAll = () => {
+	workers.map(item => (item.expanded = true))
+}
+const collapseAll = () => {
+	workers.map(item => (item.expanded = false))
 }
 </script>
 
@@ -174,12 +208,16 @@ const close = () => {
 }
 .filter {
 	width: 400px;
-	margin: 0 auto;
 }
 .q-select {
 	width: 200px;
 }
 .span {
 	font-size: 0.8rem;
+}
+.bt-filter {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 </style>
