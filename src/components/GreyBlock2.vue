@@ -3,9 +3,9 @@ div
 	.grey(:class="{ edit : editMode1}")
 		.close
 			q-btn(round flat icon="mdi-restart")
-				q-tooltip Перезапустить процесс
+				q-tooltip( anchor="top middle" self="bottom middle") Перезапустить процесс
 			q-btn(round flat icon="mdi-trash-can-outline")
-				q-tooltip Удалить процесс
+				q-tooltip( anchor="top middle" self="bottom middle") Удалить процесс
 				q-menu
 					q-list
 						q-item(clickable v-close-popup @click="del(name)").pink

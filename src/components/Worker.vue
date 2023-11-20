@@ -16,15 +16,19 @@
 						.span Всего процессов:
 						q-chip(color="warning") {{panel.processes.length}}
 						q-btn(flat round @click.stop="add(panel)" icon="mdi-plus-circle")
-							q-tooltip Добавить процесс
+							q-tooltip( anchor="top middle" self="bottom middle") Добавить процесс
 						q-btn(flat round icon="mdi-pencil" @click.stop="ren(panel)")
-							q-tooltip Переименовать
+							q-tooltip( anchor="top middle" self="bottom middle") Переименовать
 						q-btn(flat round icon="mdi-reload" @click.stop)
-							q-tooltip Перезапустить все процессы
-						q-btn(flat round icon="mdi-trash-can-outline" @click.stop="removeService(panel)")
-							q-tooltip Остановить службу
+							q-tooltip( anchor="top middle" self="bottom middle") Перезапустить все процессы
+						q-btn(flat round icon="mdi-trash-can-outline" @click.stop="")
+							q-tooltip( anchor="top middle" self="bottom middle") Остановить службу
+							q-menu
+								q-list
+									q-item(clickable v-close-popup @click="removeService(panel)").pink
+										q-item-section Удалить
 			.pcard
-				GreyBlock2( v-for="item in panel.processes" :key="item.name" :name="item.name" @del="remove(panel.id, item)")
+				GreyBlock2(v-for="item in panel.processes" :key="item.name" :name="item.name" @del="remove(panel.id, item)")
 
 	AddConnection(v-model="dialog" @close="dialog = false" @add="addProcess" worker)
 
@@ -84,6 +88,7 @@ const filtered = computed(() => {
 })
 const add = (panel: Worker) => {
 	curName.value = panel.text
+	curPanel.value = panel
 	dialog.value = true
 }
 const ren = (e: Worker) => {
