@@ -25,8 +25,9 @@ div
 				.form.form1
 					.label Соединение Docsvision:
 					q-select(v-model="form.connection" dense outlined :options="options" bg-color="white").rem
-					.label Соединение Почтовый сервер:
-					q-select(v-model="form.email" dense outlined :options="options" bg-color="white").rem
+					template(v-if="form.configtype == 'Базовые объекты'")
+						.label Соединение Почтовый сервер:
+						q-select(v-model="form.email" dense outlined :options="options" bg-color="white").rem
 
 			.border
 				.row.items-center.q-gutter-x-sm
@@ -35,6 +36,24 @@ div
 				.column.q-mt-sm
 					q-checkbox(v-model="form.turn" dense label="Отключено")
 					q-checkbox(v-model="form.x86" dense label="Использовать x86")
+
+			.border.one(v-if="form.configtype == 'Обслуживание ЭП'")
+				.sert
+					.label Дней до окончания действия сертификата:
+					q-input(v-model="form.timeout" dense outlined bg-color="white" type="number")
+					.label Количество карточек:
+					q-input(v-model="form.timeout" dense outlined bg-color="white" type="number")
+					.label Интервал между запросами, сек.:
+					q-input(v-model="form.timeout" dense outlined bg-color="white" type="number")
+
+			.border.one(v-if="form.configtype == 'Коннектор к реестру МЧД'")
+				.sert
+					.label Сервис по работе с МЧД:
+					q-select(v-model="mcd" dense outlined :options="options1" bg-color="white").rem
+					.label API-ключ:
+					q-input(v-model="api" dense outlined bg-color="white" type="text")
+					.label Интервал между запросами, мс.:
+					q-input(v-model="form.timeout" dense outlined bg-color="white" type="number")
 
 		q-checkbox.q-mt-md(v-model="form.def1" dense label="Использовать по умолчанию")
 		q-card-actions(align="right" v-if="editMode1")
@@ -55,7 +74,14 @@ const emit = defineEmits(['del'])
 
 const editMode1 = ref(false)
 const name = ref(props.name)
-const options = ['Option 1', 'Не задано']
+const options = [
+	'Базовые объекты',
+	'Обслуживание ЭП',
+	'Коннектор к реестру МЧД',
+]
+const options1 = ['Контур.Доверенность', 'Option 1', 'Option 2', 'Option 3']
+const mcd = ref('Контур.Доверенность')
+const api = ref('931a4d85-ef75-8f5e-4363-e5ee1e06bd1e')
 const form = reactive({
 	name: props.name,
 	configtype: 'Базовые объекты',
@@ -88,11 +114,15 @@ const del = (e: string) => {
 	grid-template-columns: 2fr 2fr 1fr;
 	gap: 0.5rem;
 }
+.one {
+	grid-column: 2/4;
+}
 @media screen and (max-width: 1024px) {
 	.threecol {
 		grid-template-columns: 2fr 1fr;
 	}
-	.zero {
+	.zero,
+	.one {
 		grid-column: 1/-1;
 	}
 }
@@ -104,7 +134,6 @@ const del = (e: string) => {
 .border {
 	border: 4px double #ccc;
 	padding: 0.5rem;
-	// margin: 1rem 0;
 	.form {
 		column-gap: 0.3rem;
 	}
@@ -134,5 +163,11 @@ const del = (e: string) => {
 }
 .close {
 	top: 0;
+}
+.sert {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 0.5rem;
+	align-items: center;
 }
 </style>
