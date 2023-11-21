@@ -55,7 +55,7 @@ div
 					.label Интервал между запросами, мс.:
 					q-input(v-model="form.timeout" dense outlined bg-color="white" type="number")
 
-			div(v-if="form.configtype !== 'Базовые объекты'")
+			.dumb(v-if="form.configtype !== 'Базовые объекты'")
 			q-checkbox.q-mt-md(v-model="form.def1" dense label="Использовать по умолчанию")
 		q-card-actions(align="right" v-if="editMode1")
 			q-btn(flat label="Отмена" @click="editMode1 = false")
@@ -123,7 +123,8 @@ const del = (e: string) => {
 		grid-template-columns: 2fr 1fr;
 	}
 	.zero,
-	.one {
+	.one,
+	.dumb {
 		grid-column: 1/-1;
 	}
 }
