@@ -55,7 +55,8 @@ div
 					.label Интервал между запросами, мс.:
 					q-input(v-model="form.timeout" dense outlined bg-color="white" type="number")
 
-		q-checkbox.q-mt-md(v-model="form.def1" dense label="Использовать по умолчанию")
+			div(v-if="form.configtype !== 'Базовые объекты'")
+			q-checkbox.q-mt-md(v-model="form.def1" dense label="Использовать по умолчанию")
 		q-card-actions(align="right" v-if="editMode1")
 			q-btn(flat label="Отмена" @click="editMode1 = false")
 			q-btn(unelevated color="primary" label="Сохранить" @click="save1")
