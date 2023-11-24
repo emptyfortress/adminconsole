@@ -16,22 +16,22 @@ div
 		.threecol
 			.border.zero
 				.form
-					.label Имя процесса:
+					.label Имя процесса
 					q-input(v-model="form.name" dense outlined bg-color="white").rem
-					.label Тип конфигурации:
+					.label Тип конфигурации
 					q-select(v-model="form.configtype" dense outlined :options="options" bg-color="white").rem
 
 			.border
 				.form.form1
-					.label Соединение Docsvision:
+					.label Соединение Docsvision
 					q-select(v-model="form.connection" dense outlined :options="options" bg-color="white").rem
 					template(v-if="form.configtype == 'Базовые объекты'")
-						.label Соединение Почтовый сервер:
+						.label Соединение Почтовый сервер
 						q-select(v-model="form.email" dense outlined :options="options" bg-color="white").rem
 
 			.border
 				.row.items-center.q-gutter-x-sm
-					.label Таймаут, сек.:
+					.label Таймаут, сек.
 					q-input(v-model="form.timeout" dense outlined bg-color="white" type="number").small
 				.column.q-mt-sm
 					q-checkbox(v-model="form.turn" dense label="Отключено")
@@ -39,24 +39,23 @@ div
 
 			.border.one(v-if="form.configtype == 'Обслуживание ЭП'")
 				.sert
-					.label Дней до окончания действия сертификата:
+					.label Дней до окончания действия сертификата
 					q-input(v-model="form.timeout" dense outlined bg-color="white" type="number")
-					.label Количество карточек:
+					.label Количество карточек
 					q-input(v-model="form.timeout" dense outlined bg-color="white" type="number")
-					.label Интервал между запросами, сек.:
+					.label Интервал между запросами, сек.
 					q-input(v-model="form.timeout" dense outlined bg-color="white" type="number")
 
 			.border.one(v-if="form.configtype == 'Коннектор к реестру МЧД'")
 				.sert
-					.label Сервис по работе с МЧД:
+					.label Сервис по работе с МЧД
 					q-select(v-model="mcd" dense outlined :options="options1" bg-color="white").rem
-					.label API-ключ:
+					.label API-ключ
 					q-input(v-model="api" dense outlined bg-color="white" type="text")
-					.label Интервал между запросами, мс.:
+					.label Интервал между запросами, мс
 					q-input(v-model="form.timeout" dense outlined bg-color="white" type="number")
 
 			.dumb(v-if="form.configtype !== 'Базовые объекты'")
-			q-checkbox.q-mt-md(v-model="form.def1" dense label="Использовать по умолчанию")
 		q-card-actions(align="right" v-if="editMode1")
 			q-btn(flat label="Отмена" @click="editMode1 = false")
 			q-btn(unelevated color="primary" label="Сохранить" @click="save1")
