@@ -6,7 +6,7 @@
 			q-btn(flat color="primary" label="Распахнуть все" @click="expandAll" size="sm") 
 			q-btn(flat color="primary" label="Свернуть все" @click="collapseAll" size="sm") 
 
-		q-input.filter(v-model="filter" dense clearable placeholder="Фильтр" @clear="filter = ''")
+		q-input.filter(v-model="filter" dense clearable placeholder="Найти службу или процесс" @clear="filter = ''")
 			template(v-slot:prepend)
 				q-icon(name="mdi-magnify")
 
@@ -109,8 +109,12 @@ const filter = ref('')
 const filtered = computed(() => {
 	if (filter.value === '') return workers
 	else
-		return workers.filter(item =>
-			item.text.toLowerCase().includes(filter.value.toLowerCase())
+		return workers.filter(
+			item =>
+				item.text.toLowerCase().includes(filter.value.toLowerCase()) ||
+				item.processes.some(el =>
+					el.name.toLowerCase().includes(filter.value.toLowerCase())
+				)
 		)
 })
 const add = (panel: Worker) => {
