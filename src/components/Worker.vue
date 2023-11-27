@@ -3,8 +3,10 @@
 	.zag Настройки службы фоновых операций
 	.bt-filter
 		.q-gutter-x-xs
-			q-btn(flat color="primary" label="Распахнуть все" @click="expandAll" size="sm") 
-			q-btn(flat color="primary" label="Свернуть все" @click="collapseAll" size="sm") 
+			q-btn(flat round icon="mdi-chevron-double-down" @click="expandAll") 
+				q-tooltip Развернуть все
+			q-btn(flat round icon="mdi-chevron-double-up" @click="collapseAll") 
+				q-tooltip Свернуть все
 
 		q-input.filter(v-model="filter" dense clearable placeholder="Найти службу или процесс" @clear="filter = ''")
 			template(v-slot:prepend)
