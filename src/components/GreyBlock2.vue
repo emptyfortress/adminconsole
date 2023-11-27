@@ -20,42 +20,36 @@ div
 					q-input(v-model="form.name" dense outlined bg-color="white").rem
 					.label Тип конфигурации
 					q-select(v-model="form.configtype" dense outlined :options="options" bg-color="white").rem
+					.label Таймаут, сек.
+					q-input(v-model="form.timeout" dense outlined bg-color="white" type="number").small
+					div
+					.checks.q-gutter-x-md
+						q-checkbox(v-model="form.turn" dense label="Отключено")
+						q-checkbox(v-model="form.x86" dense label="Использовать x86")
 
 			.border
-				.form.form1
+				.form
 					.label Соединение Docsvision
 					q-select(v-model="form.connection" dense outlined :options="options" bg-color="white").rem
 					template(v-if="form.configtype == 'Базовые объекты'")
 						.label Соединение Почтовый сервер
 						q-select(v-model="form.email" dense outlined :options="options" bg-color="white").rem
+					template(v-if="form.configtype == 'Обслуживание ЭП'")
+						.label Дней до окончания действия сертификата
+						q-input.small(v-model="form.timeout" dense outlined bg-color="white" type="number")
+						.label Количество карточек
+						q-input.small(v-model="form.timeout" dense outlined bg-color="white" type="number")
+						.label Интервал между запросами, сек.
+						q-input.small(v-model="form.timeout" dense outlined bg-color="white" type="number")
 
-			.border
-				.row.items-center.q-gutter-x-sm
-					.label Таймаут, сек.
-					q-input(v-model="form.timeout" dense outlined bg-color="white" type="number").small
-				.column.q-mt-sm
-					q-checkbox(v-model="form.turn" dense label="Отключено")
-					q-checkbox(v-model="form.x86" dense label="Использовать x86")
+					template(v-if="form.configtype == 'Коннектор к реестру МЧД'")
+						.label Сервис по работе с МЧД
+						q-select(v-model="mcd" dense outlined :options="options1" bg-color="white").rem
+						.label API-ключ
+						q-input(v-model="api" dense outlined bg-color="white" type="text")
+						.label Интервал между запросами, мс
+						q-input.small(v-model="form.timeout" dense outlined bg-color="white" type="number")
 
-			.border.one(v-if="form.configtype == 'Обслуживание ЭП'")
-				.sert
-					.label Дней до окончания действия сертификата
-					q-input(v-model="form.timeout" dense outlined bg-color="white" type="number")
-					.label Количество карточек
-					q-input(v-model="form.timeout" dense outlined bg-color="white" type="number")
-					.label Интервал между запросами, сек.
-					q-input(v-model="form.timeout" dense outlined bg-color="white" type="number")
-
-			.border.one(v-if="form.configtype == 'Коннектор к реестру МЧД'")
-				.sert
-					.label Сервис по работе с МЧД
-					q-select(v-model="mcd" dense outlined :options="options1" bg-color="white").rem
-					.label API-ключ
-					q-input(v-model="api" dense outlined bg-color="white" type="text")
-					.label Интервал между запросами, мс
-					q-input(v-model="form.timeout" dense outlined bg-color="white" type="number")
-
-			.dumb(v-if="form.configtype !== 'Базовые объекты'")
 		q-card-actions(align="right" v-if="editMode1")
 			q-btn(flat label="Отмена" @click="editMode1 = false")
 			q-btn(unelevated color="primary" label="Сохранить" @click="save1")
@@ -111,23 +105,10 @@ const del = (e: string) => {
 <style scoped lang="scss">
 .threecol {
 	display: grid;
-	grid-template-columns: 2fr 2fr 1fr;
+	grid-template-columns: 1fr 1fr;
 	gap: 0.5rem;
 }
-.one {
-	grid-column: 2/4;
-}
 @media screen and (max-width: 1024px) {
-	.threecol {
-		grid-template-columns: 2fr 1fr;
-	}
-	.zero,
-	.one,
-	.dumb {
-		grid-column: 1/-1;
-	}
-}
-@media screen and (max-width: 700px) {
 	.threecol {
 		grid-template-columns: 1fr;
 	}
@@ -136,27 +117,11 @@ const del = (e: string) => {
 	border: 4px double #ccc;
 	padding: 0.5rem;
 	.form {
-		column-gap: 0.3rem;
+		column-gap: 1rem;
 	}
-}
-.ed {
-	border-bottom: 1px dotted $primary;
-	height: 28px;
 }
 .form {
-	grid-template-columns: 200px 1fr;
-}
-.form1 {
-	grid-template-columns: 200px 1fr;
-}
-.grids {
-	margin-top: 0.5rem;
-	display: grid;
-	grid-template-columns: auto 210px;
-	gap: 1rem;
-	.form {
-		grid-template-columns: 160px 1fr;
-	}
+	grid-template-columns: auto 1fr;
 }
 .small {
 	width: 80px;
@@ -164,11 +129,5 @@ const del = (e: string) => {
 }
 .close {
 	top: 0;
-}
-.sert {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 0.5rem;
-	align-items: center;
 }
 </style>
