@@ -30,10 +30,10 @@ div
 			.border
 				.form
 					.label Соединение Docsvision
-					q-select(v-model="form.connection" dense outlined :options="options" bg-color="white").rem
+					q-select(v-model="form.connection" dense outlined :options="options2" bg-color="white").rem
 					template(v-if="form.configtype == 'Базовые объекты'")
 						.label Соединение Почтовый сервер
-						q-select(v-model="form.email" dense outlined :options="options" bg-color="white").rem
+						q-select(v-model="form.email" dense outlined :options="options2" bg-color="white").rem
 					template(v-if="form.configtype == 'Обслуживание ЭП'")
 						.label Дней до окончания действия сертификата
 						q-input.small(v-model="form.timeout" dense outlined bg-color="white" type="number")
@@ -74,6 +74,7 @@ const options = [
 	'Коннектор к реестру МЧД',
 ]
 const options1 = ['Контур.Доверенность', 'Option 1', 'Option 2', 'Option 3']
+const options2 = ['Option 0', 'Option 1', 'Option 2', 'Option 3']
 const mcd = ref('Контур.Доверенность')
 const api = ref('931a4d85-ef75-8f5e-4363-e5ee1e06bd1e')
 const form = reactive({
