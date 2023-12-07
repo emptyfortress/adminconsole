@@ -19,6 +19,11 @@
 					.title
 						q-icon(name="mdi-circle-slice-8" size="26px" :color="calColor(panel.id)")
 						div {{ panel.text }}
+						span :
+						span MachineName
+						// div
+						// 	q-icon.q-mr-sm(name="mdi-server-network")
+						// 	span MachineName
 					.row.items-center.q-gutter-x-sm.text-right
 						.span Всего процессов:
 						q-chip(color="warning") {{panel.processes.length}}

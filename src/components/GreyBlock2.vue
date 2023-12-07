@@ -46,7 +46,7 @@ div
 						.label Сервис по работе с МЧД
 						q-select(v-model="mcd" dense outlined :options="options1" bg-color="white").rem
 						.label API-ключ
-						q-input(v-model="api" dense outlined bg-color="white" type="text")
+						q-input(v-model="api" dense outlined bg-color="white" type="password")
 						.label Интервал между запросами, мс
 						q-input.small(v-model="form.timeout" dense outlined bg-color="white" type="number")
 
