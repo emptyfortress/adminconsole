@@ -52,7 +52,7 @@ div
 
 		q-card-actions(align="right" v-if="editMode1")
 			q-btn(flat label="Отмена" @click="editMode1 = false")
-			q-btn(unelevated color="primary" label="Сохранить" @click="save1")
+			q-btn(unelevated color="primary" label="Применить" @click="save1")
 </template>
 
 <script setup lang="ts">

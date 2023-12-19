@@ -13,14 +13,15 @@
 				q-icon(name="mdi-magnify")
 
 	q-list.q-mt-md(separator)
-		q-expansion-item(v-for="panel in filtered" :key="panel.id" switch-toggle-side v-model="panel.expanded")
+		q-expansion-item(v-for="(panel, index) in filtered" :key="panel.id" switch-toggle-side v-model="panel.expanded")
 			template(v-slot:header)
 				.head
 					.title
 						q-icon(name="mdi-circle-slice-8" size="26px" :color="calColor(panel.id)")
 						div {{ panel.text }}
-						span :
-						span MachineName
+						template(v-if="index > 2")
+							span :
+							span MachineName
 						// div
 						// 	q-icon.q-mr-sm(name="mdi-server-network")
 						// 	span MachineName
@@ -40,9 +41,9 @@
 									q-item(clickable v-close-popup @click="removeService(panel)").pink
 										q-item-section Удалить
 			.pcard
-				GreyBlock2(v-for="item in panel.processes" :key="item.name" :name="item.name" @del="remove(panel.id, item)")
+				GreyBlock2( v-for="item in panel.processes" :key="item.name" :name="item.name" @del="remove(panel.id, item)")
 
-	AddConnection(v-model="dialog" @close="dialog = false" @add="addProcess" worker)
+	AddConnection( v-model="dialog" @close="dialog = false" @add="addProcess" worker)
 
 	q-dialog(v-model="dialog2")
 		q-card(style="min-width: 400px; padding: 1rem;")
@@ -52,10 +53,10 @@
 				q-btn(icon="close" flat round dense @click="close")
 			q-form(@submit="rename")
 				q-card-section
-					q-input(autofocus v-model="curName" label="Имя службы")
+					q-input(autofocus v-model="curName" label="Имя службы" lazy-rules :rules="req")
 				q-card-actions(align="right")
 					q-btn(flat color="primary" label="Отмена" @click="close")
-					q-btn(unelevated color="primary" type="submit" label="Сохранить")
+					q-btn(unelevated color="primary" type="submit" label="Применить")
 </template>
 
 <script setup lang="ts">
@@ -134,8 +135,11 @@ const ren = (e: Worker) => {
 	curPanel.value = e
 	curName.value = e.text
 	dialog2.value = true
+	temp.value = e.text
 }
 const rename = () => {
+	// console.log(temp.value)
+	// console.log(curName.value)
 	curPanel.value.text = curName.value
 	dialog2.value = false
 }
@@ -158,6 +162,7 @@ const calColor = (id: number) => {
 }
 const close = () => {
 	dialog2.value = false
+	temp.value = ''
 }
 const expandAll = () => {
 	workers.map(item => (item.expanded = true))
@@ -165,6 +170,15 @@ const expandAll = () => {
 const collapseAll = () => {
 	workers.map(item => (item.expanded = false))
 }
+const list = computed(() => {
+	return workers.map(el => el.text).filter(e => e !== temp.value)
+})
+const temp = ref('')
+const req = [
+	(val: string) => (val && val.length > 0) || 'Это обязательное поле',
+	(val: string) =>
+		list.value.every(el => el !== val) || 'Имя должно быть уникальным',
+]
 </script>
 
 <style scoped lang="scss">

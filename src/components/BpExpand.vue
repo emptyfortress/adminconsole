@@ -6,9 +6,11 @@ const emit = defineEmits(['change', 'haserror', 'noerror'])
 
 const bp = useBp()
 
-const req = [(val: string) => (val && val.length > 0) || 'Это обязательное поле']
+const req = [
+	(val: string) => (val && val.length > 0) || 'Это обязательное поле',
+]
 
-watch(bp.bp, (value) => {
+watch(bp.bp, value => {
 	if (value) {
 		emit('change')
 	}
