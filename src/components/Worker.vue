@@ -34,21 +34,20 @@
 							q-tooltip( anchor="top middle" self="bottom middle") Переименовать экземпляр службы
 						q-btn(flat round icon="mdi-reload" @click.stop)
 							q-tooltip( anchor="top middle" self="bottom middle") Перезапустить все процессы
-						q-btn(flat round icon="mdi-trash-can-outline" @click.stop="")
+						q-btn(flat round icon="mdi-trash-can-outline" @click.stop="confirm(panel)")
 							q-tooltip( anchor="top middle" self="bottom middle") Удалить экземпляр службы
-							q-menu
-								q-list
-									q-item(clickable v-close-popup @click="removeService(panel)").pink
-										q-item-section Удалить
+
+
 			.pcard
 				GreyBlock2( v-for="item in panel.processes" :key="item.name" :name="item.name" @del="remove(panel.id, item)")
+
 
 	AddConnection( v-model="dialog" @close="dialog = false" @add="addProcess" worker)
 
 	q-dialog(v-model="dialog2")
 		q-card(style="min-width: 400px; padding: 1rem;")
 			.row.items-center.q-pb-none
-				.text-h6 Переименовать службу
+				.text-h6 Переименовать экземляр службы
 				q-space
 				q-btn(icon="close" flat round dense @click="close")
 			q-form(@submit="rename")
@@ -57,12 +56,15 @@
 				q-card-actions(align="right")
 					q-btn(flat color="primary" label="Отмена" @click="close")
 					q-btn(unelevated color="primary" type="submit" label="Применить")
+
+	ConfirmDialog(v-model="dialog3" :panel="curPanel" @close="dialog3 = false" @remove="removeService")
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, computed } from 'vue'
 import GreyBlock2 from '@/components/GreyBlock2.vue'
 import AddConnection from '@/components/AddConnection.vue'
+import ConfirmDialog from '@/components/ConfirmDialog.vue'
 
 interface Proc {
 	name: string
@@ -76,6 +78,7 @@ interface Worker {
 
 const dialog = ref(false)
 const dialog2 = ref(false)
+const dialog3 = ref(false)
 let workers = reactive([
 	{
 		id: 0,
@@ -138,8 +141,6 @@ const ren = (e: Worker) => {
 	temp.value = e.text
 }
 const rename = () => {
-	// console.log(temp.value)
-	// console.log(curName.value)
 	curPanel.value.text = curName.value
 	dialog2.value = false
 }
@@ -150,6 +151,10 @@ const remove = (id: number, e: any) => {
 const removeService = (e: Worker) => {
 	const ind = workers.findIndex(el => el === e)
 	workers.splice(ind, 1)
+}
+const confirm = (e: any) => {
+	curPanel.value = e
+	dialog3.value = true
 }
 
 const addProcess = (e: string) => {
