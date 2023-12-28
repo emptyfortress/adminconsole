@@ -47,7 +47,7 @@ div
 						q-select(v-model="mcd" dense outlined :options="options1" bg-color="white").rem
 						.label API-ключ
 						q-input(v-model="api" dense outlined bg-color="white" type="password")
-						.label Интервал между запросами, мс
+						.label Интервал между запросами, сек.
 						q-input.small(v-model="form.timeout" dense outlined bg-color="white" type="number")
 
 		q-card-actions(align="right" v-if="editMode1")
