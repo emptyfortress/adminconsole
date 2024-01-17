@@ -23,7 +23,7 @@ const items = [
 	// { id: 0, label: 'Сервер DV', to: '/setup/dvserver' },
 	// { id: 7, label: 'Конфигурации  компьютеры', to: '/setup/configuration' },
 	{ id: 1, label: 'Сервер DV', to: '/setup/dvserver1' },
-	{ id: 2, label: 'Соединения', to: '/setup/connection' },
+	// { id: 2, label: 'Соединения', to: '/setup/connection' },
 	{ id: 3, label: 'Почтовый сервер', to: '/setup/email' },
 	{
 		id: 4,
