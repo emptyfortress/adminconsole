@@ -6,7 +6,7 @@ import ConfigTree from '@/components/ConfigTree.vue'
 import { useConfig } from '@/stores/configuration'
 
 const config = useConfig()
-const tabs = ref('0')
+const tabs = ref('2')
 </script>
 
 <template lang="pug">
