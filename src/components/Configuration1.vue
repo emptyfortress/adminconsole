@@ -9,7 +9,7 @@ const tabs = ref('0')
 </script>
 
 <template lang="pug">
-div
+q-page(padding)
 	.zag Конфигурации и серверы
 	.bar
 		q-chip(color="warning")

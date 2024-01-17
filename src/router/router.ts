@@ -23,22 +23,25 @@ export const router = createRouter({
 			path: '/',
 			name: 'home',
 			component: Home,
-			meta: { title: 'Admin console', bread: [{ label: 'Dashboard', to: '/' }] },
+			meta: {
+				title: 'Admin console',
+				bread: [{ label: 'Dashboard', to: '/' }],
+			},
 		},
-		// {
-		// 	path: '/test',
-		// 	name: 'create',
-		// 	component: CreateBd,
-		// 	meta: { title: 'Admin console', bread: [{ label: 'Dashboard', to: '/' }] },
-		// },
+		{
+			path: '/setup0',
+			name: 'configserver',
+			component: () => import('@/components/Configuration1.vue'),
+			meta: { title: 'Конфигурации', bread: [{ label: 'Dashboard', to: '/' }] },
+		},
 		{
 			path: '/setup1',
 			component: () => import('@/pages/Setup1.vue'),
 			meta: {
-				title: 'Настройки',
+				title: 'Модули',
 				bread: [
 					{ label: 'Dashboard', to: '/' },
-					{ label: 'Настройки', to: '/setup1' },
+					{ label: 'Модули', to: '/setup1' },
 				],
 			},
 			children: [
@@ -46,24 +49,10 @@ export const router = createRouter({
 					path: '',
 					component: () => import('@/components/SetupRoot1.vue'),
 					meta: {
-						title: 'Настройки',
+						title: 'Модули',
 						bread: [
 							{ label: 'Dashboard', to: '/' },
-							{ label: 'Настройки', to: '/setup1' },
-						],
-					},
-				},
-				{
-					path: 'configuration1',
-					name: 'configuration1',
-					component: () => import('@/components/Configuration1.vue'),
-					meta: {
-						title: 'Настройки',
-						nav: true,
-						bread: [
-							{ label: 'Dashboard', to: '/' },
-							{ label: 'Настройки', to: '/setup1' },
-							{ label: 'Конфигурации', to: '/setup1/configuration1' },
+							{ label: 'Модули', to: '/setup1' },
 						],
 					},
 				},
@@ -72,11 +61,11 @@ export const router = createRouter({
 					name: 'bprocess',
 					component: () => import('@/components/Bprocess.vue'),
 					meta: {
-						title: 'Настройки',
+						title: 'Модули',
 						nav: true,
 						bread: [
 							{ label: 'Dashboard', to: '/' },
-							{ label: 'Настройки', to: '/setup' },
+							{ label: 'Модули', to: '/setup' },
 							{ label: 'Сервер DV', to: '/setup/dvserver' },
 						],
 					},
@@ -86,11 +75,11 @@ export const router = createRouter({
 					name: 'dvserver1',
 					component: () => import('@/components/Dvserver1.vue'),
 					meta: {
-						title: 'Настройки',
+						title: 'Модули',
 						nav: true,
 						bread: [
 							{ label: 'Dashboard', to: '/' },
-							{ label: 'Настройки', to: '/setup' },
+							{ label: 'Модули', to: '/setup' },
 							{ label: 'Сервер DV', to: '/setup/dvserver' },
 						],
 					},
@@ -100,11 +89,11 @@ export const router = createRouter({
 					name: 'connecton',
 					component: () => import('@/components/Connection.vue'),
 					meta: {
-						title: 'Настройки',
+						title: 'Модули',
 						nav: true,
 						bread: [
 							{ label: 'Dashboard', to: '/' },
-							{ label: 'Настройки', to: '/setup' },
+							{ label: 'Модули', to: '/setup' },
 							{ label: 'Соединения', to: '/setup/connection' },
 						],
 					},
@@ -114,11 +103,11 @@ export const router = createRouter({
 					name: 'email',
 					component: () => import('@/components/Email.vue'),
 					meta: {
-						title: 'Настройки',
+						title: 'Модули',
 						nav: true,
 						bread: [
 							{ label: 'Dashboard', to: '/' },
-							{ label: 'Настройки', to: '/setup' },
+							{ label: 'Модули', to: '/setup' },
 							{ label: 'Email server', to: '/setup/email' },
 						],
 					},
@@ -128,11 +117,11 @@ export const router = createRouter({
 					name: 'worker',
 					component: () => import('@/components/Worker.vue'),
 					meta: {
-						title: 'Настройки',
+						title: 'Модули',
 						nav: true,
 						bread: [
 							{ label: 'Dashboard', to: '/' },
-							{ label: 'Настройки', to: '/setup' },
+							{ label: 'Модули', to: '/setup' },
 							{ label: 'Worker service', to: '/setup/worker' },
 						],
 					},
@@ -142,11 +131,11 @@ export const router = createRouter({
 					name: 'webclient',
 					component: () => import('@/components/Webclient.vue'),
 					meta: {
-						title: 'Настройки',
+						title: 'Модули',
 						nav: true,
 						bread: [
 							{ label: 'Dashboard', to: '/' },
-							{ label: 'Настройки', to: '/setup' },
+							{ label: 'Модули', to: '/setup' },
 							{ label: 'Worker service', to: '/setup/worker' },
 						],
 					},
@@ -170,26 +159,16 @@ export const router = createRouter({
 						nav: false,
 					},
 				},
-				// {
-				// 	path: '/edit',
-				// 	name: 'edit',
-				// 	component: EditDatabase,
-				// 	meta: {
-				// 		title: 'Вкладка',
-				// 		nav: false,
-				// 	},
-				// },
-
-			]
+			],
 		},
 		{
 			path: '/setup',
 			component: () => import('@/pages/Setup.vue'),
 			meta: {
-				title: 'Настройки',
+				title: 'Модули',
 				bread: [
 					{ label: 'Dashboard', to: '/' },
-					{ label: 'Настройки', to: '/setup' },
+					{ label: 'Модули', to: '/setup' },
 				],
 			},
 			children: [
@@ -197,10 +176,10 @@ export const router = createRouter({
 					path: '',
 					component: () => import('@/components/SetupRoot.vue'),
 					meta: {
-						title: 'Настройки',
+						title: 'Модули',
 						bread: [
 							{ label: 'Dashboard', to: '/' },
-							{ label: 'Настройки', to: '/setup' },
+							{ label: 'Модули', to: '/setup' },
 						],
 					},
 				},
@@ -209,11 +188,11 @@ export const router = createRouter({
 					name: 'configuration',
 					component: () => import('@/components/Configuration.vue'),
 					meta: {
-						title: 'Настройки',
+						title: 'Модули',
 						nav: true,
 						bread: [
 							{ label: 'Dashboard', to: '/' },
-							{ label: 'Настройки', to: '/setup' },
+							{ label: 'Модули', to: '/setup' },
 							{ label: 'Конфигурации', to: '/setup/configuration' },
 						],
 					},
@@ -223,11 +202,11 @@ export const router = createRouter({
 					name: 'bprocess',
 					component: () => import('@/components/Bprocess.vue'),
 					meta: {
-						title: 'Настройки',
+						title: 'Модули',
 						nav: true,
 						bread: [
 							{ label: 'Dashboard', to: '/' },
-							{ label: 'Настройки', to: '/setup' },
+							{ label: 'Модули', to: '/setup' },
 							{ label: 'Сервер DV', to: '/setup/dvserver' },
 						],
 					},
@@ -237,11 +216,11 @@ export const router = createRouter({
 					name: 'dvserver1',
 					component: () => import('@/components/Dvserver1.vue'),
 					meta: {
-						title: 'Настройки',
+						title: 'Модули',
 						nav: true,
 						bread: [
 							{ label: 'Dashboard', to: '/' },
-							{ label: 'Настройки', to: '/setup' },
+							{ label: 'Модули', to: '/setup' },
 							{ label: 'Сервер DV', to: '/setup/dvserver' },
 						],
 					},
@@ -251,11 +230,11 @@ export const router = createRouter({
 					name: 'connecton',
 					component: () => import('@/components/Connection.vue'),
 					meta: {
-						title: 'Настройки',
+						title: 'Модули',
 						nav: true,
 						bread: [
 							{ label: 'Dashboard', to: '/' },
-							{ label: 'Настройки', to: '/setup' },
+							{ label: 'Модули', to: '/setup' },
 							{ label: 'Соединения', to: '/setup/connection' },
 						],
 					},
@@ -265,11 +244,11 @@ export const router = createRouter({
 					name: 'email',
 					component: () => import('@/components/Email.vue'),
 					meta: {
-						title: 'Настройки',
+						title: 'Модули',
 						nav: true,
 						bread: [
 							{ label: 'Dashboard', to: '/' },
-							{ label: 'Настройки', to: '/setup' },
+							{ label: 'Модули', to: '/setup' },
 							{ label: 'Email server', to: '/setup/email' },
 						],
 					},
@@ -279,11 +258,11 @@ export const router = createRouter({
 					name: 'worker',
 					component: () => import('@/components/Worker.vue'),
 					meta: {
-						title: 'Настройки',
+						title: 'Модули',
 						nav: true,
 						bread: [
 							{ label: 'Dashboard', to: '/' },
-							{ label: 'Настройки', to: '/setup' },
+							{ label: 'Модули', to: '/setup' },
 							{ label: 'Worker service', to: '/setup/worker' },
 						],
 					},
@@ -293,11 +272,11 @@ export const router = createRouter({
 					name: 'webclient',
 					component: () => import('@/components/Webclient.vue'),
 					meta: {
-						title: 'Настройки',
+						title: 'Модули',
 						nav: true,
 						bread: [
 							{ label: 'Dashboard', to: '/' },
-							{ label: 'Настройки', to: '/setup' },
+							{ label: 'Модули', to: '/setup' },
 							{ label: 'Worker service', to: '/setup/worker' },
 						],
 					},
@@ -341,6 +320,6 @@ export const router = createRouter({
 })
 
 const DEFAULT_TITLE = 'Консоль управления DV'
-router.beforeEach((to) => {
+router.beforeEach(to => {
 	document.title = to.meta.title || DEFAULT_TITLE
 })

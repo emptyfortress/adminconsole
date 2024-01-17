@@ -3,13 +3,13 @@ div
 	.inf
 		span Адрес хранилища настроек:
 		a.q-ml-md(href="#") http://sol2016.digdes.com:5200/api/Settings
-	.zag Настройки
+	.zag Модули
 	br
 	.mygrid
-		router-link.bl.conf(to="/setup1/configuration1")
-			.icon.config
-			.tit Конфигурации и серверы
-			.icon.comp
+		// router-link.bl.conf(to="/setup1/configuration1")
+		// 	.icon.config
+		// 	.tit Конфигурации и серверы
+		// 	.icon.comp
 		router-link.bl.big(to="/setup/dvserver1")
 			.icon.serverdv
 			.tit Сервер Docsvision

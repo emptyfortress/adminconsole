@@ -2,7 +2,7 @@
 q-page(padding)
 	transition(name="slide-top")
 		.nav(v-if="route.meta.nav")
-			q-btn(round color="secondary" size="sm" @click="router.push('/setup')")
+			q-btn(round color="secondary" size="sm" @click="router.push('/setup1')")
 				q-icon(name="mdi-arrow-left" color="white")
 			router-link(v-for="item in items" :to="item.to").bl {{ item.label }}
 				q-tooltip(v-if="item.tooltip") {{ item.tooltip }}
@@ -21,13 +21,23 @@ const router = useRouter()
 
 const items = [
 	// { id: 0, label: 'Сервер DV', to: '/setup/dvserver' },
-	{ id: 7, label: 'Конфигурации и компьютеры', to: '/setup/configuration', },
+	// { id: 7, label: 'Конфигурации  компьютеры', to: '/setup/configuration' },
 	{ id: 1, label: 'Сервер DV', to: '/setup/dvserver1' },
 	{ id: 2, label: 'Соединения', to: '/setup/connection' },
 	{ id: 3, label: 'Почтовый сервер', to: '/setup/email' },
-	{ id: 4, label: 'СФО', to: '/setup/worker', tooltip: 'Служба фоновых операций' },
-	{ id: 5, label: 'СУБП', to: '/setup/bprocess', tooltip: 'Служба управления бизнес-процессами' },
-	{ id: 6, label: 'Web-клиент', to: '/setup/webclient', },
+	{
+		id: 4,
+		label: 'СФО',
+		to: '/setup/worker',
+		tooltip: 'Служба фоновых операций',
+	},
+	{
+		id: 5,
+		label: 'СУБП',
+		to: '/setup/bprocess',
+		tooltip: 'Служба управления бизнес-процессами',
+	},
+	{ id: 6, label: 'Web-клиент', to: '/setup/webclient' },
 ]
 </script>
 
