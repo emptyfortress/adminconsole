@@ -25,8 +25,9 @@ const minitoogle = computed(() => {
 
 const menu = [
 	{ url: '/', icon: 'mdi-monitor-dashboard', text: 'Dashboard' },
-	{ url: '/setup', icon: 'mdi-hammer-wrench', text: 'Настройка' },
-	{ url: '/setup1', icon: 'mdi-hammer-wrench', text: 'Настройка' },
+	// { url: '/setup', icon: 'mdi-hammer-wrench', text: 'Настройка' },
+	{ url: '/setup0', icon: 'mdi-application-cog-outline', text: 'Конфигурации' },
+	{ url: '/setup1', icon: 'mdi-hammer-wrench', text: 'Модули' },
 	{ url: '/logs', icon: 'mdi-script-text-outline', text: 'Логи' },
 ]
 </script>
