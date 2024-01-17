@@ -11,11 +11,11 @@ const chips = reactive([
 	{ id: 2, selected: false, label: 'Linux' },
 ])
 
-const select = ((e: any) => {
-	chips.map(item => item.selected = false)
+const select = (e: any) => {
+	chips.map(item => (item.selected = false))
 	e.selected = true
 	selChip.value = e.id
-})
+}
 
 const pagination = {
 	rowsPerPage: 0,
@@ -36,6 +36,11 @@ const filteredRows = computed(() => {
 const compRows1 = computed(() => {
 	return config.selectedRow1.config
 })
+const calcClass = (row: any) => {
+	if (row.config.length == 0) {
+		return 'red'
+	} else return 'green'
+}
 </script>
 
 <template lang="pug">
@@ -53,7 +58,11 @@ const compRows1 = computed(() => {
 
 			template(v-slot:body='props')
 				q-tr(:props='props' @click="config.selectRow1(props.row)" :class='{ cool: props.row.selected }')
-					q-td(:props="props" key="name" ) {{ props.row.name }}
+					q-td(:props="props" key="name" )
+						span.act(:class="calcClass(props.row)")
+							q-tooltip.bg-secondary(v-if="props.row.config.length") Модули сконфигурированы
+							q-tooltip.bg-red(v-else) Конфигурации отсутствуют
+						span {{ props.row.name }}
 					q-td(:props="props" key="os" ) {{ props.row.os }}
 
 	.to
@@ -73,7 +82,7 @@ const compRows1 = computed(() => {
 }
 
 .grid {
-	margin: .5rem;
+	margin: 0.5rem;
 	display: grid;
 	grid-template-columns: 1fr auto 1fr;
 	// align-items: center;
@@ -98,5 +107,19 @@ const compRows1 = computed(() => {
 
 :deep(.q-table tr.cool) {
 	background: var(--bg-selected);
+}
+.act {
+	width: 10px;
+	height: 10px;
+	display: inline-block;
+	background: #ccc;
+	margin-right: 0.5rem;
+	border-radius: 10px;
+	&.red {
+		background: red;
+	}
+	&.green {
+		background: green;
+	}
 }
 </style>
