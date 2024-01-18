@@ -1,71 +1,31 @@
+import { uid } from 'quasar'
 const conf = [
 	{
-		id: 0,
+		id: 'root',
 		label: 'Конфигурации',
 		header: 'root',
 		children: [
 			{
-				id: 1,
-				icon: 'mdi-folder-outline',
-				label: 'Web-client',
-				children: [
-					{
-						id: 11,
-						icon: 'mdi-application-cog-outline',
-						label: 'Config 1',
-						env: 'test',
-						children: [
-							{
-								id: 111,
-								icon: 'mdi-microsoft-windows-classic',
-								label: '102pc0102',
-							},
-							{
-								id: 112,
-								icon: 'mdi-microsoft-windows-classic',
-								label: 'DV-test',
-							},
-							{
-								id: 113,
-								icon: 'mdi-penguin',
-								label: 'DVM',
-							},
-							{
-								id: 114,
-								icon: 'mdi-penguin',
-								label: '104pc0104',
-							},
-						],
-					},
-					{
-						id: 12,
-						icon: 'mdi-application-cog-outline',
-						label: 'Config 2',
-						children: [
-							{
-								id: 121,
-								icon: 'mdi-penguin',
-								label: 'DVM',
-							},
-						],
-					},
-				],
-			},
-			{
-				id: 2,
+				id: 'platform',
 				label: 'Platform',
 				icon: 'mdi-folder-outline',
 				children: [
 					{
-						id: 21,
-						label: 'Config 3',
-						icon: 'mdi-application-cog-outline',
+						id: uid(),
+						label: 'Config 1',
+						icon: 'mdi-code-braces',
 						env: 'test',
 						children: [
-							{ id: 211, label: 'DVM', icon: 'mdi-penguin', selected: false },
 							{
-								id: 212,
-								label: '104pc0104',
+								id: uid(),
+								label: 'DVM',
+								icon: 'mdi-penguin',
+								docker: true,
+								selected: false,
+							},
+							{
+								id: uid(),
+								label: '103pc0103',
 								icon: 'mdi-penguin',
 								selected: false,
 							},
@@ -74,13 +34,70 @@ const conf = [
 				],
 			},
 			{
-				id: 3,
+				id: 'web',
+				icon: 'mdi-folder-outline',
+				label: 'Web-client',
+				children: [
+					{
+						id: uid(),
+						icon: 'mdi-code-braces',
+						label: 'Config 2',
+						env: 'test',
+						children: [
+							{
+								id: uid(),
+								icon: 'mdi-microsoft-windows-classic',
+								label: '102pc0102',
+							},
+							{
+								id: uid(),
+								icon: 'mdi-penguin',
+								label: '104pc0104',
+							},
+						],
+					},
+					{
+						id: uid(),
+						icon: 'mdi-code-braces',
+						label: 'Config 3',
+						env: 'prod',
+						children: [
+							{
+								id: uid(),
+								icon: 'mdi-penguin',
+								label: '106pc0106',
+							},
+						],
+					},
+					{
+						id: uid(),
+						icon: 'mdi-code-braces',
+						label: 'Config 4',
+						env: 'dev',
+						children: [
+							{
+								id: uid(),
+								icon: 'mdi-microsoft-windows-classic',
+								label: 'DV-test',
+							},
+							{
+								id: uid(),
+								icon: 'mdi-penguin',
+								docker: true,
+								label: 'DVM-new',
+							},
+						],
+					},
+				],
+			},
+			{
+				id: uid(),
 				label: 'Workflow',
 				icon: 'mdi-folder-outline',
 				children: [],
 			},
 			{
-				id: 4,
+				id: uid(),
 				label: 'Server DV',
 				icon: 'mdi-folder-outline',
 				children: [],
