@@ -4,7 +4,7 @@ import WordHighlighter from 'vue-word-highlighter'
 import { conf } from '@/stores/confTree'
 
 const filter = ref('')
-const expandedKeys = ref(['root', ''])
+const expandedKeys = ref(['root', 'platform', 'web'])
 const chips = reactive([
 	{ id: 0, label: 'Все', selected: true },
 	{ id: 1, label: 'test', selected: false },
@@ -17,7 +17,7 @@ const select = (e: any) => {
 	e.selected = true
 	selChip.value = e.id
 	if (selChip.value > 0) tree.value.expandAll()
-	if (selChip.value == 0) expandedKeys.value = ['root', 'web', 'platform']
+	if (selChip.value == 0) expandedKeys.value = ['root', 'platform', 'web']
 }
 // const filtNodes = ref(conf)
 const tree = ref()
