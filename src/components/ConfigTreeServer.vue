@@ -54,6 +54,7 @@ const filtered = computed(() => {
 	}
 	return servers
 })
+const selectedKeys = ref(null)
 </script>
 
 <template lang="pug">
@@ -67,9 +68,9 @@ div
 		:nodes="filtered"
 		icon="mdi-chevron-right"
 		node-key="id"
-		color="secondary"
 		:filter="filter"
 		v-model:expanded="expandedKeys"
+		v-model:selected="selectedKeys"
 		)
 		template(v-slot:header-root="prop")
 			.row.items-center.q-gutter-x-md
@@ -119,5 +120,11 @@ div
 :deep(.q-chip--selected) {
 	background: $secondary;
 	color: white;
+}
+:deep(.q-tree__node--selected) {
+	background: hsl(207deg 100% 86.78%);
+	.q-tree__node-header-content {
+		color: #002544;
+	}
 }
 </style>

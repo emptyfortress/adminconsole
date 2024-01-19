@@ -38,13 +38,10 @@ q-page(padding)
 	}
 }
 
-.q-tab-panels {
-	background: transparent;
-}
-
 :deep(.q-card) {
+	padding: 1rem;
 	max-width: clamp(600px, 80%, 1200px);
 	margin: 0 auto;
-	// background: #f2f3ef;
+	background: #fff;
 }
 </style>

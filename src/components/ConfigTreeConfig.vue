@@ -2,7 +2,9 @@
 import { ref, reactive, computed, watch } from 'vue'
 import WordHighlighter from 'vue-word-highlighter'
 import { conf } from '@/stores/confTree'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const filter = ref('')
 const expandedKeys = ref(['root', 'platform', 'web'])
 const chips = reactive([
@@ -50,6 +52,13 @@ const filtered = computed(() => {
 	}
 	return conf
 })
+const selectedKeys = ref(null)
+const isSelected = (e: any) => {
+	return e.id == selectedKeys.value && e.icon == 'mdi-code-braces'
+}
+const edit = () => {
+	router.push('/setup/webclient/')
+}
 </script>
 
 <template lang="pug">
@@ -63,9 +72,9 @@ div
 		:nodes="filtered"
 		icon="mdi-chevron-right"
 		node-key="id"
-		color="secondary"
 		:filter="filter"
 		v-model:expanded="expandedKeys"
+		v-model:selected="selectedKeys"
 		)
 		template(v-slot:header-root="prop")
 			.row.items-center.q-gutter-x-md
@@ -76,7 +85,16 @@ div
 					q-icon.q-mr-sm(:name="prop.node.icon")
 					q-icon.q-mr-sm(v-if="prop.node.docker" name="mdi-docker")
 					component(:is="WordHighlighter" :query="filter") {{ prop.node.label }}
-				q-chip(v-if="prop.node.env" size="sm" :class="prop.node.env") {{ prop.node.env }}
+				div
+					q-btn(v-if="isSelected(prop.node)" flat round icon="mdi-dots-vertical" color="primary" @click.stop="action" size="sm") 
+						q-menu
+							q-list
+								q-item(clickable)
+									q-item-section Действие 1
+								q-item(clickable @click="edit")
+									q-item-section Редактировать
+				
+					q-chip(v-if="prop.node.env" size="sm" :class="prop.node.env") {{ prop.node.env }}
 </template>
 
 <style scoped lang="scss">
@@ -103,5 +121,11 @@ div
 :deep(.q-chip--selected) {
 	background: $secondary;
 	color: white;
+}
+:deep(.q-tree__node--selected) {
+	background: hsl(207deg 100% 86.78%);
+	.q-tree__node-header-content {
+		color: #002544;
+	}
 }
 </style>
