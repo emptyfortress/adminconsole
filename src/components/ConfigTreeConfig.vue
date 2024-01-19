@@ -86,7 +86,7 @@ div
 					q-icon.q-mr-sm(v-if="prop.node.docker" name="mdi-docker")
 					component(:is="WordHighlighter" :query="filter") {{ prop.node.label }}
 				div
-					q-btn(v-if="isSelected(prop.node)" flat round icon="mdi-dots-vertical" color="primary" @click.stop="action" size="sm") 
+					q-btn(v-if="isSelected(prop.node)" flat round icon="mdi-dots-vertical" color="primary" @click.stop="" size="sm") 
 						q-menu
 							q-list
 								q-item(clickable)
