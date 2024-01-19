@@ -2,7 +2,9 @@
 import { ref, reactive, computed, watch } from 'vue'
 import WordHighlighter from 'vue-word-highlighter'
 import { servers } from '@/stores/confTree'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const filter = ref('')
 const expandedKeys = ref(['root'])
 const chips = reactive([
@@ -55,6 +57,12 @@ const filtered = computed(() => {
 	return servers
 })
 const selectedKeys = ref(null)
+const isSelected = (e: any) => {
+	return e.id == selectedKeys.value && e.icon == 'mdi-code-braces'
+}
+const edit = () => {
+	router.push('/setup/webclient/')
+}
 </script>
 
 <template lang="pug">
@@ -82,6 +90,13 @@ div
 					q-icon.q-mr-sm(v-if="prop.node.docker" name="mdi-docker")
 					component(:is="WordHighlighter" :query="filter") {{ prop.node.label }}
 				div
+					q-btn(v-if="isSelected(prop.node)" flat round icon="mdi-dots-vertical" color="primary" @click.stop="" size="sm") 
+						q-menu
+							q-list
+								q-item(clickable)
+									q-item-section Действие 1
+								q-item(clickable @click="edit")
+									q-item-section Редактировать
 					q-chip(v-if="prop.node.module" size="sm" :class="prop.node.module") {{ prop.node.module }}
 					q-chip(v-if="prop.node.env" size="sm" :class="prop.node.env") {{ prop.node.env }}
 </template>
