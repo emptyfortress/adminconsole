@@ -59,6 +59,11 @@ const isSelected = (e: any) => {
 const edit = () => {
 	router.push('/setup/webclient/')
 }
+const showChip = (e: any) => {
+	if (!!e.env && e.icon == 'mdi-code-braces') {
+		return true
+	} else return false
+}
 </script>
 
 <template lang="pug">
@@ -94,7 +99,7 @@ div
 								q-item(clickable @click="edit")
 									q-item-section Редактировать
 				
-					q-chip(v-if="prop.node.env" size="sm" :class="prop.node.env") {{ prop.node.env }}
+					q-chip(v-if="showChip(prop.node)" size="sm" :class="prop.node.env") {{ prop.node.env }}
 </template>
 
 <style scoped lang="scss">
