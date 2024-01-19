@@ -1,60 +1,35 @@
-<template>
-	<div>
-		<AddConnection
-			v-model="dialog"
-			@add="addConfig"
-			dv
-		/>
-		<div class="zag">Настройки сервера Docsvision</div>
-		<div class="bar">
-			<q-chip color="warning">Всего конфигураций: {{ store.config.length }}</q-chip>
-			<q-btn
-				class="plus"
-				flat
-				round
-				dense
-				icon="mdi-plus-circle"
-				@click="add"
-			>
-				<q-tooltip>Добавить конфигурцию</q-tooltip>
-			</q-btn>
-			<q-space></q-space>
-			<div class="alltab">
-				<q-tabs
-					class="text-secondary"
-					v-model="store.tabs"
-					active-color="primary"
-					inline-label
-				>
-					<q-tab
-						v-for="item in store.config"
-						:key="item.id"
-						:name="item.name"
-						:label="item.name"
-					></q-tab>
-				</q-tabs>
-			</div>
-		</div>
-		<q-card>
-			<q-tab-panels
-				v-model="store.tabs"
-				animated
-			>
-				<template
-					v-for="item in store.config"
-					:key="item.id"
-				>
-					<q-tab-panel :name="item.name">
-						<GreyBlock4
-							:name="item.name"
-							@delete="store.removeConfig(item)"
-							@duble="addConfig(item.name, true)"
-						/>
-					</q-tab-panel>
-				</template>
-			</q-tab-panels>
-		</q-card>
-	</div>
+<template lang="pug">
+div
+	AddConnection(v-model="dialog", @add="addConfig", dv)
+	.zag Настройки сервера Docsvision
+	.bar
+		q-chip(color="warning") Всего конфигураций: {{ store.config.length }}
+		q-btn.plus(flat, round, dense, icon="mdi-plus-circle", @click="add")
+			q-tooltip Добавить конфигурцию
+		q-space
+		.alltab
+			q-tabs.text-secondary(v-model="store.tabs", active-color="primary", inline-label)
+				q-tab(v-for="item in store.config", :key="item.id", :name="item.name", :label="item.name")
+	q-card
+		q-tab-panels(v-model="store.tabs", animated)
+			template(v-for="item in store.config", :key="item.id")
+				q-tab-panel(:name="item.name")
+					GreyBlock4(:name="item.name", @delete="store.removeConfig(item)", @duble="addConfig(item.name, true)")
+
+	br
+	q-card.card
+		q-card-section.items-center.justify-between(horizontal)
+			.text-h6
+					q-icon(name="mdi-penguin" size="md")
+					span.q-ml-sm 102pc0102
+			div Тут настройки конкретного сервера
+	br
+	q-card.card
+		q-card-section.items-center.justify-between(horizontal)
+			.text-h6
+					q-icon(name="mdi-microsoft-windows-classic" size="md")
+					span.q-ml-sm DVM-new
+			div Тут настройки конкретного сервера
 </template>
 
 <script setup lang="ts">
@@ -111,5 +86,10 @@ const addConfig = (e: string, copy: boolean) => {
 
 .alltab {
 	max-width: 700px;
+}
+.card {
+	max-width: clamp(600px, 80%, 1200px);
+	margin: 0 auto;
+	background: #fff;
 }
 </style>

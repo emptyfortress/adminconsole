@@ -39,6 +39,20 @@ div
 			template(v-for="item in store.webconfig" :key="item.id")
 				q-tab-panel(:name="item.name")
 					GreyBlock5(:name="item.name" @delete="store.removeWebConfig(item)" @duble="addWebConfig(item.name, true)")
+	br
+	q-card.card
+		q-card-section.items-center.justify-between(horizontal)
+			.text-h6
+					q-icon(name="mdi-penguin" size="md")
+					span.q-ml-sm 102pc0102
+			div Тут настройки конкретного сервера
+	br
+	q-card.card
+		q-card-section.items-center.justify-between(horizontal)
+			.text-h6
+					q-icon(name="mdi-microsoft-windows-classic" size="md")
+					span.q-ml-sm DVM-new
+			div Тут настройки конкретного сервера
 </template>
 
 <style scoped lang="scss">
