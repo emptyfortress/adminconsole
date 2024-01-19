@@ -12,12 +12,7 @@ const tabs = ref('0')
 div
 	.zag Конфигурации и компьютеры
 	.bar
-		q-chip(color="warning")
-			span Всего&nbsp;
-			span(v-if="tabs == '0'") конфигураций:&nbsp;&nbsp;
-			span(v-else) комьютеров:&nbsp;&nbsp;
-			span(v-if="tabs === '0'") {{ config.totalConfigs }}
-			span(v-else) {{ config.totalComps }}
+		q-chip(color="warning") Всего конфигураций: {{ config.totalConfigs }}
 		q-btn.plus(v-if="tabs == '0'" flat round dense icon="mdi-plus-circle" @click="")
 			q-tooltip Добавить конфигурацию
 		q-space
