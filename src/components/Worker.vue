@@ -25,21 +25,21 @@
 						// div
 						// 	q-icon.q-mr-sm(name="mdi-server-network")
 						// 	span MachineName
-					.row.items-center.q-gutter-x-sm.text-right
+					.row.items-center.text-right
 						.span Всего процессов:
 						q-chip(color="warning") {{panel.processes.length}}
-						q-btn(flat round @click.stop="add(panel)" icon="mdi-plus-circle")
+							q-btn(flat round @click.stop="add(panel)" icon="mdi-plus-circle")
 							q-tooltip( anchor="top middle" self="bottom middle") Добавить процесс
-						q-btn(flat round icon="mdi-pencil" @click.stop="ren(panel)")
-							q-tooltip( anchor="top middle" self="bottom middle") Переименовать экземпляр службы
-						q-btn(flat round icon="mdi-reload" @click.stop)
-							q-tooltip( anchor="top middle" self="bottom middle") Перезапустить все процессы
-						q-btn(flat round icon="mdi-trash-can-outline" @click.stop="confirm(panel)")
-							q-tooltip( anchor="top middle" self="bottom middle") Удалить экземпляр службы
+						q-btn(dense flat round icon="mdi-pencil" @click.stop="ren(panel)")
+							q-tooltip(anchor="top middle" self="bottom middle") Переименовать экземпляр службы
+						q-btn(dense flat round icon="mdi-reload" @click.stop)
+							q-tooltip(anchor="top middle" self="bottom middle") Перезапустить все процессы
+						q-btn(dense flat round icon="mdi-trash-can-outline" @click.stop="confirm(panel)")
+							q-tooltip(anchor="top middle" self="bottom middle") Удалить экземпляр службы
 
 
 			.pcard
-				GreyBlock2( v-for="item in panel.processes" :key="item.name" :name="item.name" @del="remove(panel.id, item)")
+				GreyBlock2(v-for="item in panel.processes" :key="item.name" :name="item.name" @del="remove(panel.id, item)")
 
 
 	AddConnection( v-model="dialog" @close="dialog = false" @add="addProcess" worker)
@@ -249,5 +249,9 @@ const req = [
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+}
+:deep(.q-chip) {
+	padding-right: 0;
+	margin-right: 3rem;
 }
 </style>
