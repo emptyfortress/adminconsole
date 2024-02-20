@@ -12,7 +12,7 @@ div
 		// 	.icon.comp
 		router-link.bl.big(to="/setup/dvserver1")
 			.icon.serverdv
-			.tit Сервер Docsvision
+			.tit Сервер приложений
 		router-link.bl.big(to="/setup/webclient")
 			.icon.webclient
 			.tit Web-клиент

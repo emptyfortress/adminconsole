@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-	p Здесь настраиваются подключения пользователей к серверу Docsvision.
+	p Здесь настраиваются подключения пользователей к серверу приложений.
 	q-form(ref="form" @validation-error="$emit('haserror')" @validation-success="$emit('noerror')" no-error-focus)
 		fieldset
 			legend Настройки соединения Windows-клиента
@@ -58,7 +58,7 @@ const sel = ref(false)
 
 const emit = defineEmits(['change', 'haserror', 'noerror'])
 
-watch(store.access.access, (value) => {
+watch(store.access.access, value => {
 	if (value) {
 		store.changeDefaults(3)
 		emit('change')

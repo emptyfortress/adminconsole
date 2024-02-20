@@ -1,7 +1,7 @@
 <template lang="pug">
 div
 	AddConnection(v-model="dialog", @add="addConfig", dv)
-	.zag Настройки сервера Docsvision
+	.zag Настройки сервера приложений
 	.bar
 		q-chip(color="warning") Всего конфигураций: {{ store.config.length }}
 		q-btn.plus(flat, round, dense, icon="mdi-plus-circle", @click="add")
