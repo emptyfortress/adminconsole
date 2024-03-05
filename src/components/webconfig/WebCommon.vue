@@ -8,7 +8,7 @@ const store = useStore()
 const form = ref()
 const emit = defineEmits(['change', 'haserror', 'noerror'])
 
-watch(store.wc.common, (value) => {
+watch(store.wc.common, value => {
 	if (value) {
 		store.changeWebDefaults(0)
 		emit('change')
@@ -21,23 +21,17 @@ q-form(ref="form" @validation-error="$emit('haserror')" @validation-success="$em
 	fieldset.q-mt-none
 		legend Папки
 		.blo
-			.label Сайт в IIS:
-			q-select(dense outlined v-model="store.wc.common.iis" bg-color="white" :rules="req" @blur="form.validate()")
-			.label Размещение приложения:
-			q-input(dense outlined v-model="store.wc.common.mainFolder" bg-color="white" :rules="req" @blur="form.validate()")
 			.label Размещение расширений:
 			q-input(dense outlined v-model="store.wc.common.extensions" bg-color="white" :rules="req" @blur="form.validate()")
 				q-tooltip(anchor="top middle" self="bottom middle") ExtensionsPath
-			.label Виртуальная папка:
-			.row
-				q-input(dense outlined v-model="store.wc.common.virtual" bg-color="white" :rules="req" @blur="form.validate()" style="width: 100%;" disable)
-				q-input.short(dense outlined v-model="store.wc.common.virt1" bg-color="white" :rules="req" @blur="form.validate()")
-			.label Адрес установщика утилиты dvwebtool:
+			.label Адрес установщика утилиты DVWebTool:
 			q-input(dense outlined v-model="store.wc.common.dvwebtool" bg-color="white" :rules="req" @blur="form.validate()")
 				q-tooltip(anchor="top middle" self="bottom middle") ExtensionsPath
+			.label Адрес журнала операций web-клиента:
+			q-input(dense outlined v-model="store.wc.common.journal" bg-color="white" :rules="req" @blur="form.validate()")
 
 	fieldset
-		legend Шаблоны для определения
+		legend Шаблоны для определения устройств
 		.blo
 			.label Новые мобильные устройства:
 			q-input(dense outlined v-model="store.wc.common.template1" bg-color="white" :rules="req" @blur="form.validate()")

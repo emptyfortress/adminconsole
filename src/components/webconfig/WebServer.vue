@@ -7,23 +7,62 @@ const store = useStore()
 const form = ref()
 const emit = defineEmits(['change', 'haserror', 'noerror'])
 
-watch(store.wc.system, (value) => {
+watch(store.wc.system, value => {
 	if (value) {
 		store.changeWebDefaults(3)
 		emit('change')
 	}
 })
+const db = ref(['AGSupport', 'DvTest', 'DvShowCase'])
+const active = ref('AGSupport')
+const login = ref('')
+const password = ref('')
 </script>
 
 <template lang="pug">
 q-form(ref="form" @validation-error="$emit('haserror')" @validation-success="$emit('noerror')" no-error-focus)
 	.blo
-		.label Строка подключения к серверу DV:
+		.label Конфигурация сервера приложений:
 		q-input(dense outlined v-model="store.wc.server.address" bg-color="white" :rules="req" @blur="form.validate()")
-		.label Псевдоним:
-		q-input(dense outlined v-model="store.wc.server.psevdo" bg-color="white" :rules="req" @blur="form.validate()")
-		.label Путь к консоли администратора:
-		q-input(dense outlined v-model="store.wc.server.adminPath" bg-color="white" :rules="req" @blur="form.validate()")
+		.help
+			q-icon(name="mdi-help-circle-outline" color="primary" size="xs")
+			.txt Текст-пояснение
+		.label Подключаемая база данных:
+		q-select(dense outlined v-model="active" bg-color="white" :options="db" :rules="req" @blur="form.validate()")
+		.help
+			q-icon(name="mdi-help-circle-outline" color="primary" size="xs")
+			.txt Текст-пояснение
+		.label Имя пользователя:
+		q-input(dense outlined v-model="login" bg-color="white" :rules="req" @blur="form.validate()")
+		.help
+			q-icon(name="mdi-help-circle-outline" color="primary" size="xs")
+			.txt Имя пользователя, под которым будет выполняться подключение
+		.label Пароль:
+		q-input(dense outlined type="password" v-model="pass" bg-color="white" :rules="req" @blur="form.validate()")
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.blo {
+	grid-template-columns: auto 450px 1fr;
+}
+.help {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	.q-icon {
+		cursor: pointer;
+	}
+	.txt {
+		color: $secondary;
+		font-style: italic;
+		font-size: 0.9rem;
+		display: none;
+		line-height: 1.2;
+	}
+	&:hover {
+		.txt {
+			display: block;
+		}
+	}
+}
+</style>

@@ -8,7 +8,7 @@ div
 			q-space
 			q-btn(color="primary" unelevated @click="add") Добавить экземпляр
 
-		component(:is="GreyBlock1" v-for="item in store.connections" :key="item" :name="item.name" @delete="store.deleteConnection(item)" @duble="addConnection")
+		component(:is="GreyBlock1" v-for="item in store.connections" :key="item.name" :name="item.name" @delete="store.deleteConnection(item)" @duble="addConnection")
 
 	component(:is="AddConnection" v-model="dialog" @add="addConnection")
 </template>

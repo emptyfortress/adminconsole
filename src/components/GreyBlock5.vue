@@ -6,7 +6,6 @@
 			.label Название конфигурации:
 			q-input(v-model="form.name" dense outlined bg-color="white" lazy-rules :rules="req")
 			.def
-				q-checkbox(v-model="form.def" dense label="Использовать по умолчанию")
 			.but
 				q-btn(round flat icon="mdi-content-duplicate" @click="duble")
 					q-tooltip Дублировать
@@ -51,9 +50,11 @@ const form = reactive({
 	name: props.name,
 	def: false,
 })
-const req = [(val: string) => (val && val.length > 0) || 'Это обязательное поле']
+const req = [
+	(val: string) => (val && val.length > 0) || 'Это обязательное поле',
+]
 
-watch(form, (value) => {
+watch(form, value => {
 	if (value) {
 		editMode.value = true
 	}
@@ -80,7 +81,9 @@ const save = () => {
 	// store.panels[1].change = false
 	editMode.value = false
 	if (form.name.length > 0 && form.name !== props.name) {
-		let currentConfigIndex = store.webconfig.findIndex((item) => item.name === props.name)
+		let currentConfigIndex = store.webconfig.findIndex(
+			item => item.name === props.name
+		)
 		store.webconfig[currentConfigIndex].name = form.name
 		store.setTabs2(form.name)
 	}
