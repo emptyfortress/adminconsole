@@ -16,7 +16,7 @@ watch(store.wc.system, value => {
 const db = ref(['AGSupport', 'DvTest', 'DvShowCase'])
 const active = ref('AGSupport')
 const login = ref('')
-const password = ref('')
+const pass = ref('')
 </script>
 
 <template lang="pug">
