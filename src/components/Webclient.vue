@@ -2,6 +2,8 @@
 import { ref } from 'vue'
 import { useStore } from '@/stores/store'
 import GreyBlock5 from '@/components/GreyBlock5.vue'
+import GreyBlock6 from '@/components/GreyBlock6.vue'
+import GreyBlock7 from '@/components/GreyBlock7.vue'
 import AddConnection from '@/components/AddConnection.vue'
 
 const store = useStore()
@@ -41,18 +43,18 @@ div
 					GreyBlock5(:name="item.name" @delete="store.removeWebConfig(item)" @duble="addWebConfig(item.name, true)")
 	br
 	q-card.card
-		q-card-section.items-center.justify-between(horizontal)
-			.text-h6
-					q-icon(name="mdi-penguin" size="md")
-					span.q-ml-sm 102pc0102
-			div Тут настройки конкретного сервера
+		.text-h6.q-mx-md
+			q-icon(name="mdi-penguin" size="md")
+			span.q-ml-sm 102pc0102
+		.q-mx-md
+			GreyBlock6(name="fuck")
 	br
 	q-card.card
-		q-card-section.items-center.justify-between(horizontal)
-			.text-h6
-					q-icon(name="mdi-microsoft-windows-classic" size="md")
-					span.q-ml-sm DVM-new
-			div Тут настройки конкретного сервера
+		.text-h6.q-mx-md
+			q-icon(name="mdi-microsoft-windows-classic" size="md")
+			span.q-ml-sm DVM-new
+		.q-mx-md
+			GreyBlock7(name="fuck")
 </template>
 
 <style scoped lang="scss">

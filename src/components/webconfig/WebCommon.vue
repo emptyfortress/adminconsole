@@ -3,6 +3,12 @@ import { ref, watch } from 'vue'
 import { useStore } from '@/stores/store'
 import { req, reqnum } from '@/utils/utils'
 
+const props = defineProps({
+	part: {
+		type: Boolean,
+		default: false,
+	},
+})
 const store = useStore()
 
 const form = ref()
@@ -30,7 +36,7 @@ q-form(ref="form" @validation-error="$emit('haserror')" @validation-success="$em
 			.label Адрес журнала операций web-клиента:
 			q-input(dense outlined v-model="store.wc.common.journal" bg-color="white" :rules="req" @blur="form.validate()")
 
-	fieldset
+	fieldset(v-if="!props.part")
 		legend Шаблоны для определения устройств
 		.blo
 			.label Новые мобильные устройства:
@@ -39,7 +45,7 @@ q-form(ref="form" @validation-error="$emit('haserror')" @validation-success="$em
 			q-input(dense outlined v-model="store.wc.common.template2" bg-color="white" :rules="req" @blur="form.validate()")
 			.label Планшеты:
 			q-input(dense outlined v-model="store.wc.common.tablet" bg-color="white" :rules="req" @blur="form.validate()")
-	fieldset
+	fieldset(v-if="!props.part")
 		legend Дополнительно
 		.blo
 			.label Режим удаления карточек:

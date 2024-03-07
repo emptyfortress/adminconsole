@@ -110,6 +110,40 @@ export const useStore = defineStore({
 			},
 			// { id: 2, neg: false, expanded: false, change: false, title: 'Сервисы workflow' },
 		],
+		panelsWeb2: [
+			{
+				id: 5,
+				neg: false,
+				expanded: false,
+				change: false,
+				title: 'Подключение к серверу приложений',
+			},
+			{
+				id: 0,
+				neg: false,
+				expanded: false,
+				change: false,
+				title: 'Общие настройки',
+			},
+			{ id: 2, neg: false, expanded: false, change: false, title: 'Система' },
+		],
+		panelsWeb1: [
+			{
+				id: 5,
+				neg: false,
+				expanded: false,
+				change: false,
+				title: 'Подключение к серверу приложений',
+			},
+			{
+				id: 0,
+				neg: false,
+				expanded: false,
+				change: false,
+				title: 'Общие настройки',
+			},
+			{ id: 2, neg: false, expanded: false, change: false, title: 'Система' },
+		],
 		panelsWeb: [
 			{
 				id: 5,
