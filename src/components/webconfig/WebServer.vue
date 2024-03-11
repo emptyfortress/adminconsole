@@ -1,7 +1,14 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { useStore } from '@/stores/store'
-import { req, reqnum } from '@/utils/utils'
+import { req } from '@/utils/utils'
+
+const props = defineProps({
+	first: {
+		type: Boolean,
+		default: false,
+	},
+})
 
 const store = useStore()
 const form = ref()
@@ -22,7 +29,8 @@ const pass = ref('')
 <template lang="pug">
 q-form(ref="form" @validation-error="$emit('haserror')" @validation-success="$emit('noerror')" no-error-focus)
 	.blo
-		.label Адрес сервера приложений:
+		.label(v-if="props.first") Конфигурация сервера приложений:
+		.label(v-else) Адрес сервера приложений:
 		q-input(dense outlined v-model="store.wc.server.address" bg-color="white" :rules="req" @blur="form.validate()")
 		.help
 			q-icon(name="mdi-help-circle-outline" color="primary" size="xs")

@@ -12,7 +12,7 @@ q-list.q-mt-md(separator)
 					q-icon(name="mdi-alert-circle" size="20px" color="negative" v-if="panel.neg")
 
 		.pcard
-			component(:is="calcComponent(panel.id)" :key="key" @change="change" @haserror="setNeg(index)" @noerror="setPos(index)")
+			component(:is="calcComponent(panel.id)" :key="key" @change="change" @haserror="setNeg(index)" @noerror="setPos(index)" first)
 </template>
 
 <script setup lang="ts">
