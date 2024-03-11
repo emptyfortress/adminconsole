@@ -58,7 +58,7 @@ export const useWebConfig = defineStore({
 			timeout: 1000,
 		},
 		server: {
-			address: '',
+			address: 'http://company.com/DocsVision/StorageServer',
 			psevdo: '',
 			adminPath: '',
 		},

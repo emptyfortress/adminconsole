@@ -18,7 +18,7 @@ q-list.q-mt-md(separator)
 <script setup lang="ts">
 import { ref } from 'vue'
 import WebCommon from '@/components/webconfig/WebCommon.vue'
-import WebSystem from '@/components/webconfig/WebSystem.vue'
+import WebSystem1 from '@/components/webconfig/WebSystem1.vue'
 import WebServer from '@/components/webconfig/WebServer.vue'
 import { useStore } from '@/stores/store'
 
@@ -37,7 +37,7 @@ const calcComponent: any = (e: number) => {
 		case 0:
 			return WebCommon
 		case 2:
-			return WebSystem
+			return WebSystem1
 		case 5:
 			return WebServer
 		default:

@@ -22,7 +22,7 @@ const pass = ref('')
 <template lang="pug">
 q-form(ref="form" @validation-error="$emit('haserror')" @validation-success="$emit('noerror')" no-error-focus)
 	.blo
-		.label Конфигурация сервера приложений:
+		.label Адрес сервера приложений:
 		q-input(dense outlined v-model="store.wc.server.address" bg-color="white" :rules="req" @blur="form.validate()")
 		.help
 			q-icon(name="mdi-help-circle-outline" color="primary" size="xs")

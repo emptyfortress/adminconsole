@@ -3,6 +3,13 @@ import { ref, watch } from 'vue'
 import { useStore } from '@/stores/store'
 import { req, reqnum, reqtrue } from '@/utils/utils'
 
+const props = defineProps({
+	concrete: {
+		type: Boolean,
+		default: false,
+	},
+})
+
 const store = useStore()
 const form = ref()
 const emit = defineEmits(['change', 'haserror', 'noerror'])
