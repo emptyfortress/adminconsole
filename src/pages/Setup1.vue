@@ -1,18 +1,25 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { tree } from '@/stores/tree'
-import { useRoute, useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 
-const selected = ref()
+const selected = ref('root')
 const expanded = ref(['root'])
 const query = ref('')
 
-const route = useRoute()
 const router = useRouter()
 
-const select = () => {
-	router.push('setup/connection')
+const select = (e: string) => {
+	selected.value = e
+	console.log(selected.value)
+	// router.push('setup1/fuck')
 }
+watch(selected, val => {
+	if (val) {
+		console.log(val)
+		router.push('/')
+	}
+})
 </script>
 
 <template lang="pug">
@@ -27,25 +34,16 @@ q-page(padding)
 					:nodes="tree"
 					v-model:selected="selected"
 					v-model:expanded="expanded"
+					selected-color="primary"
 					default-expand-all
 					node-key="id")
-					template(v-slot:default-header="prop")
-						div(@click="select") {{prop.node.label}}
+					// template(v-slot:default-header="prop")
+					// 	div(@click="select(prop.node.id)") {{prop.node.label}}
 
 			.content
 				router-view(v-slot="{ Component, route }")
-					transition(name="slide-left" mode="out-in")
+					transition(name="page")
 						component(:is="Component")
-	// transition(name="slide-top")
-	// 	.nav(v-if="route.meta.nav")
-	// 		q-btn(round color="secondary" size="sm" @click="router.push('/setup1')")
-	// 			q-icon(name="mdi-arrow-left" color="white")
-	// 		router-link(v-for="item in items" :to="item.to").bl {{ item.label }}
-	// 			q-tooltip(v-if="item.tooltip") {{ item.tooltip }}
-	//
-	// router-view(v-slot="{ Component, route }")
-	// 	transition(name="slide-left" mode="out-in")
-	// 		component(:is="Component")
 
 </template>
 
@@ -65,5 +63,8 @@ q-page(padding)
 	.content {
 		background: pink;
 	}
+}
+:deep(.q-tree__node--selected) {
+	background: pink;
 }
 </style>

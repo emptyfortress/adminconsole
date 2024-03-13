@@ -50,114 +50,11 @@ export const router = createRouter({
 					component: () => import('@/components/SetupRoot1.vue'),
 					meta: {
 						title: 'Модули',
-						bread: [
-							{ label: 'Dashboard', to: '/' },
-							{ label: 'Модули', to: '/setup1' },
-						],
 					},
 				},
 				{
-					path: 'bprocess',
-					name: 'bprocess',
-					component: () => import('@/components/Bprocess.vue'),
-					meta: {
-						title: 'Модули',
-						nav: true,
-						bread: [
-							{ label: 'Dashboard', to: '/' },
-							{ label: 'Модули', to: '/setup' },
-							{ label: 'Сервер DV', to: '/setup/dvserver' },
-						],
-					},
-				},
-				{
-					path: 'dvserver1',
-					name: 'dvserver1',
-					component: () => import('@/components/Dvserver1.vue'),
-					meta: {
-						title: 'Модули',
-						nav: true,
-						bread: [
-							{ label: 'Dashboard', to: '/' },
-							{ label: 'Модули', to: '/setup' },
-							{ label: 'Сервер DV', to: '/setup/dvserver' },
-						],
-					},
-				},
-				{
-					path: 'connection',
-					name: 'connecton',
-					component: () => import('@/components/Connection.vue'),
-					meta: {
-						title: 'Модули',
-						nav: true,
-						bread: [
-							{ label: 'Dashboard', to: '/' },
-							{ label: 'Модули', to: '/setup' },
-							{ label: 'Соединения', to: '/setup/connection' },
-						],
-					},
-				},
-				{
-					path: 'email',
-					name: 'email',
-					component: () => import('@/components/Email.vue'),
-					meta: {
-						title: 'Модули',
-						nav: true,
-						bread: [
-							{ label: 'Dashboard', to: '/' },
-							{ label: 'Модули', to: '/setup' },
-							{ label: 'Email server', to: '/setup/email' },
-						],
-					},
-				},
-				{
-					path: 'worker',
-					name: 'worker',
-					component: () => import('@/components/Worker.vue'),
-					meta: {
-						title: 'Модули',
-						nav: true,
-						bread: [
-							{ label: 'Dashboard', to: '/' },
-							{ label: 'Модули', to: '/setup' },
-							{ label: 'Worker service', to: '/setup/worker' },
-						],
-					},
-				},
-				{
-					path: 'webclient',
-					name: 'webclient',
-					component: () => import('@/components/Webclient.vue'),
-					meta: {
-						title: 'Модули',
-						nav: true,
-						bread: [
-							{ label: 'Dashboard', to: '/' },
-							{ label: 'Модули', to: '/setup' },
-							{ label: 'Worker service', to: '/setup/worker' },
-						],
-					},
-				},
-				{
-					path: '/ext',
-					name: 'external',
-					component: () => import('@/components/setupcomponent/External.vue'),
-					// component: External,
-					meta: {
-						title: 'Вкладка',
-						nav: false,
-					},
-				},
-				{
-					path: '/archive',
-					name: 'archive',
-					component: () => import('@/components/setupcomponent/Archive.vue'),
-					meta: {
-						title: 'Вкладка',
-						nav: false,
-					},
+					path: 'fuck',
+					component: () => import('@/pages/Home.vue'),
 				},
 			],
 		},
