@@ -9,16 +9,10 @@ const query = ref('')
 
 const router = useRouter()
 
-const select = (e: string) => {
-	selected.value = e
-	console.log(selected.value)
-	// router.push('setup1/fuck')
-}
 watch(selected, val => {
-	if (val) {
-		console.log(val)
-		router.push('/')
-	}
+	if (val == 'config') {
+		router.push('/setup1/configurations#test')
+	} else router.push('/setup1/modules')
 })
 </script>
 
@@ -30,17 +24,21 @@ q-page(padding)
 				q-input.q-mb-md(v-model="query" dense)
 					template(v-slot:prepend)
 						q-icon(name="mdi-magnify")
-				q-tree(
-					:nodes="tree"
-					v-model:selected="selected"
-					v-model:expanded="expanded"
-					selected-color="primary"
-					default-expand-all
-					node-key="id")
-					// template(v-slot:default-header="prop")
-					// 	div(@click="select(prop.node.id)") {{prop.node.label}}
+				.left
+					q-tree(:nodes="tree"
+						v-model:selected="selected"
+						v-model:expanded="expanded"
+						selected-color="blue-10"
+						default-expand-all
+						node-key="id")
 
-			.content
+						template(v-slot:default-header="prop")
+							.node
+								q-icon(v-if="!prop.node.save" name="mdi-alert" color="orange" size="20px")
+									q-tooltip Несохраненные изменения
+								label {{ prop.node.label }}
+
+			div
 				router-view(v-slot="{ Component, route }")
 					transition(name="page")
 						component(:is="Component")
@@ -49,7 +47,7 @@ q-page(padding)
 
 <style scoped lang="scss">
 .container {
-	max-width: 1200px;
+	// max-width: 1200px;
 	margin: 0 auto;
 }
 .grid {
@@ -58,13 +56,23 @@ q-page(padding)
 	grid-template-columns: auto 1fr;
 	// justify-items: start;
 	align-items: start;
-	column-gap: 3rem;
+	column-gap: 4rem;
 	row-gap: 0.5rem;
-	.content {
-		background: pink;
-	}
 }
 :deep(.q-tree__node--selected) {
-	background: pink;
+	background: var(--tree-selection);
+	// background: #cad4e9;
+}
+.node {
+	.q-icon {
+		margin-right: 5px;
+	}
+}
+.left {
+	height: 700px;
+	width: 300px;
+}
+.right {
+	height: 800px;
 }
 </style>

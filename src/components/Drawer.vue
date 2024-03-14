@@ -42,7 +42,7 @@ const menu = [
 }
 
 .q-router-link--active {
-	background: #cad4e9;
-	color: var(--text-color);
+	background: var(--tree-selection);
+	color: $blue-10;
 }
 </style>
