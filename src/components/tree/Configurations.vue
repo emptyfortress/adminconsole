@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import type { QTableColumn } from 'quasar'
 
 const scrollAreaRef = ref()
 
@@ -10,7 +11,7 @@ onMounted(() => {
 	// scrollAreaRef.value.setScrollPosition('vertical', pos, 300)
 })
 
-const cols = [
+const cols: QTableColumn[] = [
 	{
 		label: 'Название',
 		align: 'left',
@@ -40,6 +41,7 @@ const cols = [
 		field: 'descr',
 	},
 ]
+const rows: any = []
 </script>
 
 <template lang="pug">
@@ -55,7 +57,7 @@ div
 				q-item-label 2
 	q-table(:columns="cols" :rows="rows" row-key="id" hide-bottom)
 	br
-	q-btn(unelevated color="primary" label="Добавить конфигурацию" @click="action") 
+	q-btn(unelevated color="primary" label="Добавить конфигурацию" @click="") 
 	q-scroll-area.right(ref="scrollAreaRef")
 </template>
 
