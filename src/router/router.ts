@@ -29,6 +29,13 @@ export const router = createRouter({
 			},
 		},
 		{
+			path: '/calendar',
+			name: 'calendar',
+			component: () => import('@/components/Calendar.vue'),
+			meta: { title: 'Calendar', bread: [{ label: 'Dashboard', to: '/' }] },
+		},
+
+		{
 			path: '/setup0',
 			name: 'configserver',
 			component: () => import('@/components/Configuration1.vue'),
