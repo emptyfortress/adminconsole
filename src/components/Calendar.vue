@@ -1,21 +1,63 @@
 <script setup lang="ts">
-import { ref, computed, reactive } from 'vue'
+import { ref, watchEffect, computed, reactive } from 'vue'
 
-const mode = ref('single')
+const mode = ref('range')
 const query = ref('')
-const date = ref('2019/02/01')
+const dateobject = reactive({ from: '15.03.2024', to: '17.03.2024' })
+const date = ref('')
+
 const datesingle = ref('04.10.2021')
 const list = ref(true)
-const shab = [
-	'Текущая неделя',
-	'Текущий месяц',
-	'Текущий квартал',
-	'Текущий год',
-	'Прошлая неделя',
-	'Прошлый месяц',
-	'Прошлый квартал',
-	'Прошлый год',
-]
+const shab = reactive([
+	{
+		id: 0,
+		selected: false,
+		label: 'Текущая неделя',
+		range: '10.03.2024 - 16.03.2024',
+	},
+	{
+		id: 1,
+		selected: false,
+		label: 'Текущий месяц',
+		range: '01.03.2024 - 31.03.2024',
+	},
+	{
+		id: 2,
+		selected: false,
+		label: 'Текущий квартал',
+		range: '01.01.2024 - 31.03.2024',
+	},
+	{
+		id: 3,
+		selected: false,
+		label: 'Текущий год',
+		range: '01.01.2024 - 31.12.2024',
+	},
+	{
+		id: 4,
+		selected: false,
+		label: 'Прошлая неделя',
+		range: '03.03.2024 - 09.03.2024',
+	},
+	{
+		id: 5,
+		selected: false,
+		label: 'Прошлый месяц',
+		range: '01.02.2024 - 29.02.2024',
+	},
+	{
+		id: 6,
+		selected: false,
+		label: 'Прошлый квартал',
+		range: '01.10.2023 - 31.12.2023',
+	},
+	{
+		id: 7,
+		selected: false,
+		label: 'Прошлый год',
+		range: '01.01.2023 - 31.12.2023',
+	},
+])
 const jour = reactive([
 	{ selected: false, label: '10.05.2021' },
 	{ selected: false, label: '11.05.2021' },
@@ -42,6 +84,22 @@ const toggle = () => {
 	list.value = !list.value
 }
 const check = ref(false)
+
+const fill = val => {
+	if (!!val) {
+		date.value = val.from + ' - ' + val.to
+	}
+}
+const select = (e: any) => {
+	shab.map(item => (item.selected = false))
+	e.selected = true
+	date.value = e.range
+}
+// watchEffect(() => {
+// 	if (date.value.length > 0) {
+// 		console.log('fuck')
+// 	}
+// })
 </script>
 
 <template lang="pug">
@@ -74,15 +132,16 @@ q-page(padding)
 					template(v-if="mode == 'range'")
 						q-input(v-model="date" dense filled)
 							template(v-slot:append v-if="mode == 'range'")
-								q-icon.cursor-pointer(name="mdi-calendar-blank" color="primary" @click="toggle")
+								q-icon.cursor-pointer(name="mdi-calendar-blank" color="primary" @click="toggle" v-if="list")
+								q-icon.cursor-pointer(name="mdi-format-list-bulleted-square" color="primary" @click="toggle" v-else)
 						template(v-if="list")
 							q-list(dense)
-								q-item(clickable v-for="item in shab" :key="item" :class="{bord : item == 'Текущий год'}")
+								q-item(clickable v-for="item in shab" :key="item.id" @click="select(item)" :class="{selected: item.selected}")
 									q-item-section
-										q-item-label {{ item }}
+										q-item-label {{ item.label }}
 
 						template(v-else)
-							q-date( v-model="date" today-btn range)
+							q-date( v-model="dateobject" today-btn range mask="DD.MM.YYYY" @update:model-value="fill")
 					q-separator
 					.row.justify-between.items-center
 						q-btn.red(flat round icon="mdi-trash-can-outline" @click="") 
@@ -116,5 +175,8 @@ q-page(padding)
 }
 .bord {
 	border-bottom: 1px solid #ccc;
+}
+.selected {
+	background: var(--bg-selected);
 }
 </style>
