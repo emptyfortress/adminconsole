@@ -240,3 +240,7 @@ fieldset {
 .q-stepper {
 	background: transparent;
 }
+:deep(.center .q-input__native) {
+	padding-left: 5rem;
+	text-align: center;
+}

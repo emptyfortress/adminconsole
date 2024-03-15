@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { ref, computed, reactive } from 'vue'
 
-const mode = ref('journal')
+const mode = ref('single')
 const query = ref('')
 const date = ref('2019/02/01')
+const datesingle = ref('04.10.2021')
 const list = ref(true)
 const shab = [
 	'Текущая неделя',
@@ -67,10 +68,8 @@ q-page(padding)
 									q-item-section {{ item.label}}
 
 					template(v-if="mode == 'single'")
-						q-input(v-model="date" dense filled)
-							template(v-slot:append v-if="mode == 'range'")
-								q-icon.cursor-pointer(name="mdi-calendar-blank" color="primary" @click="toggle")
-						q-date( v-model="date" today-btn )
+						q-input(v-model="datesingle" dense filled)
+						q-date( v-model="datesingle" today-btn mask="DD.MM.YYYY")
 
 					template(v-if="mode == 'range'")
 						q-input(v-model="date" dense filled)
@@ -84,6 +83,7 @@ q-page(padding)
 
 						template(v-else)
 							q-date( v-model="date" today-btn range)
+					q-separator
 					.row.justify-between.items-center
 						q-btn.red(flat round icon="mdi-trash-can-outline" @click="") 
 						q-btn(flat color="primary" label="Применить" @click="") 
