@@ -4,17 +4,17 @@ q-dialog(:model-value="props.modelValue")
 		.row.items-center.q-pb-none
 			.text-h6(v-if="props.dv") Добавить конфигурацию
 			.text-h6(v-if="props.worker") Добавить процесс
-			.text-h6(v-else) Добавить экземпляр
+			.text-h6(v-if="props.connection") Добавить экземпляр
 			q-space
 			q-btn(icon="close" flat round dense @click="close")
 		q-form(@submit="addConnection(newname)")
 			q-card-section
 				q-input(autofocus v-model="newname" v-if="props.dv" label="Название конфигурации" @submit="addConnection(newname)")
 				q-input(autofocus v-model="newname" v-if="props.worker" label="Имя процесса" @submit="addConnection(newname)")
-				q-input(autofocus v-model="newname" v-else label="Имя соединения")
+				q-input(autofocus v-model="newname" v-if="props.connection" label="Имя соединения")
 				template(v-if="props.worker")
 					q-select(v-model="config1" :options="options" label="Тип конфигурации")
-				template(v-if="!dv && !worker")
+				template(v-if="connection")
 					q-select(v-model="config" :options="options" label="Конфигурация")
 					q-select(v-model="config" :options="options" label="База данных")
 			q-card-actions(align="right")
@@ -36,6 +36,10 @@ const props = defineProps({
 		default: false,
 	},
 	worker: {
+		type: Boolean,
+		default: false,
+	},
+	connection: {
 		type: Boolean,
 		default: false,
 	},

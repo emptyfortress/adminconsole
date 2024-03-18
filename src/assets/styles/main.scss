@@ -249,4 +249,7 @@ fieldset {
 	font-size: 1.5rem;
 	border-bottom: 1px solid #aaa;
 	margin-bottom: 1rem;
+	display: flex;
+	// justify-content: space-between;
+	align-items: center;
 }

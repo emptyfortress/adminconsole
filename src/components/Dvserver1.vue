@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-	AddConnection(v-model="dialog", @add="addConfig", dv)
+	AddConnection(v-model="dialog" @add="addConfig" dv)
 	.zag Настройки сервера приложений
 	.bar
 		q-chip(color="warning") Всего конфигураций: {{ store.config.length }}

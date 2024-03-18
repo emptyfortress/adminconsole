@@ -4,7 +4,7 @@ import { tree } from '@/stores/tree'
 import { useRouter } from 'vue-router'
 
 const selected = ref('appserver')
-const expanded = ref([''])
+const expanded = ref(['appserver'])
 const query = ref('')
 
 const router = useRouter()
@@ -45,7 +45,7 @@ q-page(padding)
 
 <style scoped lang="scss">
 .container {
-	// max-width: 1200px;
+	max-width: 1200px;
 	margin: 0 auto;
 }
 .grid {

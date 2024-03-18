@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
 import type { QTableColumn } from 'quasar'
+import AddConnection from '@/components/AddConnection.vue'
 
 const scrollAreaRef = ref()
 
@@ -49,6 +50,13 @@ const remove = (e: any) => {
 	const idx = rows.findIndex(item => item.id == e.id)
 	rows.splice(idx, 1)
 }
+const dialog = ref(false)
+const add = () => {
+	dialog.value = !dialog.value
+}
+const test = (evt: Event, row: any, idx: number) => {
+	console.log(row)
+}
 </script>
 
 <template lang="pug">
@@ -56,10 +64,13 @@ const remove = (e: any) => {
 	.mainzag
 		q-icon.q-mr-md(name="mdi-hammer-wrench" color="secondary" size="md")
 		span Конфигурации
+		q-space
+		q-chip(color="warning") {{ rows.length }}
 	q-table(:columns="cols"
 		:rows="rows"
-		row-key="id"
-		hide-bottom )
+		hide-pagination
+		@row-click="test"
+		row-key="id")
 		template(v-slot:body-cell-action="props")
 			q-td.text-right(:props="props")
 				q-btn(flat dense round icon="mdi-trash-can-outline" size="sm") 
@@ -68,8 +79,10 @@ const remove = (e: any) => {
 							q-item(clickable v-close-popup @click="remove(props.row)").pink
 								q-item-section Удалить
 	br
-	q-btn(unelevated color="primary" label="Добавить конфигурацию" @click="") 
+	q-btn(unelevated color="primary" label="Добавить конфигурацию" @click="add") 
 	q-scroll-area.right(ref="scrollAreaRef")
+
+	AddConnection(v-model="dialog" @add="addConfig" dv)
 </template>
 
 <style scoped lang="scss">
