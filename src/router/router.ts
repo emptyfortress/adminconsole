@@ -68,7 +68,7 @@ export const router = createRouter({
 				},
 				{
 					path: 'appserver/configurations/:id',
-					component: () => import('@/components/tree/Module.vue'),
+					component: () => import('@/components/tree/AppConfig.vue'),
 				},
 			],
 		},

@@ -28,12 +28,14 @@ export const useTree = defineStore({
 										id: 'licence1',
 										label: 'Лицензия',
 										save: true,
+										url: '/setup1/appserver/configurations/SOL2016#licence',
 										children: [],
 									},
 									{
 										id: 'db1',
 										label: 'Базы данных',
 										save: true,
+										url: '/setup1/appserver/configurations/SOL2016#bd',
 										children: [],
 									},
 									{

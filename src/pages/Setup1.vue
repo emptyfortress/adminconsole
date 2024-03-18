@@ -11,10 +11,8 @@ const query = ref('')
 
 const router = useRouter()
 
-const active = ref('Сервер приложений')
-const goto = (e: string, a: string) => {
-	router.push(e)
-	active.value = a
+const goto = (e: Config) => {
+	router.push(e.url)
 }
 </script>
 
@@ -26,7 +24,7 @@ q-page(padding)
 				q-input.q-mb-md(v-model="query" dense)
 					template(v-slot:prepend)
 						q-icon(name="mdi-magnify")
-				.left
+				q-scroll-area.left
 					q-tree(:nodes="tree.tree"
 						v-model:selected="selected"
 						v-model:expanded="expanded"
@@ -35,13 +33,13 @@ q-page(padding)
 						node-key="id")
 
 						template(v-slot:default-header="prop")
-							.node(@click="goto(prop.node.url, prop.node.label)")
+							.node(@click="goto(prop.node)")
 								label {{ prop.node.label }}
 
-			div
+			q-scroll-area.right
 				router-view(v-slot="{ Component, route }")
 					transition(name="page")
-						component(:is="Component" :page="active")
+						component(:is="Component")
 
 </template>
 
@@ -64,11 +62,15 @@ q-page(padding)
 	// background: #cad4e9;
 }
 .left {
-	height: 700px;
+	height: calc(100vh - 200px);
 	width: 300px;
+	background: pink;
+	scroll-behavior: smooth;
 }
 .right {
-	height: 800px;
+	height: calc(100vh - 145px);
+	background: pink;
+	scroll-behavior: smooth;
 }
 .q-tree {
 	font-size: 0.8rem;
