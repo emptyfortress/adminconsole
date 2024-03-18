@@ -18,4 +18,20 @@ const getMembers = (members: any[]): any[] => {
 		.concat(children.length ? getMembers(children) : children)
 }
 
-export { req, reqnum, reqtrue, getMembers }
+function deleteNodeFromTree<T extends { id: string; children: T[] }>(
+	node: T,
+	nodeId: string
+) {
+	if (node.children != null) {
+		for (let i = 0; i < node.children.length; i++) {
+			let filtered = node.children.filter(f => f.id == nodeId)
+			if (filtered && filtered.length > 0) {
+				node.children = node.children.filter(f => f.id != nodeId)
+				return
+			}
+			deleteNodeFromTree(node.children[i], nodeId)
+		}
+	}
+}
+
+export { req, reqnum, reqtrue, getMembers, deleteNodeFromTree }

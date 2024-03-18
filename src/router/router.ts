@@ -168,15 +168,6 @@ export const router = createRouter({
 						nav: false,
 					},
 				},
-				// {
-				// 	path: '/edit',
-				// 	name: 'edit',
-				// 	component: EditDatabase,
-				// 	meta: {
-				// 		title: 'Вкладка',
-				// 		nav: false,
-				// 	},
-				// },
 			],
 		},
 		{

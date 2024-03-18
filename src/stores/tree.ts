@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { uid } from 'quasar'
-// import { getMembers } from '@/utils/utils'
+import { deleteNodeFromTree } from '@/utils/utils'
 
 export const useTree = defineStore({
 	id: 'tree',
@@ -322,5 +322,9 @@ export const useTree = defineStore({
 		},
 	},
 
-	actions: {},
+	actions: {
+		removeConfig(id: string) {
+			deleteNodeFromTree(this.tree[0], id)
+		},
+	},
 })

@@ -9,7 +9,6 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 const store = useStore()
 const tree = useTree()
-const scrollAreaRef = ref()
 
 const cols: QTableColumn[] = [
 	{
@@ -49,8 +48,8 @@ const cols: QTableColumn[] = [
 	},
 ]
 
-const remove = (e: any) => {
-	store.removeConfig(e)
+const remove = (e: string) => {
+	tree.removeConfig(e)
 }
 const dialog = ref(false)
 
@@ -65,9 +64,6 @@ const addConfig = (e: string) => {
 const goto = (evt: Event, row: any, idx: number) => {
 	router.push(`/setup1/appserver/configurations/${row.id}`)
 }
-onMounted(() => {
-	console.log(tree.configs)
-})
 </script>
 
 <template lang="pug">
@@ -84,16 +80,15 @@ onMounted(() => {
 		row-key="id")
 		template(v-slot:body-cell-action="props")
 			q-td.text-right(:props="props")
-				q-btn(flat dense round icon="mdi-trash-can-outline" size="sm") 
+				q-btn(flat dense round icon="mdi-trash-can-outline" size="sm" @click.stop) 
 					q-menu
 						q-list
-							q-item(clickable v-close-popup @click="remove(props.row)").pink
+							q-item(clickable v-close-popup @click="remove(props.row.id)").pink
 								q-item-section Удалить
 	br
 	q-btn(unelevated color="primary" label="Добавить конфигурацию" @click="add") 
-	// q-scroll-area.right(ref="scrollAreaRef")
 
-	AddDialogCommon(v-model="dialog" @add="addConfig" dv)
+	AddDialogCommon(v-model="dialog" @add="addConfig" dv )
 </template>
 
 <style scoped lang="scss">
