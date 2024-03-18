@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-// import { tree } from '@/stores/tree'
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { useTree } from '@/stores/tree1'
+import { useTree } from '@/stores/tree'
 
 const tree = useTree()
 
@@ -17,9 +16,6 @@ const goto = (e: string, a: string) => {
 	router.push(e)
 	active.value = a
 }
-onMounted(() => {
-	tree.setTree()
-})
 </script>
 
 <template lang="pug">

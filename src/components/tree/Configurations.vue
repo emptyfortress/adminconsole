@@ -3,7 +3,7 @@ import { ref, onMounted } from 'vue'
 import type { QTableColumn } from 'quasar'
 import AddDialogCommon from '@/components/AddDialogCommon.vue'
 import { useStore } from '@/stores/store'
-import { useTree } from '@/stores/tree1'
+import { useTree } from '@/stores/tree'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -16,8 +16,8 @@ const cols: QTableColumn[] = [
 		label: 'Название',
 		align: 'left',
 		sortable: true,
-		name: 'name',
-		field: 'name',
+		name: 'label',
+		field: 'label',
 	},
 	{
 		label: 'Модуль',
