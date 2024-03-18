@@ -173,11 +173,6 @@ const select1 = (e: any) => {
 	e.selected = true
 	datesingle.value = e.range
 }
-// watchEffect(() => {
-// 	if (date.value.length > 0) {
-// 		console.log('fuck')
-// 	}
-// })
 </script>
 
 <template lang="pug">
