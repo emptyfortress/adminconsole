@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 import { tree } from '@/stores/tree'
 import { useRouter } from 'vue-router'
 
-const selected = ref('root')
-const expanded = ref(['root'])
+const selected = ref('appserver')
+const expanded = ref([''])
 const query = ref('')
 
 const router = useRouter()
 
-watch(selected, val => {
-	if (val == 'config') {
-		router.push('/setup1/configurations#test')
-	} else router.push('/setup1/modules')
-})
+const active = ref('Сервер приложений')
+const goto = (e: string, a: string) => {
+	router.push(e)
+	active.value = a
+}
 </script>
 
 <template lang="pug">
@@ -29,19 +29,17 @@ q-page(padding)
 						v-model:selected="selected"
 						v-model:expanded="expanded"
 						selected-color="blue-10"
-						default-expand-all
+						no-selection-unset
 						node-key="id")
 
 						template(v-slot:default-header="prop")
-							.node
-								q-icon(v-if="!prop.node.save" name="mdi-alert" color="orange" size="20px")
-									q-tooltip Несохраненные изменения
+							.node(@click="goto(prop.node.url, prop.node.label)")
 								label {{ prop.node.label }}
 
 			div
 				router-view(v-slot="{ Component, route }")
 					transition(name="page")
-						component(:is="Component")
+						component(:is="Component" :page="active")
 
 </template>
 
@@ -63,16 +61,14 @@ q-page(padding)
 	background: var(--tree-selection);
 	// background: #cad4e9;
 }
-.node {
-	.q-icon {
-		margin-right: 5px;
-	}
-}
 .left {
 	height: 700px;
 	width: 300px;
 }
 .right {
 	height: 800px;
+}
+.q-tree {
+	font-size: 0.8rem;
 }
 </style>

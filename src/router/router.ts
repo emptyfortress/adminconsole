@@ -50,21 +50,21 @@ export const router = createRouter({
 			children: [
 				{
 					path: '',
-					component: () => import('@/components/tree/Modules.vue'),
+					component: () => import('@/components/tree/Module.vue'),
 					meta: {
 						title: 'Модули',
 					},
 				},
 				{
-					path: 'configurations',
+					path: 'appserver',
+					component: () => import('@/components/tree/Module.vue'),
+					meta: {
+						title: 'Модули',
+					},
+				},
+				{
+					path: 'appserver/configurations',
 					component: () => import('@/components/tree/Configurations.vue'),
-				},
-				{
-					path: 'modules',
-					component: () => import('@/components/tree/Modules.vue'),
-					meta: {
-						title: 'Модули',
-					},
 				},
 			],
 		},
