@@ -58,7 +58,7 @@ const add = () => {
 }
 
 const addConfig = (e: string) => {
-	store.addConfig(e)
+	tree.addConfig(e)
 }
 
 const goto = (evt: Event, row: any, idx: number) => {

@@ -326,5 +326,14 @@ export const useTree = defineStore({
 		removeConfig(id: string) {
 			deleteNodeFromTree(this.tree[0], id)
 		},
+		addConfig(e: string) {
+			let temp = {
+				id: uid(),
+				label: e,
+				url: '/',
+				save: true,
+			}
+			this.tree[0].children[0].children.push(temp)
+		},
 	},
 })
