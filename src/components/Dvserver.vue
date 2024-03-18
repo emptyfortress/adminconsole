@@ -9,13 +9,13 @@ div
 
 		component(:is="GreyBlock3" v-for="item in store.config" :key="item.id" :name="item.name" @delete="store.removeConfig(item)" @duble="addConfig(item.name)")
 
-	component(:is="AddConnection" v-model="dialog" @add="addConfig" dv)
+	component(:is="AddDialogCommon" v-model="dialog" @add="addConfig" dv)
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
 import GreyBlock3 from '@/components/GreyBlock3.vue'
-import AddConnection from '@/components/AddConnection.vue'
+import AddDialogCommon from '@/components/AddDialogCommon.vue'
 import { useStore } from '@/stores/store'
 
 const store = useStore()

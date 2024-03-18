@@ -14,8 +14,8 @@ export const useStore = defineStore({
 	state: () => ({
 		connections: [{ name: 'SOL2016' }],
 		config: [
-			{ id: '0', name: 'SOL2016' },
-			{ id: '1', name: 'SOL2017' },
+			{ id: 'SOL2016', name: 'SOL2016' },
+			{ id: 'SOL2017', name: 'SOL2017' },
 		],
 		conputer: [
 			{ id: 0, name: 'AGSupport' },

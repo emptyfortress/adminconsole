@@ -9,13 +9,13 @@ div
 			q-btn(color="primary" unelevated @click="add") Добавить экземпляр
 		component(:is="GreyBlock" v-for="item in connections" :key="item" :name="item.name" @delete="del" @duble="addConnection")
 
-	component(:is="AddConnection" v-model="dialog" @add="addConnection")
+	component(:is="AddDialogCommon" v-model="dialog" @add="addConnection")
 </template>
 
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
 import GreyBlock from '@/components/GreyBlock.vue'
-import AddConnection from '@/components/AddConnection.vue'
+import AddDialogCommon from '@/components/AddDialogCommon.vue'
 
 const type = ref('Почтовый сервер')
 

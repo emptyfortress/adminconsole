@@ -1,7 +1,10 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { tree } from '@/stores/tree'
+import { ref, onMounted } from 'vue'
+// import { tree } from '@/stores/tree'
 import { useRouter } from 'vue-router'
+import { useTree } from '@/stores/tree1'
+
+const tree = useTree()
 
 const selected = ref('appserver')
 const expanded = ref(['appserver'])
@@ -14,6 +17,9 @@ const goto = (e: string, a: string) => {
 	router.push(e)
 	active.value = a
 }
+onMounted(() => {
+	tree.setTree()
+})
 </script>
 
 <template lang="pug">
@@ -25,7 +31,7 @@ q-page(padding)
 					template(v-slot:prepend)
 						q-icon(name="mdi-magnify")
 				.left
-					q-tree(:nodes="tree"
+					q-tree(:nodes="tree.tree"
 						v-model:selected="selected"
 						v-model:expanded="expanded"
 						selected-color="blue-10"

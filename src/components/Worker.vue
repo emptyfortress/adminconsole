@@ -42,7 +42,7 @@
 				GreyBlock2(v-for="item in panel.processes" :key="item.name" :name="item.name" @del="remove(panel.id, item)")
 
 
-	AddConnection( v-model="dialog" @close="dialog = false" @add="addProcess" worker)
+	AddDialogCommon( v-model="dialog" @close="dialog = false" @add="addProcess" worker)
 
 	q-dialog(v-model="dialog2")
 		q-card(style="min-width: 400px; padding: 1rem;")
@@ -63,7 +63,7 @@
 <script setup lang="ts">
 import { ref, reactive, computed } from 'vue'
 import GreyBlock2 from '@/components/GreyBlock2.vue'
-import AddConnection from '@/components/AddConnection.vue'
+import AddDialogCommon from '@/components/AddDialogCommon.vue'
 import ConfirmDialog from '@/components/ConfirmDialog.vue'
 
 interface Proc {

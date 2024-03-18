@@ -1,8 +1,14 @@
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref, onMounted } from 'vue'
 import type { QTableColumn } from 'quasar'
-import AddConnection from '@/components/AddConnection.vue'
+import AddDialogCommon from '@/components/AddDialogCommon.vue'
+import { useStore } from '@/stores/store'
+import { useTree } from '@/stores/tree1'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
+const store = useStore()
+const tree = useTree()
 const scrollAreaRef = ref()
 
 const cols: QTableColumn[] = [
@@ -42,21 +48,26 @@ const cols: QTableColumn[] = [
 		field: 'action',
 	},
 ]
-const rows: any = reactive([
-	{ id: 0, name: 'Sol2016', module: '', env: '', descr: '', action: '' },
-	{ id: 1, name: 'Sol2017', module: '', env: '', descr: '', action: '' },
-])
+
 const remove = (e: any) => {
-	const idx = rows.findIndex(item => item.id == e.id)
-	rows.splice(idx, 1)
+	store.removeConfig(e)
 }
 const dialog = ref(false)
+
 const add = () => {
 	dialog.value = !dialog.value
 }
-const test = (evt: Event, row: any, idx: number) => {
-	console.log(row)
+
+const addConfig = (e: string) => {
+	store.addConfig(e)
 }
+
+const goto = (evt: Event, row: any, idx: number) => {
+	router.push(`/setup1/appserver/configurations/${row.id}`)
+}
+onMounted(() => {
+	console.log(tree.configs)
+})
 </script>
 
 <template lang="pug">
@@ -65,11 +76,11 @@ const test = (evt: Event, row: any, idx: number) => {
 		q-icon.q-mr-md(name="mdi-hammer-wrench" color="secondary" size="md")
 		span Конфигурации
 		q-space
-		q-chip(color="warning") {{ rows.length }}
+		q-chip(color="warning") {{ store.config.length }}
 	q-table(:columns="cols"
-		:rows="rows"
+		:rows="tree.configs"
 		hide-pagination
-		@row-click="test"
+		@row-click="goto"
 		row-key="id")
 		template(v-slot:body-cell-action="props")
 			q-td.text-right(:props="props")
@@ -80,9 +91,9 @@ const test = (evt: Event, row: any, idx: number) => {
 								q-item-section Удалить
 	br
 	q-btn(unelevated color="primary" label="Добавить конфигурацию" @click="add") 
-	q-scroll-area.right(ref="scrollAreaRef")
+	// q-scroll-area.right(ref="scrollAreaRef")
 
-	AddConnection(v-model="dialog" @add="addConfig" dv)
+	AddDialogCommon(v-model="dialog" @add="addConfig" dv)
 </template>
 
 <style scoped lang="scss">

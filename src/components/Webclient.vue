@@ -4,7 +4,7 @@ import { useStore } from '@/stores/store'
 import GreyBlock5 from '@/components/GreyBlock5.vue'
 import GreyBlock6 from '@/components/GreyBlock6.vue'
 import GreyBlock7 from '@/components/GreyBlock7.vue'
-import AddConnection from '@/components/AddConnection.vue'
+import AddDialogCommon from '@/components/AddDialogCommon.vue'
 
 const store = useStore()
 const dialog = ref(false)
@@ -25,7 +25,7 @@ const addWebConfig = (e: string, copy: boolean) => {
 
 <template lang="pug">
 div
-	AddConnection(v-model="dialog" dv @add="addWebConfig")
+	AddDialogCommon(v-model="dialog" dv @add="addWebConfig")
 	.zag Настройки web-клиента
 	.bar
 		q-chip(color="warning") Всего конфигураций: {{ store.webconfig.length }}

@@ -66,6 +66,10 @@ export const router = createRouter({
 					path: 'appserver/configurations',
 					component: () => import('@/components/tree/Configurations.vue'),
 				},
+				{
+					path: 'appserver/configurations/:id',
+					component: () => import('@/components/tree/Module.vue'),
+				},
 			],
 		},
 		{
@@ -73,10 +77,6 @@ export const router = createRouter({
 			component: () => import('@/pages/Setup.vue'),
 			meta: {
 				title: 'Модули',
-				bread: [
-					{ label: 'Dashboard', to: '/' },
-					{ label: 'Модули', to: '/setup' },
-				],
 			},
 			children: [
 				{
@@ -84,10 +84,6 @@ export const router = createRouter({
 					component: () => import('@/components/SetupRoot.vue'),
 					meta: {
 						title: 'Модули',
-						bread: [
-							{ label: 'Dashboard', to: '/' },
-							{ label: 'Модули', to: '/setup' },
-						],
 					},
 				},
 				{
@@ -97,11 +93,6 @@ export const router = createRouter({
 					meta: {
 						title: 'Модули',
 						nav: true,
-						bread: [
-							{ label: 'Dashboard', to: '/' },
-							{ label: 'Модули', to: '/setup' },
-							{ label: 'Конфигурации', to: '/setup/configuration' },
-						],
 					},
 				},
 				{
@@ -111,11 +102,6 @@ export const router = createRouter({
 					meta: {
 						title: 'Модули',
 						nav: true,
-						bread: [
-							{ label: 'Dashboard', to: '/' },
-							{ label: 'Модули', to: '/setup' },
-							{ label: 'Сервер DV', to: '/setup/dvserver' },
-						],
 					},
 				},
 				{
@@ -125,11 +111,6 @@ export const router = createRouter({
 					meta: {
 						title: 'Модули',
 						nav: true,
-						bread: [
-							{ label: 'Dashboard', to: '/' },
-							{ label: 'Модули', to: '/setup' },
-							{ label: 'Сервер DV', to: '/setup/dvserver' },
-						],
 					},
 				},
 				{
@@ -139,11 +120,6 @@ export const router = createRouter({
 					meta: {
 						title: 'Модули',
 						nav: true,
-						bread: [
-							{ label: 'Dashboard', to: '/' },
-							{ label: 'Модули', to: '/setup' },
-							{ label: 'Соединения', to: '/setup/connection' },
-						],
 					},
 				},
 				{
@@ -153,11 +129,6 @@ export const router = createRouter({
 					meta: {
 						title: 'Модули',
 						nav: true,
-						bread: [
-							{ label: 'Dashboard', to: '/' },
-							{ label: 'Модули', to: '/setup' },
-							{ label: 'Email server', to: '/setup/email' },
-						],
 					},
 				},
 				{
@@ -167,11 +138,6 @@ export const router = createRouter({
 					meta: {
 						title: 'Модули',
 						nav: true,
-						bread: [
-							{ label: 'Dashboard', to: '/' },
-							{ label: 'Модули', to: '/setup' },
-							{ label: 'Worker service', to: '/setup/worker' },
-						],
 					},
 				},
 				{
@@ -181,11 +147,6 @@ export const router = createRouter({
 					meta: {
 						title: 'Модули',
 						nav: true,
-						bread: [
-							{ label: 'Dashboard', to: '/' },
-							{ label: 'Модули', to: '/setup' },
-							{ label: 'Worker service', to: '/setup/worker' },
-						],
 					},
 				},
 				{

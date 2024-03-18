@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-	AddConnection(v-model="dialog" @add="addConfig" dv)
+	AddDialogCommon(v-model="dialog" @add="addConfig" dv)
 	.zag Настройки сервера приложений
 	.bar
 		q-chip(color="warning") Всего конфигураций: {{ store.config.length }}
@@ -34,7 +34,7 @@ div
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import AddConnection from '@/components/AddConnection.vue'
+import AddDialogCommon from '@/components/AddDialogCommon.vue'
 import GreyBlock4 from '@/components/GreyBlock4.vue'
 
 import { useStore } from '@/stores/store'

@@ -27,3 +27,11 @@ interface Hran {
 	arch: boolean
 	temp: boolean
 }
+
+interface Config {
+	id: string
+	label: string
+	save?: boolean
+	url?: string
+	children: Config[]
+}

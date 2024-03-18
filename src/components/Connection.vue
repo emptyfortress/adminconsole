@@ -10,14 +10,14 @@ div
 
 		component(:is="GreyBlock1" v-for="item in store.connections" :key="item.name" :name="item.name" @delete="store.deleteConnection(item)" @duble="addConnection")
 
-	component(:is="AddConnection" v-model="dialog" @add="addConnection")
+	component(:is="AddDialogCommon" v-model="dialog" @add="addConnection")
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useStore } from '@/stores/store'
 import GreyBlock1 from '@/components/GreyBlock1.vue'
-import AddConnection from '@/components/AddConnection.vue'
+import AddDialogCommon from '@/components/AddDialogCommon.vue'
 
 const store = useStore()
 const type = ref('Docsvision')

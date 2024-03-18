@@ -14,9 +14,10 @@ const tree = [
 				url: '/setup1/appserver/configurations',
 				children: [
 					{
-						id: 'conf1',
+						id: 'SOL2016',
 						label: 'SOL2016',
 						save: true,
+						url: '/setup1/appserver/configurations/SOL2016',
 						children: [
 							{
 								id: 'licence1',
@@ -51,9 +52,10 @@ const tree = [
 						],
 					},
 					{
-						id: 'conf2',
+						id: 'SOL2017',
 						label: 'SOL2017',
 						save: true,
+						url: '/setup1/appserver/configurations/SOL2017',
 						children: [
 							{
 								id: 'licence2',
