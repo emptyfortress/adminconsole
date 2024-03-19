@@ -1,10 +1,9 @@
 <template lang="pug">
-.rel
-	.btn
-		q-btn(flat round icon="mdi-printer-outline").q-mr-md
-		q-btn(unelevated color="secondary" label="Изменить ключ" size="sm")
+div
+	q-btn.q-mr-md(unelevated color="secondary" label="Изменить ключ" size="sm")
+	q-btn(flat round icon="mdi-printer-outline")
 	.text-bold Параметры используемой лицензии:
-	q-scroll-area(style="height: 400px;").q-mt-md
+	.q-mt-md
 		.gr
 			div Вид:
 			div Custom license
@@ -86,11 +85,6 @@
 <script setup lang="ts"></script>
 
 <style scoped lang="scss">
-.btn {
-	position: absolute;
-	top: 0;
-	right: 0;
-}
 .gr {
 	display: grid;
 	grid-template-columns: auto 1fr;

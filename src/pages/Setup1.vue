@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { useTree } from '@/stores/tree'
 
 const tree = useTree()
@@ -10,12 +10,20 @@ const expanded = ref(['appserver'])
 const query = ref('')
 
 const router = useRouter()
+const route = useRoute()
 
 const goto = (e: Config) => {
 	if (!!e.url) {
 		router.push(e.url)
 	}
 }
+router.afterEach(to => {
+	if (!!to.hash) {
+		setTimeout(() => {
+			document.querySelector(to.hash)?.scrollIntoView({ behavior: 'smooth' })
+		}, 300)
+	}
+})
 const save = ref(true)
 </script>
 
@@ -53,7 +61,7 @@ q-page(padding)
 
 <style scoped lang="scss">
 .container {
-	max-width: 1200px;
+	max-width: 1280px;
 	margin: 0 auto;
 }
 .grid {

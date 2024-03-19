@@ -1,34 +1,34 @@
 <script setup lang="ts">
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
+import Licence from '@/components/setupcomponent/Licence.vue'
+import Database from '@/components/setupcomponent/Database.vue'
 
 const route = useRoute()
-const router = useRouter()
-
-// router.afterEach((to, from) => {
-// 	if (to.hash !== undefined) {
-// 		document.querySelector(to.hash)?.scrollIntoView()
-// 	}
-// })
 </script>
 
 <template lang="pug">
 .treepage
-	.mainzag
+	#top.mainzag
 		div {{ route.params.id }}
 
-	.section#licence Лицензия
-	p(v-for="n in 20") Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias saepe illum id molestias assumenda. Ipsam quibusdam nihil nisi maiores eveniet animi praesentium? Eos veniam repellat minus excepturi autem consequuntur dolores!
+	#bd.grid
+		.full
+			.section Базы данных
+			Database
+		#licence.section Лицензия
+		Licence
 
-	.section#bd Базы данных
-	p(v-for="n in 20") Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias saepe illum id molestias assumenda. Ipsam quibusdam nihil nisi maiores eveniet animi praesentium? Eos veniam repellat minus excepturi autem consequuntur dolores!
 </template>
 
 <style scoped lang="scss">
-.section {
-	font-size: 1.2rem;
-	font-weight: 600;
+.grid {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	align-items: start;
+	column-gap: 3rem;
+	row-gap: 5rem;
 }
-.treepage {
-	scroll-behavior: smooth;
+.full {
+	grid-column: 1/-1;
 }
 </style>

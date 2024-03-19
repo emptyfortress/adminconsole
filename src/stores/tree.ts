@@ -9,6 +9,7 @@ export const useTree = defineStore({
 			{
 				id: 'appserver',
 				label: 'Сервер приложений',
+				url: '/setup1/appserver',
 				children: [
 					{
 						id: 'config',
@@ -20,20 +21,20 @@ export const useTree = defineStore({
 								id: 'SOL2016',
 								label: 'SOL2016',
 								save: true,
-								url: '/setup1/appserver/configurations/SOL2016',
+								url: '/setup1/appserver/configurations/SOL2016#top',
 								children: [
-									{
-										id: 'licence1',
-										label: 'Лицензия',
-										save: true,
-										url: '/setup1/appserver/configurations/SOL2016#licence',
-										children: [],
-									},
 									{
 										id: 'db1',
 										label: 'Базы данных',
 										save: true,
 										url: '/setup1/appserver/configurations/SOL2016#bd',
+										children: [],
+									},
+									{
+										id: 'licence1',
+										label: 'Лицензия',
+										save: true,
+										url: '/setup1/appserver/configurations/SOL2016#licence',
 										children: [],
 									},
 									{
@@ -311,7 +312,7 @@ export const useTree = defineStore({
 				save: true,
 				children: [],
 			},
-		],
+		] as Config[],
 	}),
 
 	getters: {
@@ -330,7 +331,7 @@ export const useTree = defineStore({
 				label: e,
 				url: '/',
 				save: true,
-			}
+			} as Config
 			this.tree[0].children[0].children.push(temp)
 		},
 	},

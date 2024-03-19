@@ -182,9 +182,3 @@ const DEFAULT_TITLE = 'Консоль управления DV'
 router.beforeEach(to => {
 	document.title = to.meta.title || DEFAULT_TITLE
 })
-
-router.afterEach(to => {
-	if (to.hash && document.querySelector(to.hash)) {
-		document.querySelector(to.hash)?.scrollIntoView()
-	}
-})
