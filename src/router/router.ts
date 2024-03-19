@@ -70,6 +70,24 @@ export const router = createRouter({
 					path: 'appserver/configurations/:id',
 					component: () => import('@/components/tree/AppConfig.vue'),
 				},
+				{
+					path: 'appserver/configurations/database',
+					name: 'database',
+					component: () => import('@/components/tree/InsideLevel.vue'),
+					meta: {
+						bread: [
+							{
+								label: 'Базы данных',
+								icon: 'mdi-arrow-left',
+								to: 'appserver/configurations/SOL2016',
+							},
+							{
+								label: 'AGSupport',
+								to: 'appserver/configurations/SOL2016',
+							},
+						],
+					},
+				},
 			],
 		},
 		{

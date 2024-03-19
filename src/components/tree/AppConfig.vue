@@ -12,9 +12,8 @@ const route = useRoute()
 		div {{ route.params.id }}
 
 	#bd.grid
-		.full
-			.section Базы данных
-			Database
+		.section Базы данных
+		Database
 		#licence.section Лицензия
 		Licence
 

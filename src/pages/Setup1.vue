@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, nextTick } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useTree } from '@/stores/tree'
 
@@ -19,12 +19,16 @@ const goto = (e: Config) => {
 }
 router.afterEach(to => {
 	if (!!to.hash) {
-		setTimeout(() => {
+		// document.querySelector(to.hash)?.scrollIntoView({ behavior: 'smooth' })
+		// setTimeout(() => {
+		// 	document.querySelector(to.hash)?.scrollIntoView({ behavior: 'smooth' })
+		// }, 300)
+		nextTick(() => {
 			document.querySelector(to.hash)?.scrollIntoView({ behavior: 'smooth' })
-		}, 300)
+		})
 	}
 })
-const save = ref(true)
+const save = ref(false)
 </script>
 
 <template lang="pug">
@@ -54,15 +58,16 @@ q-page(padding)
 					q-btn(unelevated color="primary" label="Сохранить изменения" size="sm") 
 				q-scroll-area.right(:class="{save: save}")
 					router-view(v-slot="{ Component, route }")
-						transition(name="page")
-							component(:is="Component")
+						component(:is="Component")
+						// transition(name="page")
+						// 	component(:is="Component")
 
 	</template>
 
 <style scoped lang="scss">
 .container {
-	max-width: 1280px;
-	margin: 0 auto;
+	// max-width: 1280px;
+	// margin: 0 auto;
 }
 .grid {
 	width: 100%;

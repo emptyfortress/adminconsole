@@ -80,11 +80,12 @@ const goto = (evt: Event, row: any, idx: number) => {
 		row-key="id")
 		template(v-slot:body-cell-action="props")
 			q-td.text-right(:props="props")
-				q-btn(flat dense round icon="mdi-trash-can-outline" size="sm" @click.stop) 
+				q-btn.q-mr-md(flat dense round icon="mdi-trash-can-outline" size="sm" @click.stop) 
 					q-menu
 						q-list
 							q-item(clickable v-close-popup @click="remove(props.row.id)").pink
 								q-item-section Удалить
+				q-btn(:props="props" round flat icon='mdi-chevron-right' size='md' dense)
 	br
 	q-btn(unelevated color="primary" label="Добавить конфигурацию" @click="add") 
 
@@ -97,5 +98,11 @@ const goto = (evt: Event, row: any, idx: number) => {
 }
 .right {
 	height: 800px;
+}
+:deep(.q-table th) {
+	font-size: 0.7rem;
+	font-weight: normal;
+	color: hsl(0, 0%, 40%);
+	padding: 5px 8px;
 }
 </style>
