@@ -32,6 +32,6 @@ interface Config {
 	id: string
 	label: string
 	save?: boolean
-	url?: string
+	url?: RouteLocationRaw
 	children: Config[]
 }

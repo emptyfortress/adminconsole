@@ -12,8 +12,11 @@ const query = ref('')
 const router = useRouter()
 
 const goto = (e: Config) => {
-	router.push(e.url)
+	if (!!e.url) {
+		router.push(e.url)
+	}
 }
+const save = ref(true)
 </script>
 
 <template lang="pug">
@@ -30,18 +33,23 @@ q-page(padding)
 						v-model:expanded="expanded"
 						selected-color="blue-10"
 						no-selection-unset
+						default-expand-all
 						node-key="id")
 
 						template(v-slot:default-header="prop")
 							.node(@click="goto(prop.node)")
 								label {{ prop.node.label }}
 
-			q-scroll-area.right
-				router-view(v-slot="{ Component, route }")
-					transition(name="page")
-						component(:is="Component")
+			div
+				.q-gutter-x-sm.text-right.q-mb-sm(v-if="save")
+					q-btn(flat color="primary" label="Отмена" size="sm") 
+					q-btn(unelevated color="primary" label="Сохранить изменения" size="sm") 
+				q-scroll-area.right(:class="{save: save}")
+					router-view(v-slot="{ Component, route }")
+						transition(name="page")
+							component(:is="Component")
 
-</template>
+	</template>
 
 <style scoped lang="scss">
 .container {
@@ -52,25 +60,22 @@ q-page(padding)
 	width: 100%;
 	display: grid;
 	grid-template-columns: auto 1fr;
-	// justify-items: start;
 	align-items: start;
 	column-gap: 4rem;
 	row-gap: 0.5rem;
 }
 :deep(.q-tree__node--selected) {
 	background: var(--tree-selection);
-	// background: #cad4e9;
 }
 .left {
 	height: calc(100vh - 200px);
 	width: 300px;
-	background: pink;
-	scroll-behavior: smooth;
 }
 .right {
 	height: calc(100vh - 145px);
-	background: pink;
-	scroll-behavior: smooth;
+	&.save {
+		height: calc(100vh - 145px - 32px);
+	}
 }
 .q-tree {
 	font-size: 0.8rem;

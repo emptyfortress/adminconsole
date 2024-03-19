@@ -9,8 +9,6 @@ export const useTree = defineStore({
 			{
 				id: 'appserver',
 				label: 'Сервер приложений',
-				save: true,
-				url: '/setup1/appserver',
 				children: [
 					{
 						id: 'config',

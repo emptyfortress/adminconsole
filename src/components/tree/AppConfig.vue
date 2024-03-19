@@ -4,9 +4,11 @@ import { useRoute, useRouter } from 'vue-router'
 const route = useRoute()
 const router = useRouter()
 
-router.afterEach((to, from) => {
-	document.querySelector(to.hash)?.scrollIntoView()
-})
+// router.afterEach((to, from) => {
+// 	if (to.hash !== undefined) {
+// 		document.querySelector(to.hash)?.scrollIntoView()
+// 	}
+// })
 </script>
 
 <template lang="pug">
@@ -25,5 +27,8 @@ router.afterEach((to, from) => {
 .section {
 	font-size: 1.2rem;
 	font-weight: 600;
+}
+.treepage {
+	scroll-behavior: smooth;
 }
 </style>
