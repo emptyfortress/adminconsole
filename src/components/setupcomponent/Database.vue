@@ -147,9 +147,8 @@ const rows = reactive([
 		def: false,
 	},
 ])
-const goto = e => {
-	router.push('database')
-	console.log(e)
+const goto = (e: any) => {
+	router.push('/database/' + e.psevdo)
 }
 </script>
 
