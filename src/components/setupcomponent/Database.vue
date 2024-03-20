@@ -156,7 +156,7 @@ const goto = (e: any) => {
 .database
 	q-table.q-mt-sm(:rows='rows' :columns='columns' row-key='name' hide-bottom)
 		template(v-slot:body='props')
-			q-tr(:props='props' :class='{ cool: props.row.def }')
+			q-tr(:props='props' :class='{ cool: props.row.def }' @click="goto(props.row)")
 				q-td(key="active" :props="props" auto-width)
 					q-icon(name="mdi-circle-slice-8" color="green" v-if="props.row.active")
 						q-tooltip Доступна

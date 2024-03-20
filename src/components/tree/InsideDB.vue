@@ -29,23 +29,24 @@ const bd = ref({
 q-page(padding)
 	.treepage
 		q-breadcrumbs
-			// q-breadcrumbs-el(v-for="item in route.meta.bread" :label="item.label" :icon="item.icon" @click="router.back")
+			q-breadcrumbs-el(v-for="item in route.meta.bread" :label="item.label" :icon="item.icon" @click="router.back")
 			q-breadcrumbs-el(:label="route.params.id.toString()")
 			q-space
 			q-btn(flat color="primary" label="Отмена" size="md") 
 			q-btn(unelevated color="primary" label="Применить" size="md") 
-	q-list.left(dense)
-		q-item(clickable v-for="item in tabs.tabs" :key="item.id" :class="{selected: selected == item.label}" @click="select(item)")
-			q-item-section
-				q-item-label {{ item.label }}
+	.grid
+		q-list.left(dense)
+			q-item(clickable v-for="item in tabs.tabs" :key="item.id" :class="{selected: selected == item.label}" @click="select(item)")
+				q-item-section
+					q-item-label {{ item.label }}
 
-	.right
-		#prop.zg Свойства
-		PropertyTab(:bd="bd" )
-		#control.zg Обслуживание
-		PropertyTab(:bd="bd")
-		PropertyTab(:bd="bd")
-		PropertyTab(:bd="bd")
+		q-scroll-area.right
+			#prop.zg Свойства
+			PropertyTab(:bd="bd" )
+			#control.zg Обслуживание
+			PropertyTab(:bd="bd")
+			PropertyTab(:bd="bd")
+			PropertyTab(:bd="bd")
 
 </template>
 
@@ -62,17 +63,15 @@ q-page(padding)
 	}
 }
 .left {
-	position: fixed;
-	top: 150px;
-	left: 100px;
 }
 .grid {
-	// display: grid;
-	// grid-template-columns: auto 1fr;
-	// justify-items: start;
-	// align-items: start;
-	// column-gap: 3rem;
-	// row-gap: 0.5rem;
+	display: grid;
+	grid-template-columns: auto 1fr;
+	justify-items: start;
+	align-items: start;
+	column-gap: 3rem;
+	row-gap: 0.5rem;
+	// background: green;
 }
 .selected {
 	background: var(--tree-selection);
@@ -84,12 +83,7 @@ q-page(padding)
 	text-transform: uppercase;
 }
 .right {
-	margin-left: 220px;
-	// display: grid;
-	// grid-template-columns: auto 1fr;
-	// justify-items: start;
-	// align-items: start;
-	// column-gap: 1rem;
-	// row-gap: 0.5rem;
+	height: calc(100vh - 300px);
+	width: 900px;
 }
 </style>

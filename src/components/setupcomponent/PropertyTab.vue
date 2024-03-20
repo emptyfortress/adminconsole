@@ -54,21 +54,21 @@ const tables = [
 
 <style scoped lang="scss">
 .all {
-	width: 900px;
-	margin: 0 auto;
+	width: 750px;
+	// margin: 0 auto;
 }
 .title {
 	font-size: 0.8rem;
 	text-transform: uppercase;
 	color: $secondary;
-	justify-self: left;
-	margin-left: 4rem;
+	// justify-self: left;
+	// margin-left: 4rem;
 }
 .arch {
 	background: var(--bg-grey);
 	padding: 1rem;
 	display: grid;
-	grid-template-columns: 300px 1fr;
+	grid-template-columns: 200px 1fr;
 	align-items: center;
 	justify-items: start;
 	column-gap: 1rem;
@@ -76,7 +76,7 @@ const tables = [
 }
 
 .proper {
-	width: 450px;
+	width: 400px;
 	background: var(--bg-grey);
 	display: grid;
 	grid-template-columns: auto 1fr;
