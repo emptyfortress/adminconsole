@@ -174,12 +174,12 @@ const goto = (e: any) => {
 					q-icon(name="mdi-check-bold" size="sm" v-if="props.row.def")
 					q-btn(flat color="primary" label="Назначить" v-else size="sm" @click.stop='assign(props.row.psevdo)')
 				q-td.text-right(key='def' :props='props')
-					q-btn.q-mr-md(:props="props" round flat icon='mdi-trash-can-outline' size='sm' dense)
+					q-btn.q-mr-md(:props="props" round flat icon='mdi-trash-can-outline' size='sm' dense @click.stop)
 						q-menu
 							q-list(:props="props")
 								q-item(clickable :props="props" @click="remove(props.row)" v-close-popup).pink
 									q-item-section Удалить
-					q-btn(:props="props" round flat icon='mdi-chevron-right' size='md' dense @click="goto(props.row)")
+					q-btn(:props="props" round flat icon='mdi-chevron-right' size='md' dense)
 
 	.master
 		div Чтобы создать новую базу данных, подключить существующую БД, не представленную в списке, а также обновить БД, если ее версия отличается от версии сервера Docsvision, воспользуйтесь <span class="text-bold">Мастером баз данных</span>.

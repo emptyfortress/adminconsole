@@ -106,6 +106,7 @@ component(v-else :is="draggable" :list="hran.rules"
 	@end="set"
 	ghost-class='ghost'
 	).list-group
+
 	template(#item="{ element, index }")
 		q-expansion-item(v-model="element.expanded" switch-toggle-side expand-icon-toggle).gro.exp
 			template(#header)
@@ -130,21 +131,19 @@ component(v-else :is="draggable" :list="hran.rules"
 						span.q-mr-xs {{element.size2}}
 						span.q-mr-xs(v-if="element.size1 || element.size2") Gb
 
-			div
-				q-separator
-				.empt(v-if="element.gr.length == 0") Добавьте группу в правило, перетащив ее сюда.
-				component(:is="draggable" :list="element.gr" item-key="id" group="last" ghost-class="ghost" @start="dragging = true" @end="dragging = false").list-group
-					template(#item="{ element: el, index: ind }")
-						.row.justify-between.items-center
-							.q-ml-sm
-								q-icon(name="mdi-server" size="18px" style="vertical-align: top;")
-								span.q-ml-sm {{ el.name }}
-							q-btn(flat round dense icon="mdi-close" size="10px" )
-								q-menu
-									q-list
-										q-item(clickable v-close-popup @click="clearGroup(index, ind)").orange
-											q-item-section Очистить
+			q-separator
 
+			component(:is="draggable" :list="element.gr" item-key="id" group="last" ghost-class="ghost" @start="dragging = true" @end="dragging = false").list-group
+				template(#item="{ element: el, index: ind }")
+					.row.justify-between.items-center
+						.q-ml-sm
+							q-icon(name="mdi-server" size="18px" style="vertical-align: top;")
+							span.q-ml-sm {{ el.name }}
+						q-btn(flat round dense icon="mdi-close" size="10px" )
+							q-menu
+								q-list
+									q-item(clickable v-close-popup @click="clearGroup(index, ind)").orange
+										q-item-section Очистить
 
 q-dialog(v-model="showAdd")
 	q-card(style="min-width: 500px;")
