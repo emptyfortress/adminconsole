@@ -36,6 +36,7 @@ const add = () => {
 	tmp.ext = ext.value
 	tmp.size1 = size1.value
 	tmp.size2 = size2.value
+	tmp.expanded = true
 	tmp.gr = []
 	if (currentItemIndex.value === null) {
 		hran.addRule(tmp)

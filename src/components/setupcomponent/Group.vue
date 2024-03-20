@@ -19,7 +19,11 @@ const addGroup = () => {
 	if (currentGroupIndex.value == null) {
 		hran.addGroup(newGroupName.value, newGroupRule.value)
 	} else {
-		hran.editGroup(currentGroupIndex.value, newGroupName.value, newGroupRule.value)
+		hran.editGroup(
+			currentGroupIndex.value,
+			newGroupName.value,
+			newGroupRule.value
+		)
 	}
 	showAdd.value = false
 	newGroupName.value = ''
@@ -32,7 +36,11 @@ const addNew = () => {
 	currentGroupIndex.value = null
 	showAdd.value = true
 }
-const options = ['Самое заполненное хранилище', 'Самое свободное хранилище', 'Случайный порядок']
+const options = [
+	'Самое заполненное хранилище',
+	'Самое свободное хранилище',
+	'Случайный порядок',
+]
 
 const removeGroup = (ind: number) => {
 	hran.removeGroup(ind)
@@ -72,7 +80,6 @@ component(:is="draggable"
 			q-separator
 
 			q-card.dblist
-				.empt(v-if="element.list.length === 0") Добавьте хранилище в группу, перетащив его сюда.
 				component(:is="draggable"
 					:list="element.list"
 					item-key="id"
@@ -90,7 +97,8 @@ component(:is="draggable"
 									q-list
 										q-item(clickable v-close-popup @click="remove(index, ind)").orange
 											q-item-section Очистить
-
+					template(#header v-if="element.list.length == 0")
+						.empt Добавьте хранилище в группу, перетащив его сюда.
 
 q-dialog(:model-value="showAdd")
 	q-card(style="min-width: 400px;")
@@ -138,12 +146,6 @@ q-dialog(:model-value="showAdd")
 	background: var(--bg-grey);
 }
 
-.dblist {
-	background: var(--bg-grey);
-	padding: 0 0.5rem;
-	padding-left: 0;
-}
-
 .gro {
 	margin-bottom: 1rem;
 }
@@ -169,7 +171,10 @@ q-dialog(:model-value="showAdd")
 .sep {
 	border: 1px dashed $secondary;
 }
-.list-group > div {
-	background: var(--bg-light);
+.ghost {
+	background: var(--bg-selected);
+}
+.empt {
+	text-align: center;
 }
 </style>

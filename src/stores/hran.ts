@@ -22,8 +22,10 @@ export const useHran = defineStore({
 	getters: {},
 	actions: {
 		unique() {
-			this.groups.forEach((item) => {
-				item.list = [...new Map(item.list.map((item) => [item['id'], item])).values()]
+			this.groups.forEach(item => {
+				item.list = [
+					...new Map(item.list.map(item => [item['id'], item])).values(),
+				]
 			})
 		},
 		addGroup(e: string, c: string) {

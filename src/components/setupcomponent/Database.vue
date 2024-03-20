@@ -180,28 +180,6 @@ const goto = (e: any) => {
 								q-item(clickable :props="props" @click="remove(props.row)" v-close-popup).pink
 									q-item-section Удалить
 					q-btn(:props="props" round flat icon='mdi-chevron-right' size='md' dense @click="goto(props.row)")
-						// q-menu(:props="props")
-						// 	q-list(:props="props")
-						// 		q-item(:props="props" clickable v-for="item in tabs.tabs" :key="item.id" @click="edBD(props.row, item.field)" v-close-popup)
-						// 			q-item-section(side)
-						// 				q-icon(name="mdi-database-cog-outline")
-						// 			q-item-section {{ item.label }}
-						// 		q-separator
-						// 		q-item(clickable :props="props" @click="remove(props.row)" v-close-popup)
-						// 			q-item-section(side)
-						// 				q-icon(name="mdi-trash-can-outline" color="pink")
-						// 			q-item-section Удалить
-				// q-menu(touch-position context-menu)
-				// 	q-list(dense)
-				// 		q-item(clickable :props="props" @click="assign(props.row.psevdo)" v-close-popup)
-				// 			q-item-section(side)
-				// 				q-icon(name="mdi-check-bold" size="16px")
-				// 			q-item-section По умолчанию
-				// 		q-separator
-				// 		q-item(clickable :props="props" @click="remove(props.row)" v-close-popup)
-				// 			q-item-section(side)
-				// 				q-icon(name="mdi-trash-can-outline" color="pink" size="16px")
-				// 			q-item-section Удалить
 
 	.master
 		div Чтобы создать новую базу данных, подключить существующую БД, не представленную в списке, а также обновить БД, если ее версия отличается от версии сервера Docsvision, воспользуйтесь <span class="text-bold">Мастером баз данных</span>.

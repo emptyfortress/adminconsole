@@ -8,7 +8,7 @@ declare module 'vue-router' {
 	interface Bread {
 		label: string
 		to: string
-		icon: string
+		icon?: string
 	}
 	interface RouteMeta {
 		title: string
@@ -78,6 +78,7 @@ export const router = createRouter({
 			name: 'database',
 			component: () => import('@/components/tree/InsideDB.vue'),
 			meta: {
+				title: 'Модули',
 				bread: [
 					{
 						label: 'Базы данных',

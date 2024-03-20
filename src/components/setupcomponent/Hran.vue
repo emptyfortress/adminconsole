@@ -231,7 +231,7 @@ q-dialog(:model-value="showAdd")
 	justify-items: start;
 	column-gap: 1rem;
 	row-gap: 0.2rem;
-	background: var(--bg-light);
+	// background: var(--bg-light);
 }
 
 .edittable {
@@ -239,5 +239,8 @@ q-dialog(:model-value="showAdd")
 	.fl {
 		display: flex;
 	}
+}
+.ghost {
+	background: var(--bg-selected);
 }
 </style>
