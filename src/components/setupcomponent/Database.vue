@@ -172,7 +172,7 @@ const goto = (e: any) => {
 				q-td(key='date' :props='props') {{ props.row.date }}
 				q-td.text-center(key='def' :props='props')
 					q-icon(name="mdi-check-bold" size="sm" v-if="props.row.def")
-					q-btn(flat color="primary" label="Назначить" v-else size="sm" @click='assign(props.row.psevdo)')
+					q-btn(flat color="primary" label="Назначить" v-else size="sm" @click.stop='assign(props.row.psevdo)')
 				q-td.text-right(key='def' :props='props')
 					q-btn.q-mr-md(:props="props" round flat icon='mdi-trash-can-outline' size='sm' dense)
 						q-menu
@@ -247,5 +247,8 @@ component(:is="EditDatabase" v-model="edit" :bd="bdRow" :tab="bdTab")
 .q-table th,
 .q-table td {
 	padding: 5px 8px;
+}
+.q-tr {
+	cursor: pointer;
 }
 </style>

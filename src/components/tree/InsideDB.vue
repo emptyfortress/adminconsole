@@ -3,6 +3,11 @@ import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useTabs } from '@/stores/tabs'
 import PropertyTab from '@/components/setupcomponent/PropertyTab.vue'
+import ControlTab from '@/components/setupcomponent/ControlTab.vue'
+import Outer from '@/components/setupcomponent/Outer.vue'
+import ArchTab from '@/components/setupcomponent/ArchTab.vue'
+import CacheTab from '@/components/setupcomponent/CacheTab.vue'
+import ModuleTab from '@/components/setupcomponent/ModuleTab.vue'
 
 const tabs = useTabs()
 
@@ -42,11 +47,17 @@ q-page(padding)
 
 		q-scroll-area.right
 			#prop.zg Свойства
-			PropertyTab(:bd="bd" )
+			component(:is="PropertyTab" :bd="bd")
 			#control.zg Обслуживание
-			PropertyTab(:bd="bd")
-			PropertyTab(:bd="bd")
-			PropertyTab(:bd="bd")
+			component(:is="ControlTab" :bd="bd")
+			#outer.zg Внешние хранилища
+			component(:is="Outer")
+			#arch.zg Архивирование
+			component(:is="ArchTab" :bd="bd")
+			#cache.zg Кэширование
+			component(:is="CacheTab" :bd="bd")
+			#module.zg Доп.настройки
+			component(:is="ModuleTab" :bd="bd")
 
 </template>
 
@@ -81,9 +92,13 @@ q-page(padding)
 	font-size: 1.3rem;
 	font-weight: 300;
 	text-transform: uppercase;
+	margin-top: 2rem;
+	&:first-child {
+		margin-top: 0;
+	}
 }
 .right {
 	height: calc(100vh - 300px);
-	width: 900px;
+	width: 100%;
 }
 </style>
